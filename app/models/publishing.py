@@ -20,9 +20,9 @@ class WordPressConnection(Base):
     """Stores WordPress connection details."""
     __tablename__ = "wordpress_connections"
 
-    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    organisation_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("organisations.id"), nullable=False)
-    lead_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("leads.id"), nullable=False)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    organisation_id: Mapped[str] = mapped_column(String(36), ForeignKey("organisations.id"), nullable=False)
+    lead_id: Mapped[str] = mapped_column(String(36), ForeignKey("leads.id"), nullable=False)
     site_url: Mapped[str] = mapped_column(String(512), nullable=False)
     username: Mapped[str] = mapped_column(String(255), nullable=False)
     app_password: Mapped[str] = mapped_column(String(512), nullable=False)  # encrypted in production
@@ -36,10 +36,10 @@ class PublishAction(Base):
     """Records each publish/rollback action."""
     __tablename__ = "publish_actions"
 
-    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    organisation_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("organisations.id"), nullable=False)
-    lead_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("leads.id"), nullable=False)
-    connection_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("wordpress_connections.id"), nullable=True)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    organisation_id: Mapped[str] = mapped_column(String(36), ForeignKey("organisations.id"), nullable=False)
+    lead_id: Mapped[str] = mapped_column(String(36), ForeignKey("leads.id"), nullable=False)
+    connection_id: Mapped[str] = mapped_column(String(36), ForeignKey("wordpress_connections.id"), nullable=True)
 
     action: Mapped[str] = mapped_column(String(50), nullable=False)  # publish, rollback, test
     resource_type: Mapped[str] = mapped_column(String(100), nullable=False)  # page, post
