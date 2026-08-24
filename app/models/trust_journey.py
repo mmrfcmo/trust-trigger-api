@@ -11,9 +11,9 @@ class TrustJourney(Base):
     """A client's trust transformation journey over time."""
     __tablename__ = "trust_journeys"
 
-    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    organisation_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("organisations.id"), nullable=False, index=True)
-    lead_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("leads.id"), nullable=False, unique=True, index=True)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    organisation_id: Mapped[str] = mapped_column(String(36), ForeignKey("organisations.id"), nullable=False, index=True)
+    lead_id: Mapped[str] = mapped_column(String(36), ForeignKey("leads.id"), nullable=False, unique=True, index=True)
 
     # Baseline
     baseline_score: Mapped[int] = mapped_column(Integer, nullable=True)
@@ -48,10 +48,10 @@ class JourneyMilestone(Base):
     """A point in the journey — scan result at a specific date."""
     __tablename__ = "journey_milestones"
 
-    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    journey_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("trust_journeys.id"), nullable=False, index=True)
-    score_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("trust_score_records.id"), nullable=True)
-    scan_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("trust_scans.id"), nullable=True)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    journey_id: Mapped[str] = mapped_column(String(36), ForeignKey("trust_journeys.id"), nullable=False, index=True)
+    score_id: Mapped[str] = mapped_column(String(36), ForeignKey("trust_score_records.id"), nullable=True)
+    scan_id: Mapped[str] = mapped_column(String(36), ForeignKey("trust_scans.id"), nullable=True)
 
     score: Mapped[int] = mapped_column(Integer, nullable=False)
     grade: Mapped[str] = mapped_column(String(50), nullable=False)
@@ -67,16 +67,16 @@ class BeforeAfterReport(Base):
     """Before/after comparison report for a client."""
     __tablename__ = "before_after_reports"
 
-    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    organisation_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("organisations.id"), nullable=False)
-    lead_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("leads.id"), nullable=False, index=True)
-    journey_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("trust_journeys.id"), nullable=True)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    organisation_id: Mapped[str] = mapped_column(String(36), ForeignKey("organisations.id"), nullable=False)
+    lead_id: Mapped[str] = mapped_column(String(36), ForeignKey("leads.id"), nullable=False, index=True)
+    journey_id: Mapped[str] = mapped_column(String(36), ForeignKey("trust_journeys.id"), nullable=True)
 
     before_score: Mapped[int] = mapped_column(Integer, nullable=False)
     after_score: Mapped[int] = mapped_column(Integer, nullable=False)
     improvement: Mapped[int] = mapped_column(Integer, nullable=False)
-    before_scan_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), nullable=True)
-    after_scan_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), nullable=True)
+    before_scan_id: Mapped[str] = mapped_column(String(36), nullable=True)
+    after_scan_id: Mapped[str] = mapped_column(String(36), nullable=True)
 
     # Pillar comparisons
     before_pillars: Mapped[dict] = mapped_column(JSON, default=dict)
