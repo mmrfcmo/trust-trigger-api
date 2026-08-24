@@ -4,7 +4,7 @@ from typing import Optional, List
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.database import get_db
-from app.core.deps import get_current_user
+from app.core.deps import get_current_user, require_role
 from app.models import User, UserRole, LeadStatus
 from app.schemas import (
     LeadCreate, LeadUpdate, LeadResponse, LeadList,
@@ -198,7 +198,3 @@ async def bulk_assign_leads(
     """Assign multiple leads to a user."""
     count = await bulk_assign(db, data.lead_ids, data.assigned_to, current_user.organisation_id, current_user.id)
     return {"updated": count}
-
-
-# Import for the bulk routes
-from app.core.deps import require_role
