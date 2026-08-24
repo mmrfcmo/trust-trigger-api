@@ -26,10 +26,10 @@ class AIRecommendation(Base):
     """Stores AI-generated recommendations for a lead."""
     __tablename__ = "ai_recommendations"
 
-    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    organisation_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("organisations.id"), nullable=False, index=True)
-    lead_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("leads.id"), nullable=False, index=True)
-    score_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("trust_score_records.id"), nullable=True)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    organisation_id: Mapped[str] = mapped_column(String(36), ForeignKey("organisations.id"), nullable=False, index=True)
+    lead_id: Mapped[str] = mapped_column(String(36), ForeignKey("leads.id"), nullable=False, index=True)
+    score_id: Mapped[str] = mapped_column(String(36), ForeignKey("trust_score_records.id"), nullable=True)
 
     recommendation_type: Mapped[RecommendationType] = mapped_column(SAEnum(RecommendationType), nullable=False, index=True)
     title: Mapped[str] = mapped_column(String(255), nullable=False)
@@ -49,9 +49,9 @@ class RecommendationFeedback(Base):
     """Client feedback on AI recommendations."""
     __tablename__ = "recommendation_feedback"
 
-    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    recommendation_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("ai_recommendations.id"), nullable=False)
-    client_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=False)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    recommendation_id: Mapped[str] = mapped_column(String(36), ForeignKey("ai_recommendations.id"), nullable=False)
+    client_id: Mapped[str] = mapped_column(String(36), ForeignKey("users.id"), nullable=False)
     status: Mapped[str] = mapped_column(String(50), nullable=False)  # approved, rejected, needs_changes
     comment: Mapped[str] = mapped_column(Text, nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
