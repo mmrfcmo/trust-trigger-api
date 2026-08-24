@@ -24,10 +24,10 @@ class ScanType(str, enum.Enum):
 class TrustScan(Base):
     __tablename__ = "trust_scans"
 
-    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    organisation_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("organisations.id"), nullable=False, index=True)
-    lead_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("leads.id"), nullable=True, index=True)
-    user_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=True)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    organisation_id: Mapped[str] = mapped_column(String(36), ForeignKey("organisations.id"), nullable=False, index=True)
+    lead_id: Mapped[str] = mapped_column(String(36), ForeignKey("leads.id"), nullable=True, index=True)
+    user_id: Mapped[str] = mapped_column(String(36), ForeignKey("users.id"), nullable=True)
 
     scan_type: Mapped[ScanType] = mapped_column(SAEnum(ScanType), default=ScanType.full, nullable=False)
     status: Mapped[ScanStatus] = mapped_column(SAEnum(ScanStatus), default=ScanStatus.pending, nullable=False)
@@ -53,8 +53,8 @@ class TrustStandard(Base):
     """Individual trust standard result from a scan."""
     __tablename__ = "trust_standards"
 
-    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    scan_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("trust_scans.id"), nullable=False, index=True)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    scan_id: Mapped[str] = mapped_column(String(36), ForeignKey("trust_scans.id"), nullable=False, index=True)
     category: Mapped[str] = mapped_column(String(100), nullable=False, index=True)  # e.g. website, google_business
     standard_name: Mapped[str] = mapped_column(String(255), nullable=False)  # e.g. https, contact_page, rating
     passed: Mapped[bool] = mapped_column(Boolean, nullable=False)
