@@ -1,4 +1,4 @@
-# Render deployment config
+# Render deployment config - using SQLite for now
 services:
   - type: web
     name: trust-trigger-api
@@ -7,18 +7,11 @@ services:
     plan: free
     dockerfilePath: ./Dockerfile
     envVars:
-      - key: DATABASE_URL
-        fromDatabase:
-          name: trust-trigger-db
-          property: connectionString
       - key: JWT_SECRET_KEY
         generateValue: true
       - key: CORS_ORIGINS
         value: https://srv16.aisoftllc.com,http://localhost:3000
-
-databases:
-  - name: trust-trigger-db
-    region: frankfurt
-    plan: free
-    databaseName: trust_trigger_os
-    ipAllowList: []
+      - key: APP_NAME
+        value: Trust Trigger Agency
+      - key: APP_VERSION
+        value: 1.0.0
