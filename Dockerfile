@@ -1,11 +1,11 @@
-# Build
-FROM python:3.12-slim
+# Use Python 3.11 slim (has pre-built wheels for everything)
+FROM python:3.11-slim
 
 WORKDIR /app
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    gcc libpq-dev && \
+    gcc && \
     rm -rf /var/lib/apt/lists/*
 
 # Install Python dependencies
