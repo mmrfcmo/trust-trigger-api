@@ -1,5 +1,5 @@
 """Application configuration using Pydantic Settings."""
-from pydantic_settings import BaseSettings
+from pydantic import BaseSettings
 from typing import Optional
 
 
@@ -39,10 +39,11 @@ class Settings(BaseSettings):
     def async_database_url(self) -> str:
         if self.database_url:
             return self.database_url
-        # Default to SQLite for easy local testing / Render deployment
         return "sqlite+aiosqlite:///./trust_trigger.db"
 
-    model_config = {"env_file": ".env", "case_sensitive": False}
+    class Config:
+        env_file = ".env"
+        case_sensitive = False
 
 
 settings = Settings()
