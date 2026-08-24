@@ -11,9 +11,9 @@ class MonitoringSchedule(Base):
     """Schedule for automatic monthly rescans."""
     __tablename__ = "monitoring_schedules"
 
-    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    organisation_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("organisations.id"), nullable=False)
-    lead_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("leads.id"), nullable=False, unique=True)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    organisation_id: Mapped[str] = mapped_column(String(36), ForeignKey("organisations.id"), nullable=False)
+    lead_id: Mapped[str] = mapped_column(String(36), ForeignKey("leads.id"), nullable=False, unique=True)
 
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
     interval_days: Mapped[int] = mapped_column(Integer, default=30)
@@ -29,10 +29,10 @@ class ScoreHistory(Base):
     """Historical trust score data for trend tracking."""
     __tablename__ = "score_history"
 
-    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    organisation_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("organisations.id"), nullable=False)
-    lead_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("leads.id"), nullable=False, index=True)
-    score_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("trust_score_records.id"), nullable=True)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    organisation_id: Mapped[str] = mapped_column(String(36), ForeignKey("organisations.id"), nullable=False)
+    lead_id: Mapped[str] = mapped_column(String(36), ForeignKey("leads.id"), nullable=False, index=True)
+    score_id: Mapped[str] = mapped_column(String(36), ForeignKey("trust_score_records.id"), nullable=True)
 
     overall_percentage: Mapped[float] = mapped_column(Float, nullable=False)
     grade: Mapped[str] = mapped_column(String(50), nullable=False)
@@ -48,9 +48,9 @@ class Alert(Base):
     """Alerts for score changes, renewal reminders, etc."""
     __tablename__ = "alerts"
 
-    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    organisation_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("organisations.id"), nullable=False)
-    lead_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("leads.id"), nullable=True)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    organisation_id: Mapped[str] = mapped_column(String(36), ForeignKey("organisations.id"), nullable=False)
+    lead_id: Mapped[str] = mapped_column(String(36), ForeignKey("leads.id"), nullable=True)
 
     alert_type: Mapped[str] = mapped_column(String(50), nullable=False)  # score_improved, score_declined, renewal_due, scan_completed
     severity: Mapped[str] = mapped_column(String(20), default="info")  # info, warning, critical
