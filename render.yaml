@@ -2,11 +2,10 @@
 services:
   - type: web
     name: trust-trigger-api
-    runtime: python
+    env: docker
     region: frankfurt
     plan: free
-    buildCommand: pip install -r requirements.txt
-    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    dockerfilePath: ./Dockerfile
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -16,10 +15,6 @@ services:
         generateValue: true
       - key: CORS_ORIGINS
         value: https://srv16.aisoftllc.com,http://localhost:3000
-      - key: APP_NAME
-        value: Trust Trigger Agency
-      - key: APP_VERSION
-        value: 1.0.0
 
 databases:
   - name: trust-trigger-db
