@@ -1,0 +1,29 @@
+# Render deployment config
+services:
+  - type: web
+    name: trust-trigger-api
+    runtime: python
+    region: frankfurt
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: trust-trigger-db
+          property: connectionString
+      - key: JWT_SECRET_KEY
+        generateValue: true
+      - key: CORS_ORIGINS
+        value: https://srv16.aisoftllc.com,http://localhost:3000
+      - key: APP_NAME
+        value: Trust Trigger Agency
+      - key: APP_VERSION
+        value: 1.0.0
+
+databases:
+  - name: trust-trigger-db
+    region: frankfurt
+    plan: free
+    databaseName: trust_trigger_os
+    ipAllowList: []
