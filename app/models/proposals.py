@@ -20,10 +20,10 @@ class ProposalStatus(str, enum.Enum):
 class Proposal(Base):
     __tablename__ = "proposals"
 
-    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    organisation_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("organisations.id"), nullable=False, index=True)
-    lead_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("leads.id"), nullable=False, index=True)
-    created_by: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=False)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    organisation_id: Mapped[str] = mapped_column(String(36), ForeignKey("organisations.id"), nullable=False, index=True)
+    lead_id: Mapped[str] = mapped_column(String(36), ForeignKey("leads.id"), nullable=False, index=True)
+    created_by: Mapped[str] = mapped_column(String(36), ForeignKey("users.id"), nullable=False)
 
     title: Mapped[str] = mapped_column(String(255), nullable=False)
     status: Mapped[ProposalStatus] = mapped_column(SAEnum(ProposalStatus), default=ProposalStatus.draft, nullable=False)
