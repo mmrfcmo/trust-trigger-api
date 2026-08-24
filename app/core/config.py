@@ -1,5 +1,5 @@
 """Application configuration using Pydantic Settings."""
-from pydantic import BaseSettings
+from pydantic import BaseSettings  # pydantic v1
 from typing import Optional
 
 
