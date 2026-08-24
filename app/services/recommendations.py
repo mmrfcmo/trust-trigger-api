@@ -5,7 +5,7 @@ from typing import Optional, List, Tuple
 from datetime import datetime, timezone
 from sqlalchemy import select, func, desc
 from sqlalchemy.ext.asyncio import AsyncSession
-from openai import AsyncOpenAI
+import openai
 from app.models import Lead
 from app.models.trust_scan import TrustScan
 from app.models.scoring import TrustScoreRecord
@@ -202,8 +202,8 @@ Task:
 Generate the recommendation now."""
 
     # Call OpenAI
-    client = AsyncOpenAI(api_key=settings.openai_api_key)
-    response = await client.chat.completions.create(
+    openai.api_key = settings.openai_api_key
+    response = await openai.ChatCompletion.acreate(
         model="gpt-4o-mini",
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
@@ -214,8 +214,8 @@ Generate the recommendation now."""
     )
 
     content = response.choices[0].message.content or ""
-    model_used = response.model
-    tokens_used = response.usage.total_tokens if response.usage else 0
+    model_used = response.model or "gpt-4o-mini"
+    tokens_used = response.usage.total_tokens if hasattr(response, 'usage') and response.usage else 0
 
     # Determine title
     title_map = {
