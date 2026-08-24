@@ -67,7 +67,8 @@ class ScanResponse(BaseModel):
     completed_at: Optional[datetime]
     created_at: datetime
 
-    model_config = {"from_attributes": True}
+    class Config:
+        orm_mode = True
 
 
 class ScanList(BaseModel):
