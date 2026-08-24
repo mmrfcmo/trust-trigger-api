@@ -11,8 +11,8 @@ class TrustFramework(Base):
     """Top-level framework. An agency can have multiple frameworks."""
     __tablename__ = "trust_frameworks"
 
-    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    organisation_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("organisations.id"), nullable=False, index=True)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    organisation_id: Mapped[str] = mapped_column(String(36), ForeignKey("organisations.id"), nullable=False, index=True)
     name: Mapped[str] = mapped_column(String(255), nullable=False)
     description: Mapped[str] = mapped_column(Text, nullable=True)
     version: Mapped[int] = mapped_column(Integer, default=1)
@@ -27,8 +27,8 @@ class TrustCategory(Base):
     """A pillar/category within a framework (e.g. Online Presence, Reputation)."""
     __tablename__ = "trust_categories"
 
-    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    framework_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("trust_frameworks.id"), nullable=False, index=True)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    framework_id: Mapped[str] = mapped_column(String(36), ForeignKey("trust_frameworks.id"), nullable=False, index=True)
     name: Mapped[str] = mapped_column(String(255), nullable=False)
     slug: Mapped[str] = mapped_column(String(100), nullable=False)
     description: Mapped[str] = mapped_column(Text, nullable=True)
@@ -46,8 +46,8 @@ class TrustStandardDef(Base):
     """A specific standard within a category (e.g. HTTPS, Contact Page)."""
     __tablename__ = "trust_standard_defs"
 
-    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    category_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("trust_categories.id"), nullable=False, index=True)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    category_id: Mapped[str] = mapped_column(String(36), ForeignKey("trust_categories.id"), nullable=False, index=True)
     name: Mapped[str] = mapped_column(String(255), nullable=False)
     slug: Mapped[str] = mapped_column(String(100), nullable=False)
     description: Mapped[str] = mapped_column(Text, nullable=True)
@@ -68,8 +68,8 @@ class StandardRecommendation(Base):
     """Improvement recommendation for a standard. Configurable per standard."""
     __tablename__ = "standard_recommendations"
 
-    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    standard_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("trust_standard_defs.id"), nullable=False, index=True)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    standard_id: Mapped[str] = mapped_column(String(36), ForeignKey("trust_standard_defs.id"), nullable=False, index=True)
     action: Mapped[str] = mapped_column(String(255), nullable=False)
     detail: Mapped[str] = mapped_column(Text, nullable=False)
     effort: Mapped[str] = mapped_column(String(20), default="medium")  # low, medium, high
