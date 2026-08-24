@@ -25,7 +25,8 @@ class RecommendationResponse(BaseModel):
     is_approved: bool
     created_at: datetime
 
-    model_config = {"from_attributes": True}
+    class Config:
+        orm_mode = True
 
 
 class RecommendationList(BaseModel):
@@ -49,4 +50,5 @@ class FeedbackResponse(BaseModel):
     comment: Optional[str]
     created_at: datetime
 
-    model_config = {"from_attributes": True}
+    class Config:
+        orm_mode = True
