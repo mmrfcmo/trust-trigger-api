@@ -55,7 +55,7 @@ class ScoreHistoryPoint(BaseModel):
 
 
 class TrustScoreList(BaseModel):
-    items: list[TrustScoreResponse]
+    items: List[TrustScoreResponse]
     total: int
     page: int
     page_size: int
