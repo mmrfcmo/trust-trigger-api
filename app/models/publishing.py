@@ -20,7 +20,7 @@ class WordPressConnection(Base):
     """Stores WordPress connection details."""
     __tablename__ = "wordpress_connections"
 
-    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     organisation_id: Mapped[str] = mapped_column(String(36), ForeignKey("organisations.id"), nullable=False)
     lead_id: Mapped[str] = mapped_column(String(36), ForeignKey("leads.id"), nullable=False)
     site_url: Mapped[str] = mapped_column(String(512), nullable=False)
@@ -36,7 +36,7 @@ class PublishAction(Base):
     """Records each publish/rollback action."""
     __tablename__ = "publish_actions"
 
-    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     organisation_id: Mapped[str] = mapped_column(String(36), ForeignKey("organisations.id"), nullable=False)
     lead_id: Mapped[str] = mapped_column(String(36), ForeignKey("leads.id"), nullable=False)
     connection_id: Mapped[str] = mapped_column(String(36), ForeignKey("wordpress_connections.id"), nullable=True)
