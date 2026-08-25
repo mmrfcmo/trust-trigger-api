@@ -29,7 +29,7 @@ class PromptTemplate(Base):
     """Versioned, editable prompt templates stored in the database."""
     __tablename__ = "prompt_templates"
 
-    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     organisation_id: Mapped[str] = mapped_column(String(36), ForeignKey("organisations.id"), nullable=True, index=True)
     category: Mapped[PromptCategory] = mapped_column(SAEnum(PromptCategory), nullable=False, index=True)
     name: Mapped[str] = mapped_column(String(255), nullable=False)
@@ -52,7 +52,7 @@ class PromptVersionHistory(Base):
     """Audit trail for prompt changes."""
     __tablename__ = "prompt_version_history"
 
-    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     prompt_id: Mapped[str] = mapped_column(String(36), ForeignKey("prompt_templates.id"), nullable=False, index=True)
     version: Mapped[int] = mapped_column(Integer, nullable=False)
     system_prompt: Mapped[str] = mapped_column(Text, nullable=False)
