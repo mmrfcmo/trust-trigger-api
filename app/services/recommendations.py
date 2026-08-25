@@ -204,7 +204,7 @@ Generate the recommendation now."""
     # Call OpenAI
     openai.api_key = settings.openai_api_key
     response = await openai.ChatCompletion.acreate(
-        model="gpt-4o-mini",
+        model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": full_prompt},
@@ -214,7 +214,7 @@ Generate the recommendation now."""
     )
 
     content = response.choices[0].message.content or ""
-    model_used = response.model or "gpt-4o-mini"
+    model_used = response.model or "gpt-3.5-turbo"
     tokens_used = response.usage.total_tokens if hasattr(response, 'usage') and response.usage else 0
 
     # Determine title
