@@ -177,3 +177,36 @@ async def debug_check_models():
             result[f"{module_path}_traceback"] = traceback.format_exc()
     
     return result
+
+
+@app.get("/debug/test-schema")
+async def debug_test_schema():
+    """Test if the OpenAPI schema can be generated."""
+    import traceback
+    from fastapi.routing import APIRoute
+    from fastapi import FastAPI
+    
+    # Create a mini app with just the health route
+    test_app = FastAPI()
+    
+    @test_app.get("/health")
+    async def test_health():
+        return {"ok": True}
+    
+    try:
+        schema = test_app.openapi()
+        result = {"mini_app": "ok"}
+    except Exception as e:
+        result = {"mini_app": f"FAILED: {str(e)}", "traceback": traceback.format_exc()}
+    
+    # Now try to generate schema for the full app
+    try:
+        from app.main import app
+        schema = app.openapi()
+        result["full_app"] = "ok"
+        result["paths_count"] = len(schema.get("paths", {}))
+    except Exception as e:
+        result["full_app"] = f"FAILED: {str(e)}"
+        result["full_traceback"] = traceback.format_exc()[-500:]
+    
+    return result
