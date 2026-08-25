@@ -66,8 +66,7 @@ class UserResponse(BaseModel):
     created_at: datetime
     updated_at: datetime
 
-    class Config:
-        orm_mode = True
+    model_config = {"from_attributes": True}
 
 
 # ─── Organisation ───────────────────────────────────────────────────────────
@@ -96,8 +95,7 @@ class OrganisationResponse(BaseModel):
     created_at: datetime
     updated_at: datetime
 
-    class Config:
-        orm_mode = True
+    model_config = {"from_attributes": True}
 
 
 # ─── Audit Log ──────────────────────────────────────────────────────────────
@@ -114,8 +112,7 @@ class AuditLogResponse(BaseModel):
     user_agent: Optional[str]
     created_at: datetime
 
-    class Config:
-        orm_mode = True
+    model_config = {"from_attributes": True}
 
 
 class AuditLogList(BaseModel):
@@ -185,8 +182,7 @@ class LeadResponse(BaseModel):
     created_at: datetime
     updated_at: datetime
 
-    class Config:
-        orm_mode = True
+    model_config = {"from_attributes": True}
 
 
 class LeadList(BaseModel):
@@ -233,8 +229,7 @@ class SearchHistoryResponse(BaseModel):
     results_count: int
     created_at: datetime
 
-    class Config:
-        orm_mode = True
+    model_config = {"from_attributes": True}
 
 
 class SearchHistoryList(BaseModel):
