@@ -44,8 +44,7 @@ class TrustScoreResponse(BaseModel):
     priority_actions: List[ImprovementAction]
     created_at: datetime
 
-    class Config:
-        orm_mode = True
+    model_config = {"from_attributes": True}
 
 
 class ScoreHistoryPoint(BaseModel):
