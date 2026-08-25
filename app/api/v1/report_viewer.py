@@ -22,21 +22,21 @@ async def view_trust_snapshot_report(
     """View a Trust Snapshot report by ID. No auth required."""
     # Get the recommendation
     result = await db.execute(
-        select(AIRecommendation).where(AIRecommendation.id == report_id)
+        select(AIRecommendation).where(AIRecommendation.id == str(report_id))
     )
     report = result.scalar_one_or_none()
     if not report:
         raise HTTPException(status_code=404, detail="Report not found")
     
     # Get the lead
-    lead_result = await db.execute(select(Lead).where(Lead.id == report.lead_id))
+    lead_result = await db.execute(select(Lead).where(Lead.id == str(report.lead_id)))
     lead = lead_result.scalar_one_or_none()
     
     # Get the score
     score_data = None
     if report.score_id:
         score_result = await db.execute(
-            select(TrustScoreRecord).where(TrustScoreRecord.id == report.score_id)
+            select(TrustScoreRecord).where(TrustScoreRecord.id == str(report.score_id))
         )
         score_record = score_result.scalar_one_or_none()
         if score_record:
@@ -44,7 +44,7 @@ async def view_trust_snapshot_report(
     
     # Get the scan
     scan_result = await db.execute(
-        select(TrustScan).where(TrustScan.lead_id == report.lead_id).order_by(TrustScan.created_at.desc()).limit(1)
+        select(TrustScan).where(TrustScan.lead_id == str(report.lead_id)).order_by(TrustScan.created_at.desc()).limit(1)
     )
     scan = scan_result.scalar_one_or_none()
     
