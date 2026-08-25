@@ -67,7 +67,7 @@ class PromptResponse(BaseModel):
 
 
 class PromptList(BaseModel):
-    items: list[PromptResponse]
+    items: List[PromptResponse]
     total: int
     page: int
     page_size: int
