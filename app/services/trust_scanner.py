@@ -280,8 +280,8 @@ async def run_scan(
     scan.status = ScanStatus.failed if errors else ScanStatus.completed
     scan.completed_at = datetime.now(timezone.utc)
     scan.duration_ms = int((scan.completed_at - scan.started_at).total_seconds() * 1000) if scan.started_at else 0
-    scan.website_results = website_result.model_dump() if website_result else {}
-    scan.google_results = google_result.model_dump() if google_result else {}
+    scan.website_results = website_result.dict() if website_result else {}
+    scan.google_results = google_result.dict() if google_result else {}
     if errors:
         scan.error_message = "; ".join(errors)
 
