@@ -131,7 +131,7 @@ async def submit_trust_snapshot(
         )
         db.add(milestone)
     
-    await db.commit()
+    # commit handled by get_db dependency
     
     # Build response
     report_url = ""
