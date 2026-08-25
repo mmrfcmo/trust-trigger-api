@@ -62,7 +62,8 @@ class PromptResponse(BaseModel):
     created_at: datetime
     updated_at: datetime
 
-    model_config = {"from_attributes": True}
+    class Config:
+        orm_mode = True
 
 
 class PromptList(BaseModel):
@@ -84,7 +85,8 @@ class VersionHistoryResponse(BaseModel):
     change_notes: Optional[str]
     created_at: datetime
 
-    model_config = {"from_attributes": True}
+    class Config:
+        orm_mode = True
 
 
 @router.post("", response_model=PromptResponse, status_code=status.HTTP_201_CREATED)
