@@ -20,7 +20,7 @@ class UserRole(str, enum.Enum):
 class Organisation(Base):
     __tablename__ = "organisations"
 
-    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     name: Mapped[str] = mapped_column(String(255), nullable=False)
     slug: Mapped[str] = mapped_column(String(100), unique=True, nullable=False, index=True)
     domain: Mapped[str] = mapped_column(String(255), nullable=True)
@@ -36,7 +36,7 @@ class Organisation(Base):
 class User(Base):
     __tablename__ = "users"
 
-    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     email: Mapped[str] = mapped_column(String(255), unique=True, nullable=False, index=True)
     password_hash: Mapped[str] = mapped_column(String(255), nullable=False)
     full_name: Mapped[str] = mapped_column(String(255), nullable=False)
@@ -57,7 +57,7 @@ class User(Base):
 class AuditLog(Base):
     __tablename__ = "audit_logs"
 
-    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     user_id: Mapped[str] = mapped_column(String(36), ForeignKey("users.id"), nullable=False)
     organisation_id: Mapped[str] = mapped_column(String(36), ForeignKey("organisations.id"), nullable=False)
     action: Mapped[str] = mapped_column(String(100), nullable=False, index=True)
@@ -95,7 +95,7 @@ class LeadSource(str, enum.Enum):
 class Lead(Base):
     __tablename__ = "leads"
 
-    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     organisation_id: Mapped[str] = mapped_column(String(36), ForeignKey("organisations.id"), nullable=False, index=True)
     assigned_to: Mapped[str] = mapped_column(String(36), ForeignKey("users.id"), nullable=True)
     business_name: Mapped[str] = mapped_column(String(255), nullable=False)
@@ -130,7 +130,7 @@ class Lead(Base):
 class SearchHistory(Base):
     __tablename__ = "search_history"
 
-    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     organisation_id: Mapped[str] = mapped_column(String(36), ForeignKey("organisations.id"), nullable=False, index=True)
     user_id: Mapped[str] = mapped_column(String(36), ForeignKey("users.id"), nullable=False)
     query: Mapped[str] = mapped_column(String(255), nullable=False)
