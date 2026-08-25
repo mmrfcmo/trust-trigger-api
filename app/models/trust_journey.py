@@ -11,7 +11,7 @@ class TrustJourney(Base):
     """A client's trust transformation journey over time."""
     __tablename__ = "trust_journeys"
 
-    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     organisation_id: Mapped[str] = mapped_column(String(36), ForeignKey("organisations.id"), nullable=False, index=True)
     lead_id: Mapped[str] = mapped_column(String(36), ForeignKey("leads.id"), nullable=False, unique=True, index=True)
 
@@ -48,7 +48,7 @@ class JourneyMilestone(Base):
     """A point in the journey — scan result at a specific date."""
     __tablename__ = "journey_milestones"
 
-    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     journey_id: Mapped[str] = mapped_column(String(36), ForeignKey("trust_journeys.id"), nullable=False, index=True)
     score_id: Mapped[str] = mapped_column(String(36), ForeignKey("trust_score_records.id"), nullable=True)
     scan_id: Mapped[str] = mapped_column(String(36), ForeignKey("trust_scans.id"), nullable=True)
@@ -67,7 +67,7 @@ class BeforeAfterReport(Base):
     """Before/after comparison report for a client."""
     __tablename__ = "before_after_reports"
 
-    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     organisation_id: Mapped[str] = mapped_column(String(36), ForeignKey("organisations.id"), nullable=False)
     lead_id: Mapped[str] = mapped_column(String(36), ForeignKey("leads.id"), nullable=False, index=True)
     journey_id: Mapped[str] = mapped_column(String(36), ForeignKey("trust_journeys.id"), nullable=True)
