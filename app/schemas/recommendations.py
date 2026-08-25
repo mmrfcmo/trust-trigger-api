@@ -30,7 +30,7 @@ class RecommendationResponse(BaseModel):
 
 
 class RecommendationList(BaseModel):
-    items: list[RecommendationResponse]
+    items: List[RecommendationResponse]
     total: int
     page: int
     page_size: int
