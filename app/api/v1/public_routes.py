@@ -31,6 +31,11 @@ class TrustSnapshotResponse(BaseModel):
     message: str
     report_url: str = ""
     lead_id: str = ""
+    score: int = 0
+    grade: str = ""
+    issues_found: int = 0
+    standards_passed: int = 0
+    standards_total: int = 9
 
 
 @router.post("/trust-snapshot", response_model=TrustSnapshotResponse, status_code=status.HTTP_201_CREATED)
