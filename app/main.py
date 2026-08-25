@@ -98,17 +98,34 @@ async def debug_env():
 async def debug_test_openai():
     """Test if openai can be imported and called."""
     import os
-    import traceback
     result = {"steps": {}}
     
-    # Step 1: Import openai
     try:
         import openai
         result["steps"]["import"] = f"ok (version={openai.__version__})"
     except Exception as e:
         result["steps"]["import"] = f"FAILED: {str(e)}"
-        result["traceback"] = traceback.format_exc()
         return result
+    
+    key = os.environ.get("OPENAI_API_KEY", "")
+    result["steps"]["key_raw"] = {
+        "length": len(key),
+        "first_10": key[:10],
+        "last_10": key[-10:] if len(key) > 10 else "",
+        "contains_ellipsis": "\u2026" in key,
+        "is_sk_proj": key.startswith("sk-proj"),
+        "is_sk_pro": key.startswith("sk-pro"),
+    }
+    
+    result["steps"]["key_check"] = f"ok (length={len(key)}, prefix={key[:20]}...)"
+    
+    try:
+        import httpx
+        result["steps"]["httpx"] = "ok"
+    except Exception as e:
+        result["steps"]["httpx"] = f"FAILED: {str(e)}"
+    
+    return result
     
     # Step 2: Check API key
     try:
