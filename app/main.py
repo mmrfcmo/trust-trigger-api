@@ -146,3 +146,34 @@ async def debug_test_openai():
         result["traceback"] = traceback.format_exc()
     
     return result
+
+
+@app.get("/debug/check-models")
+async def debug_check_models():
+    """Check if all pydantic models can be imported and validated."""
+    import traceback
+    import sys
+    result = {}
+    
+    # Check all schema models
+    models_to_check = [
+        ("app.schemas", "all"),
+        ("app.schemas.scoring", "TrustScoreResponse, TrustScoreList, ScoreHistoryPoint, PillarScore, ImprovementAction"),
+        ("app.schemas.recommendations", "RecommendationResponse, RecommendationList, GenerateRecommendationRequest"),
+        ("app.schemas.trust_scan", "ScanResponse, ScanList"),
+        ("app.api.v1.public_routes", "TrustSnapshotRequest, TrustSnapshotResponse"),
+        ("app.api.v1.analytics_routes", "DashboardResponse"),
+        ("app.api.v1.proposal_routes", "ProposalResponse, ProposalList"),
+        ("app.api.v1.prompt_routes", "PromptResponse, PromptList, VersionHistoryResponse"),
+    ]
+    
+    for module_path, classes in models_to_check:
+        try:
+            __import__(module_path)
+            module = sys.modules[module_path]
+            result[module_path] = "imported OK"
+        except Exception as e:
+            result[module_path] = f"IMPORT FAILED: {str(e)}"
+            result[f"{module_path}_traceback"] = traceback.format_exc()
+    
+    return result
