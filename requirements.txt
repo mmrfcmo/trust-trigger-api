@@ -9,7 +9,6 @@ passlib[bcrypt]==1.7.4
 python-multipart==0.0.6
 httpx==0.24.1
 beautifulsoup4==4.12.2
-lxml==4.9.3
 openai==0.28.1
 python-dotenv==1.0.0
 email-validator==2.0.0
