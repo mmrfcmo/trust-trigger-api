@@ -21,7 +21,7 @@ class TrustScoreRecord(Base):
     """Stores computed trust scores for a lead at a point in time."""
     __tablename__ = "trust_score_records"
 
-    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     organisation_id: Mapped[str] = mapped_column(String(36), ForeignKey("organisations.id"), nullable=False, index=True)
     lead_id: Mapped[str] = mapped_column(String(36), ForeignKey("leads.id"), nullable=False, index=True)
     scan_id: Mapped[str] = mapped_column(String(36), ForeignKey("trust_scans.id"), nullable=True)
