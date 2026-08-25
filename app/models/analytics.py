@@ -11,7 +11,7 @@ class AgencyMetrics(Base):
     """Aggregated agency-wide metrics (updated periodically)."""
     __tablename__ = "agency_metrics"
 
-    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     organisation_id: Mapped[str] = mapped_column(String(36), ForeignKey("organisations.id"), nullable=False, unique=True)
 
     # Revenue
@@ -38,7 +38,7 @@ class RevenueRecord(Base):
     """Individual revenue transactions."""
     __tablename__ = "revenue_records"
 
-    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     organisation_id: Mapped[str] = mapped_column(String(36), ForeignKey("organisations.id"), nullable=False)
     lead_id: Mapped[str] = mapped_column(String(36), ForeignKey("leads.id"), nullable=True)
     proposal_id: Mapped[str] = mapped_column(String(36), ForeignKey("proposals.id"), nullable=True)
