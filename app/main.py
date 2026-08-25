@@ -210,3 +210,113 @@ async def debug_test_schema():
         result["full_traceback"] = traceback.format_exc()[-500:]
     
     return result
+
+
+@app.get("/debug/test-models")
+async def debug_test_models():
+    """Test each pydantic model's schema generation."""
+    import traceback
+    from pydantic import BaseModel
+    from pydantic.schema import schema as pydantic_schema
+    
+    models_to_test = []
+    
+    # Collect all response models
+    try:
+        from app.schemas import (
+            UserResponse, OrganisationResponse, AuditLogResponse, 
+            LeadResponse, GooglePlacesSearchResponse, SearchHistoryResponse,
+            LoginRequest, RegisterRequest, TokenResponse,
+        )
+        models_to_test.extend([
+            ("UserResponse", UserResponse),
+            ("OrganisationResponse", OrganisationResponse),
+            ("AuditLogResponse", AuditLogResponse),
+            ("LeadResponse", LeadResponse),
+            ("GooglePlacesSearchResponse", GooglePlacesSearchResponse),
+            ("SearchHistoryResponse", SearchHistoryResponse),
+            ("LoginRequest", LoginRequest),
+            ("RegisterRequest", RegisterRequest),
+            ("TokenResponse", TokenResponse),
+        ])
+    except Exception as e:
+        models_to_test.append(("app.schemas IMPORT", str(e)))
+    
+    try:
+        from app.schemas.scoring import (
+            TrustScoreResponse, TrustScoreList, PillarScore, ImprovementAction
+        )
+        models_to_test.extend([
+            ("PillarScore", PillarScore),
+            ("ImprovementAction", ImprovementAction),
+            ("TrustScoreResponse", TrustScoreResponse),
+            ("TrustScoreList", TrustScoreList),
+        ])
+    except Exception as e:
+        models_to_test.append(("scoring schemas IMPORT", str(e)))
+    
+    try:
+        from app.schemas.recommendations import (
+            RecommendationResponse, RecommendationList
+        )
+        models_to_test.extend([
+            ("RecommendationResponse", RecommendationResponse),
+            ("RecommendationList", RecommendationList),
+        ])
+    except Exception as e:
+        models_to_test.append(("recommendations schemas IMPORT", str(e)))
+    
+    try:
+        from app.schemas.trust_scan import (
+            ScanResponse, ScanList, ScanResult, WebsiteScanResult, GoogleBusinessScanResult
+        )
+        models_to_test.extend([
+            ("ScanResponse", ScanResponse),
+            ("ScanList", ScanList),
+            ("ScanResult", ScanResult),
+            ("WebsiteScanResult", WebsiteScanResult),
+            ("GoogleBusinessScanResult", GoogleBusinessScanResult),
+        ])
+    except Exception as e:
+        models_to_test.append(("trust_scan schemas IMPORT", str(e)))
+    
+    try:
+        from app.api.v1.proposal_routes import ProposalResponse, ProposalList
+        models_to_test.extend([
+            ("ProposalResponse", ProposalResponse),
+            ("ProposalList", ProposalList),
+        ])
+    except Exception as e:
+        models_to_test.append(("proposal schemas IMPORT", str(e)))
+    
+    try:
+        from app.api.v1.prompt_routes import PromptResponse, PromptList, VersionHistoryResponse
+        models_to_test.extend([
+            ("PromptResponse", PromptResponse),
+            ("PromptList", PromptList),
+            ("VersionHistoryResponse", VersionHistoryResponse),
+        ])
+    except Exception as e:
+        models_to_test.append(("prompt schemas IMPORT", str(e)))
+    
+    try:
+        from app.api.v1.analytics_routes import DashboardResponse
+        models_to_test.append(("DashboardResponse", DashboardResponse))
+    except Exception as e:
+        models_to_test.append(("analytics schemas IMPORT", str(e)))
+    
+    # Test each model's schema
+    results = {}
+    for name, model in models_to_test:
+        if isinstance(model, str):
+            results[name] = f"IMPORT ERROR: {model}"
+            continue
+        try:
+            # Try to generate the JSON schema for this model
+            s = model.schema()
+            results[name] = f"OK ({len(s.get('properties', {}))} fields)"
+        except Exception as e:
+            results[name] = f"FAILED: {str(e)}"
+            results[f"{name}_traceback"] = traceback.format_exc()[-300:]
+    
+    return results
