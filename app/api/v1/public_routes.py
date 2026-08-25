@@ -36,6 +36,10 @@ class TrustSnapshotResponse(BaseModel):
     issues_found: int = 0
     standards_passed: int = 0
     standards_total: int = 9
+    pillars: list = []
+    standards: list = []
+    issues: list = []
+    actions: list = []
 
 
 @router.post("/trust-snapshot", response_model=TrustSnapshotResponse, status_code=status.HTTP_201_CREATED)
