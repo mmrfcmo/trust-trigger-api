@@ -138,6 +138,15 @@ async def submit_trust_snapshot(
     if report_content:
         report_url = f"/report/{report_content.id}"
     
+        _send_notification_email(
+        lead_email=req.email,
+        business_name=req.full_name,
+        score=int(score_response.overall_percentage) if score_response else 0,
+        grade=score_response.grade.value if score_response else "Unknown",
+        report_url=report_url,
+        lead_id=str(lead.id),
+    )
+    
     return TrustSnapshotResponse(
         success=True,
         message="Your Trust Snapshot is ready. We'll send it to your email shortly.",
@@ -161,6 +170,31 @@ async def _get_or_create_default_org(db: AsyncSession) -> Organisation:
         db.add(org)
         await db.flush()
     return org
+
+
+
+import smtplib
+import os
+from email.mime.text import MIMEText
+
+
+def _send_notification_email(lead_email, business_name, score, grade, report_url, lead_id):
+    gmail_user = os.environ.get("GMAIL_EMAIL", "")
+    gmail_password = os.environ.get("GMAIL_APP_PASSWORD", "")
+    if not gmail_user or not gmail_password:
+        return
+    full_url = f"https://trust-trigger-api.onrender.com{report_url}" if report_url else ""
+    html = f"""<!DOCTYPE html><html><head><meta charset="utf-8"></head><body style="font-family:Inter,sans-serif;background:#f8fafc;padding:2rem;margin:0"><div style="max-width:600px;margin:0 auto;background:white;border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.06)"><div style="background:linear-gradient(135deg,#0f172a,#1e293b);padding:2rem;text-align:center"><div style="font-size:2.5rem;margin-bottom:.5rem">🛡️</div><h1 style="color:white;margin:0;font-size:1.5rem">New Trust Snapshot</h1><p style="color:#94a3b8;margin:.5rem 0 0">A new lead has submitted a Trust Snapshot request</p></div><div style="padding:2rem"><div style="background:#f8fafc;border-radius:8px;padding:1.5rem;margin-bottom:1.5rem"><table style="width:100%;border-collapse:collapse"><tr><td style="padding:.5rem 0;color:#64748b;font-size:.875rem">Business</td><td style="padding:.5rem 0;font-weight:600;text-align:right">{business_name}</td></tr><tr><td style="padding:.5rem 0;color:#64748b;font-size:.875rem">Email</td><td style="padding:.5rem 0;font-weight:600;text-align:right">{lead_email}</td></tr><tr><td style="padding:.5rem 0;color:#64748b;font-size:.875rem">Trust Score</td><td style="padding:.5rem 0;font-weight:600;text-align:right">{score}/100 ({grade})</td></tr></table></div><div style="text-align:center;margin:1.5rem 0"><a href="{full_url}" style="display:inline-block;padding:.75rem 2rem;background:#f59e0b;color:white;text-decoration:none;border-radius:8px;font-weight:600">View Full Report →</a></div><p style="color:#94a3b8;font-size:.875rem;text-align:center;margin:0">Lead ID: {lead_id}</p></div><div style="background:#f8fafc;padding:1rem;text-align:center;border-top:1px solid #e2e8f0"><p style="color:#94a3b8;font-size:.75rem;margin:0">Trust Trigger Agency™</p></div></div></body></html>"""
+    msg = MIMEText(html, "html")
+    msg["Subject"] = f"New Trust Snapshot: {business_name}"
+    msg["From"] = gmail_user
+    msg["To"] = gmail_user
+    try:
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+            server.login(gmail_user, gmail_password)
+            server.send_message(msg)
+    except Exception:
+        pass
 
 
 async def _get_or_create_system_user(db: AsyncSession, org_id: uuid.UUID) -> User:
