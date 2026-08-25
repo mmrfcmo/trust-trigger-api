@@ -162,8 +162,8 @@ async def compute_trust_score(
         pillar_engagement=pillar_scores.get("engagement", 0),
         pillar_transparency=pillar_scores.get("transparency", 0),
         pillar_technical=pillar_scores.get("technical", 0),
-        improvements=[i.model_dump() for i in improvements],
-        priority_actions=[i.model_dump() for i in priority_actions],
+        improvements=[i.dict() for i in improvements],
+        priority_actions=[i.dict() for i in priority_actions],
     )
     db.add(record)
     await db.flush()
