@@ -12,7 +12,7 @@ class TrustFramework(Base):
     __tablename__ = "trust_frameworks"
 
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
-    organisation_id: Mapped[str] = mapped_column(String(36), ForeignKey("organisations.id"), nullable=False, index=True)
+    organisation_id: Mapped[str] = mapped_column(String(36), nullable=True, index=True)
     name: Mapped[str] = mapped_column(String(255), nullable=False)
     description: Mapped[str] = mapped_column(Text, nullable=True)
     version: Mapped[int] = mapped_column(Integer, default=1)
