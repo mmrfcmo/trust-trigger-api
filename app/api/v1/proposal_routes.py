@@ -71,7 +71,7 @@ class ProposalResponse(BaseModel):
 
 
 class ProposalList(BaseModel):
-    items: list[ProposalResponse]
+    items: List[ProposalResponse]
     total: int
     page: int
     page_size: int
