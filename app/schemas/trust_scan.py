@@ -72,7 +72,7 @@ class ScanResponse(BaseModel):
 
 
 class ScanList(BaseModel):
-    items: list[ScanResponse]
+    items: List[ScanResponse]
     total: int
     page: int
     page_size: int
