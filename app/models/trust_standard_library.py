@@ -11,7 +11,7 @@ class TrustStandardLibrary(Base):
     """Master library of all trust standards. This is the core IP of the platform."""
     __tablename__ = "trust_standard_library"
 
-    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     organisation_id: Mapped[str] = mapped_column(String(36), ForeignKey("organisations.id"), nullable=True, index=True)
 
     # Identity
@@ -67,7 +67,7 @@ class EvidenceCapture(Base):
     """Evidence of trust improvements — before/after snapshots, HTML, screenshots."""
     __tablename__ = "evidence_captures"
 
-    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     organisation_id: Mapped[str] = mapped_column(String(36), ForeignKey("organisations.id"), nullable=False, index=True)
     lead_id: Mapped[str] = mapped_column(String(36), ForeignKey("leads.id"), nullable=False, index=True)
     standard_library_id: Mapped[str] = mapped_column(String(36), ForeignKey("trust_standard_library.id"), nullable=True)
@@ -95,7 +95,7 @@ class TrustDelta(Base):
     """The measurable improvement between before and after for a specific standard."""
     __tablename__ = "trust_deltas"
 
-    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     organisation_id: Mapped[str] = mapped_column(String(36), ForeignKey("organisations.id"), nullable=False)
     lead_id: Mapped[str] = mapped_column(String(36), ForeignKey("leads.id"), nullable=False, index=True)
     standard_library_id: Mapped[str] = mapped_column(String(36), ForeignKey("trust_standard_library.id"), nullable=True)
