@@ -15,6 +15,21 @@ from app.api.v1.prompt_routes import router as prompt_router
 from app.api.v1.public_routes import router as public_router
 from app.api.v1.report_viewer import router as report_router
 
+# Import all models to ensure they are registered with Base.metadata
+import app.models  # noqa
+import app.models.trust_scan  # noqa
+import app.models.scoring  # noqa
+import app.models.recommendations  # noqa
+import app.models.proposals  # noqa
+import app.models.prompt_library  # noqa
+import app.models.trust_framework  # noqa
+import app.models.trust_journey  # noqa
+import app.models.trust_standard_library  # noqa
+import app.models.analytics  # noqa
+import app.models.client_workspace  # noqa
+import app.models.monitoring  # noqa
+import app.models.publishing  # noqa
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
