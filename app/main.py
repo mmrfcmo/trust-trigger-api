@@ -92,3 +92,40 @@ async def debug_env():
         "cors": settings.cors_origins,
         "jwt_set": bool(os.environ.get("JWT_SECRET_KEY")),
     }
+
+
+@app.get("/debug/test-openai")
+async def debug_test_openai():
+    """Test if openai can be imported and called."""
+    import os
+    import traceback
+    result = {"steps": {}}
+    
+    # Step 1: Import openai
+    try:
+        import openai
+        result["steps"]["import"] = f"ok (version={openai.__version__})"
+    except Exception as e:
+        result["steps"]["import"] = f"FAILED: {str(e)}"
+        result["traceback"] = traceback.format_exc()
+        return result
+    
+    # Step 2: Check API key
+    try:
+        key = os.environ.get("OPENAI_API_KEY", "")
+        result["steps"]["key_check"] = f"ok (length={len(key)}, prefix={key[:20]}...)"
+    except Exception as e:
+        result["steps"]["key_check"] = f"FAILED: {str(e)}"
+    
+    # Step 3: Try a simple API call
+    try:
+        openai.api_key = os.environ.get("OPENAI_API_KEY", "")
+        result["steps"]["api_call_attempt"] = "attempting..."
+        # Just check if we can list models (lightweight test)
+        import httpx
+        result["steps"]["httpx"] = "ok"
+    except Exception as e:
+        result["steps"]["api_call_attempt"] = f"FAILED: {str(e)}"
+        result["traceback"] = traceback.format_exc()
+    
+    return result
