@@ -1,6 +1,6 @@
 """Identity Engine: API routes for auth, users, organisations, and audit logs."""
 import uuid
-from typing import Optional
+from typing import Optional, List
 from fastapi import APIRouter, Depends, HTTPException, Request, status, Query
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.database import get_db
@@ -67,7 +67,7 @@ async def me(current_user: User = Depends(get_current_user)):
 
 # ─── Users ──────────────────────────────────────────────────────────────────
 
-@router.get("/users", response_model=list[UserResponse])
+@router.get("/users", response_model=List[UserResponse])
 async def list_users(
     skip: int = Query(0, ge=0),
     limit: int = Query(50, ge=1, le=100),
