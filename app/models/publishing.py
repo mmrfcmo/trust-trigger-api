@@ -1,7 +1,7 @@
 """Publishing Engine: models."""
 import uuid
 from datetime import datetime, timezone
-from sqlalchemy import String, Boolean, DateTime, Text, ForeignKey, JSON, Integer
+from sqlalchemy import String, Boolean, DateTime, Text, ForeignKey, JSON, Integer, Enum as SAEnum
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.dialects.postgresql import UUID
 from app.core.database import Base
