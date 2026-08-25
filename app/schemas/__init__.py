@@ -119,7 +119,7 @@ class AuditLogResponse(BaseModel):
 
 
 class AuditLogList(BaseModel):
-    items: list[AuditLogResponse]
+    items: List[AuditLogResponse]
     total: int
     page: int
     page_size: int
@@ -190,7 +190,7 @@ class LeadResponse(BaseModel):
 
 
 class LeadList(BaseModel):
-    items: list[LeadResponse]
+    items: List[LeadResponse]
     total: int
     page: int
     page_size: int
@@ -219,7 +219,7 @@ class GooglePlacesResult(BaseModel):
 
 
 class GooglePlacesSearchResponse(BaseModel):
-    results: list[GooglePlacesResult]
+    results: List[GooglePlacesResult]
     total: int
     query: str
     location: Optional[str]
@@ -238,7 +238,7 @@ class SearchHistoryResponse(BaseModel):
 
 
 class SearchHistoryList(BaseModel):
-    items: list[SearchHistoryResponse]
+    items: List[SearchHistoryResponse]
     total: int
 
 
