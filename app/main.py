@@ -79,3 +79,36 @@ app.include_router(report_router)
 @app.get("/health")
 async def health_check():
     return {"status": "ok", "version": settings.app_version}
+
+@app.get("/debug/test-ai")
+async def debug_test_ai():
+    """Test if OpenAI API call works."""
+    import os
+    result = {"steps": {}}
+    
+    try:
+        import openai
+        result["openai_version"] = openai.__version__
+    except Exception as e:
+        result["openai_import_error"] = str(e)
+        return result
+    
+    try:
+        openai.api_key = os.environ.get("OPENAI_API_KEY", "")
+        result["key_length"] = len(openai.api_key)
+        
+        # Try a simple completion
+        response = await openai.ChatCompletion.acreate(
+            model="gpt-3.5-turbo",
+            messages=[{"role": "user", "content": "Say hello in one word"}],
+            max_tokens=10,
+        )
+        result["api_call"] = "ok"
+        result["response"] = response.choices[0].message.content
+        result["model_used"] = response.model
+    except Exception as e:
+        result["api_call_error"] = str(e)
+        import traceback
+        result["traceback"] = traceback.format_exc()[-500:]
+    
+    return result
