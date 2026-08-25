@@ -1,6 +1,6 @@
 """Prompt Library API routes."""
 import uuid
-from typing import Optional
+from typing import Optional, List
 from datetime import datetime
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -161,7 +161,7 @@ async def update_prompt_route(
     return PromptResponse.model_validate(prompt)
 
 
-@router.get("/{prompt_id}/versions", response_model=list[VersionHistoryResponse])
+@router.get("/{prompt_id}/versions", response_model=List[VersionHistoryResponse])
 async def get_prompt_versions(
     prompt_id: uuid.UUID,
     current_user: User = Depends(get_current_user),
