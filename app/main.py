@@ -4,6 +4,7 @@ from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
 from app.core.database import engine, Base, async_session_factory, get_db
+from sqlalchemy.ext.asyncio import AsyncSession
 from app.api.v1 import router as identity_router
 from app.api.v1.lead_routes import router as lead_router
 from app.api.v1.scan_routes import router as scan_router
