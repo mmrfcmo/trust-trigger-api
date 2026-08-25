@@ -24,7 +24,7 @@ class ScanType(str, enum.Enum):
 class TrustScan(Base):
     __tablename__ = "trust_scans"
 
-    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     organisation_id: Mapped[str] = mapped_column(String(36), ForeignKey("organisations.id"), nullable=False, index=True)
     lead_id: Mapped[str] = mapped_column(String(36), ForeignKey("leads.id"), nullable=True, index=True)
     user_id: Mapped[str] = mapped_column(String(36), ForeignKey("users.id"), nullable=True)
@@ -53,7 +53,7 @@ class TrustStandard(Base):
     """Individual trust standard result from a scan."""
     __tablename__ = "trust_standards"
 
-    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     scan_id: Mapped[str] = mapped_column(String(36), ForeignKey("trust_scans.id"), nullable=False, index=True)
     category: Mapped[str] = mapped_column(String(100), nullable=False, index=True)  # e.g. website, google_business
     standard_name: Mapped[str] = mapped_column(String(255), nullable=False)  # e.g. https, contact_page, rating
