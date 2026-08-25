@@ -11,7 +11,7 @@ class ClientApproval(Base):
     """Tracks client approval/rejection of recommendations and changes."""
     __tablename__ = "client_approvals"
 
-    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     organisation_id: Mapped[str] = mapped_column(String(36), ForeignKey("organisations.id"), nullable=False)
     lead_id: Mapped[str] = mapped_column(String(36), ForeignKey("leads.id"), nullable=False)
     client_id: Mapped[str] = mapped_column(String(36), ForeignKey("users.id"), nullable=False)
@@ -27,7 +27,7 @@ class ClientComment(Base):
     """Client comments on any resource."""
     __tablename__ = "client_comments"
 
-    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     organisation_id: Mapped[str] = mapped_column(String(36), ForeignKey("organisations.id"), nullable=False)
     lead_id: Mapped[str] = mapped_column(String(36), ForeignKey("leads.id"), nullable=False)
     client_id: Mapped[str] = mapped_column(String(36), ForeignKey("users.id"), nullable=False)
@@ -42,7 +42,7 @@ class ProjectProgress(Base):
     """Track progress on a client project."""
     __tablename__ = "project_progress"
 
-    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uuid.uuid4)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     organisation_id: Mapped[str] = mapped_column(String(36), ForeignKey("organisations.id"), nullable=False)
     lead_id: Mapped[str] = mapped_column(String(36), ForeignKey("leads.id"), nullable=False)
     phase: Mapped[str] = mapped_column(String(100), nullable=False)  # discovery, scanning, recommendations, implementation, review
