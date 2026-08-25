@@ -79,3 +79,16 @@ app.include_router(report_router)
 @app.get("/health")
 async def health_check():
     return {"status": "ok", "version": settings.app_version}
+
+@app.get("/debug/env")
+async def debug_env():
+    """Debug endpoint to check env vars."""
+    import os
+    import sys
+    return {
+        "python_version": sys.version,
+        "openai_key_set": bool(os.environ.get("OPENAI_API_KEY")),
+        "openai_key_prefix": (os.environ.get("OPENAI_API_KEY", "")[:20] + "...") if os.environ.get("OPENAI_API_KEY") else "NOT SET",
+        "cors": settings.cors_origins,
+        "jwt_set": bool(os.environ.get("JWT_SECRET_KEY")),
+    }
