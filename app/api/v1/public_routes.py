@@ -6,7 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from app.core.database import get_db
 from app.models import Lead, Organisation, User, UserRole
-from app.models.trust_scan import TrustScan, ScanType
+from app.models.trust_scan import TrustScan, ScanType, ScanStatus
 from app.models.scoring import TrustScoreRecord
 from app.models.recommendations import AIRecommendation, RecommendationType
 from app.models.trust_journey import TrustJourney, JourneyMilestone
@@ -93,7 +93,7 @@ async def submit_trust_snapshot(
     
     # 6. Compute the trust score
     score_response = None
-    if scan and scan.status == "completed":
+    if scan and scan.status == ScanStatus.completed:
         try:
             record = await compute_trust_score(db, scan.id, org.id, lead.id, user.id)
             score_response = build_score_response(record)
