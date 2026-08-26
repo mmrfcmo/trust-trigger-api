@@ -79,3 +79,28 @@ app.include_router(report_router)
 @app.get("/health")
 async def health_check():
     return {"status": "ok", "version": settings.app_version}
+
+@app.get("/debug/test-scan")
+async def debug_test_scan():
+    """Test if the scan works."""
+    import httpx
+    from bs4 import BeautifulSoup
+    import re
+    result = {"steps": {}}
+    
+    try:
+        async with httpx.AsyncClient(timeout=10.0, follow_redirects=True) as client:
+            response = await client.get("https://example.com")
+            result["steps"]["http"] = f"ok (status={response.status_code})"
+            html = response.text
+            soup = BeautifulSoup(html, "html.parser")
+            text = soup.get_text(separator=" ", strip=True).lower()
+            result["steps"]["parse"] = f"ok (text_length={len(text)})"
+            contact_found = bool(re.search(r"contact|get in touch|reach us", text))
+            result["steps"]["contact"] = f"{'found' if contact_found else 'not found'}"
+    except Exception as e:
+        result["steps"]["error"] = str(e)
+        import traceback
+        result["traceback"] = traceback.format_exc()[-500:]
+    
+    return result
