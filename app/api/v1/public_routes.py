@@ -40,6 +40,7 @@ class TrustSnapshotResponse(BaseModel):
     standards: list = []
     issues: list = []
     actions: list = []
+    error: str = ""
 
 
 @router.post("/trust-snapshot", response_model=TrustSnapshotResponse, status_code=status.HTTP_201_CREATED)
@@ -92,8 +93,19 @@ async def submit_trust_snapshot(
         scan = None
     
     # 6. Compute the trust score
-    score_response = None
+        score_response = None
+    scan_error = ""
     if scan and scan.status == ScanStatus.completed:
+        try:
+            record = await compute_trust_score(db, scan.id, org.id, lead.id, user.id)
+            score_response = build_score_response(record)
+        except Exception as e:
+            scan_error = f"Score error: {str(e)}"
+            pass
+    elif scan:
+        scan_error = f"Scan status: {scan.status}"
+    else:
+        scan_error = "Scan failed to run"   if scan and scan.status == ScanStatus.completed:
         try:
             record = await compute_trust_score(db, scan.id, org.id, lead.id, user.id)
             score_response = build_score_response(record)
@@ -224,7 +236,8 @@ async def _get_or_create_system_user(db: AsyncSession, org_id: uuid.UUID) -> Use
             organisation_id=org_id,
             is_active=True,
             is_verified=True,
-        )
+            error=scan_error,
+    )
         db.add(user)
         await db.flush()
     return user
