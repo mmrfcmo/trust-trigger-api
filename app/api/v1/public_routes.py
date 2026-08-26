@@ -154,7 +154,6 @@ async def _get_or_create_system_user(db: AsyncSession, org_id: uuid.UUID) -> Use
             organisation_id=org_id,
             is_active=True,
             is_verified=True,
-            error=scan_error,
     )
         db.add(user)
         await db.flush()
