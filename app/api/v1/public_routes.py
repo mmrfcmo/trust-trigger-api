@@ -39,7 +39,7 @@ class TrustSnapshotResponse(BaseModel):
     actions: list = []
     error: str = ""
 
-async def _get_or_create_default_org(db: AsyncSession) -> Organisation:
+async def _get_or_create_default_org(db):
     result = await db.execute(select(Organisation).where(Organisation.slug == "trust-snapshot-leads"))
     org = result.scalar_one_or_none()
     if not org:
@@ -48,7 +48,7 @@ async def _get_or_create_default_org(db: AsyncSession) -> Organisation:
         await db.flush()
     return org
 
-async def _get_or_create_system_user(db: AsyncSession, org_id: uuid.UUID) -> User:
+async def _get_or_create_system_user(db, org_id):
     result = await db.execute(select(User).where(User.email == "system@trusttriggeragency.com", User.organisation_id == org_id))
     user = result.scalar_one_or_none()
     if not user:
@@ -57,48 +57,96 @@ async def _get_or_create_system_user(db: AsyncSession, org_id: uuid.UUID) -> Use
         await db.flush()
     return user
 
+reports = {}
+
 def _build_report_html(business_name, lead_email, website, score, grade, issues, actions, pillars, lead_id):
-    pillars_html = ""
+    lines = []
+    lines.append("")
+    lines.append("")
+    lines.append("")
+    lines.append("
+")
+    lines.append("
+")
+    lines.append("
+" + "🛡️" + "
+")
+    lines.append("
+Trust Snapshot Report
+")
+    lines.append("
+Prepared for " + business_name + "
+
+")
+    lines.append("
+")
+    lines.append("
+")
+    lines.append("")
+    lines.append("")
+    lines.append("")
+    lines.append("")
+    lines.append("")
+    lines.append("
+Business	" + business_name + "
+Website	" + website + "
+Email	" + lead_email + "
+Trust Score	" + str(score) + "/100 (" + grade + ")
+")
+    lines.append("
+Score Breakdown
+")
+    lines.append("")
+    lines.append("")
     for p in pillars:
         color = "red" if p.get("percentage", 0) < 40 else "amber" if p.get("percentage", 0) < 70 else "green"
-        pillars_html += f"{p.get('label', '')}{p.get('score', 0)}/{p.get('max_score', 0)}{p.get('percentage', 0)}%"
-    issues_html = ""
+        lines.append("")
+        lines.append("")
+        lines.append("")
+    lines.append("
+Pillar	Score	%
+" + p.get('label', '') + "	" + str(p.get('score', 0)) + "/" + str(p.get('max_score', 0)) + "	" + str(p.get('percentage', 0)) + "%
+")
+    lines.append("
+Top Issues
+")
     for iss in issues[:5]:
-        issues_html += f"
+        lines.append("
+")
+        lines.append("
 ⚠️
-{iss.get('title', '')}
-{iss.get('detail', '')}
-"
-    actions_html = ""
+")
+        lines.append("
+" + iss.get('title', '') + "
+")
+        lines.append("" + iss.get('detail', '') + "
+")
+    lines.append("
+Priority Actions
+")
     effort_colors = {"low": "background:#dcfce7;color:#166534", "medium": "background:#fef3c7;color:#92400e", "high": "background:#fee2e2;color:#991b1b"}
     for i, act in enumerate(actions[:5]):
         ec = effort_colors.get(act.get('effort', 'medium'), "background:#f1f5f9;color:#475569")
-        actions_html += f"
-#{i+1}
-{act.get('title', '')}
-{act.get('effort', 'medium').title()}
-"
-    return f"
-🛡️
-Trust Snapshot Report
-Prepared for {business_name}
-
-Business	{business_name}
-Website	{website}
-Email	{lead_email}
-Trust Score	{score}/100 ({grade})
-Score Breakdown
-{pillars_html}
-Pillar	Score	%
-Top Issues
-{issues_html}
-Priority Actions
-{actions_html}
+        lines.append("
+")
+        lines.append("
+#" + str(i+1) + "
+")
+        lines.append("
+" + act.get('title', '') + "
+")
+        lines.append("
+" + act.get('effort', 'medium').title() + "
+")
+    lines.append("
+")
+    lines.append("
 Trust Trigger Agency - London, UK
 
-"""
-
-reports = {}
+")
+    lines.append("
+")
+    return "\n".join(lines)
 
 def _send_owner_notification(business_name, lead_email, website, score, grade, issues, actions, pillars, lead_id):
     owner_email = os.environ.get("OWNER_EMAIL", "mmr1979@hotmail.co.uk")
@@ -108,35 +156,73 @@ def _send_owner_notification(business_name, lead_email, website, score, grade, i
         return
     report_html = _build_report_html(business_name, lead_email, website, score, grade, issues, actions, pillars, lead_id)
     reports[lead_id] = report_html
-    report_url = f"https://trust-trigger-api.onrender.com/report-view/{lead_id}"
-    body_html = f"
+    report_url = "https://trust-trigger-api.onrender.com/report-view/" + lead_id
+    body = ""
+    body += "
+"
+    body += "
+"
+    body += "
 🛡️
+"
+    body += "
 New Trust Snapshot Lead
+"
+    body += "
 A prospect has requested their Trust Snapshot
 
-Business	{business_name}
-Website	{website}
-Email	{lead_email}
-Trust Score	{score}/100 ({grade})
+"
+    body += "
+"
+    body += "
+"
+    body += ""
+    body += ""
+    body += ""
+    body += ""
+    body += ""
+    body += "
+Business	" + business_name + "
+Website	" + website + "
+Email	" + lead_email + "
+Trust Score	" + str(score) + "/100 (" + grade + ")
+"
+    body += "
 Digital Trust Report
+"
+    body += "
 Open the full report below to review with the prospect on your call.
 
+"
+    body += "
 Open Full Report
+"
+    body += "
 Available Options
+"
+    body += "
 Trust Snapshot (Free)
-Score: {score}/100 ({grade}).
+Score: " + str(score) + "/100 (" + grade + ").
 
+"
+    body += "
 Trust Transformation (£995)
 20-min call + full report walkthrough + fix implementation.
 
+"
+    body += "
 Trust Monitor (£99/mo)
 Ongoing monitoring and quarterly re-scans.
 
-Lead ID: {lead_id}
+"
+    body += "
+Lead ID: " + lead_id + "
 
-"""
-    msg = MIMEText(body_html, "html")
-    msg["Subject"] = f"New Trust Snapshot: {business_name} - Score: {score}/100 ({grade})"
+"
+    body += "
+"
+    msg = MIMEText(body, "html")
+    msg["Subject"] = "New Trust Snapshot: " + business_name + " - Score: " + str(score) + "/100 (" + grade + ")"
     msg["From"] = gmail_user
     msg["To"] = owner_email
     try:
@@ -151,31 +237,65 @@ def _send_prospect_email(prospect_email, business_name, score, grade):
     gmail_password = os.environ.get("GMAIL_APP_PASSWORD", "")
     if not gmail_user or not gmail_password:
         return
-    html = f"
+    body = ""
+    body += "
+"
+    body += "
+"
+    body += "
 🛡️
-Thanks, {business_name}!
+"
+    body += "
+Thanks, " + business_name + "!
+"
+    body += "
 Your Trust Snapshot is ready
 
-{score}
+"
+    body += "
+"
+    body += ""
+    body += "
+" + str(score) + "
+"
+    body += "
 /100
-{grade}
-Your digital trust score is {score}/100
+"
+    body += "
+" + grade + "
+"
+    body += "
+Your digital trust score is " + str(score) + "/100
+"
+    body += "
 The best way to understand what this score means is a quick 20-minute no-obligation screen-share with a Trust Analyst.
 
+"
+    body += "
 On your call, you will get:
 
+"
+    body += "
 ✅
 Your full score breakdown explained in plain English
+"
+    body += "
 ✅
 Specific issues found on your website and how to fix them
+"
+    body += "
 ✅
 Quick wins you can implement immediately
+"
+    body += "
 ✅
 No obligation honest advice no hard sell
-Book Your Free 20-Min Call
-"""
-    msg = MIMEText(html, "html")
-    msg["Subject"] = f"Your Trust Snapshot is ready - Score: {score}/100"
+"
+    body += "Book Your Free 20-Min Call"
+    body += "
+"
+    msg = MIMEText(body, "html")
+    msg["Subject"] = "Your Trust Snapshot is ready - Score: " + str(score) + "/100"
     msg["From"] = gmail_user
     msg["To"] = prospect_email
     try:
@@ -194,26 +314,26 @@ Report not found
 ", status_code=404)
 
 @router.post("/trust-snapshot", response_model=TrustSnapshotResponse, status_code=status.HTTP_201_CREATED)
-async def submit_trust_snapshot(req: TrustSnapshotRequest, request: Request, db: AsyncSession = Depends(get_db)):
+async def submit_trust_snapshot(req: TrustSnapshotRequest, request: Request, db = Depends(get_db)):
     org = await _get_or_create_default_org(db)
     user = await _get_or_create_system_user(db, org.id)
     website = req.website.strip()
     if not website.startswith(("http://", "https://")):
-        website = f"https://{website}"
+        website = "https://" + website
     lead = Lead(organisation_id=org.id, business_name=req.full_name, website=website, email=req.email, source="trust_snapshot_landing")
     db.add(lead)
     await db.flush()
     scan = None
     try:
         scan = await trigger_scan(db, lead.id, org.id, user.id, ScanType.full)
-    except Exception as e:
+    except Exception:
         scan = None
     score_response = None
     try:
         if scan and scan.status == ScanStatus.completed:
             score_record = await compute_trust_score(db, scan.id, org.id, lead.id, user.id)
             score_response = build_score_response(score_record)
-    except Exception as e:
+    except Exception:
         score_response = None
     if score_response:
         pillars_data = []
@@ -240,7 +360,7 @@ async def submit_trust_snapshot(req: TrustSnapshotRequest, request: Request, db:
         except Exception:
             pass
         await db.commit()
-        return TrustSnapshotResponse(success=True, message="Your Trust Snapshot is ready.", report_url=f"/report-view/{lead.id}", lead_id=str(lead.id), score=int(overall_pct), grade=grade_label, issues_found=len(issues_data), standards_passed=score_response.overall_score, standards_total=score_response.overall_max, pillars=pillars_data, standards=standards_data, issues=issues_data, actions=actions_data)
+        return TrustSnapshotResponse(success=True, message="Your Trust Snapshot is ready.", report_url="/report-view/" + str(lead.id), lead_id=str(lead.id), score=int(overall_pct), grade=grade_label, issues_found=len(issues_data), standards_passed=score_response.overall_score, standards_total=score_response.overall_max, pillars=pillars_data, standards=standards_data, issues=issues_data, actions=actions_data)
     else:
         await db.commit()
         return TrustSnapshotResponse(success=True, message="Your Trust Snapshot is being generated.", report_url="", lead_id=str(lead.id), score=0, grade="", issues_found=0, standards_passed=0, standards_total=9, pillars=[], standards=[], issues=[], actions=[])
