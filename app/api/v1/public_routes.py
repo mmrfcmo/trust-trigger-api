@@ -8,20 +8,15 @@ from app.core.database import get_db
 from app.models import Lead, Organisation, User, UserRole
 from app.models.trust_scan import TrustScan, ScanType, ScanStatus
 from app.models.scoring import TrustScoreRecord
-from app.models.recommendations import AIRecommendation, RecommendationType
-from app.models.trust_journey import TrustJourney, JourneyMilestone
 from app.services.lead_intelligence import calculate_opportunity_score
 from app.services.trust_scanner import run_scan as trigger_scan
 from app.services.scoring import compute_trust_score, build_score_response
-from app.services.recommendations import generate_recommendation
 from app.core.security import hash_password
 from pydantic import BaseModel, Field, EmailStr
 import smtplib
 import os
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from email.mime.base import MIMEBase
-from email import encoders
 
 router = APIRouter(prefix="/api/v1/public", tags=["Public - Trust Snapshot"])
 
@@ -72,7 +67,7 @@ def _build_report_html(business_name, lead_email, website, score, grade, issues,
     issues_html = ""
     for iss in issues[:5]:
         issues_html += f"""
-âš ï¸
+⚠️
 {iss.get('title', '')}
 {iss.get('detail', '')}
 """
