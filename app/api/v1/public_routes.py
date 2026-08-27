@@ -1,7 +1,8 @@
 """Public API routes for Trust Snapshot lead capture (no auth required)."""
-import uuid
+import uuid, smtplib, os
 from datetime import datetime, timezone
 from fastapi import APIRouter, Depends, HTTPException, Request, status
+from fastapi.responses import HTMLResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from app.core.database import get_db
@@ -13,8 +14,6 @@ from app.services.trust_scanner import run_scan as trigger_scan
 from app.services.scoring import compute_trust_score, build_score_response
 from app.core.security import hash_password
 from pydantic import BaseModel, Field, EmailStr
-import smtplib
-import os
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
@@ -96,9 +95,17 @@ Top Issues
 {issues_html}
 Priority Actions
 {actions_html}
-Trust Trigger Agency™ — London, UK
+Trust Trigger Agency™ - London, UK
 
 """
+
+def _generate_report_page(business_name, lead_email, website, score, grade, issues, actions, pillars, lead_id):
+    report_html = _build_report_html(business_name, lead_email, website, score, grade, issues, actions, pillars, lead_id)
+    report_filename = f"report-{lead_id}.html"
+    report_path = f"/tmp/{report_filename}"
+    with open(report_path, "w") as f:
+        f.write(report_html)
+    return f"https://trust-trigger-api.onrender.com/report-view/{lead_id}"
 
 def _send_owner_notification(business_name, lead_email, website, score, grade, issues, actions, pillars, lead_id):
     owner_email = os.environ.get("OWNER_EMAIL", "mmr1979@hotmail.co.uk")
@@ -106,7 +113,7 @@ def _send_owner_notification(business_name, lead_email, website, score, grade, i
     gmail_password = os.environ.get("GMAIL_APP_PASSWORD", "")
     if not gmail_user or not gmail_password:
         return
-    report_html = _build_report_html(business_name, lead_email, website, score, grade, issues, actions, pillars, lead_id)
+    report_url = _generate_report_page(business_name, lead_email, website, score, grade, issues, actions, pillars, lead_id)
     body_html = f"""
 🛡️
 New Trust Snapshot Lead
@@ -116,6 +123,10 @@ Business	{business_name}
 Website	{website}
 Email	{lead_email}
 Trust Score	{score}/100 ({grade})
+Digital Trust Report
+Open the full report below to review with the prospect on your call. It includes the complete score breakdown, all issues found, and priority actions.
+
+Open Full Report
 Available Options
 Trust Snapshot (Free)
 What they just received. Score: {score}/100 ({grade}).
@@ -128,17 +139,11 @@ Ongoing monitoring and quarterly re-scans.
 
 Lead ID: {lead_id}
 
-A full report is attached to this email.
-
 """
-    msg = MIMEMultipart('mixed')
+    msg = MIMEText(body_html, "html")
     msg["Subject"] = f"New Trust Snapshot: {business_name} - Score: {score}/100 ({grade})"
     msg["From"] = gmail_user
     msg["To"] = owner_email
-    msg.attach(MIMEText(body_html, "html"))
-    report_attachment = MIMEText(report_html, "html")
-    report_attachment.add_header('Content-Disposition', 'attachment', filename=f'Trust-Snapshot-{business_name.replace(" ", "-")}.html')
-    msg.attach(report_attachment)
     try:
         with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
             server.login(gmail_user, gmail_password)
@@ -184,6 +189,18 @@ Book Your Free 20-Min Call
             server.send_message(msg)
     except Exception:
         pass
+
+@router.get("/report-view/{lead_id}", response_class=HTMLResponse)
+async def view_report(lead_id: str):
+    report_path = f"/tmp/report-{lead_id}.html"
+    if os.path.exists(report_path):
+        with open(report_path, "r") as f:
+            return f.read()
+    return "
+Report not found
+The report may have expired. Please check your email for the link.
+
+"
 
 @router.post("/trust-snapshot", response_model=TrustSnapshotResponse, status_code=status.HTTP_201_CREATED)
 async def submit_trust_snapshot(req: TrustSnapshotRequest, request: Request, db: AsyncSession = Depends(get_db)):
@@ -232,7 +249,7 @@ async def submit_trust_snapshot(req: TrustSnapshotRequest, request: Request, db:
         except Exception:
             pass
         await db.commit()
-        return TrustSnapshotResponse(success=True, message="Your Trust Snapshot is ready.", report_url="", lead_id=str(lead.id), score=int(overall_pct), grade=grade_label, issues_found=len(issues_data), standards_passed=score_response.overall_score, standards_total=score_response.overall_max, pillars=pillars_data, standards=standards_data, issues=issues_data, actions=actions_data)
+        return TrustSnapshotResponse(success=True, message="Your Trust Snapshot is ready.", report_url=f"/report-view/{lead.id}", lead_id=str(lead.id), score=int(overall_pct), grade=grade_label, issues_found=len(issues_data), standards_passed=score_response.overall_score, standards_total=score_response.overall_max, pillars=pillars_data, standards=standards_data, issues=issues_data, actions=actions_data)
     else:
         await db.commit()
         return TrustSnapshotResponse(success=True, message="Your Trust Snapshot is being generated.", report_url="", lead_id=str(lead.id), score=0, grade="", issues_found=0, standards_passed=0, standards_total=9, pillars=[], standards=[], issues=[], actions=[])
