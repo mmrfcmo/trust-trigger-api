@@ -83,3 +83,8 @@ def _build_report_html(business_name, lead_email, website, score, grade, issues,
         actions_html += f"""
 #{i+1}
 {act.get('title', '')}
+{act.get('effort', 'medium').title()}
+"""
+    return f"""
+
+
