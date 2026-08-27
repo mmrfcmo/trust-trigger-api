@@ -1,5 +1,5 @@
 """Public API routes for Trust Snapshot lead capture (no auth required)."""
-import uuid, smtplib, os
+import uuid, smtplib, os, json
 from datetime import datetime, timezone
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 from fastapi.responses import HTMLResponse
@@ -61,24 +61,24 @@ def _build_report_html(business_name, lead_email, website, score, grade, issues,
     pillars_html = ""
     for p in pillars:
         color = "red" if p.get("percentage", 0) < 40 else "amber" if p.get("percentage", 0) < 70 else "green"
-        pillars_html += f"""{p.get('label', '')}{p.get('score', 0)}/{p.get('max_score', 0)}{p.get('percentage', 0)}%"""
+        pillars_html += f"{p.get('label', '')}{p.get('score', 0)}/{p.get('max_score', 0)}{p.get('percentage', 0)}%"
     issues_html = ""
     for iss in issues[:5]:
-        issues_html += f"""
+        issues_html += f"
 ⚠️
 {iss.get('title', '')}
 {iss.get('detail', '')}
-"""
+"
     actions_html = ""
     effort_colors = {"low": "background:#dcfce7;color:#166534", "medium": "background:#fef3c7;color:#92400e", "high": "background:#fee2e2;color:#991b1b"}
     for i, act in enumerate(actions[:5]):
         ec = effort_colors.get(act.get('effort', 'medium'), "background:#f1f5f9;color:#475569")
-        actions_html += f"""
+        actions_html += f"
 #{i+1}
 {act.get('title', '')}
 {act.get('effort', 'medium').title()}
-"""
-    return f"""
+"
+    return f"
 🛡️
 Trust Snapshot Report
 Prepared for {business_name}
@@ -98,13 +98,7 @@ Trust Trigger Agency - London, UK
 
 """
 
-def _generate_report_page(business_name, lead_email, website, score, grade, issues, actions, pillars, lead_id):
-    report_html = _build_report_html(business_name, lead_email, website, score, grade, issues, actions, pillars, lead_id)
-    report_filename = f"report-{lead_id}.html"
-    report_path = f"/tmp/{report_filename}"
-    with open(report_path, "w") as f:
-        f.write(report_html)
-    return f"https://trust-trigger-api.onrender.com/report-view/{lead_id}"
+reports = {}
 
 def _send_owner_notification(business_name, lead_email, website, score, grade, issues, actions, pillars, lead_id):
     owner_email = os.environ.get("OWNER_EMAIL", "mmr1979@hotmail.co.uk")
@@ -112,8 +106,10 @@ def _send_owner_notification(business_name, lead_email, website, score, grade, i
     gmail_password = os.environ.get("GMAIL_APP_PASSWORD", "")
     if not gmail_user or not gmail_password:
         return
-    report_url = _generate_report_page(business_name, lead_email, website, score, grade, issues, actions, pillars, lead_id)
-    body_html = f"""
+    report_html = _build_report_html(business_name, lead_email, website, score, grade, issues, actions, pillars, lead_id)
+    reports[lead_id] = report_html
+    report_url = f"https://trust-trigger-api.onrender.com/report-view/{lead_id}"
+    body_html = f"
 🛡️
 New Trust Snapshot Lead
 A prospect has requested their Trust Snapshot
@@ -123,12 +119,12 @@ Website	{website}
 Email	{lead_email}
 Trust Score	{score}/100 ({grade})
 Digital Trust Report
-Open the full report below to review with the prospect on your call. It includes the complete score breakdown, all issues found, and priority actions.
+Open the full report below to review with the prospect on your call.
 
 Open Full Report
 Available Options
 Trust Snapshot (Free)
-What they just received. Score: {score}/100 ({grade}).
+Score: {score}/100 ({grade}).
 
 Trust Transformation (£995)
 20-min call + full report walkthrough + fix implementation.
@@ -155,7 +151,7 @@ def _send_prospect_email(prospect_email, business_name, score, grade):
     gmail_password = os.environ.get("GMAIL_APP_PASSWORD", "")
     if not gmail_user or not gmail_password:
         return
-    html = f"""
+    html = f"
 🛡️
 Thanks, {business_name}!
 Your Trust Snapshot is ready
@@ -164,7 +160,7 @@ Your Trust Snapshot is ready
 /100
 {grade}
 Your digital trust score is {score}/100
-The best way to understand what this score means and how to improve it is a quick 20-minute no-obligation screen-share with a Trust Analyst. We will walk through your results together, explain exactly what is affecting your score, and show you what you can fix right away.
+The best way to understand what this score means is a quick 20-minute no-obligation screen-share with a Trust Analyst.
 
 On your call, you will get:
 
@@ -191,14 +187,10 @@ Book Your Free 20-Min Call
 
 @router.get("/report-view/{lead_id}")
 async def view_report(lead_id: str):
-    report_path = f"/tmp/report-{lead_id}.html"
-    if os.path.exists(report_path):
-        with open(report_path, "r") as f:
-            return HTMLResponse(content=f.read())
+    if lead_id in reports:
+        return HTMLResponse(content=reports[lead_id])
     return HTMLResponse(content="
 Report not found
-The report may have expired.
-
 ", status_code=404)
 
 @router.post("/trust-snapshot", response_model=TrustSnapshotResponse, status_code=status.HTTP_201_CREATED)
