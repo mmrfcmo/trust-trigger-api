@@ -14,7 +14,6 @@ from app.services.trust_scanner import run_scan as trigger_scan
 from app.services.scoring import compute_trust_score, build_score_response
 from app.core.security import hash_password
 from pydantic import BaseModel, Field, EmailStr
-from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
 router = APIRouter(prefix="/api/v1/public", tags=["Public - Trust Snapshot"])
@@ -95,7 +94,7 @@ Top Issues
 {issues_html}
 Priority Actions
 {actions_html}
-Trust Trigger Agency™ - London, UK
+Trust Trigger Agency - London, UK
 
 """
 
@@ -190,17 +189,17 @@ Book Your Free 20-Min Call
     except Exception:
         pass
 
-@router.get("/report-view/{lead_id}", response_class=HTMLResponse)
+@router.get("/report-view/{lead_id}")
 async def view_report(lead_id: str):
     report_path = f"/tmp/report-{lead_id}.html"
     if os.path.exists(report_path):
         with open(report_path, "r") as f:
-            return f.read()
-    return "
+            return HTMLResponse(content=f.read())
+    return HTMLResponse(content="
 Report not found
-The report may have expired. Please check your email for the link.
+The report may have expired.
 
-"
+", status_code=404)
 
 @router.post("/trust-snapshot", response_model=TrustSnapshotResponse, status_code=status.HTTP_201_CREATED)
 async def submit_trust_snapshot(req: TrustSnapshotRequest, request: Request, db: AsyncSession = Depends(get_db)):
@@ -253,5 +252,3 @@ async def submit_trust_snapshot(req: TrustSnapshotRequest, request: Request, db:
     else:
         await db.commit()
         return TrustSnapshotResponse(success=True, message="Your Trust Snapshot is being generated.", report_url="", lead_id=str(lead.id), score=0, grade="", issues_found=0, standards_passed=0, standards_total=9, pillars=[], standards=[], issues=[], actions=[])
-
-
