@@ -40,44 +40,36 @@ async def get_db() -> AsyncSession:
         finally:
             await session.close()
 
-Commit: "Fixed database.py for Render PostgreSQL support" ✅
+Only this, nothing else. Then click Commit changes.
 
-File 3: app/core/config.py
-Click app → core → config.py → pencil.
+Now you'll also need to fix config.py — go to github.com/mmrfcmo/trust-trigger-api/blob/main/app/core/config.py
 
-Delete and paste:
+Delete everything and paste just this:
 
 """Application configuration using Pydantic Settings."""
-from pydantic import BaseSettings  # pydantic v1
+from pydantic import BaseSettings
 from typing import Optional
 class Settings(BaseSettings):
     app_name: str = "Trust Trigger Agency"
     app_version: str = "1.0.0"
     debug: bool = False
 
-    # Database — Render sets DATABASE_URL automatically
     database_url: Optional[str] = None
     supabase_url: Optional[str] = None
     supabase_anon_key: Optional[str] = None
     supabase_service_key: Optional[str] = None
 
-    # Auth
     jwt_secret_key: str = "change-me-to-a-random-secret"
     jwt_algorithm: str = "HS256"
     jwt_expiration_minutes: int = 1440
 
-    # OpenAI
     openai_api_key: Optional[str] = None
-
-    # Google Places
     google_places_api_key: Optional[str] = None
 
-    # Gmail for notifications
     gmail_email: Optional[str] = None
     gmail_app_password: Optional[str] = None
     owner_email: str = "mmr1979@hotmail.co.uk"
 
-    # Security
     cors_origins: str = "https://srv16.aisoftllc.com,http://localhost:3000,http://localhost:5173"
 
     @property
