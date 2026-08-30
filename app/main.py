@@ -3,7 +3,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
-from app.core.database import engine, Base, async_session_factory
+from app.core.database import engine, Base
 from app.api.v1 import router as identity_router
 from app.api.v1.lead_routes import router as lead_router
 from app.api.v1.scan_routes import router as scan_router
@@ -34,13 +34,6 @@ import app.models.workflow_db
 async def lifespan(app: FastAPI):
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
-    async with async_session_factory() as session:
-        from app.services.seed_data import seed_default_prompts, seed_default_framework
-        await seed_default_prompts(session)
-        await seed_default_framework(session)
-        from app.services.seed_standards import seed_standard_library
-        await seed_standard_library(session)
-        await session.commit()
     yield
     await engine.dispose()
 
