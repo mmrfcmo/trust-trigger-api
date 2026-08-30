@@ -69,5 +69,3 @@ app.include_router(fulfilment_router)
 @app.get("/health")
 async def health_check():
     return {"status": "ok", "version": settings.app_version}
-
-
