@@ -9,13 +9,11 @@ from app.core.database import get_db
 from app.models import Lead, Organisation, User, UserRole
 from app.models.trust_scan import TrustScan, ScanType, ScanStatus
 from app.models.scoring import TrustScoreRecord
-from app.services.lead_intelligence import calculate_opportunity_score
 from app.services.trust_scanner import run_scan as trigger_scan
 from app.services.scoring import compute_trust_score, build_score_response
 from app.core.security import hash_password
 from pydantic import BaseModel, Field, EmailStr
 from email.mime.text import MIMEText
-
 router = APIRouter(prefix="/api/v1/public", tags=["Public - Trust Snapshot"])
 
 class TrustSnapshotRequest(BaseModel):
@@ -57,262 +55,6 @@ async def _get_or_create_system_user(db, org_id):
         await db.flush()
     return user
 
-reports = {}
-
-def _build_report_html(business_name, lead_email, website, score, grade, issues, actions, pillars, lead_id):
-    lines = []
-    lines.append("")
-    lines.append("")
-    lines.append("")
-    lines.append("
-")
-    lines.append("
-")
-    lines.append("
-" + "🛡️" + "
-")
-    lines.append("
-Trust Snapshot Report
-")
-    lines.append("
-Prepared for " + business_name + "
-
-")
-    lines.append("
-")
-    lines.append("
-")
-    lines.append("")
-    lines.append("")
-    lines.append("")
-    lines.append("")
-    lines.append("")
-    lines.append("
-Business	" + business_name + "
-Website	" + website + "
-Email	" + lead_email + "
-Trust Score	" + str(score) + "/100 (" + grade + ")
-")
-    lines.append("
-Score Breakdown
-")
-    lines.append("")
-    lines.append("")
-    for p in pillars:
-        color = "red" if p.get("percentage", 0) < 40 else "amber" if p.get("percentage", 0) < 70 else "green"
-        lines.append("")
-        lines.append("")
-        lines.append("")
-    lines.append("
-Pillar	Score	%
-" + p.get('label', '') + "	" + str(p.get('score', 0)) + "/" + str(p.get('max_score', 0)) + "	" + str(p.get('percentage', 0)) + "%
-")
-    lines.append("
-Top Issues
-")
-    for iss in issues[:5]:
-        lines.append("
-")
-        lines.append("
-⚠️
-")
-        lines.append("
-" + iss.get('title', '') + "
-")
-        lines.append("" + iss.get('detail', '') + "
-")
-    lines.append("
-Priority Actions
-")
-    effort_colors = {"low": "background:#dcfce7;color:#166534", "medium": "background:#fef3c7;color:#92400e", "high": "background:#fee2e2;color:#991b1b"}
-    for i, act in enumerate(actions[:5]):
-        ec = effort_colors.get(act.get('effort', 'medium'), "background:#f1f5f9;color:#475569")
-        lines.append("
-")
-        lines.append("
-#" + str(i+1) + "
-")
-        lines.append("
-" + act.get('title', '') + "
-")
-        lines.append("
-" + act.get('effort', 'medium').title() + "
-")
-    lines.append("
-")
-    lines.append("
-Trust Trigger Agency - London, UK
-
-")
-    lines.append("
-")
-    return "\n".join(lines)
-
-def _send_owner_notification(business_name, lead_email, website, score, grade, issues, actions, pillars, lead_id):
-    owner_email = os.environ.get("OWNER_EMAIL", "mmr1979@hotmail.co.uk")
-    gmail_user = os.environ.get("GMAIL_EMAIL", "")
-    gmail_password = os.environ.get("GMAIL_APP_PASSWORD", "")
-    if not gmail_user or not gmail_password:
-        return
-    report_html = _build_report_html(business_name, lead_email, website, score, grade, issues, actions, pillars, lead_id)
-    reports[lead_id] = report_html
-    report_url = "https://trust-trigger-api.onrender.com/report-view/" + lead_id
-    body = ""
-    body += "
-"
-    body += "
-"
-    body += "
-🛡️
-"
-    body += "
-New Trust Snapshot Lead
-"
-    body += "
-A prospect has requested their Trust Snapshot
-
-"
-    body += "
-"
-    body += "
-"
-    body += ""
-    body += ""
-    body += ""
-    body += ""
-    body += ""
-    body += "
-Business	" + business_name + "
-Website	" + website + "
-Email	" + lead_email + "
-Trust Score	" + str(score) + "/100 (" + grade + ")
-"
-    body += "
-Digital Trust Report
-"
-    body += "
-Open the full report below to review with the prospect on your call.
-
-"
-    body += "
-Open Full Report
-"
-    body += "
-Available Options
-"
-    body += "
-Trust Snapshot (Free)
-Score: " + str(score) + "/100 (" + grade + ").
-
-"
-    body += "
-Trust Transformation (£995)
-20-min call + full report walkthrough + fix implementation.
-
-"
-    body += "
-Trust Monitor (£99/mo)
-Ongoing monitoring and quarterly re-scans.
-
-"
-    body += "
-Lead ID: " + lead_id + "
-
-"
-    body += "
-"
-    msg = MIMEText(body, "html")
-    msg["Subject"] = "New Trust Snapshot: " + business_name + " - Score: " + str(score) + "/100 (" + grade + ")"
-    msg["From"] = gmail_user
-    msg["To"] = owner_email
-    try:
-        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
-            server.login(gmail_user, gmail_password)
-            server.send_message(msg)
-    except Exception:
-        pass
-
-def _send_prospect_email(prospect_email, business_name, score, grade):
-    gmail_user = os.environ.get("GMAIL_EMAIL", "")
-    gmail_password = os.environ.get("GMAIL_APP_PASSWORD", "")
-    if not gmail_user or not gmail_password:
-        return
-    body = ""
-    body += "
-"
-    body += "
-"
-    body += "
-🛡️
-"
-    body += "
-Thanks, " + business_name + "!
-"
-    body += "
-Your Trust Snapshot is ready
-
-"
-    body += "
-"
-    body += ""
-    body += "
-" + str(score) + "
-"
-    body += "
-/100
-"
-    body += "
-" + grade + "
-"
-    body += "
-Your digital trust score is " + str(score) + "/100
-"
-    body += "
-The best way to understand what this score means is a quick 20-minute no-obligation screen-share with a Trust Analyst.
-
-"
-    body += "
-On your call, you will get:
-
-"
-    body += "
-✅
-Your full score breakdown explained in plain English
-"
-    body += "
-✅
-Specific issues found on your website and how to fix them
-"
-    body += "
-✅
-Quick wins you can implement immediately
-"
-    body += "
-✅
-No obligation honest advice no hard sell
-"
-    body += "Book Your Free 20-Min Call"
-    body += "
-"
-    msg = MIMEText(body, "html")
-    msg["Subject"] = "Your Trust Snapshot is ready - Score: " + str(score) + "/100"
-    msg["From"] = gmail_user
-    msg["To"] = prospect_email
-    try:
-        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
-            server.login(gmail_user, gmail_password)
-            server.send_message(msg)
-    except Exception:
-        pass
-
-@router.get("/report-view/{lead_id}")
-async def view_report(lead_id: str):
-    if lead_id in reports:
-        return HTMLResponse(content=reports[lead_id])
-    return HTMLResponse(content="
-Report not found
-", status_code=404)
-
 @router.post("/trust-snapshot", response_model=TrustSnapshotResponse, status_code=status.HTTP_201_CREATED)
 async def submit_trust_snapshot(req: TrustSnapshotRequest, request: Request, db = Depends(get_db)):
     org = await _get_or_create_default_org(db)
@@ -351,16 +93,34 @@ async def submit_trust_snapshot(req: TrustSnapshotRequest, request: Request, db 
             actions_data.append({"title": act.action, "detail": act.detail, "effort": act.effort})
         overall_pct = score_response.overall_percentage
         grade_label = score_response.grade.value if hasattr(score_response.grade, 'value') else str(score_response.grade)
-        try:
-            _send_owner_notification(business_name=req.full_name, lead_email=req.email, website=website, score=int(overall_pct), grade=grade_label, issues=issues_data, actions=actions_data, pillars=pillars_data, lead_id=str(lead.id))
-        except Exception:
-            pass
-        try:
-            _send_prospect_email(prospect_email=req.email, business_name=req.full_name, score=int(overall_pct), grade=grade_label)
-        except Exception:
-            pass
         await db.commit()
-        return TrustSnapshotResponse(success=True, message="Your Trust Snapshot is ready.", report_url="/report-view/" + str(lead.id), lead_id=str(lead.id), score=int(overall_pct), grade=grade_label, issues_found=len(issues_data), standards_passed=score_response.overall_score, standards_total=score_response.overall_max, pillars=pillars_data, standards=standards_data, issues=issues_data, actions=actions_data)
+        return TrustSnapshotResponse(success=True, message="Your Trust Snapshot is ready.", report_url="/api/v1/public/report-view/" + str(lead.id), lead_id=str(lead.id), score=int(overall_pct), grade=grade_label, issues_found=len(issues_data), standards_passed=score_response.overall_score, standards_total=score_response.overall_max, pillars=pillars_data, standards=standards_data, issues=issues_data, actions=actions_data)
     else:
         await db.commit()
         return TrustSnapshotResponse(success=True, message="Your Trust Snapshot is being generated.", report_url="", lead_id=str(lead.id), score=0, grade="", issues_found=0, standards_passed=0, standards_total=9, pillars=[], standards=[], issues=[], actions=[])
+
+@router.get("/report-view/{lead_id}")
+async def view_report(lead_id: str, db = Depends(get_db)):
+    from app.models.recommendations import AIRecommendation
+    result = await db.execute(select(AIRecommendation).where(AIRecommendation.lead_id == lead_id))
+    report = result.scalar_one_or_none()
+    lead_result = await db.execute(select(Lead).where(Lead.id == lead_id))
+    lead = lead_result.scalar_one_or_none()
+    if not lead:
+        return HTMLResponse(content="<h1>Report not found</h1>", status_code=404)
+    business_name = lead.business_name or "Your Business"
+    website = lead.website or ""
+    score = 0
+    grade = "Unknown"
+    if report:
+        score = int(report.score) if report.score else 0
+        grade = report.grade or "Unknown"
+    html = "<html><body style='font-family:Inter,sans-serif;background:#f8fafc;padding:2rem'>"
+    html += "<h1 style='color:#0f172a'>Trust Snapshot Report</h1>"
+    html += "<p><strong>Business:</strong> " + business_name + "</p>"
+    html += "<p><strong>Website:</strong> " + website + "</p>"
+    html += "<p><strong>Trust Score:</strong> " + str(score) + "/100 (" + grade + ")</p>"
+    if report and report.content:
+        html += "<hr><div>" + report.content + "</div>"
+    html += "</body></html>"
+    return HTMLResponse(content=html)
