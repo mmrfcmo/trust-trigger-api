@@ -15,6 +15,7 @@ from app.api.v1.prompt_routes import router as prompt_router
 from app.api.v1.public_routes import router as public_router
 from app.api.v1.report_viewer import router as report_router
 from app.api.v1.fulfilment_routes import router as fulfilment_router
+from app.api.v1.console_routes import router as console_router
 import app.models
 import app.models.trust_scan
 import app.models.scoring
@@ -58,6 +59,7 @@ app.include_router(prompt_router)
 app.include_router(public_router)
 app.include_router(report_router)
 app.include_router(fulfilment_router)
+app.include_router(console_router)
 
 @app.get("/health")
 async def health_check():
