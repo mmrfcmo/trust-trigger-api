@@ -15,7 +15,6 @@ from app.core.security import hash_password
 from pydantic import BaseModel, Field, EmailStr
 from email.mime.text import MIMEText
 router = APIRouter(prefix="/api/v1/public", tags=["Public - Trust Snapshot"])
-
 class TrustSnapshotRequest(BaseModel):
     full_name: str = Field(..., min_length=1, max_length=255)
     website: str = Field(..., min_length=1, max_length=512)
@@ -94,33 +93,148 @@ async def submit_trust_snapshot(req: TrustSnapshotRequest, request: Request, db 
         overall_pct = score_response.overall_percentage
         grade_label = score_response.grade.value if hasattr(score_response.grade, 'value') else str(score_response.grade)
         await db.commit()
-        return TrustSnapshotResponse(success=True, message="Your Trust Snapshot is ready.", report_url="/api/v1/public/report-view/" + str(lead.id), lead_id=str(lead.id), score=int(overall_pct), grade=grade_label, issues_found=len(issues_data), standards_passed=score_response.overall_score, standards_total=score_response.overall_max, pillars=pillars_data, standards=standards_data, issues=issues_data, actions=actions_data)
+        return TrustSnapshotResponse(
+            success=True,
+            message="Your Trust Snapshot is ready.",
+            report_url="/api/v1/public/report-view/" + str(lead.id),
+            lead_id=str(lead.id),
+            score=int(overall_pct),
+            grade=grade_label,
+            issues_found=len(issues_data),
+            standards_passed=score_response.overall_score,
+            standards_total=score_response.overall_max,
+            pillars=pillars_data, standards=standards_data,
+            issues=issues_data, actions=actions_data
+        )
     else:
         await db.commit()
-        return TrustSnapshotResponse(success=True, message="Your Trust Snapshot is being generated.", report_url="", lead_id=str(lead.id), score=0, grade="", issues_found=0, standards_passed=0, standards_total=9, pillars=[], standards=[], issues=[], actions=[])
+        return TrustSnapshotResponse(
+            success=True, message="Your Trust Snapshot is being generated.",
+            report_url="", lead_id=str(lead.id),
+            score=0, grade="", issues_found=0, standards_passed=0, standards_total=9,
+            pillars=[], standards=[], issues=[], actions=[]
+        )
 
 @router.get("/report-view/{lead_id}")
 async def view_report(lead_id: str, db = Depends(get_db)):
-    from app.models.recommendations import AIRecommendation
-    result = await db.execute(select(AIRecommendation).where(AIRecommendation.lead_id == lead_id))
-    report = result.scalar_one_or_none()
     lead_result = await db.execute(select(Lead).where(Lead.id == lead_id))
     lead = lead_result.scalar_one_or_none()
     if not lead:
         return HTMLResponse(content="<h1>Report not found</h1>", status_code=404)
+    score_result = await db.execute(
+        select(TrustScoreRecord).where(TrustScoreRecord.lead_id == lead_id)
+        .order_by(TrustScoreRecord.created_at.desc()).limit(1)
+    )
+    score_record = score_result.scalar_one_or_none()
     business_name = lead.business_name or "Your Business"
     website = lead.website or ""
     score = 0
-    grade = "Unknown"
-    if report:
-        score = int(report.score) if report.score else 0
-        grade = report.grade or "Unknown"
-    html = "<html><body style='font-family:Inter,sans-serif;background:#f8fafc;padding:2rem'>"
-    html += "<h1 style='color:#0f172a'>Trust Snapshot Report</h1>"
-    html += "<p><strong>Business:</strong> " + business_name + "</p>"
-    html += "<p><strong>Website:</strong> " + website + "</p>"
-    html += "<p><strong>Trust Score:</strong> " + str(score) + "/100 (" + grade + ")</p>"
-    if report and report.content:
-        html += "<hr><div>" + report.content + "</div>"
-    html += "</body></html>"
+    grade_label = "Unknown"
+    pillars = []
+    issues = []
+    actions = []
+    if score_record:
+        try:
+            sr = build_score_response(score_record)
+            score = int(sr.overall_percentage)
+            grade_label = sr.grade.value if hasattr(sr.grade, 'value') else str(sr.grade)
+            for p in sr.pillars:
+                pillars.append({"name": p.name, "label": p.label, "score": p.score, "max_score": p.max_score, "percentage": p.percentage})
+            for imp in sr.improvements:
+                if not imp.passed:
+                    issues.append({"title": imp.action, "detail": imp.detail})
+            for act in sr.priority_actions:
+                actions.append({"title": act.action, "detail": act.detail, "effort": act.effort})
+        except Exception:
+            pass
+    gc = "text-red-600"
+    if score >= 80: gc = "text-emerald-700"
+    elif score >= 60: gc = "text-emerald-600"
+    elif score >= 40: gc = "text-amber-600"
+    gs = {
+        "Excellent Trust": "Your website is a strong trust engine. Visitors feel confident reaching out.",
+        "Good Trust": "You're building trust well, but there are clear opportunities to convert more visitors.",
+        "Average Trust": "Your website is losing potential customers. The gaps below are costing you enquiries.",
+        "Weak Trust": "Significant trust gaps found. Most visitors are likely leaving without contacting you.",
+        "At Risk": "Critical trust issues detected. Your website is actively repelling potential customers.",
+    }.get(grade_label, "Assessment complete. Review the findings below.")
+    ph = ""
+    if pillars:
+        for p in pillars:
+            pct = p["percentage"]
+            bc = "bg-emerald-500" if pct >= 80 else ("bg-amber-500" if pct >= 50 else "bg-red-500")
+            tc = "text-emerald-700" if pct >= 80 else ("text-amber-700" if pct >= 50 else "text-red-700")
+            ph += f'<div class="rounded-xl border border-zinc-200 bg-white p-4"><div class="flex items-center justify-between mb-2"><span class="text-sm font-medium text-zinc-700">{p["label"]}</span><span class="text-sm font-semibold {tc}">{round(pct)}%</span></div><div class="w-full h-2.5 bg-zinc-100 rounded-full overflow-hidden"><div class="h-full rounded-full {bc}" style="width:{pct}%"></div></div></div>'
+    ih = ""
+    if issues:
+        for i, issue in enumerate(issues[:5]):
+            ih += f'<div class="flex items-start gap-3 p-4 rounded-xl border border-zinc-200 bg-white"><span class="shrink-0 w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center text-xs font-bold">{i+1}</span><div><p class="text-sm font-medium text-zinc-900">{issue["title"]}</p><p class="text-sm text-zinc-500 mt-0.5">{issue["detail"]}</p></div></div>'
+    ah = ""
+    if actions:
+        for i, a in enumerate(actions[:4]):
+            b = "Quick win" if a["effort"] == "low" else ("Medium effort" if a["effort"] == "medium" else "Larger project")
+            bc2 = "bg-green-100 text-green-700" if a["effort"] == "low" else ("bg-amber-100 text-amber-700" if a["effort"] == "medium" else "bg-red-100 text-red-700")
+            ah += f'<div class="flex items-start gap-3 p-4 rounded-xl border border-zinc-200 bg-white"><span class="shrink-0 w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-bold">{i+1}</span><div class="flex-1"><div class="flex items-center justify-between gap-2"><p class="text-sm font-medium text-zinc-900">{a["title"]}</p><span class="text-xs font-medium px-2 py-0.5 rounded-full shrink-0 {bc2}">{b}</span></div><p class="text-sm text-zinc-500 mt-0.5">{a["detail"]}</p></div></div>'
+    html = f'''<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Trust Snapshot — {business_name} | Trust Trigger Agency</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>body{{font-family:"Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;}}.bg-gradient{{background:linear-gradient(135deg,#0f172a,#1e293b);}}</style>
+</head>
+<body class="bg-stone-50 text-zinc-900">
+  <div class="bg-gradient text-white py-14 px-6 text-center">
+    <p class="text-xs font-semibold uppercase tracking-wider text-amber-400 mb-2">Trust Trigger Agency™</p>
+    <h1 class="text-2xl sm:text-3xl font-bold">Trust Snapshot Report</h1>
+    <p class="text-zinc-400 text-sm mt-1">Powered by The Trust Trigger Transformation Method™</p>
+  </div>
+  <div class="max-w-3xl mx-auto px-6 -mt-8">
+    <div class="rounded-2xl border border-zinc-200 bg-white shadow-sm p-6 sm:p-8 mb-6">
+      <div class="flex flex-col sm:flex-row items-center gap-6 mb-6">
+        <div class="relative w-32 h-32 flex items-center justify-center shrink-0">
+          <svg class="w-32 h-32 -rotate-90" viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="52" fill="none" stroke="#e5e7eb" stroke-width="8"/>
+            <circle cx="60" cy="60" r="52" fill="none" stroke="#047857" stroke-width="8" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="{326.7 - (score/100)*326.7}"/>
+          </svg>
+          <div class="absolute text-center"><span class="text-5xl font-extrabold text-zinc-900">{score}</span><span class="text-sm font-semibold text-zinc-500">/100</span></div>
+        </div>
+        <div class="text-center sm:text-left">
+          <h2 class="text-2xl font-bold mb-1 {gc}">{grade_label}</h2>
+          <p class="text-lg font-medium text-zinc-900">{business_name}</p>
+          <p class="text-sm text-zinc-400 break-all">{website}</p>
+          <p class="text-sm text-zinc-500 mt-3 max-w-md">{gs}</p>
+        </div>
+      </div>
+      <div class="border-t border-zinc-100 pt-4 flex flex-wrap gap-4 text-sm text-zinc-500">
+        <span>📅 {datetime.now(timezone.utc).strftime("%d %B %Y")}</span>
+        <span>📊 {len(pillars)} pillars assessed</span>
+        <span>🔍 {len(issues)} issues found</span>
+      </div>
+    </div>'''
+    if pillars:
+        html += f'<div class="rounded-2xl border border-zinc-200 bg-white shadow-sm p-6 mb-6"><h3 class="font-semibold text-zinc-900 mb-4">Your Trust Breakdown</h3><div class="grid sm:grid-cols-2 gap-4">{ph}</div></div>'
+    if issues:
+        html += f'<div class="rounded-2xl border border-zinc-200 bg-white shadow-sm p-6 mb-6"><h3 class="font-semibold text-zinc-900 mb-4">3 Biggest Opportunities</h3><div class="space-y-3">{ih}</div></div>'
+    if actions:
+        html += f'<div class="rounded-2xl border border-zinc-200 bg-white shadow-sm p-6 mb-6"><h3 class="font-semibold text-zinc-900 mb-4">What We Would Fix</h3><div class="space-y-3">{ah}</div></div>'
+    html += f'''
+    <div class="rounded-2xl border border-zinc-200 bg-white shadow-sm p-6 mb-6">
+      <h3 class="font-semibold text-zinc-900 mb-3">What This Score Means</h3>
+      <p class="text-sm text-zinc-600 leading-relaxed">Your Trust Snapshot measures your website against industry trust standards — HTTPS security, contact information, testimonials, social proof, service pages, mobile readiness, and more. Most local service businesses score under 50. A score of <strong>{score}/100</strong> puts you in a strong position, but the gaps above are likely costing you real enquiries every week.</p>
+    </div>
+    <div class="text-center rounded-2xl border-2 border-emerald-700 bg-white shadow-sm p-8 mb-6">
+      <h3 class="text-xl font-bold mb-2">Want us to fix these for you?</h3>
+      <p class="text-zinc-600 mb-6 max-w-md mx-auto">In a 20-minute Trust Review call, we will walk through your results and show you exactly what a Trust Transformation would deliver — website rebuild, email sequence, social content, Google optimisation — all for £995, delivered in 7 days.</p>
+      <a href="https://srv16.aisoftllc.com/agent_sites/10ecdf28fd7e.html" class="inline-flex items-center gap-2 rounded-lg bg-emerald-700 px-6 py-3 text-sm font-medium text-white shadow-sm hover:bg-emerald-800">Book Your Free Trust Review →</a>
+      <p class="text-xs text-zinc-400 mt-2">No obligation. 20 minutes. See what a fix looks like.</p>
+    </div>
+    <div class="text-center pb-10"><p class="text-xs text-zinc-400">Trust Trigger Agency™ · Measure. Transform. Prove. Maintain.</p></div>
+  </div>
+</body>
+</html>'''
     return HTMLResponse(content=html)
