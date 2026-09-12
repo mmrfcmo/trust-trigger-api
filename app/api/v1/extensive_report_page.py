@@ -2,7 +2,6 @@
 from fastapi import APIRouter
 from fastapi.responses import HTMLResponse
 router = APIRouter(prefix="/extensive-report", tags=["Public - Extensive Report"])
-
 PAGE = """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,7 +47,7 @@ PAGE = """<!DOCTYPE html>
 
 <div class="rounded-2xl border-2 border-amber-200 bg-amber-50/50 shadow-sm p-6 sm:p-8 mb-8 reveal"><div class="flex items-start gap-4"><span class="text-2xl shrink-0">&#x1F4B0;</span><div><h3 class="text-lg font-bold text-zinc-900 mb-2">Where You're Potentially Losing Enquiries</h3><p class="text-sm text-zinc-600 leading-relaxed mb-4">You've already invested in getting visitors to your website. The biggest opportunity is improving what happens once they arrive. Every trust gap represents a potential leak in your conversion funnel.</p><p class="text-zinc-600 text-sm">Traffic &#8594; Trust &#8594; Confidence &#8594; <span class="text-amber-700 font-medium">Action</span></p></div></div></div>
 
-<div class="text-center rounded-2xl border-2 border-emerald-700 bg-white shadow-sm p-8 sm:p-12 mb-8 reveal"><span class="text-4xl mb-4 block">&#x1F6E1;&#xFE0F;</span><h3 class="text-2xl sm:text-3xl font-bold text-zinc-900 mb-3">Your Trust Transformation</h3><p class="text-zinc-600 mb-2 max-w-lg mx-auto">Based on this assessment, we can fix these gaps &#8212; website, email, social, Google &#8212; delivered in <strong class="text-zinc-900">7 days for &#xA3;995</strong>.</p><p class="text-sm text-zinc-500 mb-8">Let's walk through your results together. No pitch. Just clarity.</p><a href="https://srv16.aisoftllc.com/agent_sites/10ecdf28fd7e.html" class="inline-flex items-center gap-2 rounded-xl bg-emerald-700 px-8 py-4 text-base font-semibold text-white shadow-sm hover:bg-emerald-800 transition">Book Your Free 20-Minute Trust Review &#8594;</a><p class="text-xs text-zinc-400 mt-3">No obligation. 20 minutes.</p></div>
+<div class="text-center rounded-2xl border-2 border-emerald-700 bg-white shadow-sm p-8 sm:p-12 mb-8 reveal"><span class="text-4xl mb-4 block">&#x1F6E1;&#xFE0F;</span><h3 class="text-2xl sm:text-3xl font-bold text-zinc-900 mb-3">Your Trust Transformation</h3><p class="text-zinc-600 mb-2 max-w-lg mx-auto">Based on this assessment, we can fix these gaps and deliver the transformation within 14 days.</p><p class="text-sm text-zinc-500 mb-8">Let's walk through your results together. No pitch. Just clarity.</p><a href="https://srv16.aisoftllc.com/agent_sites/10ecdf28fd7e.html" class="inline-flex items-center gap-2 rounded-xl bg-emerald-700 px-8 py-4 text-base font-semibold text-white shadow-sm hover:bg-emerald-800 transition">Book Your Free 20-Minute Trust Review &#8594;</a><p class="text-xs text-zinc-400 mt-3">No obligation. 20 minutes.</p></div>
 </div>
 <div id="errorSection" class="hidden max-w-lg mx-auto reveal"><div class="text-center rounded-2xl border border-red-200 bg-red-50 p-8"><span class="text-4xl mb-4 block">&#x26A0;&#xFE0F;</span><h2 class="text-xl font-bold text-zinc-900 mb-2">Something went wrong</h2><p id="errorMsg" class="text-zinc-600 mb-6"></p><button onclick="resetForm()" class="inline-flex items-center gap-2 rounded-xl bg-emerald-700 px-5 py-3 text-sm font-medium text-white shadow-sm hover:bg-emerald-800 transition">Try again &#8594;</button></div></div>
 </div>
