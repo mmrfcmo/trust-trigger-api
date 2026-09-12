@@ -17,6 +17,7 @@ from app.api.v1.report_viewer import router as report_router
 from app.api.v1.fulfilment_routes import router as fulfilment_router
 from app.api.v1.console_routes import router as console_router
 from app.api.v1.publishing_routes import router as publishing_router
+from app.api.v1.extensive_report_page import router as extensive_router
 import app.models
 import app.models.trust_scan
 import app.models.scoring
@@ -61,6 +62,7 @@ app.include_router(report_router)
 app.include_router(fulfilment_router)
 app.include_router(console_router)
 app.include_router(publishing_router)
+app.include_router(extensive_router)
 
 @app.get("/health")
 async def health_check():
