@@ -1,5 +1,5 @@
 """Public API routes for Trust Snapshot lead capture (no auth required)."""
-import uuid, smtplib, os, json, httpx
+import uuid, smtplib, os, json, httpx, re
 from datetime import datetime, timezone
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 from fastapi.responses import HTMLResponse
@@ -96,26 +96,10 @@ async def submit_trust_snapshot(req: TrustSnapshotRequest, request: Request, db 
         grade_label = score_response.grade.value if hasattr(score_response.grade, 'value') else str(score_response.grade)
         await db.commit()
         return TrustSnapshotResponse(
-            success=True,
-            message="Your Trust Snapshot is ready.",
-            report_url="/api/v1/public/report-view/" + str(lead.id),
-            lead_id=str(lead.id),
-            score=int(overall_pct),
-            grade=grade_label,
-            issues_found=len(issues_data),
-            standards_passed=score_response.overall_score,
-            standards_total=score_response.overall_max,
-            pillars=pillars_data, standards=standards_data,
-            issues=issues_data, actions=actions_data
-        )
+            success=True, message="Your Trust Snapshot is ready.", report_url="/api/v1/public/report-view/" + str(lead.id), lead_id=str(lead.id), score=int(overall_pct), grade=grade_label, issues_found=len(issues_data), standards_passed=score_response.overall_score, standards_total=score_response.overall_max, pillars=pillars_data, standards=standards_data, issues=issues_data, actions=actions_data)
     else:
         await db.commit()
-        return TrustSnapshotResponse(
-            success=True, message="Your Trust Snapshot is being generated.",
-            report_url="", lead_id=str(lead.id),
-            score=0, grade="", issues_found=0, standards_passed=0, standards_total=9,
-            pillars=[], standards=[], issues=[], actions=[]
-        )
+        return TrustSnapshotResponse(success=True, message="Your Trust Snapshot is being generated.", report_url="", lead_id=str(lead.id), score=0, grade="", issues_found=0, standards_passed=0, standards_total=9, pillars=[], standards=[], issues=[], actions=[])
 
 @router.get("/report-view/{lead_id}")
 async def view_report(lead_id: str, db = Depends(get_db)):
@@ -150,13 +134,7 @@ async def view_report(lead_id: str, db = Depends(get_db)):
     if score >= 80: gc = "text-emerald-700"
     elif score >= 60: gc = "text-emerald-600"
     elif score >= 40: gc = "text-amber-600"
-    gs = {
-        "Excellent Trust": "Your website is a strong trust engine. Visitors feel confident reaching out.",
-        "Good Trust": "You're building trust well, but there are clear opportunities to convert more visitors.",
-        "Average Trust": "Your website is losing potential customers. The gaps below are costing you enquiries.",
-        "Weak Trust": "Significant trust gaps found. Most visitors are likely leaving without contacting you.",
-        "At Risk": "Critical trust issues detected. Your website is actively repelling potential customers.",
-    }.get(grade_label, "Assessment complete. Review the findings below.")
+    gs = {"Excellent Trust": "Your website is a strong trust engine. Visitors feel confident reaching out.", "Good Trust": "You're building trust well, but there are clear opportunities to convert more visitors.", "Average Trust": "Your website is losing potential customers. The gaps below are costing you enquiries.", "Weak Trust": "Significant trust gaps found. Most visitors are likely leaving without contacting you.", "At Risk": "Critical trust issues detected. Your website is actively repelling potential customers."}.get(grade_label, "Assessment complete. Review the findings below.")
     ph = ""
     if pillars:
         for p in pillars:
@@ -190,29 +168,47 @@ async def view_report(lead_id: str, db = Depends(get_db)):
 
 @router.get("/find-competitors")
 async def find_competitors(industry: str, website: str = "", business_name: str = ""):
-    api_key = settings.google_places_api_key
-    if not api_key:
-        return {"competitors": []}
     domain = website.replace("https://", "").replace("http://", "").split("/")[0]
+    competitors = []
+    api_key = settings.google_places_api_key
+    if api_key:
+        try:
+            async with httpx.AsyncClient(timeout=5) as client:
+                params = {"query": industry + " businesses", "key": api_key, "maxresults": 5}
+                resp = await client.get("https://maps.googleapis.com/maps/api/place/textsearch/json", params=params)
+                data = resp.json()
+                if data.get("status") == "OK" and data.get("results"):
+                    for place in data["results"]:
+                        pid = place.get("place_id")
+                        if pid:
+                            dp = {"place_id": pid, "fields": "name,website", "key": api_key}
+                            dr = await client.get("https://maps.googleapis.com/maps/api/place/details/json", params=dp)
+                            det = dr.json().get("result", {})
+                            cw = det.get("website", "")
+                            cn = det.get("name", place.get("name", ""))
+                            if cw and domain not in cw.lower():
+                                competitors.append({"name": cn, "website": cw.replace("https://","").replace("http://","").split("/")[0]})
+                                if len(competitors) >= 2:
+                                    return {"competitors": competitors}
+        except Exception:
+            pass
     try:
-        async with httpx.AsyncClient(timeout=10) as client:
-            params = {"query": industry + " businesses", "key": api_key, "maxresults": 5}
-            resp = await client.get("https://maps.googleapis.com/maps/api/place/textsearch/json", params=params)
-            data = resp.json()
-            competitors = []
-            if data.get("results"):
-                for place in data["results"]:
-                    pid = place.get("place_id")
-                    if pid:
-                        dp = {"place_id": pid, "fields": "name,website,formatted_address", "key": api_key}
-                        dr = await client.get("https://maps.googleapis.com/maps/api/place/details/json", params=dp)
-                        det = dr.json().get("result", {})
-                        cw = det.get("website", "")
-                        cn = det.get("name", place.get("name", ""))
-                        if cw and domain not in cw:
-                            competitors.append({"name": cn, "website": cw.replace("https://","").replace("http://","").split("/")[0]})
+        terms = [industry + " " + business_name, industry + " near " + domain.split(".")[0], "top " + industry + " websites"]
+        found = []
+        async with httpx.AsyncClient(timeout=10, follow_redirects=True) as client:
+            for term in terms:
+                try:
+                    resp = await client.get("https://html.duckduckgo.com/html/", params={"q": term}, headers={"User-Agent": "Mozilla/5.0"})
+                    links = re.findall(r'<a[^>]href="(https?://[^"]+)"[^>]>', resp.text)
+                    for link in links:
+                        clean = link.replace("https://", "").replace("http://", "").split("/")[0]
+                        if clean and "." in clean and "google" not in clean and "facebook" not in clean and "instagram" not in clean and "twitter" not in clean and "youtube" not in clean and "linkedin" not in clean and domain not in clean and clean not in found:
+                            found.append(clean)
+                            competitors.append({"name": "Competitor", "website": clean})
                             if len(competitors) >= 2:
-                                break
-            return {"competitors": competitors}
+                                return {"competitors": competitors}
+                except Exception:
+                    pass
     except Exception:
-        return {"competitors": []}
+        pass
+    return {"competitors": competitors}
