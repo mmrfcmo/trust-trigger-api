@@ -1,1 +1,419 @@
+"""Extensive Trust Report — served by the API with full JS support."""
+from fastapi import APIRouter
+from fastapi.responses import HTMLResponse
+router = APIRouter(prefix="/extensive-report", tags=["Public - Extensive Report"])
 
+PAGE = """<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Extensive Trust Report | Trust Trigger Agency</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body{font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;background:#f8fafc;color:#1e293b;}
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease-out,transform .6s ease-out;}
+    .reveal.in-view{opacity:1;transform:none;}
+    .pillar-bar{transition:width 1s ease-out;}
+    .gradient-header{background:linear-gradient(135deg,#0f172a 0%,#1e293b 50%,#0f172a 100%);}
+    @keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
+    .pulse-dot{animation:pulse-dot 1.5s ease-in-out infinite}
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- NAV -->
+  <nav class="gradient-header border-b border-white/10 fixed top-0 left-0 right-0 z-50 h-16 flex items-center px-6">
+    <div class="max-w-6xl mx-auto w-full flex items-center justify-between">
+      <a href="#" class="flex items-center gap-2 text-white font-semibold text-sm">
+        <span class="text-xl">\u{1F6E1}\uFE0F</span> Trust Trigger Agency
+      </a>
+      <a href="https://srv16.aisoftllc.com/agent_sites/10ecdf28fd7e.html"
+         class="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-xs font-medium text-white shadow-sm hover:bg-emerald-500 transition">
+        Get Free Snapshot \u2192
+      </a>
+    </div>
+  </nav>
+
+  <div class="h-16"></div>
+
+  <div class="max-w-5xl mx-auto px-6 py-12 sm:py-16">
+
+    <div class="text-center mb-12 reveal">
+      <p class="text-sm font-semibold uppercase tracking-wider text-emerald-700 mb-3">The Trust Trigger Method\u2122</p>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-4 text-zinc-900">
+        Extensive Trust Report
+      </h1>
+      <p class="text-zinc-600 max-w-2xl mx-auto text-lg leading-relaxed">
+        Enter any business website. We analyse it across <strong>5 trust pillars</strong> and <strong>14 standards</strong>
+        to show you exactly where trust is winning \u2014 and where it's leaking.
+      </p>
+    </div>
+
+    <div id="inputSection" class="max-w-lg mx-auto reveal">
+      <div class="rounded-2xl border border-zinc-200 bg-white shadow-sm p-6 sm:p-8">
+        <div class="space-y-5">
+          <div>
+            <label class="block text-sm font-medium text-zinc-700 mb-1.5">Business Name</label>
+            <input id="fullName" type="text" placeholder="e.g. Ivy Dentistry Aesthetics"
+                   class="w-full rounded-xl border border-zinc-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-zinc-700 mb-1.5">Website URL</label>
+            <input id="website" type="text" placeholder="e.g. ivydentistryaesthetics.co.uk"
+                   class="w-full rounded-xl border border-zinc-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-zinc-700 mb-1.5">Your Email</label>
+            <input id="email" type="email" placeholder="e.g. info@ivydentistryaesthetics.co.uk"
+                   class="w-full rounded-xl border border-zinc-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
+            <p class="text-xs text-zinc-400 mt-1.5">Your report will appear below. No spam, no storage without consent.</p>
+          </div>
+          <button onclick="generate()"
+                  class="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-700 px-5 py-3.5 text-sm font-semibold text-white shadow-sm hover:bg-emerald-800 transition">
+            Generate Your Extensive Trust Report \u2192
+          </button>
+          <p class="text-xs text-center text-zinc-400">Free. No card. Takes ~30 seconds.</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="loadingSection" class="hidden max-w-2xl mx-auto reveal">
+      <div class="rounded-2xl border border-zinc-200 bg-white shadow-sm p-8 sm:p-10 text-center">
+        <h2 class="text-xl font-bold text-zinc-900 mb-6">Generating your Trust Trigger Report</h2>
+        <p class="text-sm text-zinc-500 mb-8">Analysing your website across our Trust Trigger framework</p>
+        <div class="max-w-md mx-auto space-y-4 text-left">
+          <div class="flex items-center gap-4">
+            <span id="s1" class="w-6 h-6 rounded-full bg-zinc-200 flex items-center justify-center text-xs font-bold text-zinc-500 shrink-0">1</span>
+            <div class="flex-1"><p class="text-sm font-medium text-zinc-700">Website structure</p><p class="text-xs text-zinc-400">Layout, navigation, page architecture</p></div>
+            <span id="d1" class="text-emerald-600 text-sm font-medium">\u23F3</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <span id="s2" class="w-6 h-6 rounded-full bg-zinc-200 flex items-center justify-center text-xs font-bold text-zinc-500 shrink-0">2</span>
+            <div class="flex-1"><p class="text-sm font-medium text-zinc-700">Trust signals</p><p class="text-xs text-zinc-400">Credibility markers, reviews, authority</p></div>
+            <span id="d2" class="text-zinc-400 text-sm font-medium">\u23F3</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <span id="s3" class="w-6 h-6 rounded-full bg-zinc-200 flex items-center justify-center text-xs font-bold text-zinc-500 shrink-0">3</span>
+            <div class="flex-1"><p class="text-sm font-medium text-zinc-700">Social proof</p><p class="text-xs text-zinc-400">Testimonials, badges, case studies</p></div>
+            <span id="d3" class="text-zinc-400 text-sm font-medium">\u23F3</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <span id="s4" class="w-6 h-6 rounded-full bg-zinc-200 flex items-center justify-center text-xs font-bold text-zinc-500 shrink-0">4</span>
+            <div class="flex-1"><p class="text-sm font-medium text-zinc-700">Conversion journey</p><p class="text-xs text-zinc-400">CTAs, forms, enquiry path</p></div>
+            <span id="d4" class="text-zinc-400 text-sm font-medium">\u23F3</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <span id="s5" class="w-6 h-6 rounded-full bg-zinc-200 flex items-center justify-center text-xs font-bold text-zinc-500 shrink-0">5</span>
+            <div class="flex-1"><p class="text-sm font-medium text-zinc-700">Finalising analysis</p><p class="text-xs text-zinc-400">Scoring, gaps, building your report</p></div>
+            <span id="d5" class="text-zinc-400 text-sm font-medium">\u23F3</span>
+          </div>
+        </div>
+        <p id="loadingStatus" class="text-sm text-emerald-700 font-medium mt-8 pulse-dot">Analysing website structure...</p>
+      </div>
+    </div>
+
+    <div id="resultsSection" class="hidden">
+
+      <div class="rounded-2xl border border-zinc-200 bg-white shadow-sm p-6 sm:p-8 mb-8 reveal">
+        <p class="text-xs font-semibold uppercase tracking-wider text-emerald-700 mb-1">Your Trust Trigger Score</p>
+        <div class="flex flex-col sm:flex-row items-center gap-8">
+          <div class="relative w-36 h-36 flex items-center justify-center shrink-0">
+            <svg class="w-36 h-36 -rotate-90" viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="52" fill="none" stroke="#e5e7eb" stroke-width="8"/>
+              <circle id="scoreCircle" cx="60" cy="60" r="52" fill="none" stroke="#047857" stroke-width="8" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7" style="transition: stroke-dashoffset 1.2s ease-out"/>
+            </svg>
+            <div class="absolute text-center">
+              <span id="scoreNum" class="text-5xl font-extrabold text-zinc-900">0</span>
+              <span class="text-xs font-semibold text-zinc-400">/100</span>
+            </div>
+          </div>
+          <div class="text-center sm:text-left">
+            <h2 id="gradeTitle" class="text-2xl sm:text-3xl font-bold mb-1"></h2>
+            <p id="businessName" class="text-lg font-medium text-zinc-900"></p>
+            <p id="websiteUrl" class="text-sm text-zinc-400 break-all"></p>
+            <p id="gradeSummary" class="text-sm text-zinc-600 mt-3 max-w-lg leading-relaxed"></p>
+            <div class="flex flex-wrap gap-4 mt-4 text-sm text-zinc-500">
+              <span id="reportDate"></span>
+              <span id="pillarCount"></span>
+              <span id="issueCount"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="pillarsSection" class="rounded-2xl border border-zinc-200 bg-white shadow-sm p-6 sm:p-8 mb-8 reveal">
+        <h3 class="font-semibold text-zinc-900 mb-1">The 5 Trust Pillars</h3>
+        <p class="text-sm text-zinc-500 mb-6">Your website scored across each dimension of trust</p>
+        <div id="pillarsGrid" class="grid sm:grid-cols-2 gap-4"></div>
+      </div>
+
+      <div id="issuesSection" class="rounded-2xl border border-zinc-200 bg-white shadow-sm p-6 sm:p-8 mb-8 reveal">
+        <h3 class="font-semibold text-zinc-900 mb-1">Trust Gaps Identified</h3>
+        <p class="text-sm text-zinc-500 mb-6">These are the specific issues preventing visitors from trusting you enough to enquire</p>
+        <div id="issuesList" class="space-y-3"></div>
+        <div id="noIssues" class="hidden text-center py-6">
+          <p class="text-emerald-700 font-medium">\u2713 No major trust gaps detected for the standards checked.</p>
+        </div>
+      </div>
+
+      <div id="strengthsSection" class="rounded-2xl border border-emerald-100 bg-emerald-50/50 shadow-sm p-6 sm:p-8 mb-8 reveal">
+        <h3 class="font-semibold text-zinc-900 mb-1">\u2713 Trust Triggers Already Working</h3>
+        <p class="text-sm text-zinc-500 mb-6">Your website is getting these right. Don't change them.</p>
+        <div id="strengthsList" class="grid sm:grid-cols-2 gap-3"></div>
+      </div>
+
+      <div id="actionsSection" class="rounded-2xl border border-zinc-200 bg-white shadow-sm p-6 sm:p-8 mb-8 reveal">
+        <h3 class="font-semibold text-zinc-900 mb-1">Trust Trigger Priority Matrix</h3>
+        <p class="text-sm text-zinc-500 mb-6">Ranked by effort vs. impact \u2014 start with the quick wins</p>
+        <div id="actionsList" class="space-y-3"></div>
+        <div id="noActions" class="hidden text-center py-6">
+          <p class="text-emerald-700 font-medium">\u2713 No recommended actions. Your site is performing well across all standards.</p>
+        </div>
+      </div>
+
+      <div class="rounded-2xl border border-zinc-200 bg-white shadow-sm p-6 sm:p-10 mb-8 reveal">
+        <div class="text-center mb-8">
+          <p class="text-xs font-semibold uppercase tracking-wider text-emerald-700 mb-2">The Methodology Behind The Report</p>
+          <h3 class="text-2xl font-bold text-zinc-900">The Trust Trigger Method\u2122</h3>
+          <p class="text-sm text-zinc-500 mt-2 max-w-2xl mx-auto">A proven 9-stage framework to transform your website from a digital brochure into a trust engine that converts visitors into customers.</p>
+        </div>
+        <div class="grid sm:grid-cols-3 gap-6">
+          <div class="text-center p-4">
+            <div class="w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-lg font-bold mx-auto mb-3">01</div>
+            <h4 class="font-semibold text-zinc-900 text-sm mb-1">Diagnose</h4>
+            <p class="text-xs text-zinc-500">Identify trust and conversion gaps through data-driven analysis</p>
+          </div>
+          <div class="text-center p-4">
+            <div class="w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-lg font-bold mx-auto mb-3">02</div>
+            <h4 class="font-semibold text-zinc-900 text-sm mb-1">Prioritise</h4>
+            <p class="text-xs text-zinc-500">Identify which gaps matter most to your conversion rate</p>
+          </div>
+          <div class="text-center p-4">
+            <div class="w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-lg font-bold mx-auto mb-3">03</div>
+            <h4 class="font-semibold text-zinc-900 text-sm mb-1">Trigger</h4>
+            <p class="text-xs text-zinc-500">Strengthen the trust signals that influence visitor confidence</p>
+          </div>
+          <div class="text-center p-4">
+            <div class="w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-lg font-bold mx-auto mb-3">04</div>
+            <h4 class="font-semibold text-zinc-900 text-sm mb-1">Convert</h4>
+            <p class="text-xs text-zinc-500">Improve the journey from visitor to booked customer</p>
+          </div>
+          <div class="text-center p-4">
+            <div class="w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-lg font-bold mx-auto mb-3">05</div>
+            <h4 class="font-semibold text-zinc-900 text-sm mb-1">Optimise</h4>
+            <p class="text-xs text-zinc-500">Measure conversion improvements and refine continuously</p>
+          </div>
+          <div class="text-center p-4">
+            <div class="w-12 h-12 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-lg font-bold mx-auto mb-3">\u2192</div>
+            <h4 class="font-semibold text-zinc-900 text-sm mb-1">Full Transformation</h4>
+            <p class="text-xs text-zinc-500">Complete rollout: website, emails, social, Google optimisation</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rounded-2xl border-2 border-amber-200 bg-amber-50/50 shadow-sm p-6 sm:p-8 mb-8 reveal">
+        <div class="flex items-start gap-4">
+          <span class="text-2xl shrink-0">\u{1F4B0}</span>
+          <div>
+            <h3 class="text-lg font-bold text-zinc-900 mb-2">Where You're Potentially Losing Enquiries</h3>
+            <p class="text-sm text-zinc-600 leading-relaxed mb-4">
+              You've already invested in getting visitors to your website. The biggest opportunity isn't more traffic \u2014
+              it's improving what happens once they arrive. Every trust gap identified above represents
+              a potential leak in your conversion funnel.
+            </p>
+            <div id="conversionLeaks" class="space-y-2 text-sm">
+              <p class="text-zinc-600">Traffic \u2192 Trust \u2192 Confidence \u2192 <span class="text-amber-700 font-medium">Action</span></p>
+              <p class="text-xs text-zinc-400">The gaps in this report show exactly where trust breaks down before the visitor decides to contact you.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center rounded-2xl border-2 border-emerald-700 bg-white shadow-sm p-8 sm:p-12 mb-8 reveal">
+        <span class="text-4xl mb-4 block">\u{1F6E1}\uFE0F</span>
+        <h3 class="text-2xl sm:text-3xl font-bold text-zinc-900 mb-3">Your Trust Transformation</h3>
+        <p class="text-zinc-600 mb-2 max-w-lg mx-auto">Based on this assessment, we can fix these gaps \u2014 website rebuild, email sequence, social content, Google optimisation \u2014 all delivered in <strong class="text-zinc-900">7 days for \u00A3995</strong>.</p>
+        <p class="text-sm text-zinc-500 mb-8 max-w-md mx-auto">But first, let's walk through your results together. No pitch. Just clarity.</p>
+        <a href="https://srv16.aisoftllc.com/agent_sites/10ecdf28fd7e.html"
+           class="inline-flex items-center gap-2 rounded-xl bg-emerald-700 px-8 py-4 text-base font-semibold text-white shadow-sm hover:bg-emerald-800 transition">
+          Book Your Free 20-Minute Trust Review \u2192
+        </a>
+        <p class="text-xs text-zinc-400 mt-3">No obligation. 20 minutes. See exactly what a fix looks like.</p>
+      </div>
+
+    </div>
+
+    <div id="errorSection" class="hidden max-w-lg mx-auto reveal">
+      <div class="text-center rounded-2xl border border-red-200 bg-red-50 p-8">
+        <span class="text-4xl mb-4 block">\u26A0\uFE0F</span>
+        <h2 class="text-xl font-bold text-zinc-900 mb-2">Something went wrong</h2>
+        <p id="errorMsg" class="text-zinc-600 mb-6"></p>
+        <button onclick="resetForm()"
+                class="inline-flex items-center gap-2 rounded-xl bg-emerald-700 px-5 py-3 text-sm font-medium text-white shadow-sm hover:bg-emerald-800 transition">
+          Try again \u2192
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="gradient-header border-t border-white/10 py-12 px-6">
+    <div class="max-w-5xl mx-auto text-center">
+      <div class="flex items-center justify-center gap-2 text-white/80 text-sm mb-4">
+        <span class="text-xl">\u{1F6E1}\uFE0F</span>
+        <span class="font-semibold">Trust Trigger Agency</span>
+      </div>
+      <p class="text-xs text-zinc-500 max-w-xl mx-auto leading-relaxed">
+        We turn local service websites into trust engines. The Trust Trigger Method\u2122 \u2014 Measure. Transform. Prove. Maintain.
+      </p>
+      <p class="text-xs text-zinc-600 mt-4">\u00A9 2026 Trust Trigger Agency\u2122 \u00B7 All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+  var API = 'https://trust-trigger-api.onrender.com';
+  function $(i){return document.getElementById(i);}
+  function h(e){e.classList.add('hidden');}
+  function s(e){e.classList.remove('hidden');}
+  function animateLoading(step){
+    var steps=['s1','s2','s3','s4','s5'],dots=['d1','d2','d3','d4','d5'],statuses=['Analysing website structure...','Checking trust signals...','Evaluating social proof...','Mapping conversion journey...','Finalising your Trust Trigger Report...'];
+    for(var i=0;i<steps.length;i++){var el=$(steps[i]),d=$(dots[i]);if(i<step){el.className='w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold shrink-0';el.textContent='\u2713';d.textContent='\u2713';d.className='text-emerald-600 text-sm font-medium';}else if(i===step){el.className='w-6 h-6 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs font-bold shrink-0 pulse-dot';d.innerHTML='<span class=\"pulse-dot\">\u23F3</span>';d.className='text-emerald-600 text-sm font-medium';}}
+    if(step<statuses.length)$('loadingStatus').textContent=statuses[step];
+  }
+  function generate(){
+    var n=$('fullName').value.trim(),u=$('website').value.trim(),e=$('email').value.trim();
+    if(!n||!u||!e){alert('Please fill in all fields.');return;}
+    h($('inputSection'));h($('errorSection'));h($('resultsSection'));s($('loadingSection'));animateLoading(0);
+    var si=setInterval(function(){for(var i=0;i<5;i++){if($('s'+(i+1)).classList.contains('pulse-dot')){if(i+1<5)animateLoading(i+1);break;}}},4000);
+    fetch(API+'/api/v1/public/trust-snapshot',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({full_name:n,website:u,email:e})})
+    .then(function(r){return r.json();}).then(function(d){clearInterval(si);h($('loadingSection'));
+      if(!d.success){$('errorMsg').textContent=d.error||'Unable to generate report.';s($('errorSection'));return;}
+      if(d.score===0&&(!d.pillars||d.pillars.length===0)){pollReport(d.lead_id,n,u);return;}
+      render(d,n,u);}).catch(function(){clearInterval(si);h($('loadingSection'));$('errorMsg').textContent='Network error.';s($('errorSection'));});
+  }
+  function pollReport(id,n,u){
+    $('loadingStatus').textContent='Report is being generated... please wait.';
+    var at=0,mx=15,pi=setInterval(function(){at++;
+      fetch(API+'/api/v1/public/report-view/'+id).then(function(r){if(r.status===200)return fetch(API+'/api/v1/public/trust-snapshot',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({full_name:n,website:u,email:e})});throw new Error('Not ready');})
+      .then(function(r){return r.json();}).then(function(d){if(d.score>0||(d.pillars&&d.pillars.length>0)){clearInterval(pi);h($('loadingSection'));render(d,n,u);}else if(at>=mx){clearInterval(pi);h($('loadingSection'));$('errorMsg').textContent='Report taking longer than expected.';s($('errorSection'));}})
+      .catch(function(){if(at>=mx){clearInterval(pi);h($('loadingSection'));$('errorMsg').textContent='Report timed out.';s($('errorSection'));}});
+    },3000);
+  }
+  function render(d,n,u){
+    var sc=d.score||0,g=getGrade(sc);setTimeout(function(){var c=326.7;$('scoreCircle').style.strokeDashoffset=c-(sc/100)*c;},200);
+    $('scoreNum').textContent=sc;$('gradeTitle').textContent=d.grade||g.label;$('gradeTitle').className='text-2xl sm:text-3xl font-bold mb-1 '+g.color;
+    $('businessName').textContent=n;$('websiteUrl').textContent=u;$('gradeSummary').textContent=g.summary;
+    var dt=new Date(),ms=['January','February','March','April','May','June','July','August','September','October','November','December'];
+    $('reportDate').textContent='\u{1F4C5} '+dt.getDate()+' '+ms[dt.getMonth()]+' '+dt.getFullYear();
+    $('pillarCount').textContent='\u{1F4CA} '+(d.pillars?d.pillars.length:0)+' pillars assessed';
+    $('issueCount').textContent='\u{1F50D} '+(d.issues_found||0)+' issues found';
+    var pg=$('pillarsGrid');pg.innerHTML='';
+    if(d.pillars&&d.pillars.length){d.pillars.forEach(function(p){var pc=p.percentage||0,bc=pc>=80?'bg-emerald-500':(pc>=50?'bg-amber-500':'bg-red-500'),tc=pc>=80?'text-emerald-700':(pc>=50?'text-amber-700':'text-red-700');
+      var dv=document.createElement('div');dv.className='rounded-xl border border-zinc-200 bg-white p-4';
+      dv.innerHTML='<div class=\"flex items-center justify-between mb-2\"><span class=\"text-sm font-medium text-zinc-700\">'+(p.label||p.name)+'</span><span class=\"text-sm font-semibold '+tc+'\">'+Math.round(pc)+'%</span></div><div class=\"w-full h-2.5 bg-zinc-100 rounded-full overflow-hidden\"><div class=\"h-full rounded-full '+bc+' pillar-bar\" style=\"width:0%\"></div></div>';
+      pg.appendChild(dv);setTimeout(function(){dv.querySelector('.pillar-bar').style.width=pc+'%';},300);});s($('pillarsSection'));
+    }else{h($('pillarsSection'));}
+    var il=$('issuesList');il.innerHTML='';
+    if(d.issues&&d.issues.length){d.issues.forEach(function(iss,i){var dv=document.createElement('div');dv.className='flex items-start gap-3 p-4 rounded-xl border border-zinc-200 bg-white';
+      dv.innerHTML='<span class=\"shrink-0 w-7 h-7 rounded-full bg-red-100 text-red-600 flex items-center justify-center text-xs font-bold\">'+(i+1)+'</span><div><p class=\"text-sm font-medium text-zinc-900\">'+iss.title+'</p><p class=\"text-sm text-zinc-500 mt-0.5\">'+(iss.detail||'')+'</p></div>';il.appendChild(dv);});s($('issuesSection'));h($('noIssues'));
+    }else{h($('issuesSection'));s($('noIssues'));}
+    var sl=$('strengthsList');sl.innerHTML='';var pc2=0;
+    if(d.standards&&d.standards.length){d.standards.forEach(function(sd){if(sd.passed){pc2++;var dv=document.createElement('div');dv.className='flex items-center gap-2 p-3 rounded-xl bg-white border border-emerald-200';dv.innerHTML='<span class=\"text-emerald-600 shrink-0\">\u2713</span><span class=\"text-sm text-zinc-700\">'+(sd.name||'Standard')+'</span>';sl.appendChild(dv);}});}
+    if(pc2===0)sl.innerHTML='<p class=\"text-sm text-zinc-500 col-span-2\">No passed standards to display for this scan.</p>';s($('strengthsSection'));
+    var al=$('actionsList');al.innerHTML='';
+    if(d.actions&&d.actions.length){d.actions.forEach(function(a){var el=a.effort==='low'?'Quick win':(a.effort==='medium'?'Medium effort':'Larger project'),ec=a.effort==='low'?'bg-green-100 text-green-700':(a.effort==='medium'?'bg-amber-100 text-amber-700':'bg-red-100 text-red-700');
+      var dv=document.createElement('div');dv.className='flex items-start gap-3 p-4 rounded-xl border border-zinc-200 bg-white';
+      dv.innerHTML='<span class=\"shrink-0 w-7 h-7 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-bold\">\u2192</span><div class=\"flex-1\"><div class=\"flex items-center justify-between gap-2\"><p class=\"text-sm font-medium text-zinc-900\">'+a.title+'</p><span class=\"text-xs font-medium px-2 py-0.5 rounded-full shrink-0 '+ec+'\">'+el+'</span></div><p class=\"text-sm text-zinc-500 mt-0.5\">'+(a.detail||'')+'</p></div>';al.appendChild(dv);});s($('actionsSection'));h($('noActions'));
+    }else{h($('actionsSection'));s($('noActions'));}
+    s($('resultsSection'));setTimeout(function(){$('resultsSection').scrollIntoView({behavior:'smooth',block:'start'});},300);
+  }
+  function getGrade(s){if(s>=90)return{label:'Excellent Trust',color:'text-emerald-700',summary:'Your website is a strong trust engine. Visitors feel confident reaching out.'};if(s>=70)return{label:'Good Trust',color:'text-emerald-600',summary:"You're building trust well, but there are clear opportunities to convert more visitors."};if(s>=50)return{label:'Average Trust',color:'text-amber-600',summary:'Your website is losing potential customers. The gaps below are costing you enquiries.'};if(s>=30)return{label:'Weak Trust',color:'text-orange-600',summary:'Significant trust gaps found. Most visitors are likely leaving without contacting you.'};return{label:'At Risk',color:'text-red-600',summary:'Critical trust issues detected. Your website is actively repelling potential customers.'};}
+  function resetForm(){h($('errorSection'));h($('resultsSection'));h($('loadingSection'));s($('inputSection'));window.scrollTo({top:0,behavior:'smooth'});}
+  try{document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('reveal');});var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in-view');});},{threshold:0.1,rootMargin:'0px 0px -50px 0px'});document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});}catch(e){}
+  </script>
+</body>
+</html>"""
+
+@router.get("", response_class=HTMLResponse)
+async def extensive_report():
+    return HTMLResponse(content=PAGE)
+
+@router.get("/", response_class=HTMLResponse)
+async def extensive_report_root():
+    return HTMLResponse(content=PAGE)
+
+Now the full main.py — open this link, click the pencil ✏️, delete everything, and paste this:
+
+"""FastAPI application entry point."""
+from contextlib import asynccontextmanager
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from app.core.config import settings
+from app.core.database import engine, Base
+from app.api.v1 import router as identity_router
+from app.api.v1.lead_routes import router as lead_router
+from app.api.v1.scan_routes import router as scan_router
+from app.api.v1.score_routes import router as score_router
+from app.api.v1.recommendation_routes import router as recommendation_router
+from app.api.v1.proposal_routes import router as proposal_router
+from app.api.v1.analytics_routes import router as analytics_router
+from app.api.v1.prompt_routes import router as prompt_router
+from app.api.v1.public_routes import router as public_router
+from app.api.v1.report_viewer import router as report_router
+from app.api.v1.fulfilment_routes import router as fulfilment_router
+from app.api.v1.console_routes import router as console_router
+from app.api.v1.publishing_routes import router as publishing_router
+from app.api.v1.extensive_report_page import router as extensive_router
+import app.models
+import app.models.trust_scan
+import app.models.scoring
+import app.models.recommendations
+import app.models.proposals
+import app.models.prompt_library
+import app.models.trust_framework
+import app.models.trust_journey
+import app.models.trust_standard_library
+import app.models.analytics
+import app.models.client_workspace
+import app.models.monitoring
+import app.models.publishing
+import app.models.workflow_db
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+    yield
+    await engine.dispose()
+
+app = FastAPI(title=settings.app_name, version=settings.app_version, lifespan=lifespan)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.cors_origin_list,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.include_router(identity_router)
+app.include_router(lead_router)
+app.include_router(scan_router)
+app.include_router(score_router)
+app.include_router(recommendation_router)
+app.include_router(proposal_router)
+app.include_router(analytics_router)
+app.include_router(prompt_router)
+app.include_router(public_router)
+app.include_router(report_router)
+app.include_router(fulfilment_router)
+app.include_router(console_router)
+app.include_router(publishing_router)
+app.include_router(extensive_router)
+
+@app.get("/health")
+async def health_check():
+    return {"status": "ok", "version": settings.app_version}
