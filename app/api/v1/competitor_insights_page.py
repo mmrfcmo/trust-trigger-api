@@ -120,7 +120,7 @@ PAGE = """<!DOCTYPE html>
       </div>
       <div id="summaryDiv" class="text-zinc-700 leading-relaxed font-medium"></div>
       <div class="mt-6 text-center">
-        <a href="https://trust-trigger-api.onrender.com/home" class="rounded-xl bg-teal-500 px-6 py-3 text-base font-bold text-white shadow-lg hover:bg-teal-400 transition">Book a Free 20-Minute Review →</a>
+        <a href="https://calendly.com/mrfcmo/ai-readiness-review-call-clone?month=2026-09" class="rounded-xl bg-teal-500 px-6 py-3 text-base font-bold text-white shadow-lg hover:bg-teal-400 transition">Book a Free 20-Minute Review →</a>
       </div>
     </div>
 
@@ -211,11 +211,9 @@ function showResults(you,c1Data,c2Data,c1name,c2name,url){
     if(wins.length>0&&losses.length===0){txt+='You lead across all pillars against your competitors. ';}
     else if(wins.length>0){var wn=[];for(var wi2=0;wi2<wins.length;wi2++)wn.push(wins[wi2].p);txt+='You are ahead on <strong>'+wn.join(', ')+'</strong>. ';}else{txt+='You are not leading on any measurable pillar yet. ';}
     if(losses.length>0){txt+='Biggest opportunities: ';var tl=Math.min(losses.length,2);for(var li2=0;li2<tl;li2++){txt+='<strong>'+losses[li2].p+'</strong> ('+losses[li2].w+' leads by '+losses[li2].d+' pts)';if(li2<tl-1)txt+=', ';}txt+='. ';}
-  }else{
-    txt='Competitor data unavailable. Book a review for a full competitive analysis. ';
-  }
+  }else{txt='Competitor data unavailable. Book a review for a full competitive analysis. ';}
   if(you.issues&&you.issues.length>0){txt+='Top issue for you: <strong>'+you.issues[0].title+'</strong>. ';}
-  txt+='Need a deeper dive? <a href="https://trust-trigger-api.onrender.com/home" style="color:#0d9488;text-decoration:underline;">Book a Free 20-Minute Review</a> for a full audit.';
+  txt+='Need a deeper dive? <a href="https://calendly.com/mrfcmo/ai-readiness-review-call-clone?month=2026-09" style="color:#0d9488;text-decoration:underline;">Book a Free 20-Minute Review</a> for a full audit.';
   sum.innerHTML=txt;
   var sb=$('standardsBreakdown');sb.innerHTML='';var stds=you.standards||[];var passed=0,total=stds.length;for(var si=0;si<stds.length;si++){if(stds[si].passed)passed++;var st=stds[si];var icon=st.passed?'✅':'❌';var bg=st.passed?'background:#ecfdf5;border-color:#bbf7d0':'background:#fef2f2;border-color:#fecaca';var label=st.name.replace(/([A-Z])/g,' $1').replace(/^./,function(s){return s.toUpperCase();}).trim();if(st.name==='Https')label='HTTPS';if(st.name==='Cta')label='Clear CTAs';if(st.name==='Faq')label='FAQ Section';sb.innerHTML+='<div class="flex items-center gap-3 px-4 py-3 rounded-xl border" style="'+bg+'"><span>'+icon+'</span><span class="text-sm font-medium text-zinc-800">'+label+'</span><span class="ml-auto text-xs font-bold" style="color:'+(st.passed?'#059669':'#dc2626')+'">'+(st.passed?'✓ Passed':'✗ Failed')+'</span></div>';}
   sb.innerHTML+='<div class="flex justify-between px-4 pt-3 text-sm text-zinc-600 border-t border-zinc-200 mt-3"><span><strong>'+passed+'/'+total+'</strong> standards passed</span><span>Score: <strong>'+Math.round(passed/total*100)+'/100</strong></span></div>';
