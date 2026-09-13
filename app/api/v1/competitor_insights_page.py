@@ -2,7 +2,6 @@
 from fastapi import APIRouter
 from fastapi.responses import HTMLResponse
 router = APIRouter(prefix="/competitor-insights", tags=["Public - Competitor Insights"])
-
 PAGE = """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -128,7 +127,6 @@ PAGE = """<!DOCTYPE html>
         <div id="outperformDiv" style="display:flex;flex-direction:column;gap:8px;"></div>
       </div>
 
-      <!-- NEW: Standards breakdown -->
       <div class="card" style="margin-bottom:24px;border-left:4px solid #6366f1;">
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
           <span style="width:32px;height:32px;border-radius:50%;background:#e0e7ff;display:flex;align-items:center;justify-content:center;">🔍</span>
@@ -201,7 +199,6 @@ function runCompare() {
   var yourEmail = 'you_' + Date.now() + '@temp.com';
   scanBusiness('Your Business', url, yourEmail).then(function(you) {
     if (!you || you.error) throw new Error(you ? you.error : 'Scan failed');
-    you.displayName = 'You - ' + bizName(url);
     you.grade = you.grade || grade(you.score || 0);
     bt.textContent = 'Finding competitors...';
     return findCompetitors(bizName(url), url, 'Your Business').then(function(compResult) {
@@ -213,7 +210,7 @@ function runCompare() {
         bt.textContent = 'Scanning: ' + c2.name + '...';
         return scanBusiness(c2.name, c2.site, 'c2_' + Date.now() + '@temp.com').then(function(c2Data) {
           bt.textContent = 'Compare My Score'; sp.classList.add('hidden'); btn.disabled = false;
-          showResults(you, c1Data, c2Data, c1.name, c2.name);
+          showResults(you, c1Data, c2Data, c1.name, c2.name, url);
         });
       });
     });
@@ -222,14 +219,15 @@ function runCompare() {
     alert('Error: ' + (e.message || 'Could not scan. Please check the URL and try again.'));
   });
 }
-function showResults(you, c1Data, c2Data, c1name, c2name) {
+function showResults(you, c1Data, c2Data, c1name, c2name, url) {
   hide($('inputError')); show($('resultsSection'));
   var ys = you.score || 0, cs1 = c1Data && c1Data.score ? c1Data.score : 0, cs2 = c2Data && c2Data.score ? c2Data.score : 0;
   var c1n = c1name || 'Competitor 1', c2n = c2name || 'Competitor 2';
   $('comparisonContext').innerHTML = 'Your website was scanned against competitors. Scores out of 100 based on 42 trust signal checks.';
   $('comp1Header').textContent = c1n; $('comp2Header').textContent = c2n;
   var sd = $('overallScores'); sd.innerHTML = '';
-  var all = [{ s: ys, n: 'You - ' + (you.displayName || 'Your Business'), isYou: true }, { s: cs1, n: c1n, isYou: false }, { s: cs2, n: c2n, isYou: false }];
+  var yourDisplay = bizName(url);
+  var all = [{ s: ys, n: yourDisplay, isYou: true }, { s: cs1, n: c1n, isYou: false }, { s: cs2, n: c2n, isYou: false }];
   for (var i = 0; i < all.length; i++) {
     var a = all[i];
     sd.innerHTML += '<div class="card" style="text-align:center;padding:20px;' + (a.isYou ? 'border:2px solid #14b8a6;background:rgba(20,184,166,.04)' : '') + '"><p style="font-size:11px;font-weight:600;text-transform:uppercase;color:' + (a.isYou ? '#0d9488' : '#94a3b8') + ';margin:0 0 4px;">' + (a.isYou ? 'You' : 'Competitor') + '</p><p style="font-size:36px;font-weight:700;color:' + (a.isYou ? '#0f766e' : '#0f172a') + ';margin:0;">' + a.s + '</p><p style="font-size:10px;color:#94a3b8;margin:0;">/100</p><p style="font-size:13px;color:#64748b;margin:6px 0 0;">' + a.n + '</p></div>';
