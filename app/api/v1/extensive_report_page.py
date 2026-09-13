@@ -2,76 +2,148 @@
 from fastapi import APIRouter
 from fastapi.responses import HTMLResponse
 router = APIRouter(prefix="/extensive-report", tags=["Public - Extensive Report"])
+
 PAGE = """<!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Extensive Trust Report | Trust Trigger Agency</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>body{font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;background:#f8fafc;color:#1e293b;}.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease-out,transform .6s ease-out;}.reveal.in-view{opacity:1;transform:none;}.pillar-bar{transition:width 1s ease-out;}.gradient-header{background:linear-gradient(135deg,#0f172a 0%,#1e293b 50%,#0f172a 100%);}@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}.pulse-dot{animation:pulse-dot 1.5s ease-in-out infinite}</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Extensive Trust Report | Trust Trigger Agency</title>
+<meta name="description" content="Get your full Extensive Trust Report. 5 pillars. 14 standards. Every gap and fix prioritised.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E🛡️%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+body{font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.gt{background:linear-gradient(135deg,#059669,#0d9488);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.green1{background:linear-gradient(135deg,#064e3b,#065f46,#047857)}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease-out,transform .6s ease-out}
+.reveal.in-view{opacity:1;transform:none}
+.pillar-bar{transition:width 1.2s ease-out}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
+.pulse-dot{animation:pulse-dot 1.5s ease-in-out infinite}
+</style>
 </head>
-<body class="antialiased">
-<nav class="gradient-header border-b border-white/10 fixed top-0 left-0 right-0 z-50 h-16 flex items-center px-6"><div class="max-w-6xl mx-auto w-full flex items-center justify-between"><a href="#" class="flex items-center gap-2 text-white font-semibold text-sm"><span class="text-xl">&#x1F6E1;&#xFE0F;</span> Trust Trigger Agency</a><a href="https://srv16.aisoftllc.com/agent_sites/10ecdf28fd7e.html" class="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-xs font-medium text-white shadow-sm hover:bg-emerald-500 transition">Get Free Snapshot &#8594;</a></div></nav>
-<div class="h-16"></div>
-<div class="max-w-5xl mx-auto px-6 py-12 sm:py-16">
-<div class="text-center mb-12 reveal"><p class="text-sm font-semibold uppercase tracking-wider text-emerald-700 mb-3">The Trust Trigger Method&#8482;</p><h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-4 text-zinc-900">Extensive Trust Report</h1><p class="text-zinc-600 max-w-2xl mx-auto text-lg leading-relaxed">Enter any business website. We analyse it across <strong>5 trust pillars</strong> and <strong>14 standards</strong> to show you exactly where trust is winning and where it's leaking.</p></div>
-<div id="inputSection" class="max-w-lg mx-auto reveal"><div class="rounded-2xl border border-zinc-200 bg-white shadow-sm p-6 sm:p-8"><div class="space-y-5">
-<div><label class="block text-sm font-medium text-zinc-700 mb-1.5">Business Name</label><input id="fullName" type="text" placeholder="e.g. Ivy Dentistry Aesthetics" class="w-full rounded-xl border border-zinc-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition"></div>
-<div><label class="block text-sm font-medium text-zinc-700 mb-1.5">Website URL</label><input id="website" type="text" placeholder="e.g. ivydentistryaesthetics.co.uk" class="w-full rounded-xl border border-zinc-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition"></div>
-<div><label class="block text-sm font-medium text-zinc-700 mb-1.5">Your Email</label><input id="email" type="email" placeholder="e.g. info@ivydentistryaesthetics.co.uk" class="w-full rounded-xl border border-zinc-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition"><p class="text-xs text-zinc-400 mt-1.5">Your report will appear below.</p></div>
-<button onclick="generate()" class="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-700 px-5 py-3.5 text-sm font-semibold text-white shadow-sm hover:bg-emerald-800 transition">Generate Your Extensive Trust Report &#8594;</button>
-<p class="text-xs text-center text-zinc-400">Free. No card. Takes ~30 seconds.</p>
-</div></div></div>
+<body class="antialiased bg-emerald-50 text-zinc-800">
 
-<div id="loadingSection" class="hidden max-w-2xl mx-auto reveal"><div class="rounded-2xl border border-zinc-200 bg-white shadow-sm p-8 sm:p-10 text-center"><h2 class="text-xl font-bold text-zinc-900 mb-6">Generating your Trust Trigger Report</h2><p class="text-sm text-zinc-500 mb-8">Analysing your website across our Trust Trigger framework</p>
+<nav class="bg-black border-b border-zinc-800 fixed top-0 left-0 right-0 z-50 h-20 flex items-center px-6">
+<div class="max-w-6xl mx-auto w-full flex items-center justify-between">
+<a href="https://trust-trigger-api.onrender.com/home" class="flex items-center gap-2 text-2xl font-extrabold text-yellow-400"><span class="text-3xl">🛡️</span> Trust Trigger Agency</a>
+<div class="flex items-center gap-3">
+<a href="https://trust-trigger-api.onrender.com/home" class="rounded-lg bg-teal-500 px-4 py-2 text-xs font-semibold text-white hover:bg-teal-400">Get Free Snapshot →</a>
+</div>
+</div>
+</nav>
+
+<div class="h-20"></div>
+
+<div class="green1 text-white py-20 sm:py-28 px-6">
+<div class="max-w-5xl mx-auto text-center">
+<p class="text-sm font-bold uppercase tracking-[.2em] text-teal-300 mb-4">The Trust Trigger Method™</p>
+<h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight mb-4">Extensive Trust Report</h1>
+<p class="text-lg sm:text-xl text-emerald-200 max-w-3xl mx-auto leading-relaxed font-medium">Enter any business website. We analyse it across <strong class="text-white">5 trust pillars</strong> and <strong class="text-white">14 standards</strong> to show you exactly where trust is winning and where it's leaking.</p>
+</div>
+</div>
+
+<div class="max-w-5xl mx-auto px-6 py-16">
+<div id="inputSection" class="max-w-lg mx-auto">
+<div class="rounded-2xl border border-emerald-200 bg-white shadow-xl p-6 sm:p-8">
+<div class="space-y-5">
+<div><label class="block text-sm font-bold text-zinc-800 mb-1.5">Business Name</label><input id="fullName" type="text" placeholder="e.g. Ivy Dentistry Aesthetics" class="w-full rounded-xl border border-emerald-300 px-5 py-3.5 text-base font-medium text-zinc-800 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-teal-500"></div>
+<div><label class="block text-sm font-bold text-zinc-800 mb-1.5">Website URL</label><input id="website" type="text" placeholder="e.g. ivydentistryaesthetics.co.uk" class="w-full rounded-xl border border-emerald-300 px-5 py-3.5 text-base font-medium text-zinc-800 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-teal-500"></div>
+<div><label class="block text-sm font-bold text-zinc-800 mb-1.5">Your Email</label><input id="email" type="email" placeholder="e.g. info@yourpractice.co.uk" class="w-full rounded-xl border border-emerald-300 px-5 py-3.5 text-base font-medium text-zinc-800 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-teal-500"><p class="text-xs text-zinc-500 mt-1.5 font-medium">Your report will appear below.</p></div>
+<button onclick="generate()" class="w-full rounded-xl bg-teal-500 px-6 py-3.5 text-base font-bold text-white shadow-lg hover:bg-teal-400 transition">Generate Your Extensive Trust Report →</button>
+<p class="text-xs text-center text-zinc-500 font-medium">Free. No card. Takes ~30 seconds.</p>
+</div>
+</div>
+</div>
+
+<div id="loadingSection" class="hidden max-w-2xl mx-auto mt-8">
+<div class="rounded-2xl border border-emerald-200 bg-white shadow-xl p-8 sm:p-10 text-center">
+<h2 class="text-xl font-bold text-zinc-900 mb-6">Generating your Trust Trigger Report</h2>
+<p class="text-sm text-zinc-600 mb-8 font-medium">Analysing your website across our Trust Trigger framework</p>
 <div class="max-w-md mx-auto space-y-4 text-left">
-<div class="flex items-center gap-4"><span id="s1" class="w-6 h-6 rounded-full bg-zinc-200 flex items-center justify-center text-xs font-bold text-zinc-500 shrink-0">1</span><div class="flex-1"><p class="text-sm font-medium text-zinc-700">Website structure</p><p class="text-xs text-zinc-400">Layout, navigation, page architecture</p></div><span id="d1" class="text-emerald-600 text-sm font-medium">&#x23F3;</span></div>
-<div class="flex items-center gap-4"><span id="s2" class="w-6 h-6 rounded-full bg-zinc-200 flex items-center justify-center text-xs font-bold text-zinc-500 shrink-0">2</span><div class="flex-1"><p class="text-sm font-medium text-zinc-700">Trust signals</p><p class="text-xs text-zinc-400">Credibility markers, reviews, authority</p></div><span id="d2" class="text-zinc-400 text-sm font-medium">&#x23F3;</span></div>
-<div class="flex items-center gap-4"><span id="s3" class="w-6 h-6 rounded-full bg-zinc-200 flex items-center justify-center text-xs font-bold text-zinc-500 shrink-0">3</span><div class="flex-1"><p class="text-sm font-medium text-zinc-700">Social proof</p><p class="text-xs text-zinc-400">Testimonials, badges, case studies</p></div><span id="d3" class="text-zinc-400 text-sm font-medium">&#x23F3;</span></div>
-<div class="flex items-center gap-4"><span id="s4" class="w-6 h-6 rounded-full bg-zinc-200 flex items-center justify-center text-xs font-bold text-zinc-500 shrink-0">4</span><div class="flex-1"><p class="text-sm font-medium text-zinc-700">Conversion journey</p><p class="text-xs text-zinc-400">CTAs, forms, enquiry path</p></div><span id="d4" class="text-zinc-400 text-sm font-medium">&#x23F3;</span></div>
-<div class="flex items-center gap-4"><span id="s5" class="w-6 h-6 rounded-full bg-zinc-200 flex items-center justify-center text-xs font-bold text-zinc-500 shrink-0">5</span><div class="flex-1"><p class="text-sm font-medium text-zinc-700">Finalising analysis</p><p class="text-xs text-zinc-400">Scoring, gaps, building your report</p></div><span id="d5" class="text-zinc-400 text-sm font-medium">&#x23F3;</span></div>
+<div class="flex items-center gap-4"><span id="s1" class="w-7 h-7 rounded-full bg-zinc-200 flex items-center justify-center text-sm font-bold text-zinc-500 shrink-0">1</span><div class="flex-1"><p class="text-sm font-semibold text-zinc-800">Website structure</p><p class="text-xs text-zinc-500">Layout, navigation, page architecture</p></div><span id="d1" class="text-teal-600 text-sm font-medium">⏳</span></div>
+<div class="flex items-center gap-4"><span id="s2" class="w-7 h-7 rounded-full bg-zinc-200 flex items-center justify-center text-sm font-bold text-zinc-500 shrink-0">2</span><div class="flex-1"><p class="text-sm font-semibold text-zinc-800">Trust signals</p><p class="text-xs text-zinc-500">Credibility markers, reviews, authority</p></div><span id="d2" class="text-zinc-400 text-sm font-medium">⏳</span></div>
+<div class="flex items-center gap-4"><span id="s3" class="w-7 h-7 rounded-full bg-zinc-200 flex items-center justify-center text-sm font-bold text-zinc-500 shrink-0">3</span><div class="flex-1"><p class="text-sm font-semibold text-zinc-800">Social proof</p><p class="text-xs text-zinc-500">Testimonials, badges, case studies</p></div><span id="d3" class="text-zinc-400 text-sm font-medium">⏳</span></div>
+<div class="flex items-center gap-4"><span id="s4" class="w-7 h-7 rounded-full bg-zinc-200 flex items-center justify-center text-sm font-bold text-zinc-500 shrink-0">4</span><div class="flex-1"><p class="text-sm font-semibold text-zinc-800">Conversion journey</p><p class="text-xs text-zinc-500">CTAs, forms, enquiry path</p></div><span id="d4" class="text-zinc-400 text-sm font-medium">⏳</span></div>
+<div class="flex items-center gap-4"><span id="s5" class="w-7 h-7 rounded-full bg-zinc-200 flex items-center justify-center text-sm font-bold text-zinc-500 shrink-0">5</span><div class="flex-1"><p class="text-sm font-semibold text-zinc-800">Finalising analysis</p><p class="text-xs text-zinc-500">Scoring, gaps, building your report</p></div><span id="d5" class="text-zinc-400 text-sm font-medium">⏳</span></div>
 </div>
-<p id="loadingStatus" class="text-sm text-emerald-700 font-medium mt-8 pulse-dot">Analysing website structure...</p>
-</div></div>
-
-<div id="resultsSection" class="hidden">
-<div class="rounded-2xl border border-zinc-200 bg-white shadow-sm p-6 sm:p-8 mb-8 reveal"><p class="text-xs font-semibold uppercase tracking-wider text-emerald-700 mb-1">Your Trust Trigger Score</p><div class="flex flex-col sm:flex-row items-center gap-8"><div class="relative w-36 h-36 flex items-center justify-center shrink-0"><svg class="w-36 h-36 -rotate-90" viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="none" stroke="#e5e7eb" stroke-width="8"/><circle id="scoreCircle" cx="60" cy="60" r="52" fill="none" stroke="#047857" stroke-width="8" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7" style="transition: stroke-dashoffset 1.2s ease-out"/></svg><div class="absolute text-center"><span id="scoreNum" class="text-5xl font-extrabold text-zinc-900">0</span><span class="text-xs font-semibold text-zinc-400">/100</span></div></div><div class="text-center sm:text-left"><h2 id="gradeTitle" class="text-2xl sm:text-3xl font-bold mb-1"></h2><p id="businessName" class="text-lg font-medium text-zinc-900"></p><p id="websiteUrl" class="text-sm text-zinc-400 break-all"></p><p id="gradeSummary" class="text-sm text-zinc-600 mt-3 max-w-lg leading-relaxed"></p><div class="flex flex-wrap gap-4 mt-4 text-sm text-zinc-500"><span id="reportDate"></span><span id="pillarCount"></span><span id="issueCount"></span></div></div></div></div>
-<div id="pillarsSection" class="rounded-2xl border border-zinc-200 bg-white shadow-sm p-6 sm:p-8 mb-8 reveal"><h3 class="font-semibold text-zinc-900 mb-1">The 5 Trust Pillars</h3><p class="text-sm text-zinc-500 mb-6">Your website scored across each dimension of trust</p><div id="pillarsGrid" class="grid sm:grid-cols-2 gap-4"></div></div>
-<div id="issuesSection" class="rounded-2xl border border-zinc-200 bg-white shadow-sm p-6 sm:p-8 mb-8 reveal"><h3 class="font-semibold text-zinc-900 mb-1">Trust Gaps Identified</h3><p class="text-sm text-zinc-500 mb-6">These are the specific issues preventing visitors from trusting you enough to enquire</p><div id="issuesList" class="space-y-3"></div><div id="noIssues" class="hidden text-center py-6"><p class="text-emerald-700 font-medium">&#x2713; No major trust gaps detected.</p></div></div>
-<div id="strengthsSection" class="rounded-2xl border border-emerald-100 bg-emerald-50/50 shadow-sm p-6 sm:p-8 mb-8 reveal"><h3 class="font-semibold text-zinc-900 mb-1">&#x2713; Trust Triggers Already Working</h3><p class="text-sm text-zinc-500 mb-6">Your website is getting these right. Don't change them.</p><div id="strengthsList" class="grid sm:grid-cols-2 gap-3"></div></div>
-<div id="actionsSection" class="rounded-2xl border border-zinc-200 bg-white shadow-sm p-6 sm:p-8 mb-8 reveal"><h3 class="font-semibold text-zinc-900 mb-1">Trust Trigger Priority Matrix</h3><p class="text-sm text-zinc-500 mb-6">Ranked by effort vs. impact</p><div id="actionsList" class="space-y-3"></div><div id="noActions" class="hidden text-center py-6"><p class="text-emerald-700 font-medium">&#x2713; No recommended actions.</p></div></div>
-
-<div class="rounded-2xl border-2 border-amber-200 bg-amber-50/50 shadow-sm p-6 sm:p-8 mb-8 reveal"><div class="flex items-start gap-4"><span class="text-2xl shrink-0">&#x1F4B0;</span><div><h3 class="text-lg font-bold text-zinc-900 mb-2">Where You're Potentially Losing Enquiries</h3><p class="text-sm text-zinc-600 leading-relaxed mb-4">You've already invested in getting visitors to your website. The biggest opportunity is improving what happens once they arrive. Every trust gap represents a potential leak in your conversion funnel.</p><p class="text-zinc-600 text-sm">Traffic &#8594; Trust &#8594; Confidence &#8594; <span class="text-amber-700 font-medium">Action</span></p></div></div></div>
-
-<div class="text-center rounded-2xl border-2 border-emerald-700 bg-white shadow-sm p-8 sm:p-12 mb-8 reveal"><span class="text-4xl mb-4 block">&#x1F6E1;&#xFE0F;</span><h3 class="text-2xl sm:text-3xl font-bold text-zinc-900 mb-3">Your Trust Transformation</h3><p class="text-zinc-600 mb-2 max-w-lg mx-auto">Based on this assessment, we can fix these gaps and deliver the transformation within 14 days.</p><p class="text-sm text-zinc-500 mb-8">Let's walk through your results together. No pitch. Just clarity.</p><a href="https://srv16.aisoftllc.com/agent_sites/10ecdf28fd7e.html" class="inline-flex items-center gap-2 rounded-xl bg-emerald-700 px-8 py-4 text-base font-semibold text-white shadow-sm hover:bg-emerald-800 transition">Book Your Free 20-Minute Trust Review &#8594;</a><p class="text-xs text-zinc-400 mt-3">No obligation. 20 minutes.</p></div>
+<p id="loadingStatus" class="text-sm text-teal-700 font-bold mt-8 pulse-dot">Analysing website structure...</p>
 </div>
-<div id="errorSection" class="hidden max-w-lg mx-auto reveal"><div class="text-center rounded-2xl border border-red-200 bg-red-50 p-8"><span class="text-4xl mb-4 block">&#x26A0;&#xFE0F;</span><h2 class="text-xl font-bold text-zinc-900 mb-2">Something went wrong</h2><p id="errorMsg" class="text-zinc-600 mb-6"></p><button onclick="resetForm()" class="inline-flex items-center gap-2 rounded-xl bg-emerald-700 px-5 py-3 text-sm font-medium text-white shadow-sm hover:bg-emerald-800 transition">Try again &#8594;</button></div></div>
 </div>
-<footer class="gradient-header border-t border-white/10 py-12 px-6"><div class="max-w-5xl mx-auto text-center"><div class="flex items-center justify-center gap-2 text-white/80 text-sm mb-4"><span class="text-xl">&#x1F6E1;&#xFE0F;</span><span class="font-semibold">Trust Trigger Agency</span></div><p class="text-xs text-zinc-500 max-w-xl mx-auto leading-relaxed">We turn local service websites into trust engines. The Trust Trigger Method&#8482; &#8212; Measure. Transform. Prove. Maintain.</p><p class="text-xs text-zinc-600 mt-4">&copy; 2026 Trust Trigger Agency&#8482;</p></div></footer>
+
+<div id="resultsSection" class="hidden mt-8 space-y-8"></div>
+<div id="ctaSection" class="hidden mt-8 text-center">
+<div class="max-w-xl mx-auto rounded-2xl border-2 border-teal-500 bg-white shadow-xl p-8">
+<h3 class="text-xl font-bold text-zinc-900 mb-4">Want to fix these gaps?</h3>
+<p class="text-zinc-600 mb-6 font-medium">Book a free 20-minute call and we'll walk through your report together — every gap, every fix, prioritised by impact.</p>
+<a href="https://calendly.com/mrfcmo/ai-readiness-review-call-clone?month=2026-09" class="rounded-xl bg-teal-500 px-6 py-3.5 text-base font-bold text-white shadow-lg hover:bg-teal-400 transition">Book Your Free Review →</a>
+</div>
+</div>
+</div>
+
+<footer class="bg-zinc-900 text-zinc-300 py-12 px-6 border-t border-zinc-800">
+<div class="max-w-6xl mx-auto">
+<div class="grid grid-cols-2 gap-10">
+<div><div class="flex items-center gap-2 text-lg font-extrabold mb-4"><span class="text-xl">🛡️</span> <span class="text-yellow-400">Trust Trigger Agency</span></div><p class="text-zinc-400 text-sm">Helping healthcare practices turn websites into patient booking engines.</p></div>
+<div><p class="text-sm font-bold uppercase tracking-wider text-emerald-400 mb-4">Service</p><ul class="space-y-3 text-sm font-medium"><li><a href="https://trust-trigger-api.onrender.com/home" class="text-zinc-300 hover:text-white">Home</a></li><li><a href="https://trust-trigger-api.onrender.com/competitor-insights" class="text-zinc-300 hover:text-white">Compare Competitors</a></li><li><a href="https://calendly.com/mrfcmo/ai-readiness-review-call-clone?month=2026-09" class="text-zinc-300 hover:text-white">Book a Review</a></li></ul></div>
+</div>
+<div class="border-t border-zinc-800 mt-8 pt-6 text-sm font-medium text-center"><p class="text-yellow-400">© 2025 Trust Trigger Agency™ · The Trust Trigger Transformation Method™</p></div>
+</div>
+</footer>
+
 <script>
-var API='https://trust-trigger-api.onrender.com';
-function $(i){return document.getElementById(i);}
-function h(e){e.classList.add('hidden');}
-function s(e){e.classList.remove('hidden');}
-function al(s){var st=['s1','s2','s3','s4','s5'],d=['d1','d2','d3','d4','d5'],tx=['Analysing website structure...','Checking trust signals...','Evaluating social proof...','Mapping conversion journey...','Finalising your Trust Trigger Report...'];for(var i=0;i<st.length;i++){var el=$(st[i]),dt=$(d[i]);if(i<s){el.className='w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold shrink-0';el.textContent='✓';dt.textContent='✓';dt.className='text-emerald-600 text-sm font-medium';}else if(i===s){el.className='w-6 h-6 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs font-bold shrink-0 pulse-dot';dt.innerHTML='<span class=\"pulse-dot\">⏳</span>';dt.className='text-emerald-600 text-sm font-medium';}}if(s<tx.length)$('loadingStatus').textContent=tx[s];}
-function generate(){var n=$('fullName').value.trim(),u=$('website').value.trim(),e=$('email').value.trim();if(!n||!u||!e){alert('Please fill in all fields.');return;}h($('inputSection'));h($('errorSection'));h($('resultsSection'));s($('loadingSection'));al(0);var si=setInterval(function(){for(var i=0;i<5;i++){if($('s'+(i+1)).classList.contains('pulse-dot')){if(i+1<5)al(i+1);break;}}},4000);fetch(API+'/api/v1/public/trust-snapshot',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({full_name:n,website:u,email:e})}).then(function(r){return r.json();}).then(function(d){clearInterval(si);h($('loadingSection'));if(!d.success){$('errorMsg').textContent=d.error||'Unable to generate report.';s($('errorSection'));return;}if(d.score===0&&(!d.pillars||d.pillars.length===0)){poll(d.lead_id,n,u,e);return;}render(d,n,u);}).catch(function(){clearInterval(si);h($('loadingSection'));$('errorMsg').textContent='Network error.';s($('errorSection'));});}
-function poll(id,n,u,e){$('loadingStatus').textContent='Report is being generated... please wait.';var at=0,mx=15,pi=setInterval(function(){at++;fetch(API+'/api/v1/public/trust-snapshot',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({full_name:n,website:u,email:e})}).then(function(r){return r.json();}).then(function(d){if(d.score>0||(d.pillars&&d.pillars.length>0)){clearInterval(pi);h($('loadingSection'));render(d,n,u);}else if(at>=mx){clearInterval(pi);h($('loadingSection'));$('errorMsg').textContent='Report taking longer than expected.';s($('errorSection'));}}).catch(function(){if(at>=mx){clearInterval(pi);h($('loadingSection'));$('errorMsg').textContent='Report timed out.';s($('errorSection'));}});},3000);}
-function render(d,n,u){var sc=d.score||0,g=gr(sc);setTimeout(function(){var c=326.7;$('scoreCircle').style.strokeDashoffset=c-(sc/100)*c;},200);$('scoreNum').textContent=sc;$('gradeTitle').textContent=d.grade||g.label;$('gradeTitle').className='text-2xl sm:text-3xl font-bold mb-1 '+g.color;$('businessName').textContent=n;$('websiteUrl').textContent=u;$('gradeSummary').textContent=g.summary;var dt=new Date(),ms=['January','February','March','April','May','June','July','August','September','October','November','December'];$('reportDate').textContent='📅 '+dt.getDate()+' '+ms[dt.getMonth()]+' '+dt.getFullYear();$('pillarCount').textContent='📊 '+(d.pillars?d.pillars.length:0)+' pillars assessed';$('issueCount').textContent='🔍 '+(d.issues_found||0)+' issues found';var pg=$('pillarsGrid');pg.innerHTML='';if(d.pillars&&d.pillars.length){d.pillars.forEach(function(p){var pc=p.percentage||0,bc=pc>=80?'bg-emerald-500':(pc>=50?'bg-amber-500':'bg-red-500'),tc=pc>=80?'text-emerald-700':(pc>=50?'text-amber-700':'text-red-700');var dv=document.createElement('div');dv.className='rounded-xl border border-zinc-200 bg-white p-4';dv.innerHTML='<div class=\"flex items-center justify-between mb-2\"><span class=\"text-sm font-medium text-zinc-700\">'+(p.label||p.name)+'</span><span class=\"text-sm font-semibold '+tc+'\">'+Math.round(pc)+'%</span></div><div class=\"w-full h-2.5 bg-zinc-100 rounded-full overflow-hidden\"><div class=\"h-full rounded-full '+bc+' pillar-bar\" style=\"width:0%\"></div></div>';pg.appendChild(dv);setTimeout(function(){dv.querySelector('.pillar-bar').style.width=pc+'%';},300);});s($('pillarsSection'));}else{h($('pillarsSection'));}var il=$('issuesList');il.innerHTML='';if(d.issues&&d.issues.length){d.issues.forEach(function(iss,i){var dv=document.createElement('div');dv.className='flex items-start gap-3 p-4 rounded-xl border border-zinc-200 bg-white';dv.innerHTML='<span class=\"shrink-0 w-7 h-7 rounded-full bg-red-100 text-red-600 flex items-center justify-center text-xs font-bold\">'+(i+1)+'</span><div><p class=\"text-sm font-medium text-zinc-900\">'+iss.title+'</p><p class=\"text-sm text-zinc-500 mt-0.5\">'+(iss.detail||'')+'</p></div>';il.appendChild(dv);});s($('issuesSection'));h($('noIssues'));}else{h($('issuesSection'));s($('noIssues'));}var sl=$('strengthsList');sl.innerHTML='';var pc2=0;if(d.standards&&d.standards.length){d.standards.forEach(function(sd){if(sd.passed){pc2++;var dv=document.createElement('div');dv.className='flex items-center gap-2 p-3 rounded-xl bg-white border border-emerald-200';dv.innerHTML='<span class=\"text-emerald-600 shrink-0\">✓</span><span class=\"text-sm text-zinc-700\">'+(sd.name||'Standard')+'</span>';sl.appendChild(dv);}});}if(pc2===0)sl.innerHTML='<p class=\"text-sm text-zinc-500 col-span-2\">No passed standards.</p>';s($('strengthsSection'));var al2=$('actionsList');al2.innerHTML='';if(d.actions&&d.actions.length){d.actions.forEach(function(a){var el=a.effort==='low'?'Quick win':(a.effort==='medium'?'Medium effort':'Larger project'),ec=a.effort==='low'?'bg-green-100 text-green-700':(a.effort==='medium'?'bg-amber-100 text-amber-700':'bg-red-100 text-red-700');var dv=document.createElement('div');dv.className='flex items-start gap-3 p-4 rounded-xl border border-zinc-200 bg-white';dv.innerHTML='<span class=\"shrink-0 w-7 h-7 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-bold\">→</span><div class=\"flex-1\"><div class=\"flex items-center justify-between gap-2\"><p class=\"text-sm font-medium text-zinc-900\">'+a.title+'</p><span class=\"text-xs font-medium px-2 py-0.5 rounded-full shrink-0 '+ec+'\">'+el+'</span></div><p class=\"text-sm text-zinc-500 mt-0.5\">'+(a.detail||'')+'</p></div>';al2.appendChild(dv);});s($('actionsSection'));h($('noActions'));}else{h($('actionsSection'));s($('noActions'));}s($('resultsSection'));setTimeout(function(){$('resultsSection').scrollIntoView({behavior:'smooth',block:'start'});},300);}
-function gr(s){if(s>=90)return{label:'Excellent Trust',color:'text-emerald-700',summary:'Your website is a strong trust engine.'};if(s>=70)return{label:'Good Trust',color:'text-emerald-600',summary:"You're building trust well."};if(s>=50)return{label:'Average Trust',color:'text-amber-600',summary:'Trust gaps are costing you enquiries.'};if(s>=30)return{label:'Weak Trust',color:'text-orange-600',summary:'Most visitors likely leave.'};return{label:'At Risk',color:'text-red-600',summary:'Critical trust issues detected.'};}
-function resetForm(){h($('errorSection'));h($('resultsSection'));h($('loadingSection'));s($('inputSection'));window.scrollTo({top:0,behavior:'smooth'});}
-try{document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('reveal');});var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in-view');});},{threshold:0.1,rootMargin:'0px 0px -50px 0px'});document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});}catch(e){}
+var API='';function $(i){return document.getElementById(i);}
+function h(e){e.classList.add('hidden');}function s(e){e.classList.remove('hidden');}
+function al(step){
+  var steps=['s1','s2','s3','s4','s5'],dots=['d1','d2','d3','d4','d5'],msgs=['Analysing website structure...','Checking trust signals...','Evaluating social proof...','Mapping conversion journey...','Finalising your Trust Trigger Report...'];
+  for(var i=0;i<steps.length;i++){
+    var el=$(steps[i]),dt=$(dots[i]);
+    if(i<step){
+      el.className='w-7 h-7 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm font-bold shrink-0';el.textContent='✓';dt.textContent='✓';dt.className='text-emerald-600 text-sm font-medium';
+    }else if(i===step){
+      el.className='w-7 h-7 rounded-full bg-teal-500 text-white flex items-center justify-center text-sm font-bold shrink-0 pulse-dot';dt.innerHTML='<span class="pulse-dot">⏳</span>';dt.className='text-teal-600 text-sm font-medium';
+    }
+  }
+  if(step<msgs.length)$('loadingStatus').textContent=msgs[step];
+}
+function generate(){
+  var n=$('fullName').value.trim(),u=$('website').value.trim(),e=$('email').value.trim();
+  if(!n||!u||!e){alert('Please fill in all fields.');return;}
+  h($('inputSection'));h($('resultsSection'));h($('ctaSection'));s($('loadingSection'));al(0);
+  var si=setInterval(function(){for(var i=0;i<5;i++){if($('s'+(i+1)).classList.contains('pulse-dot')){if(i+1<5)al(i+1);break;}}},4000);
+  fetch('/api/v1/public/trust-snapshot',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({full_name:n,website:u,email:e})})
+  .then(function(r){return r.json();}).then(function(d){
+    clearInterval(si);h($('loadingSection'));if(d.error){alert(d.error);s($('inputSection'));return;}
+    setTimeout(function(){showReport(d);},5000);
+  });
+}
+function gl(s){if(s>=90)return'Excellent';if(s>=75)return'Good';if(s>=55)return'Average';if(s>=35)return'Weak';return'Critical';}
+function showReport(d){
+  var sc=d.score||0;h($('loadingSection'));s($('resultsSection'));
+  var summaries={Excellent:'Your website builds strong trust. Minor refinements can maximise conversion.',Good:'Your website is credible — but specific trust gaps are preventing it from converting at full potential.',Average:'Your website has foundational elements but lacks the trust signals needed to convert visitors.',Weak:'Significant trust gaps exist. Visitors are likely leaving without enquiring.',Critical:'Your website is actively losing patients. Urgent improvements needed.'};
+  var now=new Date();var pills=d.pillars||[];
+  var labels={online_presence:'Online Presence',reputation:'Reputation',engagement:'Engagement',transparency:'Transparency',technical:'Technical Health'};
+  var pillHtml='';pills.forEach(function(p){var l=labels[p.name]||p.label;var pc=Math.round(p.percentage);var col=pc>=80?'#14b8a6':pc>=60?'#eab308':pc>=40?'#f97316':'#ef4444';pillHtml+='<div class="rounded-xl border border-zinc-200 bg-white p-4"><div class="flex justify-between items-center mb-2"><span class="font-semibold text-zinc-800">'+l+'</span><span class="font-bold" style="color:'+col+'">'+pc+'</span></div><div class="h-2.5 rounded-full bg-zinc-200 overflow-hidden"><div class="h-full rounded-full" style="width:'+pc+'%;background:'+col+'"></div></div></div>';});
+  var issuesHtml='';var issues=d.issues||[];if(issues.length){issuesHtml='<div class="rounded-2xl border border-emerald-200 bg-white shadow-xl p-6 sm:p-8"><h3 class="font-bold text-zinc-900 mb-4">Trust Gaps Identified</h3>';issues.forEach(function(iss){issuesHtml+='<div class="flex items-start gap-3 p-4 rounded-xl border border-red-100 bg-red-50 mb-3"><span class="text-red-500 font-bold mt-0.5">⚠️</span><div><p class="font-semibold text-zinc-900">'+iss.title+'</p><p class="text-sm text-zinc-600 mt-1">'+iss.detail+'</p></div></div>';});issuesHtml+='</div>';}
+  var stdHtml='';var stds=d.standards||[];var pcnt=0;stds.forEach(function(st){if(st.passed){pcnt++;var lb=st.name.replace(/([A-Z])/g,' $1').replace(/^./,function(s){return s.toUpperCase();}).trim();if(st.name==='Https')lb='HTTPS';if(st.name==='Cta')lb='Clear CTAs';if(st.name==='Faq')lb='FAQ Section';stdHtml+='<div class="flex items-center gap-2 p-3 rounded-lg border border-emerald-200 bg-white"><span class="text-teal-600 font-bold">✓</span><span class="text-sm font-medium text-zinc-800">'+lb+'</span></div>';}});
+  var rs=$('resultsSection');rs.innerHTML='<div class="rounded-2xl border border-emerald-200 bg-white shadow-xl p-6 sm:p-8"><p class="text-xs font-bold uppercase tracking-wider text-emerald-700 mb-1">Your Trust Trigger Score</p><div class="flex flex-col sm:flex-row items-center gap-8"><div class="relative w-36 h-36 flex items-center justify-center shrink-0"><svg class="w-36 h-36 -rotate-90" viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="none" stroke="#e5e7eb" stroke-width="8"/><circle id="scoreCircle" cx="60" cy="60" r="52" fill="none" stroke="#14b8a6" stroke-width="8" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7" style="transition:stroke-dashoffset 1.2s"/></svg><div class="absolute text-center"><span id="scoreNum" class="text-5xl font-extrabold text-zinc-900">0</span><span class="text-xs font-semibold text-zinc-500">/100</span></div></div><div><h2 class="text-2xl sm:text-3xl font-bold mb-1">'+gl(sc)+'</h2><p class="text-lg font-bold text-zinc-900">'+$('fullName').value+'</p><p class="text-sm text-zinc-500">'+$('website').value+'</p><p class="text-sm text-zinc-700 mt-3 max-w-lg leading-relaxed font-medium">'+summaries[gl(sc)]+'</p><div class="flex flex-wrap gap-4 mt-4 text-sm text-zinc-600 font-medium"><span>📅 '+now.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})+'</span><span>📊 '+(d.pillars?d.pillars.length:0)+' pillars</span><span>⚠️ '+(d.issues_found||0)+' issues</span></div></div></div></div><div class="rounded-2xl border border-emerald-200 bg-white shadow-xl p-6 sm:p-8 mt-8"><h3 class="font-bold text-zinc-900 mb-1">The 5 Trust Pillars</h3><p class="text-sm text-zinc-600 mb-6 font-medium">Your website scored across each dimension of trust</p><div class="grid sm:grid-cols-2 gap-4">'+pillHtml+'</div></div>'+issuesHtml+(stdHtml?'<div class="rounded-2xl border border-emerald-200 bg-emerald-50 shadow-xl p-6 sm:p-8 mt-8"><h3 class="font-bold text-zinc-900 mb-1">✓ Trust Triggers Already Working</h3><p class="text-sm text-zinc-600 mb-6 font-medium">Your website is getting these right. Don\'t change them.</p><div class="grid sm:grid-cols-2 gap-3">'+stdHtml+'</div></div>':'')+'<div class="text-center mt-8"><a href="https://calendly.com/mrfcmo/ai-readiness-review-call-clone?month=2026-09" class="rounded-xl bg-teal-500 px-6 py-3.5 text-base font-bold text-white shadow-lg hover:bg-teal-400 transition">Book Your Free Review →</a></div>';
+  s($('ctaSection'));
+  setTimeout(function(){var circ=$('scoreCircle');var r=52,cl=2Math.PIr;circ.style.strokeDashoffset=cl-(sc/100)*cl;},200);
+  var ct=0;var ti=setInterval(function(){ct++;if(ct>sc){clearInterval(ti);}$('scoreNum').textContent=ct;},20);
+  rs.querySelector('.rounded-2xl').scrollIntoView({behavior:'smooth',block:'start'});
+}
 </script>
 </body>
 </html>"""
 
 @router.get("", response_class=HTMLResponse)
-async def extensive_report():
-    return HTMLResponse(content=PAGE)
+async def get_extensive_report_page():
+    return PAGE
 
 @router.get("/", response_class=HTMLResponse)
-async def extensive_report_root():
-    return HTMLResponse(content=PAGE)
+async def get_extensive_report_page_root():
+    return PAGE
