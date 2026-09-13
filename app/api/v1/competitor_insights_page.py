@@ -128,6 +128,18 @@ PAGE = """<!DOCTYPE html>
         <div id="outperformDiv" style="display:flex;flex-direction:column;gap:8px;"></div>
       </div>
 
+      <!-- NEW: Standards breakdown -->
+      <div class="card" style="margin-bottom:24px;border-left:4px solid #6366f1;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+          <span style="width:32px;height:32px;border-radius:50%;background:#e0e7ff;display:flex;align-items:center;justify-content:center;">🔍</span>
+          <div>
+            <p style="font-size:14px;font-weight:600;color:#0f172a;margin:0;">How We Scored You</p>
+            <p style="font-size:12px;color:#64748b;margin:2px 0 0;">Your website was checked against 9 trust standards. Each pass contributes to your score.</p>
+          </div>
+        </div>
+        <div id="standardsBreakdown" style="display:flex;flex-direction:column;gap:6px;"></div>
+      </div>
+
       <div class="card" style="background:linear-gradient(135deg,#f0fdfa,#ecfdf5);border-color:#14b8a6;">
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
           <span style="width:32px;height:32px;border-radius:50%;background:#ccfbf1;display:flex;align-items:center;justify-content:center;">📊</span>
@@ -243,8 +255,33 @@ function showResults(you, c1Data, c2Data, c1name, c2name) {
   losses.sort(function(a,b){return b.d-a.d;});
   var wd = $('winningDiv'); wd.innerHTML = wins.length===0?'<p style="font-size:14px;color:#64748b;">You are not leading on any pillar yet.</p>':''; for(var wi=0;wi<wins.length;wi++){wd.innerHTML+='<div style="display:flex;gap:8px;font-size:14px;"><span style="color:#10b981;">✓</span><p style="margin:0;"><strong>'+wins[wi].p+'</strong> &mdash; You score '+wins[wi].y+', ahead of competitors.</p></div>';}
   var od = $('outperformDiv'); od.innerHTML = losses.length===0?'<p style="font-size:14px;color:#64748b;">You are ahead across the board.</p>':''; var maxL=Math.min(losses.length,5); for(var li=0;li<maxL;li++){od.innerHTML+='<div style="display:flex;gap:8px;font-size:14px;"><span style="color:#f59e0b;">⚡</span><p style="margin:0;"><strong>'+losses[li].p+'</strong> &mdash; '+losses[li].w+' leads by '+losses[li].d+' points.</p></div>';}
-  var sum = $('summaryDiv'); var txt = ''; if(wins.length>0){var wn=[];for(var wi2=0;wi2<wins.length;wi2++)wn.push(wins[wi2].p);txt+='You are ahead on <strong>'+wn.join(', ')+'</strong>. ';}else{txt+='You are not leading on any pillar yet. ';} if(losses.length>0){txt+='Biggest opportunities: ';var tl=Math.min(losses.length,2);for(var li2=0;li2<tl;li2++){txt+='<strong>'+losses[li2].p+'</strong> ('+losses[li2].w+' leads by '+losses[li2].d+' pts)';if(li2<tl-1)txt+=', ';}txt+='. ';} if(you.issues&&you.issues.length>0){txt+='Top issue for you: <strong>'+you.issues[0].title+'</strong>. ';} txt+='Need a deeper dive? <a href="#" style="color:#0d9488;text-decoration:underline;">Book a Free 20-Minute Review</a> for a full audit.';
-  sum.innerHTML = txt;
+  var sum = $('summaryDiv'); var txt = ''; if(wins.length>0){var wn=[];for(var wi2=0;wi2<wins.length;wi2++)wn.push(wins[wi2].p);txt+='You are ahead on <strong>'+wn.join(', ')+'</strong>. ';}else{txt+='You are not leading on any pillar yet. ';} if(losses.length>0){txt+='Biggest opportunities: ';var tl=Math.min(losses.length,2);for(var li2=0;li2<tl;li2++){txt+='<strong>'+losses[li2].p+'</strong> ('+losses[li2].w+' leads by '+losses[li2].d+' pts)';if(li2<tl-1)txt+=', ';}txt+='. ';} if(you.issues&&you.issues.length>0){txt+='Top issue for you: <strong>'+you.issues[0].title+'</strong>. ';} txt+='Need a deeper dive? <a href="#" style="color:#0d9488;text-decoration:underline;">Book a Free 20-Minute Review</a> for a full audit.'; sum.innerHTML = txt;
+
+  // Standards breakdown
+  var sb = $('standardsBreakdown'); sb.innerHTML = '';
+  var stds = you.standards || [];
+  var passed = 0, total = stds.length;
+  for (var si = 0; si < stds.length; si++) {
+    if (stds[si].passed) passed++;
+    var st = stds[si];
+    var icon = st.passed ? '✅' : '❌';
+    var bg = st.passed ? 'background:#ecfdf5;border-color:#bbf7d0' : 'background:#fef2f2;border-color:#fecaca';
+    var label = st.name.replace(/([A-Z])/g, ' $1').replace(/^./, function(s){ return s.toUpperCase(); }).trim();
+    if (st.name === 'Https') label = 'HTTPS';
+    if (st.name === 'Cta') label = 'Clear CTAs';
+    if (st.name === 'Faq') label = 'FAQ Section';
+    if (st.name === 'Service Pages') label = 'Service Pages';
+    if (st.name === 'Privacy Policy') label = 'Privacy Policy';
+    if (st.name === 'Mobile Responsive') label = 'Mobile Responsive';
+    sb.innerHTML += '<div style="display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;border:1px solid;' + bg + '">' +
+      '<span>' + icon + '</span>' +
+      '<span style="font-size:14px;font-weight:500;color:#0f172a;">' + label + '</span>' +
+      '<span style="margin-left:auto;font-size:12px;font-weight:600;color:' + (st.passed ? '#059669' : '#dc2626') + ';">' + (st.passed ? '✓ Passed' : '✗ Failed') + '</span></div>';
+  }
+  sb.innerHTML += '<div style="display:flex;justify-content:space-between;padding:10px 12px 0;font-size:13px;color:#64748b;border-top:1px solid #e2e8f0;margin-top:8px;">' +
+    '<span><strong>' + passed + '/' + total + '</strong> standards passed</span>' +
+    '<span>Score: <strong>' + Math.round(passed/total*100) + '/100</strong></span></div>';
+
   $('resultsSection').scrollIntoView({behavior:'smooth',block:'start'});
 }
 function resetPage() { hide($('resultsSection')); show($('inputError')); $('yourUrl').value = ''; window.scrollTo({top:0,behavior:'smooth'}); }
