@@ -66,9 +66,9 @@ body{font-family:Inter,sans-serif;-webkit-font-smoothing:antialiased}
 
 <section id="snapshot" class="py-20 px-6 bg-black text-white">
 <div class="max-w-6xl mx-auto">
-<div class="text-center mb-12">
+<div class="text-center mb-12" id="snapshotHeader">
 <p class="text-sm font-bold uppercase tracking-[.2em] text-teal-400 mb-3">Your Free Trust Snapshot</p>
-<h2 class="text-4xl sm:text-5xl font-extrabold text-white mb-4">See your score in 30 seconds</h2>
+<h2 class="text-4xl sm:text-5xl font-extrabold text-white mb-4" id="snapshotTitle">See your score in 30 seconds</h2>
 </div>
 
 <div class="max-w-4xl mx-auto mb-10" id="exampleSnapshot">
@@ -97,7 +97,7 @@ body{font-family:Inter,sans-serif;-webkit-font-smoothing:antialiased}
 </div>
 </div>
 
-<div id="liveResult" class="hidden max-w-4xl mx-auto mb-10"></div>
+<div id="liveResult" class="hidden max-w-4xl mx-auto"></div>
 
 <div id="scanBox" class="max-w-xl mx-auto bg-zinc-800 border border-zinc-700 rounded-2xl p-8">
 <div class="flex flex-col sm:flex-row gap-3">
@@ -106,9 +106,9 @@ body{font-family:Inter,sans-serif;-webkit-font-smoothing:antialiased}
 </div>
 <div id="scanStatus" class="text-sm text-zinc-500 mt-4"></div>
 </div>
-<p class="text-sm text-zinc-500 mt-4 text-center">Free. No card. Takes 30 seconds.</p>
+<p class="text-sm text-zinc-500 mt-4 text-center" id="freeTag">Free. No card. Takes 30 seconds.</p>
 
-<div id="surprisedSection" class="hidden max-w-2xl mx-auto mt-16 text-center">
+<div id="surprisedSection" class="hidden max-w-2xl mx-auto mt-8 text-center">
 <p class="text-2xl sm:text-3xl font-extrabold text-white mb-6">Surprised with your score?</p>
 <p class="text-lg text-zinc-300 max-w-xl mx-auto mb-8 leading-relaxed font-medium">Let's go through your full report together and we'll show you how to improve your score quickly to convert more enquiries.</p>
 <a href="https://calendly.com/mrfcmo/ai-readiness-review-call-clone?month=2026-09" class="rounded-xl bg-teal-500 px-8 py-4 text-lg font-bold text-white shadow-xl hover:bg-teal-400 transition">Book A Free 20 Minute Review →</a>
@@ -205,7 +205,10 @@ fetch('/api/v1/public/trust-snapshot',{method:'POST',headers:{'Content-Type':'ap
 .then(function(d){
 b.disabled=false; b.textContent='Get My Score →';
 if(!d.score){s.textContent='Could not scan. Try again.';return;}
-s.textContent=''; e.classList.add('hidden'); r.classList.remove('hidden'); sur.classList.remove('hidden'); document.getElementById('scanBox').classList.add('hidden');
+s.textContent=''; e.classList.add('hidden'); r.classList.remove('hidden'); sur.classList.remove('hidden');
+document.getElementById('scanBox').classList.add('hidden');
+document.getElementById('snapshotTitle').classList.add('hidden');
+document.getElementById('freeTag').classList.add('hidden');
 var pills={};if(d.pillars)d.pillars.forEach(function(p){pills[p.label]=Math.round(p.percentage);});
 var labels=['Online Presence','Reputation','Engagement','Transparency','Technical Health'];
 var bars='';
