@@ -29,7 +29,7 @@ PAGE = """<!DOCTYPE html>
     <a href="https://trust-trigger-api.onrender.com/home" class="flex items-center gap-2 text-2xl font-extrabold text-yellow-400"><span class="text-3xl">🛡️</span> Trust Trigger Agency</a>
     <div class="flex items-center gap-5">
       <a href="https://trust-trigger-api.onrender.com/home#contact" class="text-base font-semibold text-zinc-300 hover:text-white">Contact</a>
-      <a href="https://trust-trigger-api.onrender.com/home" class="rounded-lg bg-teal-500 px-5 py-2.5 text-base font-semibold text-white hover:bg-teal-400">Get Free Snapshot →</a>
+      <a href="https://calendly.com/mrfcmo/ai-readiness-review-call-clone?month=2026-09" class="rounded-lg bg-teal-500 px-5 py-2.5 text-base font-semibold text-white hover:bg-teal-400">Get A Free Trust Review →</a>
     </div>
   </div>
 </nav>
