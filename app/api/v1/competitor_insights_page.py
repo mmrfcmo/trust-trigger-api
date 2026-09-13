@@ -1,68 +1,71 @@
-"""Competitor Trust Insights — served by the API with full JS support."""
-from fastapi import APIRouter
-from fastapi.responses import HTMLResponse
-router = APIRouter(prefix="/competitor-insights", tags=["Public - Competitor Insights"])
-
-PAGE = """<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Competitor Trust Insights | Trust Trigger Agency</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>body{font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;background:#f8fafc;color:#1e293b;}.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease-out,transform .6s ease-out;}.reveal.in-view{opacity:1;transform:none;}.gradient-header{background:linear-gradient(135deg,#0f172a 0%,#1e293b 50%,#0f172a 100%);}@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}.pulse-dot{animation:pulse-dot 1.5s ease-in-out infinite}</style>
-</head>
-<body class="antialiased">
-<nav class="gradient-header border-b border-white/10 fixed top-0 left-0 right-0 z-50 h-16 flex items-center px-6"><div class="max-w-6xl mx-auto w-full flex items-center justify-between"><a href="#" class="flex items-center gap-2 text-white font-semibold text-sm"><span class="text-xl">&#x1F6E1;&#xFE0F;</span> Trust Trigger Agency</a><a href="/extensive-report" class="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-xs font-medium text-white shadow-sm hover:bg-emerald-500 transition">Extensive Report &#8594;</a></div></nav>
-<div class="h-16"></div>
-<div class="max-w-6xl mx-auto px-6 py-12 sm:py-16">
-<div class="text-center mb-12 reveal"><p class="text-sm font-semibold uppercase tracking-wider text-emerald-700 mb-3">Competitor Analysis</p><h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-4 text-zinc-900">Competitor Trust Insights</h1><p class="text-zinc-600 max-w-2xl mx-auto text-lg leading-relaxed">Enter your website URL and industry. We'll find <strong>2 of your real competitors</strong> and compare trust scores side by side.</p></div>
-<div id="inputSection" class="max-w-lg mx-auto reveal"><div class="rounded-2xl border border-zinc-200 bg-white shadow-sm p-6 sm:p-8"><div class="space-y-5">
-<div><label class="block text-sm font-medium text-zinc-700 mb-1.5">Your Business Name</label><input id="businessName" type="text" placeholder="e.g. Ivy Dentistry Aesthetics" class="w-full rounded-xl border border-zinc-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition"></div>
-<div><label class="block text-sm font-medium text-zinc-700 mb-1.5">Your Website URL</label><input id="website" type="text" placeholder="e.g. ivydentistryaesthetics.co.uk" class="w-full rounded-xl border border-zinc-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition"></div>
-<div><label class="block text-sm font-medium text-zinc-700 mb-1.5">What does your business do?</label><input id="industry" type="text" placeholder="e.g. dentist, plumber, roofer" class="w-full rounded-xl border border-zinc-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition"><p class="text-xs text-zinc-400 mt-1.5">Just a keyword like "dentist" or "roofing".</p></div>
-<button onclick="startCompare()" class="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-700 px-5 py-3.5 text-sm font-semibold text-white shadow-sm hover:bg-emerald-800 transition">Compare My Score &#8594;</button><p class="text-xs text-center text-zinc-400">Free. No card. Takes ~30 seconds.</p>
-</div></div></div>
-<div id="loadingSection" class="hidden max-w-2xl mx-auto reveal"><div class="rounded-2xl border border-zinc-200 bg-white shadow-sm p-8 sm:p-10 text-center"><h2 class="text-xl font-bold text-zinc-900 mb-6">Analysing Your Business</h2><p id="compLoadingStatus" class="text-sm text-zinc-500 mb-8">Scanning your website...</p><div class="inline-block w-12 h-12 border-4 border-emerald-200 border-t-emerald-700 rounded-full animate-spin mb-6"></div></div></div>
-<div id="resultsSection" class="hidden">
-<div class="rounded-2xl border border-zinc-200 bg-white shadow-sm p-6 sm:p-8 mb-8 reveal"><p class="text-xs font-semibold uppercase tracking-wider text-emerald-700 mb-1">Competitor Trust Comparison</p><h2 class="text-2xl sm:text-3xl font-bold text-zinc-900 mb-6">Your Business vs The Competition</h2><div class="overflow-x-auto"><table class="w-full text-left"><thead><tr class="border-b border-zinc-200"><th class="pb-3 pr-4 text-sm font-semibold text-zinc-500 uppercase tracking-wider">Metric</th><th id="hdrYou" class="pb-3 px-4 text-sm font-semibold text-emerald-700 uppercase tracking-wider"></th><th id="hdrC1" class="pb-3 px-4 text-sm font-semibold text-zinc-700 uppercase tracking-wider"></th><th id="hdrC2" class="pb-3 px-4 text-sm font-semibold text-zinc-700 uppercase tracking-wider"></th></tr></thead><tbody id="comparisonBody"></tbody></table></div></div>
-<div class="grid sm:grid-cols-3 gap-4 mb-8 reveal">
-<div class="rounded-2xl border-2 border-emerald-200 bg-emerald-50/50 shadow-sm p-6 text-center"><p class="text-xs font-semibold uppercase tracking-wider text-emerald-700 mb-2" id="yourLabel">Your Business</p><div class="text-5xl font-extrabold text-zinc-900 mb-1" id="yourScore">0</div><p class="text-sm text-zinc-500">Trust Score</p><div class="mt-3 w-full h-2 bg-zinc-200 rounded-full overflow-hidden"><div id="yourBar" class="h-full rounded-full bg-emerald-500" style="width:0%"></div></div></div>
-<div class="rounded-2xl border border-zinc-200 bg-white shadow-sm p-6 text-center"><p class="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-2" id="c1Label">Competitor 1</p><div class="text-5xl font-extrabold text-zinc-900 mb-1" id="c1Score">0</div><p class="text-sm text-zinc-500">Trust Score</p><div class="mt-3 w-full h-2 bg-zinc-200 rounded-full overflow-hidden"><div id="c1Bar" class="h-full rounded-full bg-amber-500" style="width:0%"></div></div></div>
-<div class="rounded-2xl border border-zinc-200 bg-white shadow-sm p-6 text-center"><p class="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-2" id="c2Label">Competitor 2</p><div class="text-5xl font-extrabold text-zinc-900 mb-1" id="c2Score">0</div><p class="text-sm text-zinc-500">Trust Score</p><div class="mt-3 w-full h-2 bg-zinc-200 rounded-full overflow-hidden"><div id="c2Bar" class="h-full rounded-full bg-amber-500" style="width:0%"></div></div></div>
-</div>
-<div class="rounded-2xl border border-zinc-200 bg-white shadow-sm p-6 sm:p-8 mb-8 reveal"><h3 class="font-semibold text-zinc-900 mb-4">&#x1F4A1; Key Insights</h3><div id="insightsList" class="space-y-3"></div></div>
-<div class="text-center rounded-2xl border-2 border-emerald-700 bg-white shadow-sm p-8 sm:p-12 mb-8 reveal"><span class="text-4xl mb-4 block">&#x1F6E1;&#xFE0F;</span><h3 class="text-2xl sm:text-3xl font-bold text-zinc-900 mb-3">Want to overtake your competition?</h3><p class="text-zinc-600 mb-6 max-w-lg mx-auto">Book a free 20-minute Trust Review and we'll show you exactly how to outperform every competitor in your area.</p><a href="/extensive-report" class="inline-flex items-center gap-2 rounded-xl bg-emerald-700 px-8 py-4 text-base font-semibold text-white shadow-sm hover:bg-emerald-800 transition">Start Your Full Trust Report &#8594;</a><p class="text-xs text-zinc-400 mt-3">Free. No obligation.</p></div>
-</div>
-<div id="errorSection" class="hidden max-w-lg mx-auto reveal"><div class="text-center rounded-2xl border border-red-200 bg-red-50 p-8"><span class="text-4xl mb-4 block">&#x26A0;&#xFE0F;</span><h2 class="text-xl font-bold text-zinc-900 mb-2">Something went wrong</h2><p id="compErrorMsg" class="text-zinc-600 mb-6"></p><button onclick="resetComp()" class="inline-flex items-center gap-2 rounded-xl bg-emerald-700 px-5 py-3 text-sm font-medium text-white shadow-sm hover:bg-emerald-800 transition">Try again &#8594;</button></div></div>
-</div>
-<footer class="gradient-header border-t border-white/10 py-12 px-6"><div class="max-w-5xl mx-auto text-center"><div class="flex items-center justify-center gap-2 text-white/80 text-sm mb-4"><span class="text-xl">&#x1F6E1;&#xFE0F;</span><span class="font-semibold">Trust Trigger Agency</span></div><p class="text-xs text-zinc-500 max-w-xl mx-auto leading-relaxed">The Trust Trigger Method&#8482; &#8212; Measure. Transform. Prove. Maintain.</p><p class="text-xs text-zinc-600 mt-4">&copy; 2026 Trust Trigger Agency&#8482;</p></div></footer>
-<script>
-var API='';function $(i){return document.getElementById(i);}function h(e){e.classList.add('hidden');}function s(e){e.classList.remove('hidden');}
-function gr(s){if(s>=90)return'Excellent';if(s>=70)return'Good';if(s>=50)return'Average';if(s>=30)return'Weak';return'At Risk';}
-function rs(n,u,e){return fetch('/api/v1/public/trust-snapshot',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({full_name:n,website:u,email:e})}).then(function(r){return r.json();});}
-function fc(i,w,b){return fetch('/api/v1/public/find-competitors?industry='+encodeURIComponent(i)+'&website='+encodeURIComponent(w)+'&business_name='+encodeURIComponent(b)).then(function(r){return r.json();});}
-function gp(base){var p=[];var labels=['Online Presence','Reputation','Engagement','Transparency','Technical Health'];for(var i=0;i<labels.length;i++){var v=Math.max(10,Math.min(100,base-20+(i*11)%41));p.push({label:labels[i],percentage:v});}return p;}
-function startCompare(){var n=$('businessName').value.trim(),u=$('website').value.trim(),i=$('industry').value.trim();if(!n||!u||!i){alert('Fill in all fields.');return;}h($('inputSection'));h($('errorSection'));h($('resultsSection'));s($('loadingSection'));$('compLoadingStatus').textContent='Scanning your website...';var e='c'+Date.now()+'@temp.com';rs(n,u,e).then(function(you){$('compLoadingStatus').textContent='Finding competitors...';return fc(i,u,n).then(function(r){var comps=r.competitors||[];if(comps.length>0){var c1=comps[0],c2=comps.length>1?comps[1]:comps[0];$('compLoadingStatus').textContent='Building comparison...';setTimeout(function(){showComp(you,c1,c2,n,u,c1.name||'Competitor 1',c1.site||'unknown',c2.name||'Competitor 2',c2.site||'unknown');},300);}else{showComp(you,null,null,n,u,'Not found','','Not found','');}});}).catch(function(){h($('loadingSection'));$('compErrorMsg').textContent='Unable to scan your website.';s($('errorSection'));});}
-function showComp(you,c1,c2,n,u,c1n,c1u,c2n,c2u){h($('loadingSection'));s($('resultsSection'));var ys=you.score||0;var cs1=Math.max(5,ys-12);var cs2=Math.max(5,ys-6);$('hdrYou').textContent=n;$('hdrC1').textContent=c1n;$('hdrC2').textContent=c2n;$('yourLabel').textContent=n;$('yourScore').textContent=ys;setTimeout(function(){$('yourBar').style.width=ys+'%';},200);$('c1Label').textContent=c1n;$('c1Score').textContent=cs1;setTimeout(function(){$('c1Bar').style.width=cs1+'%';},400);$('c2Label').textContent=c2n;$('c2Score').textContent=cs2;setTimeout(function(){$('c2Bar').style.width=cs2+'%';},600);var tb=$('comparisonBody');tb.innerHTML='';function ar(l,y,c1v,c2v){var tr=document.createElement('tr');tr.className='border-b border-zinc-100';tr.innerHTML='<td class="py-3 pr-4 text-sm font-medium text-zinc-700">'+l+'</td><td class="py-3 px-4 text-sm font-semibold text-emerald-700">'+(y||'-')+'</td><td class="py-3 px-4 text-sm text-zinc-600">'+(c1v||'-')+'</td><td class="py-3 px-4 text-sm text-zinc-600">'+(c2v||'-')+'</td>';tb.appendChild(tr);}
-ar('Trust Score',ys,cs1,cs2);ar('Grade',you.grade||gr(ys),gr(cs1),gr(cs2));var youPills=you.pillars||[];var c1Pills=gp(cs1);var c2Pills=gp(cs2);var allLabels=[];for(var i=0;i<youPills.length;i++){allLabels.push(youPills[i].label);}for(var i=0;i<allLabels.length;i++){var yp=Math.round(youPills[i].percentage)+'%';var c1p='-';var c2p='-';for(var j=0;j<c1Pills.length;j++){if(c1Pills[j].label===allLabels[i]){c1p=Math.round(c1Pills[j].percentage)+'%';break;}}for(var j=0;j<c2Pills.length;j++){if(c2Pills[j].label===allLabels[i]){c2p=Math.round(c2Pills[j].percentage)+'%';break;}}ar(allLabels[i],yp,c1p,c2p);}
-ar('Issues Found',you.issues_found||0,'-','-');var il=$('insightsList');il.innerHTML='';var ins=[];if(ys>cs1&&ys>cs2){ins.push('<strong>You have the highest estimated Trust Score</strong> among your competitors.');}else if(ys<cs1&&ys<cs2){ins.push('<strong>Your score is lower than competitors.</strong> Significant opportunities to improve.');}else if(ys<cs1||ys<cs2){ins.push('<strong>You are behind at least one competitor.</strong>');}else{ins.push('<strong>You are competitive.</strong> Small improvements could give you an edge.');}
-if(you.issues&&you.issues.length>0){ins.push('<strong>Top issue: '+you.issues[0].title+'</strong>. Fixing this could increase your score.');}
-ins.push('<strong>Want exact competitor scores?</strong> Book a Trust Review and we will run full scans on all competitors.');
-ins.forEach(function(t){var dv=document.createElement('div');dv.className='flex items-start gap-3 p-4 rounded-xl border border-zinc-200 bg-white';dv.innerHTML='<div class="text-sm text-zinc-700 leading-relaxed">'+t+'</div>';il.appendChild(dv);});setTimeout(function(){$('resultsSection').scrollIntoView({behavior:'smooth',block:'start'});},300);}
-function resetComp(){h($('errorSection'));h($('resultsSection'));h($('loadingSection'));s($('inputSection'));window.scrollTo({top:0,behavior:'smooth'});}
-try{document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('reveal');});var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in-view');});},{threshold:0.1,rootMargin:'0px 0px -50px 0px'});document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});}catch(e){}
-</script>
-</body>
-</html>"""
-
-@router.get("", response_class=HTMLResponse)
-async def competitor_insights():
-    return HTMLResponse(content=PAGE)
-
-@router.get("/", response_class=HTMLResponse)
-async def competitor_insights_root():
-    return HTMLResponse(content=PAGE)
+function startCompare(){
+  var n=$('businessName').value.trim(),u=$('website').value.trim(),i=$('industry').value.trim();
+  if(!n||!u||!i){alert('Fill in all fields.');return;}
+  h($('inputSection'));h($('errorSection'));h($('resultsSection'));s($('loadingSection'));
+  $('compLoadingStatus').textContent='Scanning your website...';
+  var e='c'+Date.now()+'@temp.com';
+  rs(n,u,e).then(function(you){
+    $('compLoadingStatus').textContent='Finding competitors...';
+    return fc(i,u,n).then(function(r){
+      var comps=r.competitors||[];
+      if(comps.length>0){
+        var c1=comps[0],c2=comps.length>1?comps[1]:comps[0];
+        $('compLoadingStatus').textContent='Scanning competitor: '+c1.name+'...';
+        var e1='c1_'+Date.now()+'@temp.com';
+        return rs(c1.name,c1.site,e1).then(function(c1Data){
+          $('compLoadingStatus').textContent='Scanning competitor: '+c2.name+'...';
+          var e2='c2_'+Date.now()+'@temp.com';
+          return rs(c2.name,c2.site,e2).then(function(c2Data){
+            $('compLoadingStatus').textContent='Building comparison...';
+            setTimeout(function(){showComp(you,c1Data,c2Data,n,u,c1.name||'Competitor 1',c1.site||'unknown',c2.name||'Competitor 2',c2.site||'unknown');},300);
+          });
+        });
+      } else {
+        showComp(you,null,null,n,u,'Not found','','Not found','');
+      }
+    });
+  }).catch(function(){
+    h($('loadingSection'));
+    $('compErrorMsg').textContent='Unable to scan your website. Please check the URL and try again.';
+    s($('errorSection'));
+  });
+}
+function showComp(you,c1Data,c2Data,n,u,c1n,c1u,c2n,c2u){
+  h($('loadingSection'));s($('resultsSection'));
+  var ys=you.score||0;
+  var cs1=c1Data?c1Data.score||0:0;
+  var cs2=c2Data?c2Data.score||0:0;
+  $('hdrYou').textContent=n;$('hdrC1').textContent=c1n;$('hdrC2').textContent=c2n;
+  $('yourLabel').textContent=n;$('yourScore').textContent=ys;
+  setTimeout(function(){$('yourBar').style.width=ys+'%';},200);
+  $('c1Label').textContent=c1n;$('c1Score').textContent=cs1;
+  setTimeout(function(){$('c1Bar').style.width=cs1+'%';},400);
+  $('c2Label').textContent=c2n;$('c2Score').textContent=cs2;
+  setTimeout(function(){$('c2Bar').style.width=cs2+'%';},600);
+  var tb=$('comparisonBody');tb.innerHTML='';
+  function ar(l,y,c1v,c2v){
+    var tr=document.createElement('tr');tr.className='border-b border-zinc-100';
+    tr.innerHTML='<td class="py-3 pr-4 text-sm font-medium text-zinc-700">'+l+'</td><td class="py-3 px-4 text-sm font-semibold text-emerald-700">'+(y||'-')+'</td><td class="py-3 px-4 text-sm text-zinc-600">'+(c1v||'-')+'</td><td class="py-3 px-4 text-sm text-zinc-600">'+(c2v||'-')+'</td>';
+    tb.appendChild(tr);
+  }
+  ar('Trust Score',ys,cs1,cs2);
+  ar('Grade',you.grade||gr(ys),c1Data?c1Data.grade||gr(cs1):'N/A',c2Data?c2Data.grade||gr(cs2):'N/A');
+  var youPills=you.pillars||[];var c1Pills=c1Data?c1Data.pillars||[]:[];var c2Pills=c2Data?c2Data.pillars||[]:[];
+  var allLabels=['Online Presence','Reputation','Engagement','Transparency','Technical Health'];
+  for(var i=0;i<allLabels.length;i++){
+    var yp='-',c1p='-',c2p='-';
+    for(var j=0;j<youPills.length;j++){if(youPills[j].label===allLabels[i]){yp=Math.round(youPills[j].percentage)+'%';break;}}
+    for(var j=0;j<c1Pills.length;j++){if(c1Pills[j].label===allLabels[i]){c1p=Math.round(c1Pills[j].percentage)+'%';break;}}
+    for(var j=0;j<c2Pills.length;j++){if(c2Pills[j].label===allLabels[i]){c2p=Math.round(c2Pills[j].percentage)+'%';break;}}
+    ar(allLabels[i],yp,c1p,c2p);
+  }
+  ar('Issues Found',you.issues_found||0,c1Data?c1Data.issues_found||'-':'-',c2Data?c2Data.issues_found||'-':'-');
+  var il=$('insightsList');il.innerHTML='';var ins=[];
+  if(ys>cs1&&ys>cs2){ins.push('<strong>You have the highest Trust Score</strong> among your competitors.');}
+  else if(ys<cs1&&ys<cs2){ins.push('<strong>Your score is lower than competitors.</strong> Significant opportunities to improve.');}
+  else if(ys<cs1||ys<cs2){ins.push('<strong>You are behind at least one competitor.</strong>');}
+  else{ins.push('<strong>You are competitive.</strong> Small improvements could give you an edge.');}
+  if(you.issues&&you.issues.length>0){ins.push('<strong>Top issue: '+you.issues[0].title+'</strong>. Fixing this could increase your score.');}
+  ins.push('<strong>Need a deeper dive?</strong> Book a Trust Review for a full in-depth competitor audit.');
+  ins.forEach(function(t){var dv=document.createElement('div');dv.className='flex items-start gap-3 p-4 rounded-xl border border-zinc-200 bg-white';dv.innerHTML='<div class="text-sm text-zinc-700 leading-relaxed">'+t+'</div>';il.appendChild(dv);});
+  setTimeout(function(){$('resultsSection').scrollIntoView({behavior:'smooth',block:'start'});},300);
