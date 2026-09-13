@@ -20,6 +20,7 @@ from app.api.v1.publishing_routes import router as publishing_router
 from app.api.v1.extensive_report_page import router as extensive_router
 from app.api.v1.competitor_insights_page import router as competitor_router
 from app.api.v1.embed_snapshot import router as embed_snapshot_router
+from app.api.v1.homepage import router as homepage_router
 import app.models
 import app.models.trust_scan
 import app.models.scoring
@@ -67,8 +68,8 @@ app.include_router(publishing_router)
 app.include_router(extensive_router)
 app.include_router(competitor_router)
 app.include_router(embed_snapshot_router)
+app.include_router(homepage_router)
 
 @app.get("/health")
 async def health_check():
     return {"status": "ok", "version": settings.app_version}
-
