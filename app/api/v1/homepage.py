@@ -99,7 +99,7 @@ body{font-family:Inter,sans-serif;-webkit-font-smoothing:antialiased}
 
 <div id="liveResult" class="hidden max-w-4xl mx-auto mb-10"></div>
 
-<div class="max-w-xl mx-auto bg-zinc-800 border border-zinc-700 rounded-2xl p-8">
+<div id="scanBox" class="max-w-xl mx-auto bg-zinc-800 border border-zinc-700 rounded-2xl p-8">
 <div class="flex flex-col sm:flex-row gap-3">
 <input id="scanUrl" type="text" placeholder="yourpractice.co.uk" class="flex-1 rounded-xl border border-zinc-600 bg-zinc-900 px-5 py-3.5 text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-teal-500">
 <button onclick="doScan()" id="scanBtn" class="rounded-xl bg-teal-500 px-6 py-3.5 text-base font-bold text-white hover:bg-teal-400 whitespace-nowrap">Get My Score →</button>
@@ -205,7 +205,7 @@ fetch('/api/v1/public/trust-snapshot',{method:'POST',headers:{'Content-Type':'ap
 .then(function(d){
 b.disabled=false; b.textContent='Get My Score →';
 if(!d.score){s.textContent='Could not scan. Try again.';return;}
-s.textContent=''; e.classList.add('hidden'); r.classList.remove('hidden'); sur.classList.remove('hidden');
+s.textContent=''; e.classList.add('hidden'); r.classList.remove('hidden'); sur.classList.remove('hidden'); document.getElementById('scanBox').classList.add('hidden');
 var pills={};if(d.pillars)d.pillars.forEach(function(p){pills[p.label]=Math.round(p.percentage);});
 var labels=['Online Presence','Reputation','Engagement','Transparency','Technical Health'];
 var bars='';
