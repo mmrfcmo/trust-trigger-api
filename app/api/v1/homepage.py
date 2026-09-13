@@ -99,14 +99,14 @@ body{font-family:Inter,sans-serif;-webkit-font-smoothing:antialiased}
 
 <div id="liveResult" class="hidden max-w-4xl mx-auto"></div>
 
-<div id="scanBox" class="max-w-xl mx-auto bg-zinc-800 border border-zinc-700 rounded-2xl p-8">
+<div id="scanBox" class="max-w-xl mx-auto bg-white border border-emerald-200 rounded-2xl shadow-xl p-8">
 <div class="flex flex-col sm:flex-row gap-3">
-<input id="scanUrl" type="text" placeholder="yourpractice.co.uk" class="flex-1 rounded-xl border border-zinc-600 bg-zinc-900 px-5 py-3.5 text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-teal-500">
+<input id="scanUrl" type="text" placeholder="yourpractice.co.uk" class="flex-1 rounded-xl border border-emerald-300 bg-white px-5 py-3.5 text-zinc-800 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-teal-500">
 <button onclick="doScan()" id="scanBtn" class="rounded-xl bg-teal-500 px-6 py-3.5 text-base font-bold text-white hover:bg-teal-400 whitespace-nowrap">Get My Score →</button>
 </div>
 <div id="scanStatus" class="text-sm text-zinc-500 mt-4"></div>
 </div>
-<p class="text-sm text-zinc-500 mt-4 text-center" id="freeTag">Free. No card. Takes 30 seconds.</p>
+<p class="text-sm text-emerald-200 mt-4 text-center" id="freeTag">Free. No card. Takes 30 seconds.</p>
 
 <div id="surprisedSection" class="hidden max-w-2xl mx-auto mt-8 text-center">
 <p class="text-2xl sm:text-3xl font-extrabold text-white mb-6">Surprised with your score?</p>
