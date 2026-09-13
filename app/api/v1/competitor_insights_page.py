@@ -49,13 +49,13 @@ PAGE = """<!DOCTYPE html>
     <p class="text-lg font-bold text-zinc-900 mb-2">Enter your website</p>
     <p class="text-zinc-600 mb-6 font-medium">We will auto-detect 2 real competitors in your industry.</p>
     <div class="space-y-4">
-      <input id="yourUrl" type="url" placeholder="e.g. yourbusiness.co.uk" class="w-full rounded-xl border border-emerald-300 px-5 py-3.5 text-base font-medium text-zinc-800 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-teal-500">
+      <input id="yourUrl" type="text" placeholder="e.g. yourbusiness.co.uk" class="w-full rounded-xl border border-emerald-300 px-5 py-3.5 text-base font-medium text-zinc-800 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-teal-500">
       <button onclick="runCompare()" id="compareBtn" class="w-full rounded-xl bg-teal-500 px-6 py-3.5 text-base font-bold text-white shadow-lg hover:bg-teal-400 transition flex items-center justify-center gap-2">
         <span id="btnText">Compare My Score →</span>
         <span id="btnSpinner" class="hidden inline-block w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
       </button>
     </div>
-    <p id="inputError" class="hidden text-red-600 text-sm mt-2 font-medium">Please enter a valid URL</p>
+    <p id="inputError" class="hidden text-red-600 text-sm mt-2 font-medium">Please enter a valid website address</p>
     <p class="text-sm text-zinc-500 mt-4 font-medium">Free. No card. Results in seconds.</p>
   </div>
 </div>
@@ -146,14 +146,17 @@ function h(e){e.classList.add('hidden');}
 function s(e){e.classList.remove('hidden');}
 function grade(score){if(score>=90)return'Excellent';if(score>=70)return'Good';if(score>=50)return'Average';if(score>=30)return'Weak';return'At Risk';}
 function badgeHtml(s){var b=s>=75?'emerald':s>=45?'amber':'red';var cl={emerald:'background:#d1fae5;color:#047857;border-color:#a7f3d0',amber:'background:#fef3c7;color:#b45309;border-color:#fcd34d',red:'background:#fef2f2;color:#dc2626;border-color:#fecaca'};return'<span class="inline-flex items-center justify-center w-9 h-7 rounded-md text-sm font-bold border" style="'+cl[b]+'">'+s+'</span>';}
+function scoreColor(s){if(s>=80)return'#22c55e';if(s>=60)return'#eab308';if(s>=40)return'#f97316';return'#ef4444';}
+function isValidUrl(u){u=u.trim().toLowerCase();if(!u)return false;if(!u.startsWith('http'))u='https://'+u;try{new URL(u);var h=u.replace(/https?:\/\/(www\.)?/,'').split('/')[0].split('?')[0];if(!h||h.length<3)return false;if(h.indexOf('.')===-1)return false;return true;}catch(e){return false;}}
 function norm(u){u=u.trim();if(!u)return null;if(!u.startsWith('http'))u='https://'+u;try{new URL(u);return u;}catch(e){return null;}}
 function bizName(u){return u.replace(/https?:\/\/(www\.)?/,'').split('/')[0].split('?')[0];}
 function scanBusiness(n,u,e){return fetch('/api/v1/public/trust-snapshot',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({full_name:n,website:u,email:e})}).then(function(r){return r.json();});}
 function findCompetitors(i,w,b){return fetch('/api/v1/public/find-competitors?industry='+encodeURIComponent(i)+'&website='+encodeURIComponent(w)+'&business_name='+encodeURIComponent(b)).then(function(r){return r.json();});}
 function runCompare(){
-  var url=norm($('yourUrl').value);var err=$('inputError');
-  if(!url){err.classList.remove('hidden');return;}
+  var url=$('yourUrl').value.trim();var err=$('inputError');
+  if(!isValidUrl(url)){err.textContent='Please enter a valid website address (e.g. yourbusiness.co.uk)';err.classList.remove('hidden');return;}
   err.classList.add('hidden');
+  if(!url.startsWith('http'))url='https://'+url;
   var bt=$('btnText'),sp=$('btnSpinner'),btn=$('compareBtn');
   bt.textContent='Analysing...';sp.classList.remove('hidden');btn.disabled=true;
   scanBusiness('Your Business',url,'you_'+Date.now()+'@temp.com').then(function(you){
@@ -175,7 +178,8 @@ function runCompare(){
     });
   }).catch(function(e){
     bt.textContent='Compare My Score';sp.classList.add('hidden');btn.disabled=false;
-    alert('Error: '+(e.message||'Could not scan. Please check the URL and try again.'));
+    err.textContent='Could not scan this website. Please check the URL and try again.';
+    err.classList.remove('hidden');
   });
 }
 function showResults(you,c1Data,c2Data,c1name,c2name,url){
@@ -186,13 +190,13 @@ function showResults(you,c1Data,c2Data,c1name,c2name,url){
   $('comp1Header').textContent=c1n;$('comp2Header').textContent=c2n;
   var sd=$('overallScores');sd.innerHTML='';
   var all=[{s:ys,n:bizName(url),isYou:true},{s:cs1,n:c1n,isYou:false},{s:cs2,n:c2n,isYou:false}];
-  for(var i=0;i<all.length;i++){var a=all[i];sd.innerHTML+='<div class="rounded-2xl border border-emerald-200 bg-white shadow-xl p-6 text-center'+(a.isYou?' border-2 border-teal-500 bg-teal-50/20':'')+'"><p class="text-sm font-bold uppercase tracking-wider text-zinc-500 mb-1">'+(a.isYou?'You':'Competitor')+'</p><p class="text-4xl font-extrabold text-zinc-900 mb-1">'+a.s+'</p><p class="text-xs text-zinc-400">/100</p><p class="text-sm text-zinc-600 mt-2 font-medium">'+a.n+'</p></div>';}
+  for(var i=0;i<all.length;i++){var a=all[i];sd.innerHTML+='<div class="rounded-2xl border border-emerald-200 bg-white shadow-xl p-6 text-center'+(a.isYou?' border-2 border-teal-500 bg-teal-50/20':'')+'"><p class="text-sm font-bold uppercase tracking-wider text-zinc-500 mb-1">'+(a.isYou?'You':'Competitor')+'</p><p class="text-4xl font-extrabold mb-1" style="color:'+scoreColor(a.s)+'">'+a.s+'</p><p class="text-xs text-zinc-400">/100</p><p class="text-sm text-zinc-600 mt-2 font-medium">'+a.n+'</p></div>';}
   var pillars=[{k:'Online Presence',l:'Online Presence',d:'Website visibility and reach'},{k:'Reputation',l:'Reputation',d:'Reviews and testimonials'},{k:'Engagement',l:'Engagement',d:'Social proof and interaction'},{k:'Transparency',l:'Transparency',d:'Clear policies and trust signals'},{k:'Technical Health',l:'Technical Health',d:'SSL, speed, mobile readiness'}];
   function gp(data,label){if(!data||!data.pillars)return null;for(var i=0;i<data.pillars.length;i++){if(data.pillars[i].label===label)return Math.round(data.pillars[i].percentage);}return null;}
   var tb=$('pillarBody');tb.innerHTML='';
-  for(var pi=0;pi<pillars.length;pi++){var p=pillars[pi],yv=gp(you,p.k),c1v=gp(c1Data,p.k),c2v=gp(c2Data,p.k);var vals=[yv,c1v,c2v],mx=-1;for(var vi=0;vi<vals.length;vi++){if(vals[vi]!==null&&vals[vi]>mx)mx=vals[vi];}var row='<tr class="border-b border-zinc-100"><td class="py-4 pr-4 font-medium text-zinc-800">'+p.l+'</td>';var av=[yv,c1v,c2v];for(var j=0;j<av.length;j++){row+='<td class="py-4 px-4"><div class="flex items-center gap-2">'+(av[j]!==null?badgeHtml(av[j]):'<span class="inline-flex items-center justify-center w-9 h-7 rounded-md text-sm font-bold border bg-zinc-100 text-zinc-400 border-zinc-200">-</span>')+(av[j]!==null&&av[j]===mx&&mx>-1?'<span class="text-sm">🥇</span>':'')+'</div></td>';}row+='</tr>';tb.innerHTML+=row;}
+  for(var pi=0;pi<pillars.length;pi++){var p=pillars[pi],yv=gp(you,p.k),c1v=gp(c1Data,p.k),c2v=gp(c2Data,p.k);var row='<tr class="border-b border-zinc-100"><td class="py-4 pr-4 font-medium text-zinc-800">'+p.l+'</td>';var av=[yv,c1v,c2v];for(var j=0;j<av.length;j++){row+='<td class="py-4 px-4"><div class="flex items-center gap-2">'+(av[j]!==null?badgeHtml(av[j]):'<span class="inline-flex items-center justify-center w-9 h-7 rounded-md text-sm font-bold border bg-zinc-100 text-zinc-400 border-zinc-200">-</span>')+'</div></td>';}row+='</tr>';tb.innerHTML+=row;}
   var bar=$('barChart');bar.innerHTML='';
-  for(var bi=0;bi<all.length;bi++){var a2=all[bi];bar.innerHTML+='<div><div class="flex justify-between text-sm font-semibold mb-1"><span style="color:'+(a2.isYou?'#0f766e':'#64748b')+'">'+(a2.isYou?'You':a2.n)+'</span><span class="text-zinc-800">'+a2.s+'/100</span></div><div class="h-3 rounded-full bg-zinc-200 overflow-hidden"><div class="h-full rounded-full" style="width:'+a2.s+'%;background:'+(a2.isYou?'linear-gradient(135deg,#14b8a6,#0d9488)':'#d4d4d8')+'"></div></div></div>';}
+  for(var bi=0;bi<all.length;bi++){var a2=all[bi];var barCol=scoreColor(a2.s);bar.innerHTML+='<div><div class="flex justify-between text-sm font-semibold mb-1"><span>'+(a2.isYou?'You':a2.n)+'</span><span style="color:'+barCol+'" class="font-bold">'+a2.s+'/100</span></div><div class="h-3 rounded-full bg-zinc-200 overflow-hidden"><div class="h-full rounded-full" style="width:'+a2.s+'%;background:'+barCol+'"></div></div></div>';}
   var wins=[],losses=[];
   for(var pi2=0;pi2<pillars.length;pi2++){var p2=pillars[pi2],yval=gp(you,p2.k),c1val=gp(c1Data,p2.k),c2val=gp(c2Data,p2.k);if(yval===null)continue;var compVals=[];if(c1val!==null)compVals.push({val:c1val,name:c1n});if(c2val!==null)compVals.push({val:c2val,name:c2n});if(compVals.length===0){wins.push({p:p2.l,y:yval});continue;}var bestComp=compVals[0];for(var cv=1;cv<compVals.length;cv++){if(compVals[cv].val>bestComp.val)bestComp=compVals[cv];}if(yval>=bestComp.val){wins.push({p:p2.l,y:yval});}else{losses.push({p:p2.l,y:yval,best:bestComp.val,d:bestComp.val-yval,w:bestComp.name});}}
   losses.sort(function(a,b){return b.d-a.d;});
