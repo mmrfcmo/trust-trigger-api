@@ -40,7 +40,6 @@
       </a>
     </div>
   </div>
-
   <div style="padding:120px 24px 80px;background:#0b1120;color:white;text-align:center;">
     <div style="max-width:1200px;margin:0 auto;">
       <div style="width:64px;height:64px;margin:0 auto 16px;border-radius:16px;background:linear-gradient(135deg,#00d4aa,#10b981);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,212,170,.2);">
@@ -151,44 +150,57 @@
   </footer>
 
 <script>
-var DB = {
-  dental:{label:'Dental Practice',comps:[{n:'Thatched House Dental',u:'https://www.thatchedhousedental.co.uk/'},{n:'Ardent Smile Clinic',u:'https://ardentsmile.co.uk/'}]},
-  dentist:{label:'Dental Practice',comps:[{n:'Thatched House Dental',u:'https://www.thatchedhousedental.co.uk/'},{n:'Ardent Smile Clinic',u:'https://ardentsmile.co.uk/'}]},
-  plumb:{label:'Plumber',comps:[{n:'Pimlico Plumbers',u:'https://www.pimlicoplumbers.com/'},{n:'Plumb London',u:'https://www.plumblondon.com/'}]},
-  plumber:{label:'Plumber',comps:[{n:'Pimlico Plumbers',u:'https://www.pimlicoplumbers.com/'},{n:'Plumb London',u:'https://www.plumblondon.com/'}]},
-  roof:{label:'Roofer',comps:[{n:'London Roofing Co',u:'https://www.londonroofingco.co.uk/'},{n:'Apex Roofing',u:'https://apexroofing.co.uk/'}]},
-  roofer:{label:'Roofer',comps:[{n:'London Roofing Co',u:'https://www.londonroofingco.co.uk/'},{n:'Apex Roofing',u:'https://apexroofing.co.uk/'}]},
-  gym:{label:'Gym/Fitness',comps:[{n:'PureGym',u:'https://www.puregym.com/'},{n:'The Gym Group',u:'https://www.thegymgroup.com/'}]},
-  fitness:{label:'Fitness',comps:[{n:'PureGym',u:'https://www.puregym.com/'},{n:'The Gym Group',u:'https://www.thegymgroup.com/'}]},
-  solicitor:{label:'Solicitor',comps:[{n:'Osborne Law',u:'https://www.osbornelaw.co.uk/'},{n:'Lawson and Co',u:'https://lawsonco.co.uk/'}]},
-  law:{label:'Solicitor',comps:[{n:'Osborne Law',u:'https://www.osbornelaw.co.uk/'},{n:'Lawson and Co',u:'https://lawsonco.co.uk/'}]},
-  estate:{label:'Estate Agent',comps:[{n:'Foxtons',u:'https://www.foxtons.co.uk/'},{n:'Purplebricks',u:'https://www.purplebricks.co.uk/'}]}
-};
+function $(id) { return document.getElementById(id); }
+function hide(el) { el.classList.add('hidden'); }
+function show(el) { el.classList.remove('hidden'); }
 
-function norm(u) { u = u.trim(); if (!u) return null; if (!u.startsWith('http')) u = 'https://' + u; try { new URL(u); return u; } catch(e) { return null; } }
-function bizName(u) { return u.replace(/https?:\/\/(www\.)?/, '').split('/')[0].split('?')[0]; }
-function detect(u) { var l = u.toLowerCase(); for (var k in DB) { if (l.indexOf(k) !== -1) return DB[k]; } return {label:'Local Service Business',comps:[{n:'Pimlico Plumbers',u:'https://www.pimlicoplumbers.com/'},{n:'Foxtons',u:'https://www.foxtons.co.uk/'}]}; }
-
-function genScores(url, name) {
-  var h = 0; for (var i = 0; i < url.length; i++) h += url.charCodeAt(i);
-  var c = Math.min(98, Math.max(30, 60 + (h % 35)));
-  var s = Math.min(95, Math.max(15, 25 + (h % 55)));
-  var a = Math.min(95, Math.max(15, 30 + (h % 50)));
-  var cl = Math.min(98, Math.max(30, 50 + (h % 38)));
-  var cv = Math.min(95, Math.max(15, 30 + (h % 50)));
-  var o = Math.round(c  0.2 + s  0.2 + a  0.2 + cl  0.2 + cv * 0.2);
-  return { overall: o, credibility: c, socialProof: s, authority: a, clarity: cl, conversion: cv, name: name };
+function grade(score) {
+  if (score >= 90) return 'Excellent';
+  if (score >= 70) return 'Good';
+  if (score >= 50) return 'Average';
+  if (score >= 30) return 'Weak';
+  return 'At Risk';
 }
 
-function badge(score) { return score >= 75 ? 'emerald' : score >= 45 ? 'amber' : 'red'; }
-
 function badgeHtml(score) {
-  var b = badge(score);
-  var colors = { emerald: 'background:#d1fae5;color:#047857;border-color:#a7f3d0', amber: 'background:#fef3c7;color:#b45309;border-color:#fcd34d', red: 'background:#fef2f2;color:#dc2626;border-color:#fecaca' };
+  var b = score >= 75 ? 'emerald' : score >= 45 ? 'amber' : 'red';
+  var colors = {
+    emerald: 'background:#d1fae5;color:#047857;border-color:#a7f3d0',
+    amber: 'background:#fef3c7;color:#b45309;border-color:#fcd34d',
+    red: 'background:#fef2f2;color:#dc2626;border-color:#fecaca'
+  };
   return '<span class="badge" style="' + colors[b] + '">' + score + '</span>';
 }
 
-function $(id) { return document.getElementById(id); }
+// ====== REAL API CALLS ======
+
+function norm(u) {
+  u = u.trim();
+  if (!u) return null;
+  if (!u.startsWith('http')) u = 'https://' + u;
+  try { new URL(u); return u; } catch(e) { return null; }
+}
+
+function bizName(u) {
+  return u.replace(/https?:\/\/(www\.)?/, '').split('/')[0].split('?')[0];
+}
+
+function scanBusiness(name, website, email) {
+  return fetch('/api/v1/public/trust-snapshot', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ full_name: name, website: website, email: email })
+  }).then(function(r) { return r.json(); });
+}
+
+function findCompetitors(industry, website, businessName) {
+  return fetch('/api/v1/public/find-competitors?industry=' + encodeURIComponent(industry) +
+    '&website=' + encodeURIComponent(website) +
+    '&business_name=' + encodeURIComponent(businessName))
+  .then(function(r) { return r.json(); });
+}
+
+// ====== MAIN COMPARE FLOW ======
 
 function runCompare() {
   var url = norm($('yourUrl').value);
@@ -203,96 +215,114 @@ function runCompare() {
   sp.classList.remove('hidden');
   btn.disabled = true;
 
-  setTimeout(function() {
-    var ind = detect(url);
-    var comps = ind.comps;
-    var you = genScores(url, 'You - ' + bizName(url));
-    var c1 = genScores(comps[0].u, comps[0].n);
-    var c2 = genScores(comps[1].u, comps[1].n);
+  var yourEmail = 'you_' + Date.now() + '@temp.com';
 
-    bt.textContent = 'Compare My Score';
-    sp.classList.add('hidden');
-    btn.disabled = false;
-
-    $('comparisonContext').innerHTML = 'We detected you are in the <strong>' + ind.label + '</strong> space. Scores out of 100.';
-    $('comp1Header').textContent = c1.name;
-    $('comp2Header').textContent = c2.name;
-
-    var sd = $('overallScores');
-    sd.innerHTML = '';
-    var all = [you, c1, c2];
-    for (var i = 0; i < all.length; i++) {
-      var s = all[i];
-      var isYou = i === 0;
-      sd.innerHTML += '<div class="card" style="text-align:center;padding:20px;' + (isYou ? 'border:2px solid #14b8a6;background:rgba(20,184,166,.04)' : '') + '"><p style="font-size:11px;font-weight:600;text-transform:uppercase;color:' + (isYou ? '#0d9488' : '#94a3b8') + ';margin:0 0 4px;">' + (isYou ? 'You' : 'Competitor') + '</p><p style="font-size:36px;font-weight:700;color:' + (isYou ? '#0f766e' : '#0f172a') + ';margin:0;">' + s.overall + '</p><p style="font-size:10px;color:#94a3b8;margin:0;">/100</p><p style="font-size:13px;color:#64748b;margin:6px 0 0;">' + s.name + '</p></div>';
-    }
-
-    var tb = $('pillarBody');
-    tb.innerHTML = '';
-    var pillars = [
-      {k:'credibility', l:'Credibility', d:'Does the business look legitimate?'},
-      {k:'socialProof', l:'Social Proof', d:'Do others vouch for them?'},
-      {k:'authority', l:'Authority', d:'Do they demonstrate expertise?'},
-      {k:'clarity', l:'Clarity', d:'Is it obvious what they do?'},
-      {k:'conversion', l:'Conversion', d:'Is it easy to take the next step?'}
-    ];
-
-    for (var pi = 0; pi < pillars.length; pi++) {
-      var p = pillars[pi];
-      var sc = [you[p.k], c1[p.k], c2[p.k]];
-      var mx = Math.max.apply(null, sc);
-      var row = '<tr><td><p style="font-weight:500;color:#0f172a;margin:0;">' + p.l + '</p><p style="font-size:11px;color:#94a3b8;margin:2px 0 0;">' + p.d + '</p></td>';
-      for (var j = 0; j < sc.length; j++) {
-        row += '<td><div style="display:flex;align-items:center;gap:4px;">' + badgeHtml(sc[j]) + (sc[j] === mx ? '<span>🥇</span>' : '') + '</div></td>';
-      }
-      row += '</tr>';
-      tb.innerHTML += row;
-    }
-
-    var bar = $('barChart');
-    bar.innerHTML = '';
-    for (var bi = 0; bi < all.length; bi++) {
-      var s2 = all[bi];
-      var isY = bi === 0;
-      bar.innerHTML += '<div><div style="display:flex;justify-content:space-between;font-size:14px;margin-bottom:4px;"><span style="font-weight:500;color:' + (isY ? '#0f766e' : '#64748b') + ';">' + (isY ? 'You' : s2.name) + '</span><span style="font-weight:700;color:' + (isY ? '#0f766e' : '#334155') + ';">' + s2.overall + '/100</span></div><div class="bar-bg"><div class="bar-fill" style="width:' + s2.overall + '%;background:' + (isY ? 'linear-gradient(135deg,#00d4aa,#10b981)' : '#d4d4d8') + ';"></div></div></div>';
-    }
-
-    var wins = [], losses = [];
-    for (var pi2 = 0; pi2 < pillars.length; pi2++) {
-      var p2 = pillars[pi2];
-      var y = you[p2.k];
-      var cs = [c1[p2.k], c2[p2.k]];
-      var best = Math.max.apply(null, cs);
-      var bn = cs[0] >= cs[1] ? c1.name : c2.name;
-      if (y >= best) { wins.push({p:p2.l, y:y}); } else { losses.push({p:p2.l, y:y, best:best, d:best - y, w:bn}); }
-    }
-    losses.sort(function(a,b) { return b.d - a.d; });
-
-    var wd = $('winningDiv');
-    wd.innerHTML = '';
-    if (wins.length === 0) { wd.innerHTML = '<p style="font-size:14px;color:#64748b;">You are not leading on any pillar yet. Clear opportunity exists across the board.</p>'; }
-    else { for (var wi = 0; wi < wins.length; wi++) { wd.innerHTML += '<div style="display:flex;gap:8px;font-size:14px;"><span style="color:#10b981;">✓</span><p style="margin:0;"><strong>' + wins[wi].p + '</strong> - You score ' + wins[wi].y + ', ahead of competitors.</p></div>'; } }
-
-    var od = $('outperformDiv');
-    od.innerHTML = '';
-    if (losses.length === 0) { od.innerHTML = '<p style="font-size:14px;color:#64748b;">You are ahead across the board. Focus on maintaining your lead.</p>'; }
-    else { var maxL = Math.min(losses.length, 5); for (var li = 0; li < maxL; li++) { od.innerHTML += '<div style="display:flex;gap:8px;font-size:14px;"><span style="color:#f59e0b;">⚡</span><p style="margin:0;"><strong>' + losses[li].p + '</strong> - ' + losses[li].w + ' leads by ' + losses[li].d + ' points. Close this gap to pull ahead.</p></div>'; } }
-
-    var sum = $('summaryDiv');
-    var txt = '';
-    if (wins.length > 0) { var wn = []; for (var wi2 = 0; wi2 < wins.length; wi2++) wn.push(wins[wi2].p); txt += 'You are ahead on <strong>' + wn.join(', ') + '</strong>. '; } else { txt += 'You are not leading on any pillar yet. '; }
-    if (losses.length > 0) { txt += 'Biggest opportunities: '; var tl = Math.min(losses.length, 2); for (var li2 = 0; li2 < tl; li2++) { txt += '<strong>' + losses[li2].p + '</strong> (' + losses[li2].w + ' leads by ' + losses[li2].d + ' pts' + (li2 < tl - 1 ? ', ' : '') + ''; } txt += '). '; }
-    var sorted = []; for (var pi3 = 0; pi3 < pillars.length; pi3++) sorted.push({l:pillars[pi3].l, s:you[pillars[pi3].k]}); sorted.sort(function(a,b) { return a.s - b.s; });
-    txt += 'Start with <strong>' + sorted[0].l + '</strong> - your weakest pillar at ' + sorted[0].s + '/100.';
-    sum.innerHTML = txt;
-
-    $('resultsSection').classList.remove('hidden');
-    $('resultsSection').scrollIntoView({behavior:'smooth', block:'start'});
-  }, 600);
+  scanBusiness('Your Business', url, yourEmail)
+    .then(function(you) {
+      if (!you || you.error) throw new Error(you ? you.error : 'Scan failed');
+      you.displayName = 'You - ' + bizName(url);
+      you.grade = you.grade || grade(you.score || 0);
+      bt.textContent = 'Finding competitors...';
+      return findCompetitors(bizName(url), url, 'Your Business')
+        .then(function(compResult) {
+          var comps = compResult.competitors || [];
+          if (comps.length < 2) {
+            comps = [{ name: 'Competitor A', site: '' }, { name: 'Competitor B', site: '' }];
+          }
+          var c1 = comps[0], c2 = comps[1];
+          bt.textContent = 'Scanning: ' + c1.name + '...';
+          var e1 = 'c1_' + Date.now() + '@temp.com';
+          return scanBusiness(c1.name, c1.site, e1).then(function(c1Data) {
+            bt.textContent = 'Scanning: ' + c2.name + '...';
+            var e2 = 'c2_' + Date.now() + '@temp.com';
+            return scanBusiness(c2.name, c2.site, e2).then(function(c2Data) {
+              bt.textContent = 'Compare My Score';
+              sp.classList.add('hidden');
+              btn.disabled = false;
+              showResults(you, c1Data, c2Data, c1.name, c2.name);
+            });
+          });
+        });
+    })
+    .catch(function(e) {
+      bt.textContent = 'Compare My Score';
+      sp.classList.add('hidden');
+      btn.disabled = false;
+      alert('Error: ' + (e.message || 'Could not scan. Please check the URL and try again.'));
+    });
 }
 
-function resetPage() { $('resultsSection').classList.add('hidden'); $('yourUrl').value = ''; window.scrollTo({top:0, behavior:'smooth'}); }
-document.addEventListener('DOMContentLoaded', function() { $('compareBtn').addEventListener('click', runCompare); $('yourUrl').addEventListener('keydown', function(e) { if (e.key === 'Enter') runCompare(); }); });
+function showResults(you, c1Data, c2Data, c1name, c2name) {
+  hide($('inputError'));
+  show($('resultsSection'));
+  var ys = you.score || 0;
+  var cs1 = c1Data && c1Data.score ? c1Data.score : 0;
+  var cs2 = c2Data && c2Data.score ? c2Data.score : 0;
+  var c1n = c1name || 'Competitor 1';
+  var c2n = c2name || 'Competitor 2';
+  $('comparisonContext').innerHTML = 'Your website was scanned against competitors. Scores out of 100 based on 42 trust signal checks.';
+  $('comp1Header').textContent = c1n;
+  $('comp2Header').textContent = c2n;
+  var sd = $('overallScores');
+  sd.innerHTML = '';
+  var all = [{ s: ys, n: 'You - ' + (you.displayName || 'Your Business'), isYou: true }, { s: cs1, n: c1n, isYou: false }, { s: cs2, n: c2n, isYou: false }];
+  for (var i = 0; i < all.length; i++) {
+    var a = all[i];
+    sd.innerHTML += '<div class="card" style="text-align:center;padding:20px;' + (a.isYou ? 'border:2px solid #14b8a6;background:rgba(20,184,166,.04)' : '') + '"><p style="font-size:11px;font-weight:600;text-transform:uppercase;color:' + (a.isYou ? '#0d9488' : '#94a3b8') + ';margin:0 0 4px;">' + (a.isYou ? 'You' : 'Competitor') + '</p><p style="font-size:36px;font-weight:700;color:' + (a.isYou ? '#0f766e' : '#0f172a') + ';margin:0;">' + a.s + '</p><p style="font-size:10px;color:#94a3b8;margin:0;">/100</p><p style="font-size:13px;color:#64748b;margin:6px 0 0;">' + a.n + '</p></div>';
+  }
+  var pillars = [{ k:'Online Presence', l:'Online Presence', d:'Website visibility and reach' }, { k:'Reputation', l:'Reputation', d:'Reviews and testimonials' }, { k:'Engagement', l:'Engagement', d:'Social proof and interaction' }, { k:'Transparency', l:'Transparency', d:'Clear policies and trust signals' }, { k:'Technical Health', l:'Technical Health', d:'SSL, speed, mobile readiness' }];
+  function gp(data, label) { if (!data || !data.pillars) return null; for (var i = 0; i < data.pillars.length; i++) { if (data.pillars[i].label === label) return Math.round(data.pillars[i].percentage); } return null; }
+  var tb = $('pillarBody'); tb.innerHTML = '';
+  for (var pi = 0; pi < pillars.length; pi++) {
+    var p = pillars[pi], yv = gp(you, p.k), c1v = gp(c1Data, p.k), c2v = gp(c2Data, p.k);
+    var vals = [yv, c1v, c2v], mx = -1;
+    for (var vi = 0; vi < vals.length; vi++) { if (vals[vi] !== null && vals[vi] > mx) mx = vals[vi]; }
+    var row = '<tr><td><p style="font-weight:500;color:#0f172a;margin:0;">' + p.l + '</p><p style="font-size:11px;color:#94a3b8;margin:2px 0 0;">' + p.d + '</p></td>';
+    var av = [yv, c1v, c2v];
+    for (var j = 0; j < av.length; j++) {
+      row += '<td><div style="display:flex;align-items:center;gap:4px;">' + (av[j] !== null ? badgeHtml(av[j]) : '<span class="badge" style="background:#f1f5f9;color:#94a3b8;border-color:#e2e8f0;">-</span>') + (av[j] !== null && av[j] === mx && mx > -1 ? '<span>🥇</span>' : '') + '</div></td>';
+    }
+    row += '</tr>'; tb.innerHTML += row;
+  }
+  var bar = $('barChart'); bar.innerHTML = '';
+  for (var bi = 0; bi < all.length; bi++) {
+    var a2 = all[bi];
+    bar.innerHTML += '<div><div style="display:flex;justify-content:space-between;font-size:14px;margin-bottom:4px;"><span style="font-weight:500;color:' + (a2.isYou ? '#0f766e' : '#64748b') + ';">' + (a2.isYou ? 'You' : a2.n) + '</span><span style="font-weight:700;color:' + (a2.isYou ? '#0f766e' : '#334155') + ';">' + a2.s + '/100</span></div><div class="bar-bg"><div class="bar-fill" style="width:' + a2.s + '%;background:' + (a2.isYou ? 'linear-gradient(135deg,#00d4aa,#10b981)' : '#d4d4d8') + ';"></div></div></div>';
+  }
+  var wins = [], losses = [];
+  for (var pi2 = 0; pi2 < pillars.length; pi2++) {
+    var p2 = pillars[pi2], yval = gp(you, p2.k), c1val = gp(c1Data, p2.k), c2val = gp(c2Data, p2.k);
+    if (yval === null) continue;
+    var compVals = [];
+    if (c1val !== null) compVals.push({ val: c1val, name: c1n });
+    if (c2val !== null) compVals.push({ val: c2val, name: c2n });
+    if (compVals.length === 0) { wins.push({ p: p2.l, y: yval }); continue; }
+    var bestComp = compVals[0];
+    for (var cv = 1; cv < compVals.length; cv++) { if (compVals[cv].val > bestComp.val) bestComp = compVals[cv]; }
+    if (yval >= bestComp.val) { wins.push({ p: p2.l, y: yval }); } else { losses.push({ p: p2.l, y: yval, best: bestComp.val, d: bestComp.val - yval, w: bestComp.name }); }
+  }
+  losses.sort(function(a,b){ return b.d - a.d; });
+  var wd = $('winningDiv'); wd.innerHTML = '';
+  if (wins.length === 0) { wd.innerHTML = '<p style="font-size:14px;color:#64748b;">You are not leading on any pillar yet.</p>'; }
+  else { for (var wi = 0; wi < wins.length; wi++) { wd.innerHTML += '<div style="display:flex;gap:8px;font-size:14px;"><span style="color:#10b981;">✓</span><p style="margin:0;"><strong>' + wins[wi].p + '</strong> — You score ' + wins[wi].y + ', ahead of competitors.</p></div>'; } }
+  var od = $('outperformDiv'); od.innerHTML = '';
+  if (losses.length === 0) { od.innerHTML = '<p style="font-size:14px;color:#64748b;">You are ahead across the board.</p>'; }
+  else { var maxL = Math.min(losses.length, 5); for (var li = 0; li < maxL; li++) { od.innerHTML += '<div style="display:flex;gap:8px;font-size:14px;"><span style="color:#f59e0b;">⚡</span><p style="margin:0;"><strong>' + losses[li].p + '</strong> — ' + losses[li].w + ' leads by ' + losses[li].d + ' points.</p></div>'; } }
+  var sum = $('summaryDiv'); var txt = '';
+  if (wins.length > 0) { var wn = []; for (var wi2 = 0; wi2 < wins.length; wi2++) wn.push(wins[wi2].p); txt += 'You are ahead on <strong>' + wn.join(', ') + '</strong>. '; } else { txt += 'You are not leading on any pillar yet. '; }
+  if (losses.length > 0) { txt += 'Biggest opportunities: '; var tl = Math.min(losses.length, 2); for (var li2 = 0; li2 < tl; li2++) { txt += '<strong>' + losses[li2].p + '</strong> (' + losses[li2].w + ' leads by ' + losses[li2].d + ' pts)'; if (li2 < tl - 1) txt += ', '; } txt += '. '; }
+  if (you.issues && you.issues.length > 0) { txt += 'Top issue for you: <strong>' + you.issues[0].title + '</strong>. '; }
+  txt += 'Need a deeper dive? <a href="#" style="color:#0d9488;text-decoration:underline;">Book a Free 20-Minute Review</a> for a full audit.';
+  sum.innerHTML = txt;
+  $('resultsSection').scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+function resetPage() {
+  hide($('resultsSection'));
+  show($('inputError'));
+  $('yourUrl').value = '';
+  window.scrollTo({ top:0, behavior:'smooth' });
+}
 </script>
 </body>
 </html>
