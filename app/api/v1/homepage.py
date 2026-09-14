@@ -81,30 +81,30 @@ body{font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased
 <section id="snapshot" class="py-20 sm:py-28 px-6 bg-white">
 <div class="max-w-6xl mx-auto">
 <p class="text-sm font-bold uppercase tracking-[.2em] text-emerald-700 text-center mb-3">Your Free Trust Snapshot</p>
-<h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 text-center mb-4">See your score in 30 seconds</h2>
-<p class="text-center text-zinc-500 mb-12 font-medium">Enter your details below and get an instant trust analysis.</p>
+<h2 id="snapHeading" class="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 text-center mb-4">See your score in 30 seconds</h2>
+<p id="snapSubtext" class="text-center text-zinc-500 mb-12 font-medium">Enter your details below and get an instant trust analysis.</p>
 
-<!-- EXAMPLE SCORE CARD -->
+<!-- EXAMPLE SCORE CARD (black bg, score below 60) -->
 <div id="exampleCard" class="max-w-4xl mx-auto mb-12">
-<div class="rounded-2xl border border-emerald-200 bg-white shadow-xl p-8">
-<p class="text-sm font-bold uppercase tracking-[.2em] text-emerald-700 text-center mb-6">Example Snapshot</p>
+<div class="rounded-2xl bg-zinc-900 shadow-xl p-8">
+<p class="text-sm font-bold uppercase tracking-[.2em] text-zinc-400 text-center mb-6">Example Snapshot</p>
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
 <div class="text-center lg:col-span-1">
-<div class="text-7xl font-extrabold text-zinc-900 mb-2">72</div>
-<p class="text-lg font-bold text-zinc-700 mb-1">Trust Score</p>
-<p class="text-sm text-zinc-500 leading-relaxed">Your website is credible — but specific trust gaps are preventing it from converting at full potential.</p>
+<div class="text-7xl font-extrabold text-red-400 mb-2">48</div>
+<p class="text-lg font-bold text-zinc-100 mb-1">Trust Score</p>
+<p class="text-sm text-zinc-400 leading-relaxed">Your website has significant trust gaps that are likely costing you patient enquiries every day.</p>
 </div>
 <div class="lg:col-span-2 space-y-3">
-<div><div class="flex items-center justify-between mb-1"><span class="text-sm font-medium text-zinc-700">Credibility</span><span class="text-sm font-semibold text-emerald-700">85%</span></div><div class="w-full h-2.5 bg-zinc-100 rounded-full overflow-hidden"><div class="h-full rounded-full bg-emerald-500" style="width:85%"></div></div></div>
-<div><div class="flex items-center justify-between mb-1"><span class="text-sm font-medium text-zinc-700">Social Proof</span><span class="text-sm font-semibold text-amber-700">45%</span></div><div class="w-full h-2.5 bg-zinc-100 rounded-full overflow-hidden"><div class="h-full rounded-full bg-amber-500" style="width:45%"></div></div></div>
-<div><div class="flex items-center justify-between mb-1"><span class="text-sm font-medium text-zinc-700">Authority</span><span class="text-sm font-semibold text-amber-700">60%</span></div><div class="w-full h-2.5 bg-zinc-100 rounded-full overflow-hidden"><div class="h-full rounded-full bg-amber-500" style="width:60%"></div></div></div>
-<div><div class="flex items-center justify-between mb-1"><span class="text-sm font-medium text-zinc-700">Clarity</span><span class="text-sm font-semibold text-emerald-700">70%</span></div><div class="w-full h-2.5 bg-zinc-100 rounded-full overflow-hidden"><div class="h-full rounded-full bg-emerald-500" style="width:70%"></div></div></div>
-<div><div class="flex items-center justify-between mb-1"><span class="text-sm font-medium text-zinc-700">Conversion</span><span class="text-sm font-semibold text-amber-700">55%</span></div><div class="w-full h-2.5 bg-zinc-100 rounded-full overflow-hidden"><div class="h-full rounded-full bg-amber-500" style="width:55%"></div></div></div>
+<div><div class="flex items-center justify-between mb-1"><span class="text-sm font-medium text-zinc-300">Credibility</span><span class="text-sm font-semibold text-amber-400">45%</span></div><div class="w-full h-2.5 bg-zinc-700 rounded-full overflow-hidden"><div class="h-full rounded-full bg-amber-500" style="width:45%"></div></div></div>
+<div><div class="flex items-center justify-between mb-1"><span class="text-sm font-medium text-zinc-300">Social Proof</span><span class="text-sm font-semibold text-red-400">25%</span></div><div class="w-full h-2.5 bg-zinc-700 rounded-full overflow-hidden"><div class="h-full rounded-full bg-red-500" style="width:25%"></div></div></div>
+<div><div class="flex items-center justify-between mb-1"><span class="text-sm font-medium text-zinc-300">Authority</span><span class="text-sm font-semibold text-amber-400">55%</span></div><div class="w-full h-2.5 bg-zinc-700 rounded-full overflow-hidden"><div class="h-full rounded-full bg-amber-500" style="width:55%"></div></div></div>
+<div><div class="flex items-center justify-between mb-1"><span class="text-sm font-medium text-zinc-300">Clarity</span><span class="text-sm font-semibold text-amber-400">40%</span></div><div class="w-full h-2.5 bg-zinc-700 rounded-full overflow-hidden"><div class="h-full rounded-full bg-amber-500" style="width:40%"></div></div></div>
+<div><div class="flex items-center justify-between mb-1"><span class="text-sm font-medium text-zinc-300">Conversion</span><span class="text-sm font-semibold text-red-400">30%</span></div><div class="w-full h-2.5 bg-zinc-700 rounded-full overflow-hidden"><div class="h-full rounded-full bg-red-500" style="width:30%"></div></div></div>
 </div>
 </div>
-<div class="mt-6 rounded-xl border border-red-100 bg-red-50 p-5">
-<p class="text-sm font-bold text-red-800 mb-3">&#9888;&#65039; Top Issues</p>
-<ol class="space-y-2 text-sm text-red-700 list-decimal list-inside font-medium">
+<div class="mt-6 rounded-xl border border-red-800 bg-red-950 p-5">
+<p class="text-sm font-bold text-red-300 mb-3">&#9888;&#65039; Top Issues</p>
+<ol class="space-y-2 text-sm text-red-400 list-decimal list-inside font-medium">
 <li>Homepage value proposition unclear — visitors can't immediately tell what you do</li>
 <li>No visible reviews or testimonials — your best social proof is hidden</li>
 <li>Booking CTA is buried or generic — doesn't motivate action</li>
@@ -129,38 +129,30 @@ body{font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased
 </div>
 </div>
 
-<div class="max-w-lg mx-auto mt-8 text-center">
-<div class="rounded-2xl border border-teal-200 bg-gradient-to-r from-emerald-50 to-teal-50 shadow-xl p-8">
-<p class="text-xl font-bold text-zinc-900 mb-4">Surprised with your score?</p>
-<p class="text-base text-zinc-600 mb-6 leading-relaxed">Let's go through your full report together and we'll show you how to improve your score quickly.</p>
-<a href="https://calendly.com/mrfcmo/ai-readiness-review-call-clone?month=2026-09" class="inline-flex items-center gap-2 rounded-xl bg-teal-500 px-6 py-3.5 text-base font-bold text-white shadow-lg hover:bg-teal-400 transition">Book A Free 20 Minute Review →</a>
-</div>
-</div>
-
-<!-- RESULTS -->
+<!-- RESULTS (replaces example card on scan) -->
 <div id="snapResults" class="hidden mt-16 max-w-4xl mx-auto">
-<div class="rounded-2xl border border-emerald-200 bg-white shadow-xl p-8 mb-8 text-center">
-<p class="text-sm font-bold uppercase tracking-[.2em] text-emerald-700 mb-2">Your Trust Snapshot</p>
-<div class="text-7xl font-extrabold text-zinc-900 mb-2"><span id="snapScore">0</span></div>
-<p class="text-lg font-bold text-zinc-700 mb-1"><span id="snapGrade">—</span></p>
-<p id="snapGradeDesc" class="text-zinc-500 max-w-lg mx-auto">Assessment complete. Review the findings below.</p>
+<div class="rounded-2xl bg-zinc-900 shadow-xl p-8 mb-8 text-center">
+<p class="text-sm font-bold uppercase tracking-[.2em] text-teal-400 mb-2">Your Trust Snapshot</p>
+<div class="text-7xl font-extrabold mb-2" id="snapScoreColor"><span id="snapScore">0</span></div>
+<p class="text-lg font-bold text-zinc-100 mb-1"><span id="snapGrade">—</span></p>
+<p id="snapGradeDesc" class="text-zinc-400 max-w-lg mx-auto">Assessment complete. Review the findings below.</p>
 </div>
 
 <div id="snapPillars" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8"></div>
 
-<div class="rounded-2xl border border-emerald-200 bg-white shadow-xl p-8 mb-6">
-<h3 class="text-lg font-bold text-zinc-900 mb-4">&#9888;&#65039; Top Issues Found</h3>
+<div class="rounded-2xl bg-zinc-900 shadow-xl p-8 mb-6">
+<h3 class="text-lg font-bold text-zinc-100 mb-4">&#9888;&#65039; Top Issues Found</h3>
 <div id="snapIssues" class="space-y-3"></div>
 </div>
 
-<div class="rounded-2xl border border-emerald-200 bg-white shadow-xl p-8 mb-6">
-<h3 class="text-lg font-bold text-zinc-900 mb-4">&#128295; Priority Actions</h3>
+<div class="rounded-2xl bg-zinc-900 shadow-xl p-8 mb-6">
+<h3 class="text-lg font-bold text-zinc-100 mb-4">&#128295; Priority Actions</h3>
 <div id="snapActions" class="space-y-3"></div>
 </div>
 
-<div class="rounded-2xl bg-gradient-to-r from-emerald-50 to-teal-50 border border-teal-500 shadow-xl p-8 text-center">
-<p class="text-2xl font-bold text-zinc-900 mb-4">Surprised with your score?</p>
-<p class="text-lg text-zinc-600 mb-6">Let's go through your full report together and we'll show you how to improve your score quickly to convert more enquiries.</p>
+<div class="rounded-2xl border border-teal-500 bg-gradient-to-r from-emerald-900 to-teal-900 shadow-xl p-8 text-center">
+<p class="text-2xl font-bold text-white mb-4">Surprised with your score?</p>
+<p class="text-lg text-zinc-300 mb-6">Let's go through your full report together and we'll show you how to improve your score quickly to convert more enquiries.</p>
 <a href="https://calendly.com/mrfcmo/ai-readiness-review-call-clone?month=2026-09" class="inline-flex items-center gap-2 rounded-xl bg-teal-500 px-8 py-4 text-lg font-bold text-white shadow-xl hover:bg-teal-400 transition">Book A Free 20 Minute Review →</a>
 </div>
 </div>
@@ -266,7 +258,16 @@ async function runSnapshot(){
     });
     var d=await res.json();
     if(d.success){
-      document.getElementById('snapScore').textContent=d.score;
+      document.getElementById('snapHeading').style.display='none';
+      document.getElementById('snapSubtext').style.display='none';
+      document.getElementById('exampleCard').style.display='none';
+      var s=d.score||0;
+      var sc=document.getElementById('snapScoreColor');
+      if(s>=80){sc.className='text-7xl font-extrabold text-emerald-400 mb-2';}
+      else if(s>=60){sc.className='text-7xl font-extrabold text-amber-400 mb-2';}
+      else if(s>=40){sc.className='text-7xl font-extrabold text-amber-400 mb-2';}
+      else{sc.className='text-7xl font-extrabold text-red-400 mb-2';}
+      document.getElementById('snapScore').textContent=s;
       var gradeMap={'Excellent Trust':'Excellent Trust — Your website is a strong trust engine. Visitors feel confident reaching out.','Good Trust':'Good Trust — You\'re building trust well, but there are clear opportunities to convert more visitors.','Average Trust':'Average Trust — Your website is losing potential customers. The gaps below are costing you enquiries.','Weak Trust':'Weak Trust — Significant trust gaps found. Most visitors are likely leaving without contacting you.','At Risk':'At Risk — Critical trust issues detected. Your website is actively repelling potential customers.'};
       var g=d.grade||'Assessment complete.';
       document.getElementById('snapGrade').textContent=g;
@@ -276,26 +277,26 @@ async function runSnapshot(){
         d.pillars.forEach(function(p){
           var pct=Math.round(p.percentage);
           var bc=pct>=80?'bg-emerald-500':(pct>=50?'bg-amber-500':'bg-red-500');
-          var tc=pct>=80?'text-emerald-700':(pct>=50?'text-amber-700':'text-red-700');
-          ph+='<div class="rounded-xl border border-zinc-200 bg-white p-4"><div class="flex items-center justify-between mb-2"><span class="text-sm font-medium text-zinc-700">'+p.label+'</span><span class="text-sm font-semibold '+tc+'">'+pct+'%</span></div><div class="w-full h-2.5 bg-zinc-100 rounded-full overflow-hidden"><div class="h-full rounded-full '+bc+'" style="width:'+pct+'%"></div></div></div>';
+          var tc=pct>=80?'text-emerald-400':(pct>=50?'text-amber-400':'text-red-400');
+          ph+='<div class="rounded-xl bg-zinc-800 p-4"><div class="flex items-center justify-between mb-1"><span class="text-sm font-medium text-zinc-300">'+p.label+'</span><span class="text-sm font-semibold '+tc+'">'+pct+'%</span></div><div class="w-full h-2.5 bg-zinc-700 rounded-full overflow-hidden"><div class="h-full rounded-full '+bc+'" style="width:'+pct+'%"></div></div></div>';
         });
       }
       document.getElementById('snapPillars').innerHTML=ph;
       var ih='';
       if(d.issues&&d.issues.length){
         d.issues.slice(0,5).forEach(function(issue,i){
-          ih+='<div class="flex items-start gap-3 p-4 rounded-xl border border-zinc-200 bg-white"><span class="shrink-0 w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center text-xs font-bold">'+(i+1)+'</span><div><p class="text-sm font-medium text-zinc-900">'+issue.title+'</p><p class="text-sm text-zinc-500 mt-0.5">'+(issue.detail||'')+'</p></div></div>';
+          ih+='<div class="flex items-start gap-3 p-4 rounded-xl bg-zinc-800"><span class="shrink-0 w-6 h-6 rounded-full bg-red-900 text-red-300 flex items-center justify-center text-xs font-bold">'+(i+1)+'</span><div><p class="text-sm font-medium text-zinc-100">'+issue.title+'</p><p class="text-sm text-zinc-400 mt-0.5">'+(issue.detail||'')+'</p></div></div>';
         });
-      }else{ih='<p class="text-sm text-zinc-500">No issues found — great work!</p>';}
+      }else{ih='<p class="text-sm text-zinc-400">No issues found — great work!</p>';}
       document.getElementById('snapIssues').innerHTML=ih;
       var ah='';
       if(d.actions&&d.actions.length){
         d.actions.slice(0,4).forEach(function(a,i){
           var label=a.effort==='low'?'Quick win':(a.effort==='medium'?'Medium effort':'Larger project');
-          var bc2=a.effort==='low'?'bg-green-100 text-green-700':(a.effort==='medium'?'bg-amber-100 text-amber-700':'bg-red-100 text-red-700');
-          ah+='<div class="flex items-start gap-3 p-4 rounded-xl border border-zinc-200 bg-white"><span class="shrink-0 w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-bold">'+(i+1)+'</span><div class="flex-1"><div class="flex items-center justify-between gap-2"><p class="text-sm font-medium text-zinc-900">'+a.title+'</p><span class="text-xs font-semibold '+bc2+' px-2 py-0.5 rounded-full">'+label+'</span></div><p class="text-sm text-zinc-500 mt-0.5">'+(a.detail||'')+'</p></div></div>';
+          var bc2=a.effort==='low'?'bg-emerald-900 text-emerald-300':(a.effort==='medium'?'bg-amber-900 text-amber-300':'bg-red-900 text-red-300');
+          ah+='<div class="flex items-start gap-3 p-4 rounded-xl bg-zinc-800"><span class="shrink-0 w-6 h-6 rounded-full bg-teal-900 text-teal-300 flex items-center justify-center text-xs font-bold">'+(i+1)+'</span><div class="flex-1"><div class="flex items-center justify-between gap-2"><p class="text-sm font-medium text-zinc-100">'+a.title+'</p><span class="text-xs font-semibold '+bc2+' px-2 py-0.5 rounded-full">'+label+'</span></div><p class="text-sm text-zinc-400 mt-0.5">'+(a.detail||'')+'</p></div></div>';
         });
-      }else{ah='<p class="text-sm text-zinc-500">No recommendations yet.</p>';}
+      }else{ah='<p class="text-sm text-zinc-400">No recommendations yet.</p>';}
       document.getElementById('snapActions').innerHTML=ah;
       document.getElementById('snapResults').classList.remove('hidden');
       document.getElementById('snapResults').scrollIntoView({behavior:'smooth',block:'start'});
@@ -324,4 +325,3 @@ try{
 @router.get("", response_class=HTMLResponse)
 async def homepage():
     return HTMLResponse(content=PAGE)
-
