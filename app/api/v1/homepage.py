@@ -292,14 +292,3 @@ try{
 async def homepage():
     return HTMLResponse(content=PAGE)
 
-Also need to add root / redirect in main.py
-Link: https://github.com/mmrfcmo/trust-trigger-api/blob/main/app/main.py
-
-Add this import at the top (around line 2-3):
-
-from fastapi.responses import RedirectResponse
-Add this route right before @app.get("/health") (around line 70):
-
-@app.get("/")
-async def root():
-    return RedirectResponse(url="/home")
