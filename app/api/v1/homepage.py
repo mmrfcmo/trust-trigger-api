@@ -30,10 +30,10 @@ body{font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased
 
 <nav class="bg-black border-b border-zinc-800 fixed top-0 left-0 right-0 z-50 h-20 flex items-center px-6">
 <div class="max-w-6xl mx-auto w-full flex items-center justify-between">
-<a href="/home" class="flex items-center gap-2 text-2xl font-extrabold text-yellow-400"><span class="text-3xl">🛡️</span> Trust Trigger Agency</a>
+<a href="/home" class="flex items-center gap-2 text-2xl font-extrabold text-yellow-400"><span class="text-3xl">&#x1f6e1;&#xfe0f;</span> Trust Trigger Agency</a>
 <div class="flex items-center gap-5">
 <a href="#contact" class="text-base font-semibold text-zinc-300 hover:text-white">Contact</a>
-<a href="#snapshot" class="rounded-lg bg-teal-500 px-5 py-2.5 text-base font-semibold text-white hover:bg-teal-400">Get Free Snapshot →</a>
+<a href="#snapshot" class="rounded-lg bg-teal-500 px-5 py-2.5 text-base font-semibold text-white hover:bg-teal-400">Get Free Snapshot &rarr;</a>
 </div>
 </div>
 </nav>
@@ -43,11 +43,11 @@ body{font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased
 <!-- HERO -->
 <section class="green1 text-white py-24 sm:py-32 px-6">
 <div class="max-w-6xl mx-auto text-center">
-<p class="text-sm font-bold uppercase tracking-[.2em] text-teal-300 mb-4">Trust Trigger Transformation Method™</p>
+<p class="text-sm font-bold uppercase tracking-[.2em] text-teal-300 mb-4">Trust Trigger Transformation Method&trade;</p>
 <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-[1.05]">Is your healthcare practice<br>losing patients to <span class="gt">your website?</span></h1>
-<p class="text-lg sm:text-xl text-emerald-200 max-w-3xl mx-auto leading-relaxed font-medium mb-10">Get a free Trust Snapshot in 30 seconds, then book a 20-minute call and we'll screenshare your full Extensive Trust Report together — at no cost.</p>
+<p class="text-lg sm:text-xl text-emerald-200 max-w-3xl mx-auto leading-relaxed font-medium mb-10">Get a free Trust Snapshot in 30 seconds, then book a 20-minute call and we will screenshare your full Extensive Trust Report together &mdash; at no cost.</p>
 <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-<a href="#snapshot" class="inline-flex items-center gap-2 rounded-xl bg-teal-500 px-7 py-4 text-base font-bold text-white shadow-xl hover:bg-teal-400 transition">Get Your Free Trust Snapshot →</a>
+<a href="#snapshot" class="inline-flex items-center gap-2 rounded-xl bg-teal-500 px-7 py-4 text-base font-bold text-white shadow-xl hover:bg-teal-400 transition">Get Your Free Trust Snapshot &rarr;</a>
 <a href="#about" class="inline-flex items-center gap-2 rounded-xl border border-emerald-400 px-7 py-4 text-base font-bold text-emerald-100 hover:bg-emerald-800 transition">See what we do</a>
 </div>
 </div>
@@ -59,7 +59,7 @@ body{font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased
 <div class="max-w-3xl mx-auto text-center">
 <p class="text-sm font-bold uppercase tracking-[.2em] text-emerald-700 mb-3">About</p>
 <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 mb-6">We help healthcare practices turn website visitors into booked patients.</h2>
-<p class="text-base sm:text-lg text-zinc-600 leading-relaxed font-medium">Most healthcare websites look fine — but to a first-time patient, they don't inspire enough confidence to pick up the phone. Every gap costs you new patients.</p>
+<p class="text-base sm:text-lg text-zinc-600 leading-relaxed font-medium">Most healthcare websites look fine &mdash; but to a first-time patient, they do not inspire enough confidence to pick up the phone. Every gap costs you new patients.</p>
 </div>
 </div>
 </section>
@@ -70,9 +70,9 @@ body{font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased
 <p class="text-sm font-bold uppercase tracking-[.2em] text-emerald-700 text-center mb-3">How It Works</p>
 <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 text-center mb-16">Three steps to clarity.</h2>
 <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
-<div class="rounded-2xl border border-emerald-200 bg-white p-8 text-center shadow-sm"><div class="w-14 h-14 rounded-full bg-emerald-100 text-2xl flex items-center justify-center mx-auto mb-5">🎯</div><p class="text-sm font-bold uppercase tracking-wider text-emerald-700 mb-2">Step 1</p><h3 class="text-xl font-bold text-zinc-900 mb-3">Data-driven diagnosis</h3><p class="text-zinc-600 text-sm leading-relaxed">42 checks across 5 pillars. No guesswork — every issue has evidence and a clear fix priority.</p></div>
-<div class="rounded-2xl border border-emerald-200 bg-white p-8 text-center shadow-sm"><div class="w-14 h-14 rounded-full bg-emerald-100 text-2xl flex items-center justify-center mx-auto mb-5">🔧</div><p class="text-sm font-bold uppercase tracking-wider text-emerald-700 mb-2">Step 2</p><h3 class="text-xl font-bold text-zinc-900 mb-3">Fix what's broken</h3><p class="text-zinc-600 text-sm leading-relaxed">Not every practice needs a new website. We can optimise or build. You decide.</p></div>
-<div class="rounded-2xl border border-emerald-200 bg-white p-8 text-center shadow-sm"><div class="w-14 h-14 rounded-full bg-emerald-100 text-2xl flex items-center justify-center mx-auto mb-5">📈</div><p class="text-sm font-bold uppercase tracking-wider text-emerald-700 mb-2">Step 3</p><h3 class="text-xl font-bold text-zinc-900 mb-3">Proven results</h3><p class="text-zinc-600 text-sm leading-relaxed">Documented before/after for every client. We prove what changed.</p></div>
+<div class="rounded-2xl border border-emerald-200 bg-white p-8 text-center shadow-sm"><div class="w-14 h-14 rounded-full bg-emerald-100 text-2xl flex items-center justify-center mx-auto mb-5">&#x1f3af;</div><p class="text-sm font-bold uppercase tracking-wider text-emerald-700 mb-2">Step 1</p><h3 class="text-xl font-bold text-zinc-900 mb-3">Data-driven diagnosis</h3><p class="text-zinc-600 text-sm leading-relaxed">42 checks across 5 pillars. No guesswork &mdash; every issue has evidence and a clear fix priority.</p></div>
+<div class="rounded-2xl border border-emerald-200 bg-white p-8 text-center shadow-sm"><div class="w-14 h-14 rounded-full bg-emerald-100 text-2xl flex items-center justify-center mx-auto mb-5">&#x1f527;</div><p class="text-sm font-bold uppercase tracking-wider text-emerald-700 mb-2">Step 2</p><h3 class="text-xl font-bold text-zinc-900 mb-3">Fix what is broken</h3><p class="text-zinc-600 text-sm leading-relaxed">Not every practice needs a new website. We can optimise or build. You decide.</p></div>
+<div class="rounded-2xl border border-emerald-200 bg-white p-8 text-center shadow-sm"><div class="w-14 h-14 rounded-full bg-emerald-100 text-2xl flex items-center justify-center mx-auto mb-5">&#x1f4c8;</div><p class="text-sm font-bold uppercase tracking-wider text-emerald-700 mb-2">Step 3</p><h3 class="text-xl font-bold text-zinc-900 mb-3">Proven results</h3><p class="text-zinc-600 text-sm leading-relaxed">Documented before/after for every client. We prove what changed.</p></div>
 </div>
 </div>
 </section>
@@ -103,11 +103,11 @@ body{font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased
 </div>
 </div>
 <div class="mt-6 rounded-xl border border-red-800 bg-red-950 p-5">
-<p class="text-sm font-bold text-red-300 mb-3">&#9888;&#65039; Top Issues</p>
+<p class="text-sm font-bold text-red-300 mb-3">&#x26a0;&#xfe0f; Top Issues</p>
 <ol class="space-y-2 text-sm text-red-400 list-decimal list-inside font-medium">
-<li>Homepage value proposition unclear — visitors can't immediately tell what you do</li>
-<li>No visible reviews or testimonials — your best social proof is hidden</li>
-<li>Booking CTA is buried or generic — doesn't motivate action</li>
+<li>Homepage value proposition unclear &mdash; visitors cannot immediately tell what you do</li>
+<li>No visible reviews or testimonials &mdash; your best social proof is hidden</li>
+<li>Booking CTA is buried or generic &mdash; does not motivate action</li>
 </ol>
 </div>
 </div>
@@ -120,7 +120,7 @@ body{font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased
 <div><input id="snapWebsite" type="text" placeholder="yourpractice.co.uk" class="w-full rounded-xl border border-emerald-300 px-5 py-3.5 text-base font-medium text-zinc-800 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-teal-500 bg-white"></div>
 <div><input id="snapEmail" type="email" placeholder="info@yourpractice.co.uk" class="w-full rounded-xl border border-emerald-300 px-5 py-3.5 text-base font-medium text-zinc-800 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-teal-500 bg-white"></div>
 <button onclick="runSnapshot()" id="snapBtn" class="w-full rounded-xl bg-teal-500 px-6 py-3.5 text-base font-bold text-white shadow-lg hover:bg-teal-400 transition flex items-center justify-center gap-2">
-<span id="snapBtnText">Get My Score →</span>
+<span id="snapBtnText">Get My Score &rarr;</span>
 <span id="snapBtnSpin" class="hidden inline-block w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
 </button>
 </div>
@@ -134,26 +134,26 @@ body{font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased
 <div class="rounded-2xl bg-zinc-900 shadow-xl p-8 mb-8 text-center">
 <p class="text-sm font-bold uppercase tracking-[.2em] text-teal-400 mb-2">Your Trust Snapshot</p>
 <div class="text-7xl font-extrabold mb-2" id="snapScoreColor"><span id="snapScore">0</span></div>
-<p class="text-lg font-bold text-zinc-100 mb-1"><span id="snapGrade">—</span></p>
+<p class="text-lg font-bold text-zinc-100 mb-1"><span id="snapGrade"></span></p>
 <p id="snapGradeDesc" class="text-zinc-400 max-w-lg mx-auto">Assessment complete. Review the findings below.</p>
 </div>
 
 <div id="snapPillars" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8"></div>
 
 <div class="rounded-2xl bg-zinc-900 shadow-xl p-8 mb-6">
-<h3 class="text-lg font-bold text-zinc-100 mb-4">&#9888;&#65039; Top Issues Found</h3>
+<h3 class="text-lg font-bold text-zinc-100 mb-4">&#x26a0;&#xfe0f; Top Issues Found</h3>
 <div id="snapIssues" class="space-y-3"></div>
 </div>
 
 <div class="rounded-2xl bg-zinc-900 shadow-xl p-8 mb-6">
-<h3 class="text-lg font-bold text-zinc-100 mb-4">&#128295; Priority Actions</h3>
+<h3 class="text-lg font-bold text-zinc-100 mb-4">&#x1f527; Priority Actions</h3>
 <div id="snapActions" class="space-y-3"></div>
 </div>
 
 <div class="rounded-2xl border border-teal-500 bg-gradient-to-r from-emerald-900 to-teal-900 shadow-xl p-8 text-center">
 <p class="text-2xl font-bold text-white mb-4">Surprised with your score?</p>
-<p class="text-lg text-zinc-300 mb-6">Let's go through your full report together and we'll show you how to improve your score quickly to convert more enquiries.</p>
-<a href="https://calendly.com/mrfcmo/ai-readiness-review-call-clone?month=2026-09" class="inline-flex items-center gap-2 rounded-xl bg-teal-500 px-8 py-4 text-lg font-bold text-white shadow-xl hover:bg-teal-400 transition">Book A Free 20 Minute Review →</a>
+<p class="text-lg text-zinc-300 mb-6">Let us go through your full report together and we will show you how to improve your score quickly to convert more enquiries.</p>
+<a href="https://calendly.com/mrfcmo/ai-readiness-review-call-clone?month=2026-09" class="inline-flex items-center gap-2 rounded-xl bg-teal-500 px-8 py-4 text-lg font-bold text-white shadow-xl hover:bg-teal-400 transition">Book A Free 20 Minute Review &rarr;</a>
 </div>
 </div>
 </div>
@@ -165,9 +165,9 @@ body{font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased
 <p class="text-sm font-bold uppercase tracking-[.2em] text-emerald-700 text-center mb-3">Real Results</p>
 <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 text-center mb-12">Practices like yours, transformed</h2>
 <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-<div class="rounded-2xl border border-emerald-200 bg-white p-8 shadow-sm"><p class="text-yellow-400 text-lg mb-1">&#9733;&#9733;&#9733;&#9733;&#9733;</p><p class="text-zinc-700 italic mb-4 leading-relaxed">"Calls went from 3 a week to 14. Trust score went from 42 to 91."</p><p class="font-bold text-zinc-900">Paul M.</p><p class="text-sm text-zinc-500">Dental Practice, London</p></div>
-<div class="rounded-2xl border border-emerald-200 bg-white p-8 shadow-sm"><p class="text-yellow-400 text-lg mb-1">&#9733;&#9733;&#9733;&#9733;&#9733;</p><p class="text-zinc-700 italic mb-4 leading-relaxed">"8 calls this month from the site — that never happened before."</p><p class="font-bold text-zinc-900">Dr. S. Davies</p><p class="text-sm text-zinc-500">Healthcare Clinic, Birmingham</p></div>
-<div class="rounded-2xl border border-emerald-200 bg-white p-8 shadow-sm"><p class="text-yellow-400 text-lg mb-1">&#9733;&#9733;&#9733;&#9733;&#9733;</p><p class="text-zinc-700 italic mb-4 leading-relaxed">"Patient enquiries went up 3x in the first month. Game changer."</p><p class="font-bold text-zinc-900">Dr. A. Khan</p><p class="text-sm text-zinc-500">Medical Aesthetics, Manchester</p></div>
+<div class="rounded-2xl border border-emerald-200 bg-white p-8 shadow-sm"><p class="text-yellow-400 text-lg mb-1">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</p><p class="text-zinc-700 italic mb-4 leading-relaxed">&ldquo;Calls went from 3 a week to 14. Trust score went from 42 to 91.&rdquo;</p><p class="font-bold text-zinc-900">Paul M.</p><p class="text-sm text-zinc-500">Dental Practice, London</p></div>
+<div class="rounded-2xl border border-emerald-200 bg-white p-8 shadow-sm"><p class="text-yellow-400 text-lg mb-1">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</p><p class="text-zinc-700 italic mb-4 leading-relaxed">&ldquo;8 calls this month from the site &mdash; that never happened before.&rdquo;</p><p class="font-bold text-zinc-900">Dr. S. Davies</p><p class="text-sm text-zinc-500">Healthcare Clinic, Birmingham</p></div>
+<div class="rounded-2xl border border-emerald-200 bg-white p-8 shadow-sm"><p class="text-yellow-400 text-lg mb-1">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</p><p class="text-zinc-700 italic mb-4 leading-relaxed">&ldquo;Patient enquiries went up 3x in the first month. Game changer.&rdquo;</p><p class="font-bold text-zinc-900">Dr. A. Khan</p><p class="text-sm text-zinc-500">Medical Aesthetics, Manchester</p></div>
 </div>
 </div>
 </section>
@@ -178,11 +178,11 @@ body{font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased
 <p class="text-sm font-bold uppercase tracking-[.2em] text-emerald-700 text-center mb-3">What We Measure</p>
 <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 text-center mb-6">5 trust pillars. 42 checks.</h2>
 <div class="grid grid-cols-1 sm:grid-cols-5 gap-4 max-w-4xl mx-auto">
-<div class="rounded-2xl border border-emerald-200 bg-emerald-50 p-6 text-center"><div class="text-3xl mb-3">&#128170;</div><h3 class="font-bold text-zinc-900 mb-1">Credibility</h3><p class="text-sm text-zinc-600">Contact, about page, SSL, legal pages.</p></div>
-<div class="rounded-2xl border border-emerald-200 bg-emerald-50 p-6 text-center"><div class="text-3xl mb-3">&#11088;</div><h3 class="font-bold text-zinc-900 mb-1">Social Proof</h3><p class="text-sm text-zinc-600">Reviews, testimonials, trust badges.</p></div>
-<div class="rounded-2xl border border-emerald-200 bg-emerald-50 p-6 text-center"><div class="text-3xl mb-3">&#127942;</div><h3 class="font-bold text-zinc-900 mb-1">Authority</h3><p class="text-sm text-zinc-600">Content, certifications, team bios.</p></div>
-<div class="rounded-2xl border border-emerald-200 bg-emerald-50 p-6 text-center"><div class="text-3xl mb-3">&#128065;</div><h3 class="font-bold text-zinc-900 mb-1">Clarity</h3><p class="text-sm text-zinc-600">Headline, value proposition, navigation.</p></div>
-<div class="rounded-2xl border border-emerald-200 bg-emerald-50 p-6 text-center"><div class="text-3xl mb-3">&#127919;</div><h3 class="font-bold text-zinc-900 mb-1">Conversion</h3><p class="text-sm text-zinc-600">Booking CTAs, forms, phone prominence.</p></div>
+<div class="rounded-2xl border border-emerald-200 bg-emerald-50 p-6 text-center"><div class="text-3xl mb-3">&#x1f4aa;</div><h3 class="font-bold text-zinc-900 mb-1">Credibility</h3><p class="text-sm text-zinc-600">Contact, about page, SSL, legal pages.</p></div>
+<div class="rounded-2xl border border-emerald-200 bg-emerald-50 p-6 text-center"><div class="text-3xl mb-3">&#x2b50;</div><h3 class="font-bold text-zinc-900 mb-1">Social Proof</h3><p class="text-sm text-zinc-600">Reviews, testimonials, trust badges.</p></div>
+<div class="rounded-2xl border border-emerald-200 bg-emerald-50 p-6 text-center"><div class="text-3xl mb-3">&#x1f3c6;</div><h3 class="font-bold text-zinc-900 mb-1">Authority</h3><p class="text-sm text-zinc-600">Content, certifications, team bios.</p></div>
+<div class="rounded-2xl border border-emerald-200 bg-emerald-50 p-6 text-center"><div class="text-3xl mb-3">&#x1f441;</div><h3 class="font-bold text-zinc-900 mb-1">Clarity</h3><p class="text-sm text-zinc-600">Headline, value proposition, navigation.</p></div>
+<div class="rounded-2xl border border-emerald-200 bg-emerald-50 p-6 text-center"><div class="text-3xl mb-3">&#x1f3af;</div><h3 class="font-bold text-zinc-900 mb-1">Conversion</h3><p class="text-sm text-zinc-600">Booking CTAs, forms, phone prominence.</p></div>
 </div>
 <div class="text-center mt-8"><p class="inline-flex items-center gap-2 rounded-xl bg-zinc-900 px-6 py-3 text-base font-bold text-white shadow-lg">42 Checks Across 5 Pillars</p></div>
 </div>
@@ -195,7 +195,7 @@ body{font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased
 <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 text-center mb-12">Common questions</h2>
 <div class="space-y-4">
 <div class="rounded-2xl border border-emerald-200 bg-white p-6 shadow-sm"><h3 class="font-bold text-zinc-900 mb-2">Do I need a new website?</h3><p class="text-zinc-600 text-sm leading-relaxed">Not at all. Many clients optimise their existing site. No pressure either way.</p></div>
-<div class="rounded-2xl border border-emerald-200 bg-white p-6 shadow-sm"><h3 class="font-bold text-zinc-900 mb-2">What's the difference between the Snapshot and the full report?</h3><p class="text-zinc-600 text-sm leading-relaxed">Snapshot = score in 30 seconds. Full report = every gap and fix, screenshared on a free call.</p></div>
+<div class="rounded-2xl border border-emerald-200 bg-white p-6 shadow-sm"><h3 class="font-bold text-zinc-900 mb-2">What is the difference between the Snapshot and the full report?</h3><p class="text-zinc-600 text-sm leading-relaxed">Snapshot = score in 30 seconds. Full report = every gap and fix, screenshared on a free call.</p></div>
 <div class="rounded-2xl border border-emerald-200 bg-white p-6 shadow-sm"><h3 class="font-bold text-zinc-900 mb-2">Is the review call really free?</h3><p class="text-zinc-600 text-sm leading-relaxed">Yes. 20 minutes. No cost, no commitment, no sales pitch.</p></div>
 </div>
 </div>
@@ -205,13 +205,13 @@ body{font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased
 <section id="contact" class="py-20 sm:py-28 px-6 bg-white">
 <div class="max-w-4xl mx-auto text-center">
 <p class="text-sm font-bold uppercase tracking-[.2em] text-emerald-700 mb-3">Contact Us</p>
-<h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 mb-4">Let's talk</h2>
-<p class="text-zinc-500 mb-8 font-medium">We'll respond within 24 hours.</p>
-<form id="contactForm" class="max-w-lg mx-auto space-y-4" onsubmit="event.preventDefault();alert('Thanks! We\'ll be in touch within 24 hours.');">
+<h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 mb-4">Let us talk</h2>
+<p class="text-zinc-500 mb-8 font-medium">We will respond within 24 hours.</p>
+<form id="contactForm" class="max-w-lg mx-auto space-y-4" onsubmit="event.preventDefault();alert('Thanks! We will be in touch within 24 hours.');">
 <input type="text" placeholder="Your name" class="w-full rounded-xl border border-emerald-300 px-5 py-3.5 text-base font-medium focus:outline-none focus:ring-2 focus:ring-teal-500">
 <input type="email" placeholder="Your email" class="w-full rounded-xl border border-emerald-300 px-5 py-3.5 text-base font-medium focus:outline-none focus:ring-2 focus:ring-teal-500">
 <textarea rows="3" placeholder="Message" class="w-full rounded-xl border border-emerald-300 px-5 py-3.5 text-base font-medium focus:outline-none focus:ring-2 focus:ring-teal-500"></textarea>
-<button type="submit" class="w-full rounded-xl bg-teal-500 px-6 py-3.5 text-base font-bold text-white shadow-lg hover:bg-teal-400 transition">Send Message →</button>
+<button type="submit" class="w-full rounded-xl bg-teal-500 px-6 py-3.5 text-base font-bold text-white shadow-lg hover:bg-teal-400 transition">Send Message &rarr;</button>
 </form>
 </div>
 </section>
@@ -219,9 +219,9 @@ body{font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased
 <!-- FINAL CTA -->
 <section class="green1 text-white py-20 sm:py-28 px-6">
 <div class="max-w-4xl mx-auto text-center">
-<p class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4">&#128737;</p>
+<p class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4">&#x1f6e1;</p>
 <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-4">Stop guessing. Start knowing.</h2>
-<a href="#snapshot" class="inline-flex items-center gap-2 rounded-xl bg-teal-500 px-8 py-4 text-lg font-bold text-white shadow-xl hover:bg-teal-400 transition">Get Instant Access To Your Free Trust Snapshot →</a>
+<a href="#snapshot" class="inline-flex items-center gap-2 rounded-xl bg-teal-500 px-8 py-4 text-lg font-bold text-white shadow-xl hover:bg-teal-400 transition">Get Instant Access To Your Free Trust Snapshot &rarr;</a>
 </div>
 </section>
 
@@ -229,7 +229,7 @@ body{font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased
 <footer class="bg-zinc-900 text-zinc-300 py-12 px-6 border-t border-zinc-800">
 <div class="max-w-6xl mx-auto">
 <div class="grid grid-cols-1 sm:grid-cols-3 gap-10">
-<div><div class="flex items-center gap-2 text-lg font-extrabold mb-4"><span class="text-xl">&#128737;</span> <span class="text-yellow-400">Trust Trigger Agency</span></div><p class="text-zinc-400 text-sm">Helping healthcare practices turn websites into patient booking engines.</p></div>
+<div><div class="flex items-center gap-2 text-lg font-extrabold mb-4"><span class="text-xl">&#x1f6e1;</span> <span class="text-yellow-400">Trust Trigger Agency</span></div><p class="text-zinc-400 text-sm">Helping healthcare practices turn websites into patient booking engines.</p></div>
 <div><p class="text-sm font-bold uppercase tracking-wider text-emerald-400 mb-4">Service</p><ul class="space-y-3 text-sm font-medium"><li><a href="/home" class="text-zinc-300 hover:text-white">Free Snapshot</a></li><li><a href="/competitor-insights" class="text-zinc-300 hover:text-white">Compare Competitors</a></li><li><a href="/extensive-report" class="text-zinc-300 hover:text-white">Extensive Report</a></li><li><a href="https://calendly.com/mrfcmo/ai-readiness-review-call-clone?month=2026-09" class="text-zinc-300 hover:text-white">Book a Review</a></li></ul></div>
 <div><p class="text-sm font-bold uppercase tracking-wider text-emerald-400 mb-4">Contact</p><ul class="space-y-3 text-sm font-medium"><li><a href="#contact" class="text-zinc-300 hover:text-white">Get in Touch</a></li></ul></div>
 </div>
@@ -238,6 +238,14 @@ body{font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased
 </footer>
 
 <script>
+var gradeDesc = {
+  'excellent': 'Excellent Trust \u2014 Your website is a strong trust engine. Visitors feel confident reaching out.',
+  'good': 'Good Trust \u2014 You are building trust well, but there are clear opportunities to convert more visitors.',
+  'average': 'Average Trust \u2014 Your website is losing potential customers. The gaps below are costing you enquiries.',
+  'poor': 'Poor Trust \u2014 Significant trust gaps found. Most visitors are likely leaving without contacting you.',
+  'at_risk': 'At Risk \u2014 Critical trust issues detected. Your website is actively repelling potential customers.'
+};
+
 async function runSnapshot(){
   var name=document.getElementById('snapName').value.trim();
   var web=document.getElementById('snapWebsite').value.trim();
@@ -268,10 +276,9 @@ async function runSnapshot(){
       else if(s>=40){sc.className='text-7xl font-extrabold text-amber-400 mb-2';}
       else{sc.className='text-7xl font-extrabold text-red-400 mb-2';}
       document.getElementById('snapScore').textContent=s;
-      var gradeMap={'Excellent Trust':'Excellent Trust — Your website is a strong trust engine. Visitors feel confident reaching out.','Good Trust':'Good Trust — You\'re building trust well, but there are clear opportunities to convert more visitors.','Average Trust':'Average Trust — Your website is losing potential customers. The gaps below are costing you enquiries.','Weak Trust':'Weak Trust — Significant trust gaps found. Most visitors are likely leaving without contacting you.','At Risk':'At Risk — Critical trust issues detected. Your website is actively repelling potential customers.'};
-      var g=d.grade||'Assessment complete.';
-      document.getElementById('snapGrade').textContent=g;
-      document.getElementById('snapGradeDesc').textContent=gradeMap[g]||'Assessment complete. Review the findings below.';
+      var g=(d.grade||'').toLowerCase().replace(/ /g,'_');
+      document.getElementById('snapGrade').textContent=d.grade||'Assessment complete.';
+      document.getElementById('snapGradeDesc').textContent=gradeDesc[g]||'Assessment complete. Review the findings below.';
       var ph='';
       if(d.pillars&&d.pillars.length){
         d.pillars.forEach(function(p){
@@ -287,7 +294,7 @@ async function runSnapshot(){
         d.issues.slice(0,5).forEach(function(issue,i){
           ih+='<div class="flex items-start gap-3 p-4 rounded-xl bg-zinc-800"><span class="shrink-0 w-6 h-6 rounded-full bg-red-900 text-red-300 flex items-center justify-center text-xs font-bold">'+(i+1)+'</span><div><p class="text-sm font-medium text-zinc-100">'+issue.title+'</p><p class="text-sm text-zinc-400 mt-0.5">'+(issue.detail||'')+'</p></div></div>';
         });
-      }else{ih='<p class="text-sm text-zinc-400">No issues found — great work!</p>';}
+      }else{ih='<p class="text-sm text-zinc-400">No issues found - great work!</p>';}
       document.getElementById('snapIssues').innerHTML=ih;
       var ah='';
       if(d.actions&&d.actions.length){
@@ -308,7 +315,7 @@ async function runSnapshot(){
     err.textContent='Network error. Please check your connection.';
     err.classList.remove('hidden');
   }
-  btn.disabled=false;btxt.textContent='Get My Score →';bspin.classList.add('hidden');
+  btn.disabled=false;btxt.textContent='Get My Score';bspin.classList.add('hidden');
 }
 
 try{
