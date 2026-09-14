@@ -84,6 +84,35 @@ body{font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased
 <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 text-center mb-4">See your score in 30 seconds</h2>
 <p class="text-center text-zinc-500 mb-12 font-medium">Enter your details below and get an instant trust analysis.</p>
 
+<!-- EXAMPLE SCORE CARD -->
+<div id="exampleCard" class="max-w-4xl mx-auto mb-12">
+<div class="rounded-2xl border border-emerald-200 bg-white shadow-xl p-8">
+<p class="text-sm font-bold uppercase tracking-[.2em] text-emerald-700 text-center mb-6">Example Snapshot</p>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="text-center lg:col-span-1">
+<div class="text-7xl font-extrabold text-zinc-900 mb-2">72</div>
+<p class="text-lg font-bold text-zinc-700 mb-1">Trust Score</p>
+<p class="text-sm text-zinc-500 leading-relaxed">Your website is credible — but specific trust gaps are preventing it from converting at full potential.</p>
+</div>
+<div class="lg:col-span-2 space-y-3">
+<div><div class="flex items-center justify-between mb-1"><span class="text-sm font-medium text-zinc-700">Credibility</span><span class="text-sm font-semibold text-emerald-700">85%</span></div><div class="w-full h-2.5 bg-zinc-100 rounded-full overflow-hidden"><div class="h-full rounded-full bg-emerald-500" style="width:85%"></div></div></div>
+<div><div class="flex items-center justify-between mb-1"><span class="text-sm font-medium text-zinc-700">Social Proof</span><span class="text-sm font-semibold text-amber-700">45%</span></div><div class="w-full h-2.5 bg-zinc-100 rounded-full overflow-hidden"><div class="h-full rounded-full bg-amber-500" style="width:45%"></div></div></div>
+<div><div class="flex items-center justify-between mb-1"><span class="text-sm font-medium text-zinc-700">Authority</span><span class="text-sm font-semibold text-amber-700">60%</span></div><div class="w-full h-2.5 bg-zinc-100 rounded-full overflow-hidden"><div class="h-full rounded-full bg-amber-500" style="width:60%"></div></div></div>
+<div><div class="flex items-center justify-between mb-1"><span class="text-sm font-medium text-zinc-700">Clarity</span><span class="text-sm font-semibold text-emerald-700">70%</span></div><div class="w-full h-2.5 bg-zinc-100 rounded-full overflow-hidden"><div class="h-full rounded-full bg-emerald-500" style="width:70%"></div></div></div>
+<div><div class="flex items-center justify-between mb-1"><span class="text-sm font-medium text-zinc-700">Conversion</span><span class="text-sm font-semibold text-amber-700">55%</span></div><div class="w-full h-2.5 bg-zinc-100 rounded-full overflow-hidden"><div class="h-full rounded-full bg-amber-500" style="width:55%"></div></div></div>
+</div>
+</div>
+<div class="mt-6 rounded-xl border border-red-100 bg-red-50 p-5">
+<p class="text-sm font-bold text-red-800 mb-3">⚠️ Top Issues</p>
+<ol class="space-y-2 text-sm text-red-700 list-decimal list-inside font-medium">
+<li>Homepage value proposition unclear — visitors can't immediately tell what you do</li>
+<li>No visible reviews or testimonials — your best social proof is hidden</li>
+<li>Booking CTA is buried or generic — doesn't motivate action</li>
+</ol>
+</div>
+</div>
+</div>
+
 <div class="max-w-lg mx-auto">
 <div class="rounded-2xl border border-emerald-200 bg-emerald-50 shadow-xl p-6 sm:p-8">
 <div class="space-y-4">
@@ -97,6 +126,14 @@ body{font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased
 </div>
 <p id="snapError" class="hidden text-red-600 text-sm mt-3 text-center font-medium">Please fill in all fields with valid info.</p>
 <p class="text-sm text-zinc-500 mt-4 text-center font-medium">Free. No card. Takes 30 seconds.</p>
+</div>
+</div>
+
+<div class="max-w-lg mx-auto mt-8 text-center">
+<div class="rounded-2xl border border-teal-200 bg-gradient-to-r from-emerald-50 to-teal-50 shadow-xl p-8">
+<p class="text-xl font-bold text-zinc-900 mb-4">Surprised with your score?</p>
+<p class="text-base text-zinc-600 mb-6 leading-relaxed">Let's go through your full report together and we'll show you how to improve your score quickly.</p>
+<a href="https://calendly.com/mrfcmo/ai-readiness-review-call-clone?month=2026-09" class="inline-flex items-center gap-2 rounded-xl bg-teal-500 px-6 py-3.5 text-base font-bold text-white shadow-lg hover:bg-teal-400 transition">Book A Free 20 Minute Review →</a>
 </div>
 </div>
 
@@ -178,7 +215,7 @@ body{font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased
 <p class="text-sm font-bold uppercase tracking-[.2em] text-emerald-700 mb-3">Contact Us</p>
 <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 mb-4">Let's talk</h2>
 <p class="text-zinc-500 mb-8 font-medium">We'll respond within 24 hours.</p>
-<form id="contactForm" class="max-w-lg mx-auto space-y-4" onsubmit="event.preventDefault();alert('Thanks! We'll be in touch within 24 hours.');">
+<form id="contactForm" class="max-w-lg mx-auto space-y-4" onsubmit="event.preventDefault();alert('Thanks! We'\''ll be in touch within 24 hours.');">
 <input type="text" placeholder="Your name" class="w-full rounded-xl border border-emerald-300 px-5 py-3.5 text-base font-medium focus:outline-none focus:ring-2 focus:ring-teal-500">
 <input type="email" placeholder="Your email" class="w-full rounded-xl border border-emerald-300 px-5 py-3.5 text-base font-medium focus:outline-none focus:ring-2 focus:ring-teal-500">
 <textarea rows="3" placeholder="Message" class="w-full rounded-xl border border-emerald-300 px-5 py-3.5 text-base font-medium focus:outline-none focus:ring-2 focus:ring-teal-500"></textarea>
@@ -230,11 +267,10 @@ async function runSnapshot(){
     var d=await res.json();
     if(d.success){
       document.getElementById('snapScore').textContent=d.score;
-      var gradeMap={'Excellent Trust':'Excellent Trust — Your website is a strong trust engine. Visitors feel confident reaching out.','Good Trust':'Good Trust — You\'re building trust well, but there are clear opportunities to convert more visitors.','Average Trust':'Average Trust — Your website is losing potential customers. The gaps below are costing you enquiries.','Weak Trust':'Weak Trust — Significant trust gaps found. Most visitors are likely leaving without contacting you.','At Risk':'At Risk — Critical trust issues detected. Your website is actively repelling potential customers.'};
+      var gradeMap={'Excellent Trust':'Excellent Trust — Your website is a strong trust engine. Visitors feel confident reaching out.','Good Trust':'Good Trust — You'\''re building trust well, but there are clear opportunities to convert more visitors.','Average Trust':'Average Trust — Your website is losing potential customers. The gaps below are costing you enquiries.','Weak Trust':'Weak Trust — Significant trust gaps found. Most visitors are likely leaving without contacting you.','At Risk':'At Risk — Critical trust issues detected. Your website is actively repelling potential customers.'};
       var g=d.grade||'Assessment complete.';
       document.getElementById('snapGrade').textContent=g;
       document.getElementById('snapGradeDesc').textContent=gradeMap[g]||'Assessment complete. Review the findings below.';
-      // Pillars
       var ph='';
       if(d.pillars&&d.pillars.length){
         d.pillars.forEach(function(p){
@@ -245,7 +281,6 @@ async function runSnapshot(){
         });
       }
       document.getElementById('snapPillars').innerHTML=ph;
-      // Issues
       var ih='';
       if(d.issues&&d.issues.length){
         d.issues.slice(0,5).forEach(function(issue,i){
@@ -253,7 +288,6 @@ async function runSnapshot(){
         });
       }else{ih='<p class="text-sm text-zinc-500">No issues found — great work!</p>';}
       document.getElementById('snapIssues').innerHTML=ih;
-      // Actions
       var ah='';
       if(d.actions&&d.actions.length){
         d.actions.slice(0,4).forEach(function(a,i){
@@ -276,7 +310,6 @@ async function runSnapshot(){
   btn.disabled=false;btxt.textContent='Get My Score →';bspin.classList.add('hidden');
 }
 
-// Scroll-in reveal
 try{
   document.querySelectorAll('section,footer').forEach(function(el){el.classList.add('reveal');});
   var io=new IntersectionObserver(function(entries){
@@ -291,4 +324,19 @@ try{
 @router.get("", response_class=HTMLResponse)
 async def homepage():
     return HTMLResponse(content=PAGE)
+
+Also fix main.py (add root redirect):
+
+Go to: https://github.com/mmrfcmo/trust-trigger-api/blob/main/app/main.py
+
+Click ✏️ Edit and make 2 changes:
+
+Line 3 — add after from fastapi import FastAPI:
+
+from fastapi.responses import RedirectResponse
+Before @app.get("/health") (around line 70) — add:
+
+@app.get("/")
+async def root():
+    return RedirectResponse(url="/home")
 
