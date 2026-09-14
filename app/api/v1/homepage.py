@@ -80,7 +80,7 @@ body{font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased
 <!-- SNAPSHOT SECTION (on-page scan) -->
 <section id="snapshot" class="py-20 sm:py-28 px-6 bg-white">
 <div class="max-w-6xl mx-auto">
-<p class="text-sm font-bold uppercase tracking-[.2em] text-emerald-700 text-center mb-3">Your Free Trust Snapshot</p>
+<p id="snapEyebrow" class="text-sm font-bold uppercase tracking-[.2em] text-emerald-700 text-center mb-3">Your Free Trust Snapshot</p>
 <h2 id="snapHeading" class="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 text-center mb-4">See your score in 30 seconds</h2>
 <p id="snapSubtext" class="text-center text-zinc-500 mb-12 font-medium">Enter your details below and get an instant trust analysis.</p>
 
@@ -113,7 +113,7 @@ body{font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased
 </div>
 </div>
 
-<div class="max-w-lg mx-auto">
+<div id="snapFormSection" class="max-w-lg mx-auto">
 <div class="rounded-2xl border border-emerald-200 bg-emerald-50 shadow-xl p-6 sm:p-8">
 <div class="space-y-4">
 <div><input id="snapName" type="text" placeholder="Your full name" class="w-full rounded-xl border border-emerald-300 px-5 py-3.5 text-base font-medium text-zinc-800 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-teal-500 bg-white"></div>
@@ -129,8 +129,8 @@ body{font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased
 </div>
 </div>
 
-<!-- RESULTS (replaces example card on scan) -->
-<div id="snapResults" class="hidden mt-16 max-w-4xl mx-auto">
+<!-- RESULTS (replaces example + form on scan) -->
+<div id="snapResults" class="hidden mt-0 max-w-4xl mx-auto">
 <div class="rounded-2xl bg-zinc-900 shadow-xl p-8 mb-8 text-center">
 <p class="text-sm font-bold uppercase tracking-[.2em] text-teal-400 mb-2">Your Trust Snapshot</p>
 <div class="text-7xl font-extrabold mb-2" id="snapScoreColor"><span id="snapScore">0</span></div>
@@ -266,9 +266,11 @@ async function runSnapshot(){
     });
     var d=await res.json();
     if(d.success){
+      document.getElementById('snapEyebrow').style.display='none';
       document.getElementById('snapHeading').style.display='none';
       document.getElementById('snapSubtext').style.display='none';
       document.getElementById('exampleCard').style.display='none';
+      document.getElementById('snapFormSection').style.display='none';
       var s=d.score||0;
       var sc=document.getElementById('snapScoreColor');
       if(s>=80){sc.className='text-7xl font-extrabold text-emerald-400 mb-2';}
