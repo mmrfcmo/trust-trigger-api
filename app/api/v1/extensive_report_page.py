@@ -176,7 +176,7 @@ function showReport(d,n,u){
   var circ=$('scoreCircle');
   if(circ){
     var r=52;
-    var cl=2Math.PIr;
+     var cl=2Math.PIr;
     setTimeout(function(){circ.style.strokeDashoffset=cl-(sc/100)*cl;},300);
   }
   var ct=0;
