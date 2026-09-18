@@ -71,7 +71,9 @@ app.include_router(competitor_router)
 app.include_router(embed_snapshot_router)
 app.include_router(homepage_router)
 from app.api.v1.trust_report_page import router as trust_report_router
+from app.api.v1.deep_report_page import router as deep_report_router
 app.include_router(trust_report_router)
+app.include_router(deep_report_router)
 @app.get("/")
 async def root():
     return RedirectResponse(url="/home")
