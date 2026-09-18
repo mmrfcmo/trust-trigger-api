@@ -90,7 +90,7 @@ $('_go').onclick=function(){
 };
 
 function gr(s){
-  var weeklyLoss = Math.round((100 - s) / 100  10 *  AVG_CUSTOMER_LTV);
+  var weeklyLoss = Math.round((100 - s) / 100  10  AVG_CUSTOMER_LTV);
   var weeklyImpact = Math.round((100 - s) / 100 * 10);
   if(s>=80) return {label:'Strong (B)',color:'text-emerald-700',desc:'Your website builds trust reasonably well, but specific gaps still prevent some visitors from booking.',impact:weeklyImpact+' enquiries/week',loss:'&pound;'+weeklyLoss.toLocaleString()+'/week'};
   if(s>=60) return {label:'Good (C)',color:'text-emerald-600',desc:'Your site is credible but missing key trust signals that convert visitors into customers.',impact:weeklyImpact+' enquiries/week',loss:'&pound;'+weeklyLoss.toLocaleString()+'/week'};
@@ -193,7 +193,7 @@ function render(){
   h+='<div class="flex items-start gap-5"><div class="relative w-20 h-20 shrink-0"><svg class="w-20 h-20 -rotate-90" viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="none" stroke="#e5e7eb" stroke-width="10"/><circle class="score-ring" id="sc" cx="60" cy="60" r="52" fill="none" stroke="#0d9488" stroke-width="10" stroke-dasharray="326.7" stroke-dashoffset="326.7"/></svg><div class="absolute inset-0 flex items-center justify-center"><span class="text-xl font-extrabold text-zinc-900" id="sn">0</span></div></div>';
   h+='<div><p class="text-xs font-bold uppercase tracking-wider text-zinc-500">Trust Trigger Score</p><h2 class="text-xl font-bold text-zinc-900">'+g.label+'</h2><p class="font-semibold text-zinc-800 text-sm">'+N+'</p><p class="text-xs text-zinc-400">'+U+'</p><p class="text-sm text-zinc-600 mt-2">'+g.desc+'</p></div></div>';
 
-  var weeklyLossVal = Math.round((100 - sc) / 100  10 *  AVG_CUSTOMER_LTV);
+  var weeklyLossVal = Math.round((100 - sc) / 100  10  AVG_CUSTOMER_LTV);
   h+='<div class="mt-4 bg-red-50 border border-red-200 rounded-lg p-4"><p class="text-sm font-bold text-red-800">Estimated Revenue Impact</p><p class="text-sm text-red-700 mt-1">Based on an average customer lifetime value of <strong>&pound;'+AVG_CUSTOMER_LTV.toLocaleString()+'</strong>, your current trust gaps are likely costing you <strong>'+g.impact+'</strong> — approximately <strong>&pound;'+weeklyLossVal.toLocaleString()+'/week</strong> (&pound;'+(weeklyLossVal*52).toLocaleString()+'/year) in missed revenue.</p></div>';
   h+='<div class="mt-3 text-xs text-zinc-500 flex flex-wrap gap-3"><span>'+now.toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"})+'</span><span>'+pills.length+' pillars</span><span>'+iss.length+' issues</span></div>';
   h+='</div>';
