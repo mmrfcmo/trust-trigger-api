@@ -139,7 +139,7 @@ function render(){
   }
   
   if(stds.length){
-    h+='<div class="mt-8"><p class="text-lg font-bold text-zinc-900 mb-1">Deep Diagnostic: Every Standard Checked</p><p class="text-sm text-zinc-500 mb-5">Below is what we found, what it means, and what happens if you don\'t fix it.</p>';
+    h+='<div class="mt-8"><p class="text-lg font-bold text-zinc-900 mb-1">Deep Diagnostic: Every Standard Checked</p><p class="text-sm text-zinc-500 mb-5">Below is what we found, what it means, and what happens if you do not fix it.</p>';
     stds.forEach(function(st){
       var dg=DIAG[st.name]||{issue:'Standard checked.',means:'Affects patient perception.',benefit:'Fixing this improves trust.',notfix:'Leaving this unfixed costs enquiries.',probe:'Consider this.'};
       var lb=st.name.replace(/([A-Z])/g,' $1').replace(/^./,function(x){return x.toUpperCase()}).trim();
