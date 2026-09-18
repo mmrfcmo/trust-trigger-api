@@ -58,3 +58,26 @@ async def rescan_project(project_id: str, db: AsyncSession = Depends(get_db)):
     db.add(new_task)
     await db.commit()
     return {"success": True, "project_id": project_id, "message": "Rescan queued", "task_id": new_task.id}
+
+@router.post("/wordpress/test-connection")
+async def test_wordpress_connection(credentials: WordPressCredentials):
+    """Test connection to a WordPress site."""
+    from app.services.wordpress_publisher import test_connection
+    result = await test_connection(
+        credentials.site_url, credentials.username, credentials.app_password,
+    )
+    return result
+@router.post("/wordpress/publish-page")
+async def publish_wordpress_page(
+    credentials: WordPressCredentials,
+    title: str = "Home",
+    content: str = "",
+    status: str = "draft",
+):
+    """Publish a page to WordPress."""
+    from app.services.wordpress_publisher import publish_page
+    result = await publish_page(
+        credentials.site_url, credentials.username, credentials.app_password,
+        title, content, status=status,
+    )
+    return result
