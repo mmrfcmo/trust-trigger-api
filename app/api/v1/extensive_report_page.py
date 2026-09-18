@@ -16,135 +16,180 @@ PAGE = """<!DOCTYPE html>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
 body{font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-.gt{background:linear-gradient(135deg,#059669,#0d9488);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .green1{background:linear-gradient(135deg,#064e3b,#065f46,#047857)}
-.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease-out,transform .6s ease-out}
-.reveal.in-view{opacity:1;transform:none}
-.pillar-bar{transition:width 1.2s ease-out}
-@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
-.pulse-dot{animation:pulse-dot 1.5s ease-in-out infinite}
 </style>
 </head>
 <body class="antialiased bg-emerald-50 text-zinc-800">
-
-<nav class="bg-black border-b border-zinc-800 fixed top-0 left-0 right-0 z-50 h-20 flex items-center px-6">
+<nav class="bg-black border-b border-zinc-800 fixed top-0 left-0 right-0 z-50 h-16 flex items-center px-6">
 <div class="max-w-6xl mx-auto w-full flex items-center justify-between">
-<a href="https://trust-trigger-api.onrender.com/home" class="flex items-center gap-2 text-2xl font-extrabold text-yellow-400"><span class="text-3xl">&#x1f6e1;&#xfe0f;</span> Trust Trigger Agency</a>
-<div class="flex items-center gap-3">
+<a href="https://trust-trigger-api.onrender.com/home" class="flex items-center gap-2 text-xl font-extrabold text-yellow-400"><span class="text-2xl">🛡️</span> Trust Trigger Agency</a>
 <a href="https://trust-trigger-api.onrender.com/home" class="rounded-lg bg-teal-500 px-4 py-2 text-xs font-semibold text-white hover:bg-teal-400">Get Free Snapshot &rarr;</a>
-</div>
 </div>
 </nav>
 
-<div class="h-20"></div>
+<div class="h-16"></div>
 
-<div class="green1 text-white py-20 sm:py-28 px-6">
-<div class="max-w-5xl mx-auto text-center">
+<div class="green1 text-white py-20 px-6">
+<div class="max-w-4xl mx-auto text-center">
 <p class="text-sm font-bold uppercase tracking-[.2em] text-teal-300 mb-4">The Trust Trigger Method&trade;</p>
-<h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight mb-4">Extensive Trust Report</h1>
-<p class="text-lg sm:text-xl text-emerald-200 max-w-3xl mx-auto leading-relaxed font-medium">Enter any business website. We analyse it across <strong class="text-white">5 trust pillars</strong> and <strong class="text-white">14 standards</strong> to show you exactly where trust is winning and where it is leaking.</p>
+<h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">Extensive Trust Report</h1>
+<p class="text-lg text-emerald-200 max-w-2xl mx-auto">Enter any business website. We analyse it across <strong class="text-white">5 trust pillars</strong> and <strong class="text-white">14 standards</strong>.</p>
 </div>
 </div>
 
-<div class="max-w-5xl mx-auto px-6 py-16">
+<div class="max-w-4xl mx-auto px-6 py-12">
+
 <div id="inputSection" class="max-w-lg mx-auto">
-<div class="rounded-2xl border border-emerald-200 bg-white shadow-xl p-6 sm:p-8">
-<div class="space-y-5">
-<div><label class="block text-sm font-bold text-zinc-800 mb-1.5">Business Name</label><input id="fullName" type="text" placeholder="e.g. Ivy Dentistry Aesthetics" class="w-full rounded-xl border border-emerald-300 px-5 py-3.5 text-base font-medium text-zinc-800 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-teal-500"></div>
-<div><label class="block text-sm font-bold text-zinc-800 mb-1.5">Website URL</label><input id="website" type="text" placeholder="e.g. ivydentistryaesthetics.co.uk" class="w-full rounded-xl border border-emerald-300 px-5 py-3.5 text-base font-medium text-zinc-800 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-teal-500"></div>
-<div><label class="block text-sm font-bold text-zinc-800 mb-1.5">Your Email</label><input id="email" type="email" placeholder="e.g. info@yourpractice.co.uk" class="w-full rounded-xl border border-emerald-300 px-5 py-3.5 text-base font-medium text-zinc-800 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-teal-500"><p class="text-xs text-zinc-500 mt-1.5 font-medium">Your report will appear below.</p></div>
-<button onclick="generate()" class="w-full rounded-xl bg-teal-500 px-6 py-3.5 text-base font-bold text-white shadow-lg hover:bg-teal-400 transition">Generate Your Extensive Trust Report &rarr;</button>
-<p class="text-xs text-center text-zinc-500 font-medium">Free. No card. Takes ~30 seconds.</p>
+<div class="rounded-2xl border border-emerald-200 bg-white shadow-xl p-6">
+<div class="space-y-4">
+<div><label class="block text-sm font-bold text-zinc-800 mb-1">Business Name</label><input id="fullName" type="text" placeholder="e.g. Ivy Dentistry" class="w-full rounded-xl border border-emerald-300 px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-teal-500"></div>
+<div><label class="block text-sm font-bold text-zinc-800 mb-1">Website URL</label><input id="website" type="text" placeholder="e.g. ivydentistry.co.uk" class="w-full rounded-xl border border-emerald-300 px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-teal-500"></div>
+<div><label class="block text-sm font-bold text-zinc-800 mb-1">Your Email</label><input id="email" type="email" placeholder="e.g. info@practice.co.uk" class="w-full rounded-xl border border-emerald-300 px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-teal-500"></div>
+<button onclick="generate()" class="w-full rounded-xl bg-teal-500 px-5 py-3 text-base font-bold text-white shadow-lg hover:bg-teal-400 transition">Generate Your Report &rarr;</button>
+<p class="text-xs text-center text-zinc-500">Free. No card. Takes ~30 seconds.</p>
 </div>
 </div>
 </div>
 
-<div id="loadingSection" class="hidden max-w-2xl mx-auto mt-8">
-<div class="rounded-2xl border border-emerald-200 bg-white shadow-xl p-8 sm:p-10 text-center">
-<h2 class="text-xl font-bold text-zinc-900 mb-6">Generating your Trust Trigger Report</h2>
-<p class="text-sm text-zinc-600 mb-8 font-medium">Analysing your website across our Trust Trigger framework</p>
-<div class="max-w-md mx-auto space-y-4 text-left">
-<div class="flex items-center gap-4"><span id="s1" class="w-7 h-7 rounded-full bg-zinc-200 flex items-center justify-center text-sm font-bold text-zinc-500 shrink-0">1</span><div class="flex-1"><p class="text-sm font-semibold text-zinc-800">Website structure</p><p class="text-xs text-zinc-500">Layout, navigation, page architecture</p></div><span id="d1" class="text-teal-600 text-sm font-medium">&nbsp;</span></div>
-<div class="flex items-center gap-4"><span id="s2" class="w-7 h-7 rounded-full bg-zinc-200 flex items-center justify-center text-sm font-bold text-zinc-500 shrink-0">2</span><div class="flex-1"><p class="text-sm font-semibold text-zinc-800">Trust signals</p><p class="text-xs text-zinc-500">Credibility markers, reviews, authority</p></div><span id="d2" class="text-zinc-400 text-sm font-medium">&nbsp;</span></div>
-<div class="flex items-center gap-4"><span id="s3" class="w-7 h-7 rounded-full bg-zinc-200 flex items-center justify-center text-sm font-bold text-zinc-500 shrink-0">3</span><div class="flex-1"><p class="text-sm font-semibold text-zinc-800">Social proof</p><p class="text-xs text-zinc-500">Testimonials, badges, case studies</p></div><span id="d3" class="text-zinc-400 text-sm font-medium">&nbsp;</span></div>
-<div class="flex items-center gap-4"><span id="s4" class="w-7 h-7 rounded-full bg-zinc-200 flex items-center justify-center text-sm font-bold text-zinc-500 shrink-0">4</span><div class="flex-1"><p class="text-sm font-semibold text-zinc-800">Conversion journey</p><p class="text-xs text-zinc-500">CTAs, forms, enquiry path</p></div><span id="d4" class="text-zinc-400 text-sm font-medium">&nbsp;</span></div>
-<div class="flex items-center gap-4"><span id="s5" class="w-7 h-7 rounded-full bg-zinc-200 flex items-center justify-center text-sm font-bold text-zinc-500 shrink-0">5</span><div class="flex-1"><p class="text-sm font-semibold text-zinc-800">Finalising analysis</p><p class="text-xs text-zinc-500">Scoring, gaps, building your report</p></div><span id="d5" class="text-zinc-400 text-sm font-medium">&nbsp;</span></div>
-</div>
-<p id="loadingStatus" class="text-sm text-teal-700 font-bold mt-8 pulse-dot">Analysing website structure...</p>
-</div>
+<div id="loadingSection" class="hidden text-center py-12">
+<div class="inline-block w-10 h-10 border-4 border-emerald-200 border-t-emerald-700 rounded-full animate-spin mb-4"></div>
+<p id="loadingText" class="text-lg font-semibold text-zinc-700">Scanning your website...</p>
+<p class="text-sm text-zinc-500 mt-2">Analysing trust signals across 5 pillars</p>
 </div>
 
-<div id="resultsSection" class="hidden mt-8 space-y-8"></div>
-<div id="ctaSection" class="hidden mt-8 text-center">
-<div class="max-w-xl mx-auto rounded-2xl border-2 border-teal-500 bg-white shadow-xl p-8">
-<h3 class="text-xl font-bold text-zinc-900 mb-4">Want to fix these gaps?</h3>
-<p class="text-zinc-600 mb-6 font-medium">Book a free 20-minute call and we will walk through your report together - every gap, every fix, prioritised by impact.</p>
-<a href="https://calendly.com/mrfcmo/ai-readiness-review-call-clone?month=2026-09" class="rounded-xl bg-teal-500 px-6 py-3.5 text-base font-bold text-white shadow-lg hover:bg-teal-400 transition">Book Your Free Review &rarr;</a>
-</div>
-</div>
+<div id="resultsSection" class="hidden"></div>
+
 </div>
 
-<footer class="bg-zinc-900 text-zinc-300 py-12 px-6 border-t border-zinc-800">
-<div class="max-w-6xl mx-auto">
-<div class="grid grid-cols-2 gap-10">
-<div><div class="flex items-center gap-2 text-lg font-extrabold mb-4"><span class="text-xl">&#x1f6e1;</span> <span class="text-yellow-400">Trust Trigger Agency</span></div><p class="text-zinc-400 text-sm">Helping healthcare practices turn websites into patient booking engines.</p></div>
-<div><p class="text-sm font-bold uppercase tracking-wider text-emerald-400 mb-4">Service</p><ul class="space-y-3 text-sm font-medium"><li><a href="https://trust-trigger-api.onrender.com/home" class="text-zinc-300 hover:text-white">Home</a></li><li><a href="https://trust-trigger-api.onrender.com/competitor-insights" class="text-zinc-300 hover:text-white">Compare Competitors</a></li><li><a href="https://calendly.com/mrfcmo/ai-readiness-review-call-clone?month=2026-09" class="text-zinc-300 hover:text-white">Book a Review</a></li></ul></div>
-</div>
-<div class="border-t border-zinc-800 mt-8 pt-6 text-sm font-medium text-center"><p class="text-yellow-400">&copy; 2025 Trust Trigger Agency&trade; &middot; The Trust Trigger Transformation Method&trade;</p></div>
+<footer class="bg-zinc-900 text-zinc-300 py-10 px-6">
+<div class="max-w-6xl mx-auto text-center text-sm">
+<p class="text-yellow-400">&copy; 2025 Trust Trigger Agency&trade; &middot; The Trust Trigger Transformation Method&trade;</p>
 </div>
 </footer>
 
 <script>
-var API='';function $(i){return document.getElementById(i);}
-function h(e){e.classList.add('hidden');}function s(e){e.classList.remove('hidden');}
-function al(step){
-  var steps=['s1','s2','s3','s4','s5'],dots=['d1','d2','d3','d4','d5'],msgs=['Analysing website structure...','Checking trust signals...','Evaluating social proof...','Mapping conversion journey...','Finalising your Trust Trigger Report...'];
-  for(var i=0;i<steps.length;i++){
-    var el=$(steps[i]),dt=$(dots[i]);
-    if(i<step){
-      el.className='w-7 h-7 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm font-bold shrink-0';el.textContent='&#10003;';dt.textContent='&#10003;';dt.className='text-emerald-600 text-sm font-medium';
-    }else if(i===step){
-      el.className='w-7 h-7 rounded-full bg-teal-500 text-white flex items-center justify-center text-sm font-bold shrink-0 pulse-dot';dt.innerHTML='<span class="pulse-dot">&#9203;</span>';dt.className='text-teal-600 text-sm font-medium';
-    }
-  }
-  if(step<msgs.length)$('loadingStatus').textContent=msgs[step];
-}
+function $(i){return document.getElementById(i);}
+function h(e){e.classList.add('hidden');}
+function s(e){e.classList.remove('hidden');}
+
 function generate(){
   var n=$('fullName').value.trim(),u=$('website').value.trim(),e=$('email').value.trim();
-  if(!n||!u||!e){alert('Please fill in all fields.');return;}
-  h($('inputSection'));h($('resultsSection'));h($('ctaSection'));s($('loadingSection'));al(0);
-  var si=setInterval(function(){for(var i=0;i<5;i++){if($('s'+(i+1)).classList.contains('pulse-dot')){if(i+1<5)al(i+1);break;}}},4000);
-  fetch('/api/v1/public/trust-snapshot',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({full_name:n,website:u,email:e})})
-  .then(function(r){return r.json();}).then(function(d){
-    clearInterval(si);h($('loadingSection'));if(d.error){alert(d.error);s($('inputSection'));return;}
-    setTimeout(function(){showReport(d);},5000);
+  if(!n||!u||!e){alert('Fill in all fields.');return;}
+  h($('inputSection'));h($('resultsSection'));s($('loadingSection'));
+  $('loadingText').textContent='Scanning your website...';
+
+  fetch('/api/v1/public/trust-snapshot',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({full_name:n,website:u,email:e})
+  })
+  .then(function(r){return r.json();})
+  .then(function(d){
+    h($('loadingSection'));
+    if(d.error){alert(d.error);s($('inputSection'));return;}
+    showReport(d,n,u);
+  })
+  .catch(function(){
+    h($('loadingSection'));
+    alert('Network error. Please try again.');
+    s($('inputSection'));
   });
 }
-function gl(s){if(s>=90)return'Excellent';if(s>=75)return'Good';if(s>=55)return'Average';if(s>=35)return'Weak';return'Critical';}
-function showReport(d){
-  var sc=d.score||0;h($('loadingSection'));s($('resultsSection'));
-  var summaries={Excellent:'Your website passes 9 out of 9 trust standards. Visitors have every reason to trust you and reach out.',Good:'Your website passes 7 out of 9 trust standards. Minor gaps are preventing a portion of visitors from converting.',Average:'Your website passes 5 out of 9 trust standards. You have a solid foundation but significant trust signals are missing.',Weak:'Your website passes 3 out of 9 trust standards. Most visitors will not feel confident enough to contact you.',Critical:'Your website passes fewer than 3 of 9 trust standards. It is actively losing patients who land on your site.'};
-  var now=new Date();var pills=d.pillars||[];
+
+function grade(s){if(s>=90)return'Excellent';if(s>=75)return'Good';if(s>=55)return'Average';if(s>=35)return'Weak';return'Critical';}
+
+function showReport(d,n,u){
+  var sc=d.score||0;
+  var g=grade(sc);
+  var summaries={Excellent:'Your website is a strong trust engine. Visitors feel confident reaching out.',Good:'You are building trust well. Minor gaps are preventing some conversions.',Average:'Your website is losing potential customers. The gaps below are costing you enquiries.',Weak:'Significant trust gaps found. Most visitors are likely leaving.',Critical:'Critical trust issues detected. Your website is actively repelling visitors.'};
+
+  // Platform badge
+  var platform=d.platform||'unknown';
+  var isWP=d.is_wordpress||false;
+  var platHtml='';
+  if(isWP){
+    platHtml='<div class="rounded-xl border border-emerald-200 bg-emerald-50 p-4 mb-6 text-center"><span class="inline-flex items-center gap-2 text-sm font-semibold text-emerald-800"><span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span> WordPress Site Detected &mdash; Content can be published directly to your existing site (styled by your theme)</span></div>';
+  } else {
+    platHtml='<div class="rounded-xl border border-amber-200 bg-amber-50 p-4 mb-6 text-center"><span class="inline-flex items-center gap-2 text-sm font-semibold text-amber-800"><span class="w-3 h-3 rounded-full bg-amber-500"></span> Custom Platform / No Site &mdash; We will build you a brand new dedicated website</span></div>';
+  }
+
+  var pills=d.pillars||[];
   var labels={online_presence:'Online Presence',reputation:'Reputation',engagement:'Engagement',transparency:'Transparency',technical:'Technical Health'};
-  var pillHtml='';pills.forEach(function(p){var l=labels[p.name]||p.label;var pc=Math.round(p.percentage);var col=pc>=80?'#14b8a6':pc>=60?'#eab308':pc>=40?'#f97316':'#ef4444';pillHtml+='<div class="rounded-xl border border-zinc-200 bg-white p-4"><div class="flex justify-between items-center mb-2"><span class="font-semibold text-zinc-800">'+l+'</span><span class="font-bold" style="color:'+col+'">'+pc+'</span></div><div class="h-2.5 rounded-full bg-zinc-200 overflow-hidden"><div class="h-full rounded-full" style="width:'+pc+'%;background:'+col+'"></div></div></div>';});
-  var issuesHtml='';var issues=d.issues||[];if(issues.length){issuesHtml='<div class="rounded-2xl border border-emerald-200 bg-white shadow-xl p-6 sm:p-8"><h3 class="font-bold text-zinc-900 mb-4">Trust Gaps Identified</h3>';issues.forEach(function(iss){issuesHtml+='<div class="flex items-start gap-3 p-4 rounded-xl border border-red-100 bg-red-50 mb-3"><span class="text-red-500 font-bold mt-0.5">&#9888;&#65039;</span><div><p class="font-semibold text-zinc-900">'+iss.title+'</p><p class="text-sm text-zinc-600 mt-1">'+iss.detail+'</p></div></div>';});issuesHtml+='</div>';}
-  var stdHtml='';var stds=d.standards||[];var pcnt=0;var passedNames=[];var failedNames=[];stds.forEach(function(st){if(st.passed){pcnt++;var lb=st.name.replace(/([A-Z])/g,' $1').replace(/^./,function(s){return s.toUpperCase();}).trim();if(st.name==='Https')lb='HTTPS';if(st.name==='Cta')lb='Clear Calls to Action';if(st.name==='Faq')lb='FAQ Section';passedNames.push(lb);stdHtml+='<div class="flex items-center gap-2 p-3 rounded-lg border border-emerald-200 bg-white"><span class="text-teal-600 font-bold">&#10003;</span><span class="text-sm font-medium text-zinc-800">'+lb+'</span></div>';}else{var lb=st.name.replace(/([A-Z])/g,' $1').replace(/^./,function(s){return s.toUpperCase();}).trim();if(st.name==='Https')lb='HTTPS';if(st.name==='Cta')lb='Clear Calls to Action';if(st.name==='Faq')lb='FAQ Section';failedNames.push(lb);}});
-  var winCopy='';if(passedNames.length>0){winCopy='<p class="text-sm text-zinc-600 mb-2 font-medium">Your website passes <strong class="text-emerald-700">'+pcnt+' of '+stds.length+' trust standards</strong>. These are working in your favour:</p>';}else{winCopy='<p class="text-sm text-zinc-600 mb-2 font-medium">Your website currently passes <strong class="text-amber-700">0 of '+stds.length+' trust standards</strong>. Every area needs attention.</p>';}
-  var gapCopy='';if(failedNames.length>0){gapCopy='<p class="text-sm text-zinc-600 mb-4 font-medium"><strong class="text-red-700">'+failedNames.length+' of '+stds.length+' standards</strong> are missing. These gaps are costing you patient enquiries:</p>';}
-  var rs=$('resultsSection');rs.innerHTML='<div class="rounded-2xl border border-emerald-200 bg-white shadow-xl p-6 sm:p-8"><p class="text-xs font-bold uppercase tracking-wider text-emerald-700 mb-1">Your Trust Trigger Score</p><div class="flex flex-col sm:flex-row items-center gap-8"><div class="relative w-36 h-36 flex items-center justify-center shrink-0"><svg class="w-36 h-36 -rotate-90" viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="none" stroke="#e5e7eb" stroke-width="8"/><circle id="scoreCircle" cx="60" cy="60" r="52" fill="none" stroke="#14b8a6" stroke-width="8" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7" style="transition:stroke-dashoffset 1.2s"/></svg><div class="absolute text-center"><span id="scoreNum" class="text-5xl font-extrabold text-zinc-900">0</span><span class="text-xs font-semibold text-zinc-500">/100</span></div></div><div><h2 class="text-2xl sm:text-3xl font-bold mb-1">'+gl(sc)+'</h2><p class="text-lg font-bold text-zinc-900">'+$('fullName').value+'</p><p class="text-sm text-zinc-500">'+$('website').value+'</p><p class="text-sm text-zinc-700 mt-3 max-w-lg leading-relaxed font-medium">'+summaries[gl(sc)]+'</p><div class="flex flex-wrap gap-4 mt-4 text-sm text-zinc-600 font-medium"><span>&#128197; '+now.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})+'</span><span>&#128202; '+(d.pillars?d.pillars.length:0)+' pillars</span><span>&#9888;&#65039; '+(d.issues_found||0)+' issues</span></div></div></div></div><div class="rounded-2xl border border-emerald-200 bg-white shadow-xl p-6 sm:p-8 mt-8"><h3 class="font-bold text-zinc-900 mb-1">The 5 Trust Pillars</h3><p class="text-sm text-zinc-600 mb-6 font-medium">Your website scored across each dimension of trust</p><div class="grid sm:grid-cols-2 gap-4">'+pillHtml+'</div></div>'+issuesHtml+(stdHtml?'<div class="rounded-2xl border border-emerald-200 bg-emerald-50 shadow-xl p-6 sm:p-8 mt-8"><h3 class="font-bold text-zinc-900 mb-1">&#10003; Where You Are Winning</h3>'+winCopy+'<div class="grid sm:grid-cols-2 gap-3 mt-4">'+stdHtml+'</div></div>':'')+(gapCopy?'<div class="rounded-2xl border border-red-200 bg-red-50 shadow-xl p-6 sm:p-8 mt-8"><h3 class="font-bold text-red-900 mb-1">&#9888;&#65039; Where You Are Missing Standards</h3>'+gapCopy+'</div>':'')+'<div class="text-center mt-8"><a href="https://calendly.com/mrfcmo/ai-readiness-review-call-clone?month=2026-09" class="rounded-xl bg-teal-500 px-6 py-3.5 text-base font-bold text-white shadow-lg hover:bg-teal-400 transition">Book Your Free Review &rarr;</a></div>';
-  s($('ctaSection'));
-  setTimeout(function(){var circ=$('scoreCircle');var r=52,cl=2Math.PIr;circ.style.strokeDashoffset=cl-(sc/100)*cl;},200);
-  var ct=0;var ti=setInterval(function(){ct++;if(ct>sc){clearInterval(ti);}$('scoreNum').textContent=ct;},20);
-  rs.querySelector('.rounded-2xl').scrollIntoView({behavior:'smooth',block:'start'});
+  var pillHtml='';
+  pills.forEach(function(p){
+    var l=labels[p.name]||p.label;
+    var pc=Math.round(p.percentage);
+    var c=pc>=80?'#14b8a6':pc>=60?'#eab308':pc>=40?'#f97316':'#ef4444';
+    pillHtml+='<div class="rounded-xl border border-zinc-200 bg-white p-4"><div class="flex justify-between items-center mb-2"><span class="font-semibold text-zinc-800">'+l+'</span><span class="font-bold" style="color:'+c+'">'+pc+'%</span></div><div class="h-2.5 rounded-full bg-zinc-200 overflow-hidden"><div class="h-full rounded-full" style="width:'+pc+'%;background:'+c+'"></div></div></div>';
+  });
+
+  var stds=d.standards||[];
+  var passedStds=[],failedStds=[];
+  stds.forEach(function(st){
+    var lb=st.name.replace(/([A-Z])/g,' $1').replace(/^./,function(s){return s.toUpperCase();}).trim();
+    if(st.name==='Https')lb='HTTPS';
+    if(st.name==='Cta')lb='Clear Calls to Action';
+    if(st.name==='Faq')lb='FAQ Section';
+    if(st.passed){passedStds.push(lb);}else{failedStds.push(lb);}
+  });
+
+  var stdHtml='';
+  if(passedStds.length>0){
+    stdHtml='<h3 class="font-bold text-zinc-900 mb-3">✓ What is Working ('+passedStds.length+'/'+stds.length+')</h3><div class="grid sm:grid-cols-2 gap-2">';
+    passedStds.forEach(function(lb){stdHtml+='<div class="flex items-center gap-2 p-3 rounded-lg border border-emerald-200 bg-white"><span class="text-teal-600 font-bold">✓</span><span class="text-sm text-zinc-800">'+lb+'</span></div>';});
+    stdHtml+='</div>';
+  }
+  if(failedStds.length>0){
+    stdHtml+='<h3 class="font-bold text-red-800 mb-3 mt-6">✗ Missing ('+failedStds.length+'/'+stds.length+')</h3><div class="grid sm:grid-cols-2 gap-2">';
+    failedStds.forEach(function(lb){stdHtml+='<div class="flex items-center gap-2 p-3 rounded-lg border border-red-200 bg-red-50"><span class="text-red-500 font-bold">✗</span><span class="text-sm text-zinc-800">'+lb+'</span></div>';});
+    stdHtml+='</div>';
+  }
+
+  var issues=d.issues||[];
+  var issuesHtml='';
+  if(issues.length>0){
+    issuesHtml='<h3 class="font-bold text-zinc-900 mb-3">⚠ Priority Gaps</h3>';
+    issues.forEach(function(iss){
+      issuesHtml+='<div class="flex items-start gap-3 p-4 rounded-xl border border-red-100 bg-red-50 mb-3"><span class="text-red-500 font-bold mt-0.5">⚠</span><div><p class="font-semibold text-zinc-900">'+iss.title+'</p><p class="text-sm text-zinc-600 mt-1">'+iss.detail+'</p></div></div>';
+    });
+  }
+
+  var now=new Date();
+  var html='';
+  html+='<div class="rounded-2xl border border-emerald-200 bg-white shadow-xl p-6 sm:p-8">';
+  html+=platHtml;
+  html+='<div class="flex flex-col sm:flex-row items-center gap-8"><div class="relative w-36 h-36 flex items-center justify-center shrink-0"><svg class="w-36 h-36 -rotate-90" viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="none" stroke="#e5e7eb" stroke-width="8"/><circle id="scoreCircle" cx="60" cy="60" r="52" fill="none" stroke="#14b8a6" stroke-width="8" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7"/></svg><div class="absolute text-center"><span id="scoreNum" class="text-5xl font-extrabold text-zinc-900">0</span><span class="text-xs font-semibold text-zinc-500">/100</span></div></div><div><p class="text-xs font-bold uppercase tracking-wider text-emerald-700 mb-1">Trust Trigger Score</p><h2 class="text-2xl font-bold text-zinc-900">'+g+'</h2><p class="font-bold text-zinc-900 mt-1">'+n+'</p><p class="text-sm text-zinc-500 break-all">'+u+'</p><p class="text-sm text-zinc-700 mt-3">'+summaries[g]+'</p><div class="flex flex-wrap gap-4 mt-4 text-sm text-zinc-600"><span>📅 '+now.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})+'</span><span>📊 '+pills.length+' pillars</span><span>🔍 '+issues.length+' issues</span></div></div></div></div>';
+  if(pills.length>0){
+    html+='<div class="rounded-2xl border border-emerald-200 bg-white shadow-xl p-6 mt-6"><h3 class="font-bold text-zinc-900 mb-4">Trust Pillar Breakdown</h3><div class="grid sm:grid-cols-2 gap-4">'+pillHtml+'</div></div>';
+  }
+  if(stdHtml){
+    html+='<div class="rounded-2xl border border-emerald-200 bg-emerald-50 shadow-xl p-6 mt-6">'+stdHtml+'</div>';
+  }
+  if(issuesHtml){
+    html+='<div class="rounded-2xl border border-red-200 bg-red-50 shadow-xl p-6 mt-6">'+issuesHtml+'</div>';
+  }
+  html+='<div class="text-center mt-8"><div class="rounded-2xl border-2 border-teal-500 bg-white shadow-xl p-8"><h3 class="text-xl font-bold text-zinc-900 mb-3">Want us to fix these gaps?</h3><p class="text-zinc-600 mb-6">Book a free 20-minute call and we will walk through your report together.</p><a href="https://calendly.com/mrfcmo/ai-readiness-review-call-clone" class="inline-block rounded-xl bg-teal-500 px-6 py-3 text-base font-bold text-white shadow-lg hover:bg-teal-400 transition">Book Your Free Review &rarr;</a></div></div>';
+
+  $('resultsSection').innerHTML=html;
+  s($('resultsSection'));
+
+  var circ=$('scoreCircle');
+  if(circ){
+    var r=52;
+    var cl=2Math.PIr;
+    setTimeout(function(){circ.style.strokeDashoffset=cl-(sc/100)*cl;},300);
+  }
+  var ct=0;
+  var ti=setInterval(function(){ct++;if(ct>sc||ct>100){clearInterval(ti);}$('scoreNum').textContent=ct;},15);
 }
 </script>
 </body>
 </html>"""
 
 @router.get("", response_class=HTMLResponse)
-async def get_extensive_report_page():
+async def get_page():
     return PAGE
 
 @router.get("/", response_class=HTMLResponse)
-async def get_extensive_report_page_root():
+async def get_page_root():
     return PAGE
