@@ -42,9 +42,9 @@ class TrustScoreRecord(Base):
     # Pillar maxes
     pillar_online_presence_max: Mapped[int] = mapped_column(Integer, default=25)
     pillar_reputation_max: Mapped[int] = mapped_column(Integer, default=30)
-    pillar_engagement_max: Mapped[int] = mapped_column(Integer, default=20)
+    pillar_engagement_max: Mapped[int] = mapped_column(Integer, default=50)
     pillar_transparency_max: Mapped[int] = mapped_column(Integer, default=15)
-    pillar_technical_max: Mapped[int] = mapped_column(Integer, default=10)
+    pillar_technical_max: Mapped[int] = mapped_column(Integer, default=25)
 
     # Improvement
     improvements: Mapped[list] = mapped_column(JSON, default=list)
@@ -80,7 +80,7 @@ PILLAR_MAPPING = {
     },
     "engagement": {
         "label": "Engagement",
-        "max": 20,
+        "max": 50,
         "standards": {
             "website": ["cta", "contact_page", "service_pages"],
             "google_business": ["photos"],
@@ -98,7 +98,7 @@ PILLAR_MAPPING = {
     },
     "technical": {
         "label": "Technical Health",
-        "max": 10,
+        "max": 25,
         "standards": {
             "website": ["mobile_responsive"],
             "google_business": [],
