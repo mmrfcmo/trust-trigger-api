@@ -7,7 +7,7 @@ PAGE = """<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Deep Trust Report | TAA — Trust Trigger Agency</title>
+<title>Deep Trust Report | TTA — Trust Trigger Agency</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap">
@@ -15,7 +15,7 @@ PAGE = """<!DOCTYPE html>
 <style>
 body{font-family:'Inter',system-ui,sans-serif}
 .green1{background:linear-gradient(135deg,#064e3b,#065f46,#047857)}
-.spinner{border:3px solid #e5e7eb;border-top:3px solid #14b8a6;border-radius:50%;width:32px;height:32px;animation:s .8s linear infinite}@keyframes s{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.spinner{border:3px solid #e5e7eb;border-top:3px solid #f59e0b;border-radius:50%;width:32px;height:32px;animation:s .8s linear infinite}@keyframes s{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
 .score-ring{transition:stroke-dashoffset 1.2s ease-out}
 </style>
 </head>
@@ -23,7 +23,7 @@ body{font-family:'Inter',system-ui,sans-serif}
 
 <nav class="bg-zinc-900 border-b border-zinc-700 h-14 flex items-center px-6">
 <div class="max-w-5xl mx-auto w-full flex items-center justify-between">
-<a href="/home" class="flex items-center gap-2 text-lg font-extrabold text-yellow-400"><span class="w-8 h-8 rounded-lg bg-teal-600 text-white flex items-center justify-center text-xs font-bold">TAA</span> <span class="hidden sm:inline">Trust Trigger Agency</span></a>
+<a href="/home" class="flex items-center gap-2 text-lg font-extrabold text-yellow-400"><span class="w-8 h-8 rounded-lg bg-amber-500 text-white flex items-center justify-center text-xs font-bold">TTA</span> <span class="hidden sm:inline">Trust Trigger Agency</span></a>
 </div>
 </nav>
 
@@ -41,7 +41,7 @@ body{font-family:'Inter',system-ui,sans-serif}
 <input id="_n" type="text" placeholder="Business name" class="w-full rounded-lg border border-zinc-200 px-3 py-2.5 text-sm mb-2.5">
 <input id="_u" type="text" placeholder="Website URL" class="w-full rounded-lg border border-zinc-200 px-3 py-2.5 text-sm mb-2.5">
 <input id="_e" type="email" placeholder="Your email" class="w-full rounded-lg border border-zinc-200 px-3 py-2.5 text-sm mb-4">
-<button id="_go" class="w-full rounded-lg bg-teal-600 px-4 py-2.5 text-sm font-bold text-white shadow-sm hover:bg-teal-500">Generate Your Trust Report →</button>
+<button id="_go" class="w-full rounded-lg bg-amber-500 px-4 py-2.5 text-sm font-bold text-white shadow-sm hover:bg-amber-400">Generate Your Trust Report →</button>
 <p class="text-xs text-zinc-400 text-center mt-2">Free. No card. Takes 30 seconds.</p>
 </div>
 </div>
@@ -62,7 +62,7 @@ body{font-family:'Inter',system-ui,sans-serif}
 </div>
 
 <footer class="bg-zinc-900 text-zinc-500 py-10 px-6 text-center text-xs">
-<p class="text-yellow-400">&copy; 2025 TAA — Trust Trigger Agency &middot; The Trust Trigger Transformation Method</p>
+<p class="text-yellow-400">&copy; 2025 TTA — Trust Trigger Agency &middot; The Trust Trigger Transformation Method</p>
 </footer>
 
 <script>
@@ -90,7 +90,7 @@ $('_go').onclick=function(){
 };
 
 function gr(s){
-  var weeklyLoss = Math.round((100 - s) / 100  *  10  *  AVG_CUSTOMER_LTV);
+  var weeklyLoss = Math.round((100 - s) / 100  10  AVG_CUSTOMER_LTV);
   var weeklyImpact = Math.round((100 - s) / 100 * 10);
   if(s>=80) return {label:'Strong (B)',color:'text-emerald-700',desc:'Your website builds trust reasonably well, but specific gaps still prevent some visitors from booking.',impact:weeklyImpact+' enquiries/week',loss:'&pound;'+weeklyLoss.toLocaleString()+'/week'};
   if(s>=60) return {label:'Good (C)',color:'text-emerald-600',desc:'Your site is credible but missing key trust signals that convert visitors into customers.',impact:weeklyImpact+' enquiries/week',loss:'&pound;'+weeklyLoss.toLocaleString()+'/week'};
@@ -98,6 +98,34 @@ function gr(s){
   if(s>=20) return {label:'Weak (E)',color:'text-orange-600',desc:'Significant trust gaps. Most visitors leave without contacting you.',impact:weeklyImpact+' enquiries/week',loss:'&pound;'+weeklyLoss.toLocaleString()+'/week'};
   return {label:'At Risk (F)',color:'text-red-600',desc:'Critical trust issues. Your website is actively repelling customers.',impact:weeklyImpact+' enquiries/week',loss:'&pound;'+weeklyLoss.toLocaleString()+'/week'};
 }
+
+var PILLAR_INSIGHTS={
+  'Online Presence':{
+    critical:'Your website is hard to find or looks unprofessional on first glance. Visitors judge your business in under 3 seconds — and they are leaving before they even read your content. Missing or incomplete key pages means every prospect who lands on your site struggles to decide if you are legitimate.',
+    warning:'Your online presence exists but lacks polish. Key pages may be missing or incomplete. Each missing page is a prospect who cannot decide to trust you and leaves for a competitor.',
+    good:'Your online presence is solid. Maintain it to keep your competitive edge.'
+  },
+  'Reputation':{
+    critical:'You have zero or dangerously low social proof online. No reviews, no testimonials, no case studies displayed on your site. 71% of customers check reviews before choosing a business — you are invisible during the most critical part of their decision process. Your competitors are collecting reviews while you remain silent.',
+    warning:'You have some reputation signals but they are not prominent or recent enough. Customers who see testimonials are 58% more likely to book. You are leaving money on the table by not featuring your best reviews.',
+    good:'Your reputation signals are working. Keep collecting and prominently displaying fresh reviews.'
+  },
+  'Engagement':{
+    critical:'Your site has no clear calls-to-action, no visible contact options, and no clear path for visitors to take the next step. You are actively sending ready-to-buy prospects to competitors who make it easy to convert. Every page without a "Book Now" or "Contact Us" button is a silent revenue leak.',
+    warning:'Some calls-to-action exist but they are not prominent or compelling enough. Every extra click a customer makes to contact you reduces conversion by roughly 20%. Your CTAs need to be impossible to miss.',
+    good:'Your engagement flow is solid. Test different CTAs and placements to keep improving conversion rates.'
+  },
+  'Transparency':{
+    critical:'Your business appears faceless online. No About page, no team photos, no credentials, no privacy policy. You are asking visitors to trust a business they cannot see or verify. In competitive markets, a faceless business is an untrusted business — prospects choose the company that shows their people and story.',
+    warning:'Basic information exists but lacks depth and warmth. Detailed About pages with real team photos increase enquiry volume by 20-35%. Customers want to know who they are trusting before they commit.',
+    good:'Your transparency is solid. Customers know who you are and what you stand for.'
+  },
+  'Technical Health':{
+    critical:'Your site has serious technical issues — slow loading, not mobile-friendly, or missing HTTPS. Over 60% of visitors come from mobile devices. If your site does not work perfectly on their phone, they leave within 3 seconds and never return. Google also penalises slow and non-mobile sites in search rankings.',
+    warning:'Some technical issues exist that may be costing you visitors. Page speed and mobile responsiveness directly impact both user trust and Google ranking. Every second of delay reduces conversion by 7%.',
+    good:'Your technical foundation is solid. Fast, secure, and mobile-friendly.'
+  }
+};
 
 var DIAG={
   'Https':{
@@ -131,55 +159,55 @@ var DIAG={
     issue:'No clear calls-to-action telling visitors what to do.',
     means:'Visitors land, browse, then leave. Without a "Book Now" button, you are not asking for the booking.',
     benefit:'A well-placed CTA can double your conversion rate.',
-    findings:['Your site lacks prominent "Book Now" or "Contact Us" buttons above the fold','There is no clear next step on service pages -- customers read and then hit a dead end','No sticky header or floating CTA that follows the user as they scroll'],
-    bizImplications:['Without explicit calls-to-action, visitors consume content and leave without taking action -- conversion rates drop by 50-70%','Customers are often on mobile and expect a one-tap call or booking button -- without it, they bounce','Each service page without a CTA is a missed booking opportunity worth thousands in customer LTV'],
-    notfixReasons:['Every visitor who reads a service page and finds no "Book Now" button is a lost booking -- typically 5-10 per week','Without CTAs, your website acts as a brochure rather than a revenue channel -- the difference between &pound;0 and &pound;25K+/month from your site','80% of website visitors use mobile -- a floating "Call Now" button can double phone enquiries overnight'],
-    considerations:['A single well-placed CTA button costs nothing to add but can generate 4-8 new bookings per week worth &pound;14K-&pound;30K/year in customer LTV','Customers on your site have high intent -- failing to ask for the booking is the most expensive mistake in marketing','Every CTA you add shortens the time between interested and booked, reducing competitor exposure']
+    findings:['Your site lacks prominent "Book Now" or "Contact Us" buttons above the fold','There is no clear next step on service pages — customers read and then hit a dead end','No sticky header or floating CTA that follows the user as they scroll'],
+    bizImplications:['Without explicit calls-to-action, visitors consume content and leave without taking action — conversion rates drop by 50-70%','Customers are often on mobile and expect a one-tap call or booking button — without it, they bounce','Each service page without a CTA is a missed booking opportunity worth thousands in customer LTV'],
+    notfixReasons:['Every visitor who reads a service page and finds no "Book Now" button is a lost booking — typically 5-10 per week','Without CTAs, your website acts as a brochure rather than a revenue channel — the difference between &pound;0 and &pound;25K+/month from your site','80% of website visitors use mobile — a floating "Call Now" button can double phone enquiries overnight'],
+    considerations:['A single well-placed CTA button costs nothing to add but can generate 4-8 new bookings per week worth &pound;14K-&pound;30K/year in customer LTV','Customers on your site have high intent — failing to ask for the booking is the most expensive mistake in marketing','Every CTA you add shortens the time between "interested" and "booked", reducing competitor exposure']
   },
   'testimonials':{
     issue:'No customer reviews or testimonials displayed.',
     means:'Social proof is everything. Without reviews, new visitors have no reason to trust you.',
     benefit:'Displaying reviews builds instant credibility. Customers who see testimonials are 58% more likely to book.',
     findings:['Your site displays no customer reviews, testimonials, or case studies','There are no before/after images or outcome stories','Online reviews exist but are not embedded or referenced on your website'],
-    bizImplications:['71% of customers read online reviews before choosing a provider -- without social proof on your site, they check elsewhere and may book a competitor','Website visitors who see testimonials convert at 58% higher rates than those who do not','Without customer stories, your service pages lack the emotional proof that justifies your pricing'],
-    notfixReasons:['Customers who leave your site to check reviews may not return -- 3-5 enquiries per week lost to competitors with stronger social proof','Testimonials increase perceived value by 25-40%, directly supporting your pricing. Without them, customers are more price-sensitive','Case studies of successful outcomes build authority and justify premium fees for specialist services'],
-    considerations:['Embedding 5-8 customer reviews on your site can increase conversion by up to 58% -- this typically recovers 4-6 bookings/week worth &pound;14K-&pound;22K/year','A single video testimonial from a happy customer carries more trust value than any amount of marketing copy','Customers trust peer experiences over marketing claims -- testimonials are the most cost-effective trust builder']
+    bizImplications:['71% of customers read online reviews before choosing a provider — without social proof on your site, they check elsewhere and may book a competitor','Website visitors who see testimonials convert at 58% higher rates than those who do not','Without customer stories, your service pages lack the emotional proof that justifies your pricing'],
+    notfixReasons:['Customers who leave your site to check reviews may not return — 3-5 enquiries per week lost to competitors with stronger social proof','Testimonials increase perceived value by 25-40%, directly supporting your pricing. Without them, customers are more price-sensitive','Case studies of successful outcomes build authority and justify premium fees for specialist services'],
+    considerations:['Embedding 5-8 customer reviews on your site can increase conversion by up to 58% — this typically recovers 4-6 bookings/week worth &pound;14K-&pound;22K/year','A single video testimonial from a happy customer carries more trust value than any amount of marketing copy','Customers trust peer experiences over marketing claims — testimonials are the most cost-effective trust builder']
   },
   'faq':{
     issue:'No FAQ section addressing common customer questions.',
     means:'Every customer asks: cost, duration, process, booking. Without answers, they call a competitor who has answers ready.',
     benefit:'FAQs answer objections before they arise. Saves staff time, builds trust.',
-    findings:['Your site has no FAQ section answering the most common customer questions','Key questions -- service costs, timeline, process -- are not addressed','Customers cannot self-serve basic information and must call or email for answers'],
-    bizImplications:['Without FAQs, every potential customer hits the same objections with no answers -- increasing friction and abandonment','Staff spend 30-50% of their time answering the same questions that a FAQ page could handle','Customers who have to call for basic information often comparison-shop before booking -- giving competitors a chance to win them'],
-    notfixReasons:['Each day without FAQs costs 10-20 minutes of staff time per repeated question -- adding up to 5-10 hours/week of wasted labour','FAQ pages reduce phone enquiry volume by 25-30%, freeing staff for booking conversations rather than information calls','Without cost information on your site, price-sensitive customers self-select out before even contacting you -- losing 3-5 potential bookings/week'],
-    considerations:['An FAQ page addressing 15-20 common questions can save 5-10 hours of staff time per week -- worth &pound;6K-&pound;12K/year in labour hours','Customers who find answers on your site are 2x more likely to book than those who have to call for information','Putting pricing transparency in FAQs filters for qualified, committed customers -- reducing wasted phone calls by 30%']
+    findings:['Your site has no FAQ section answering the most common customer questions','Key questions — service costs, timeline, process — are not addressed','Customers cannot self-serve basic information and must call or email for answers'],
+    bizImplications:['Without FAQs, every potential customer hits the same objections with no answers — increasing friction and abandonment','Staff spend 30-50% of their time answering the same questions that a FAQ page could handle','Customers who have to call for basic information often comparison-shop before booking — giving competitors a chance to win them'],
+    notfixReasons:['Each day without FAQs costs 10-20 minutes of staff time per repeated question — adding up to 5-10 hours/week of wasted labour','FAQ pages reduce phone enquiry volume by 25-30%, freeing staff for booking conversations rather than information calls','Without cost information on your site, price-sensitive customers self-select out before even contacting you — losing 3-5 potential bookings/week'],
+    considerations:['An FAQ page addressing 15-20 common questions can save 5-10 hours of staff time per week — worth &pound;6K-&pound;12K/year in labour hours','Customers who find answers on your site are 2x more likely to book than those who have to call for information','Putting pricing transparency in FAQs filters for qualified, committed customers — reducing wasted phone calls by 30%']
   },
   'service_pages':{
     issue:'Services not clearly detailed on your website.',
     means:'Customers arrive looking for specific services. If they cannot find clear info, they leave.',
     benefit:'Detailed service pages establish you as an expert and answer questions before they are asked.',
-    findings:['Your service pages lack depth -- little detail on what each service involves','There is no information about outcomes, process, or what to expect','Prices or price ranges are not visible for common services'],
-    bizImplications:['Customers searching for a specific service will choose the business that explains it clearly -- you lose to competitors with detailed pages','Thin service pages signal low expertise to both customers and search engines, harming organic rankings','Without outcome information, customers cannot visualise the benefit, reducing perceived value and willingness to book'],
-    notfixReasons:['Detailed service pages rank higher in Google and drive 3-5x more organic traffic than thin pages -- you are losing 8-12 visits per service per month','Customers who cannot find service details leave within 15 seconds -- costing 4-7 lost opportunities per week','Without pricing transparency on key services, customers assume costs are higher than they are and self-select out'],
-    considerations:['Each well-written service page can generate 2-4 direct booking enquiries per month -- worth &pound;7K-&pound;14K/year per page in customer LTV','Customers who read detailed service information before calling are 60% more likely to book on the first contact','Investing in 5 detailed service pages typically recovers the cost of a full website rebuild within 3-4 months']
+    findings:['Your service pages lack depth — little detail on what each service involves','There is no information about outcomes, process, or what to expect','Prices or price ranges are not visible for common services'],
+    bizImplications:['Customers searching for a specific service will choose the business that explains it clearly — you lose to competitors with detailed pages','Thin service pages signal low expertise to both customers and search engines, harming organic rankings','Without outcome information, customers cannot visualise the benefit, reducing perceived value and willingness to book'],
+    notfixReasons:['Detailed service pages rank higher in Google and drive 3-5x more organic traffic than thin pages — you are losing 8-12 visits per service per month','Customers who cannot find service details leave within 15 seconds — costing 4-7 lost opportunities per week','Without pricing transparency on key services, customers assume costs are higher than they are and self-select out'],
+    considerations:['Each well-written service page can generate 2-4 direct booking enquiries per month — worth &pound;7K-&pound;14K/year per page in customer LTV','Customers who read detailed service information before calling are 60% more likely to book on the first contact','Investing in 5 detailed service pages typically recovers the cost of a full website rebuild within 3-4 months']
   },
   'privacy_policy':{
     issue:'No privacy policy or GDPR compliance page.',
     means:'Customers need to know their data is safe. Missing privacy policy creates legal risk too.',
     benefit:'A privacy policy builds trust and keeps you compliant with GDPR.',
-    findings:['Your site has no visible privacy policy -- customers have no way to understand how their data is handled','There is no cookie consent banner or data processing notice','Customer data submission (forms, bookings) happens without a clear data protection statement'],
-    bizImplications:['Privacy-conscious customers will not submit personal details without knowing how data is handled -- losing form completions and bookings','GDPR non-compliance can result in fines of up to 4% of annual turnover or &pound;17.5M, whichever is higher','Customer data is classified as special category data under GDPR -- the requirements and risks are significant'],
-    notfixReasons:['Without a privacy policy, you risk ICO enforcement action -- businesses have received fines of &pound;10K-&pound;60K for basic GDPR failures','Privacy-conscious customers (25-35% of visitors) will not submit contact forms -- losing 2-4 potential bookings per week','Missing privacy pages undermine trust signals for AI systems and search engines, reducing your overall trust score'],
-    considerations:['A compliant privacy policy takes one hour to draft and removes a significant legal risk -- the cost of non-compliance is far higher than the effort to fix it','Customers are 2x more likely to submit their details when a privacy statement is visible next to the form','Displaying GDPR compliance actively builds trust with privacy-aware customer segments -- a competitive advantage']
+    findings:['Your site has no visible privacy policy — customers have no way to understand how their data is handled','There is no cookie consent banner or data processing notice','Customer data submission (forms, bookings) happens without a clear data protection statement'],
+    bizImplications:['Privacy-conscious customers will not submit personal details without knowing how data is handled — losing form completions and bookings','GDPR non-compliance can result in fines of up to 4% of annual turnover or &pound;17.5M, whichever is higher','Customer data is classified as special category data under GDPR — the requirements and risks are significant'],
+    notfixReasons:['Without a privacy policy, you risk ICO enforcement action — businesses have received fines of &pound;10K-&pound;60K for basic GDPR failures','Privacy-conscious customers (25-35% of visitors) will not submit contact forms — losing 2-4 potential bookings per week','Missing privacy pages undermine trust signals for AI systems and search engines, reducing your overall trust score'],
+    considerations:['A compliant privacy policy takes one hour to draft and removes a significant legal risk — the cost of non-compliance is far higher than the effort to fix it','Customers are 2x more likely to submit their details when a privacy statement is visible next to the form','Displaying GDPR compliance actively builds trust with privacy-aware customer segments — a competitive advantage']
   },
   'mobile_responsive':{
     issue:'Site not fully optimised for mobile devices.',
     means:'Over 60% of website visits come from phones. If your site is hard to use on mobile, you lose most of your traffic.',
     benefit:'Mobile-friendly sites keep customers engaged and rank higher on Google.',
-    findings:['Your site does not display properly on mobile devices -- text is too small, buttons are hard to tap, content is cut off','Navigation is difficult on phone screens, making it hard for customers to find key information','Page load speed on mobile is slow, causing visitors to leave before the content loads'],
-    bizImplications:['Over 60% of website visits come from mobile devices -- a poor mobile experience alienates the majority of your traffic','Google uses mobile-first indexing -- your mobile experience determines your search ranking for ALL visitors','Mobile users are 3x more likely to leave a site that takes longer than 3 seconds to load'],
-    notfixReasons:['A non-mobile-friendly site loses 60%+ of potential customers before they even see your content -- typically 8-12 lost opportunities per week','Google penalises non-mobile-friendly sites by 3-5 search positions, reducing organic traffic by 40-50%','Mobile bounce rates above 70% indicate your site is actively repelling phone users -- costing an estimated &pound;20K-&pound;40K/year'],
-    considerations:['Making your site mobile-friendly can reduce bounce rates from 70% to 30% and double mobile enquiry volume within weeks','Google mobile-first indexing means your mobile site IS your primary site -- fixing mobile is non-negotiable for search visibility','Customers browsing on their phone are high-intent -- failing to serve them loses bookings you have already earned']
+    findings:['Your site does not display properly on mobile devices — text is too small, buttons are hard to tap, content is cut off','Navigation is difficult on phone screens, making it hard for customers to find key information','Page load speed on mobile is slow, causing visitors to leave before the content loads'],
+    bizImplications:['Over 60% of website visits come from mobile devices — a poor mobile experience alienates the majority of your traffic','Google uses mobile-first indexing — your mobile experience determines your search ranking for ALL visitors','Mobile users are 3x more likely to leave a site that takes longer than 3 seconds to load'],
+    notfixReasons:['A non-mobile-friendly site loses 60%+ of potential customers before they even see your content — typically 8-12 lost opportunities per week','Google penalises non-mobile-friendly sites by 3-5 search positions, reducing organic traffic by 40-50%','Mobile bounce rates above 70% indicate your site is actively repelling phone users — costing an estimated &pound;20K-&pound;40K/year'],
+    considerations:['Making your site mobile-friendly can reduce bounce rates from 70% to 30% and double mobile enquiry volume within weeks','Google mobile-first indexing means your mobile site IS your primary site — fixing mobile is non-negotiable for search visibility','Customers browsing on their phone are high-intent — failing to serve them loses bookings you have already earned']
   }
 };
 
@@ -190,10 +218,10 @@ function render(){
   var h='';
   
   h+='<div class="rounded-xl border border-zinc-200 bg-white shadow-sm p-6">';
-  h+='<div class="flex items-start gap-5"><div class="relative w-20 h-20 shrink-0"><svg class="w-20 h-20 -rotate-90" viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="none" stroke="#e5e7eb" stroke-width="10"/><circle class="score-ring" id="sc" cx="60" cy="60" r="52" fill="none" stroke="#0d9488" stroke-width="10" stroke-dasharray="326.7" stroke-dashoffset="326.7"/></svg><div class="absolute inset-0 flex items-center justify-center"><span class="text-xl font-extrabold text-zinc-900" id="sn">0</span></div></div>';
+  h+='<div class="flex items-start gap-5"><div class="relative w-20 h-20 shrink-0"><svg class="w-20 h-20 -rotate-90" viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="none" stroke="#e5e7eb" stroke-width="10"/><circle class="score-ring" id="sc" cx="60" cy="60" r="52" fill="none" stroke="#f59e0b" stroke-width="10" stroke-dasharray="326.7" stroke-dashoffset="326.7"/></svg><div class="absolute inset-0 flex items-center justify-center"><span class="text-xl font-extrabold text-zinc-900" id="sn">0</span></div></div>';
   h+='<div><p class="text-xs font-bold uppercase tracking-wider text-zinc-500">Trust Trigger Score</p><h2 class="text-xl font-bold text-zinc-900">'+g.label+'</h2><p class="font-semibold text-zinc-800 text-sm">'+N+'</p><p class="text-xs text-zinc-400">'+U+'</p><p class="text-sm text-zinc-600 mt-2">'+g.desc+'</p></div></div>';
 
-  var weeklyLossVal = Math.round((100 - sc) / 100 * 10 * AVG_CUSTOMER_LTV);
+  var weeklyLossVal = Math.round((100 - sc) / 100  10  AVG_CUSTOMER_LTV);
   h+='<div class="mt-4 bg-red-50 border border-red-200 rounded-lg p-4"><p class="text-sm font-bold text-red-800">Estimated Revenue Impact</p><p class="text-sm text-red-700 mt-1">Based on an average customer lifetime value of <strong>&pound;'+AVG_CUSTOMER_LTV.toLocaleString()+'</strong>, your current trust gaps are likely costing you <strong>'+g.impact+'</strong> — approximately <strong>&pound;'+weeklyLossVal.toLocaleString()+'/week</strong> (&pound;'+(weeklyLossVal*52).toLocaleString()+'/year) in missed revenue.</p></div>';
   h+='<div class="mt-3 text-xs text-zinc-500 flex flex-wrap gap-3"><span>'+now.toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"})+'</span><span>'+pills.length+' pillars</span><span>'+iss.length+' issues</span></div>';
   h+='</div>';
@@ -204,15 +232,27 @@ function render(){
   h+='</div>';
   
   if(pills.length){
-    h+='<div class="mt-8"><p class="text-lg font-bold text-zinc-900 mb-1">Trust Pillar Breakdown</p><p class="text-sm text-zinc-500 mb-5">Your website scored across 5 trust dimensions.</p>';
+    h+='<div class="mt-8"><p class="text-lg font-bold text-zinc-900 mb-1">Trust Pillar Breakdown</p><p class="text-sm text-zinc-500 mb-5">Your website scored across 5 trust dimensions. Each pillar reveals a specific reason visitors may leave without converting.</p>';
     pills.forEach(function(p){
       var pc=Math.round(p.percentage),l=p.label||p.name;
       if(pc<1 && p.percentage===0) { pc=0; }
+      var insight = '';
+      var insightColor = '';
+      var pi = PILLAR_INSIGHTS[l];
+      if(pi) {
+        if(pc<40) { insight = pi.critical; insightColor = 'text-red-600'; }
+        else if(pc<80) { insight = pi.warning; insightColor = 'text-amber-600'; }
+        else { insight = pi.good; insightColor = 'text-emerald-600'; }
+      }
       var b=pc>=80?'bg-emerald-500':pc>=60?'bg-amber-500':pc>=40?'bg-orange-500':'bg-red-500';
       var t=pc>=80?'text-emerald-700':pc>=60?'text-amber-700':pc>=40?'text-orange-700':'text-red-700';
       var displayLabel = pc+'%';
-      if(pc===0) { b='bg-zinc-300'; t='text-zinc-500'; displayLabel='Not scored'; }
-      h+='<div class="rounded-xl border border-zinc-200 bg-white shadow-sm p-4 mb-3"><div class="flex justify-between items-center mb-1"><span class="text-sm font-bold text-zinc-900">'+l+'</span><span class="text-sm font-bold '+t+'">'+displayLabel+'</span></div><div class="h-2 bg-zinc-100 rounded-full overflow-hidden"><div class="h-full rounded-full '+b+'" style="width:'+(pc||5)+'%"></div></div></div>';
+      if(pc===0) { b='bg-zinc-300'; t='text-zinc-500'; displayLabel='Not scored'; insight = 'This pillar was not scored because the data was insufficient or unavailable. This itself is a red flag — it means your business is invisible across critical trust dimensions that customers check before converting.'; insightColor = 'text-red-600'; }
+      h+='<div class="rounded-xl border border-zinc-200 bg-white shadow-sm p-4 mb-3">';
+      h+='<div class="flex justify-between items-center mb-1"><span class="text-sm font-bold text-zinc-900">'+l+'</span><span class="text-sm font-bold '+t+'">'+displayLabel+'</span></div>';
+      h+='<div class="h-2 bg-zinc-100 rounded-full overflow-hidden"><div class="h-full rounded-full '+b+'" style="width:'+(pc||5)+'%"></div></div>';
+      if(insight){ h+='<p class="text-xs '+insightColor+' mt-2 leading-relaxed">'+insight+'</p>'; }
+      h+='</div>';
     });
     h+='</div>';
   }
@@ -255,12 +295,12 @@ function render(){
     h+='</div>';
   }
   
-  h+='<div class="mt-10"><div class="rounded-xl border-2 border-teal-600 bg-white shadow-sm p-6">';
-  h+='<p class="text-xs font-bold text-teal-600 uppercase tracking-wider">Our Recommendation</p>';
+  h+='<div class="mt-10"><div class="rounded-xl border-2 border-amber-500 bg-white shadow-sm p-6">';
+  h+='<p class="text-xs font-bold text-amber-600 uppercase tracking-wider">Our Recommendation</p>';
   h+='<p class="text-2xl font-bold text-zinc-900 mt-1 mb-5">Trust Transformation Proposal</p>';
   h+='<div class="bg-zinc-50 border border-zinc-200 rounded-lg p-4 mb-5"><table class="w-full text-sm"><tbody>';
   h+='<tr class="border-b border-zinc-200"><td class="py-2 font-medium">Package</td><td class="py-2 text-right font-bold">Trust Transformation</td></tr>';
-  h+='<tr class="border-b border-zinc-200"><td class="py-2 font-medium">Price</td><td class="py-2 text-right"><span class="text-xl font-extrabold text-teal-700">&pound;995</span><span class="text-xs text-zinc-500 ml-1">one-time</span></td></tr>';
+  h+='<tr class="border-b border-zinc-200"><td class="py-2 font-medium">Price</td><td class="py-2 text-right"><span class="text-xl font-extrabold text-amber-600">&pound;995</span><span class="text-xs text-zinc-500 ml-1">one-time</span></td></tr>';
   var deliveryDays = isWP ? 14 : 28;
   h+='<tr class="border-b border-zinc-200"><td class="py-2 font-medium">Delivery</td><td class="py-2 text-right font-semibold">'+deliveryDays+' days</td></tr>';
   h+='<tr><td class="py-2 font-medium">Projected score</td><td class="py-2 text-right font-semibold text-emerald-700">'+sc+' &rarr; 85+</td></tr>';
@@ -275,7 +315,7 @@ function render(){
   else h+='<li class="flex items-start gap-2"><span class="text-emerald-600">&#10003;</span> Brand new website build (5-7 pages, hosted — 28-day delivery)</li>';
   h+='<li class="flex items-start gap-2"><span class="text-emerald-600">&#10003;</span> Before/after evidence report with score improvement</li>';
   h+='</ul>';
-  h+='<div class="text-center"><a href="https://calendly.com/mrfcmo/ai-readiness-review-call-clone" class="inline-block rounded-lg bg-teal-600 px-8 py-3 text-base font-bold text-white shadow-sm hover:bg-teal-500">Book Your Free 20-Minute Trust Review &rarr;</a><p class="text-xs text-zinc-400 mt-2">Free. No obligation.</p></div>';
+  h+='<div class="text-center"><a href="https://calendly.com/mrfcmo/ai-readiness-review-call-clone" class="inline-block rounded-lg bg-amber-500 px-8 py-3 text-base font-bold text-white shadow-sm hover:bg-amber-400">Book Your Free 20-Minute Trust Review &rarr;</a><p class="text-xs text-zinc-400 mt-2">Free. No obligation.</p></div>';
   h+='</div></div>';
   
   h+='<div class="mt-8"><div class="rounded-xl border border-zinc-200 bg-white shadow-sm p-6">';
@@ -288,12 +328,12 @@ function render(){
     timeline = [['1-2','Strategy &amp; Scope','We review your report. You confirm scope and design preferences.'],['3-10','Design &amp; Build','5-7 page website designed and built on custom platform.'],['11-16','Content Creation','All copy, images, and trust signals integrated into site.'],['17-22','Your Review','Preview link sent. You review and request changes.'],['23-26','Revisions &amp; Polish','We implement your feedback and finalise the site.'],['27-28','Launch &amp; Evidence','Site goes live. Rescan + before/after report with score improvement.']];
   }
   timeline.forEach(function(s){
-    h+='<div class="flex items-start gap-4 mb-4"><span class="shrink-0 w-8 h-8 rounded-full bg-teal-100 text-teal-700 flex items-center justify-center text-sm font-bold">'+s[0]+'</span><div><p class="text-sm font-bold text-zinc-900">'+s[1]+'</p><p class="text-xs text-zinc-500">'+s[2]+'</p></div></div>';
+    h+='<div class="flex items-start gap-4 mb-4"><span class="shrink-0 w-8 h-8 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-sm font-bold">'+s[0]+'</span><div><p class="text-sm font-bold text-zinc-900">'+s[1]+'</p><p class="text-xs text-zinc-500">'+s[2]+'</p></div></div>';
   });
   h+='<div class="mt-4 bg-zinc-50 border border-zinc-200 rounded-lg p-4"><p class="text-sm text-zinc-700">Your time commitment: <strong>~20 minutes total</strong> (one call + one approval). We do the rest.</p></div>';
   h+='</div></div>';
   
-  h+='<div class="mt-8 text-center"><a href="https://calendly.com/mrfcmo/ai-readiness-review-call-clone" class="inline-block rounded-lg bg-teal-600 px-8 py-3.5 text-base font-bold text-white shadow-sm hover:bg-teal-500">Book Your Free Trust Review &rarr;</a></div>';
+  h+='<div class="mt-8 text-center"><a href="https://calendly.com/mrfcmo/ai-readiness-review-call-clone" class="inline-block rounded-lg bg-amber-500 px-8 py-3.5 text-base font-bold text-white shadow-sm hover:bg-amber-400">Book Your Free Trust Review &rarr;</a></div>';
   
   $('results').innerHTML=h;
   s('results');
