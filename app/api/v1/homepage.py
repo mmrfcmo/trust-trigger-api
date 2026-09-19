@@ -27,7 +27,6 @@ PAGE = """<!DOCTYPE html>
   </style>
 </head>
 <body>
-
 <!-- ===== NAV ===== -->
 <nav class="fixed top-0 left-0 right-0 z-50 bg-slate-950/90 backdrop-blur-md border-b border-slate-800">
 <div class="max-w-6xl mx-auto px-6 flex items-center justify-between h-20">
@@ -199,10 +198,10 @@ PAGE = """<!DOCTYPE html>
   <div class="mb-6">
     <p class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">Score Breakdown</p>
     <div class="grid sm:grid-cols-2 gap-3">
-      <div><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Online Presence</span><span class="text-white font-bold">8/25</span></div><div class="h-2 bg-slate-800 rounded-full"><div class="h-32p bg-red-500 rounded-full" style="width:32%"></div></div><p class="text-xs text-red-400 mt-1">Your site is hard to find. Missing key pages. Visitors cannot verify your credibility.</p></div>
-      <div><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Reputation</span><span class="text-white font-bold">6/30</span></div><div class="h-2 bg-slate-800 rounded-full"><div class="h-20p bg-red-500 rounded-full" style="width:20%"></div></div><p class="text-xs text-red-400 mt-1">No social proof. Zero reviews displayed. Customers choose competitors they can see.</p></div>
-      <div><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Engagement</span><span class="text-white font-bold">7/20</span></div><div class="h-2 bg-slate-800 rounded-full"><div class="h-35p bg-amber-500 rounded-full" style="width:35%"></div></div><p class="text-xs text-amber-400 mt-1">No clear calls-to-action. Visitors leave without booking.</p></div>
-      <div><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Transparency</span><span class="text-white font-bold">4/15</span></div><div class="h-2 bg-slate-800 rounded-full"><div class="h-27p bg-red-500 rounded-full" style="width:27%"></div></div><p class="text-xs text-red-400 mt-1">No About page, team photos, or privacy policy. You are asking visitors to trust a faceless business.</p></div>
+      <div><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Online Presence</span><span class="text-white font-bold">8/25</span></div><div class="h-2 bg-slate-800 rounded-full"><div class="h-full bg-red-500 rounded-full" style="width:32%"></div></div><p class="text-xs text-red-400 mt-1">Your site is hard to find. Missing key pages. Visitors cannot verify your credibility.</p></div>
+      <div><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Reputation</span><span class="text-white font-bold">6/30</span></div><div class="h-2 bg-slate-800 rounded-full"><div class="h-full bg-red-500 rounded-full" style="width:20%"></div></div><p class="text-xs text-red-400 mt-1">No social proof. Zero reviews displayed. Customers choose competitors they can see.</p></div>
+      <div><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Engagement</span><span class="text-white font-bold">7/20</span></div><div class="h-2 bg-slate-800 rounded-full"><div class="h-full bg-amber-500 rounded-full" style="width:35%"></div></div><p class="text-xs text-amber-400 mt-1">No clear calls-to-action. Visitors leave without booking.</p></div>
+      <div><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Transparency</span><span class="text-white font-bold">4/15</span></div><div class="h-2 bg-slate-800 rounded-full"><div class="h-full bg-red-500 rounded-full" style="width:27%"></div></div><p class="text-xs text-red-400 mt-1">No About page, team photos, or privacy policy. You are asking visitors to trust a faceless business.</p></div>
       <div class="sm:col-span-2"><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Technical Health</span><span class="text-white font-bold">7/10</span></div><div class="h-2 bg-slate-800 rounded-full"><div class="bg-emerald-500 rounded-full" style="width:70%;height:100%"></div></div><p class="text-xs text-emerald-400 mt-1">Your technical foundation is reasonable.</p></div>
     </div>
   </div>
