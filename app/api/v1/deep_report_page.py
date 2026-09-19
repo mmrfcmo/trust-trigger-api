@@ -14,55 +14,55 @@ PAGE = """<!DOCTYPE html>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
 body{font-family:'Inter',system-ui,sans-serif}
-.green1{background:linear-gradient(135deg,#064e3b,#065f46,#047857)}
+.dark-hero{background:linear-gradient(135deg,#0f172a 0%,#1a2a4a 50%,#78350f 100%)}
 .spinner{border:3px solid #e5e7eb;border-top:3px solid #f59e0b;border-radius:50%;width:32px;height:32px;animation:s .8s linear infinite}@keyframes s{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
 .score-ring{transition:stroke-dashoffset 1.2s ease-out}
 </style>
 </head>
-<body class="bg-stone-50 text-zinc-800">
+<body class="bg-slate-950 text-slate-200">
 
-<nav class="bg-zinc-900 border-b border-zinc-700 h-14 flex items-center px-6">
+<nav class="bg-slate-900 border-b border-slate-800 h-14 flex items-center px-6">
 <div class="max-w-5xl mx-auto w-full flex items-center justify-between">
-<a href="/home" class="flex items-center gap-2 text-lg font-extrabold text-yellow-400"><span class="w-8 h-8 rounded-lg bg-amber-500 text-white flex items-center justify-center text-xs font-bold">TTA</span> <span class="hidden sm:inline">Trust Trigger Agency</span></a>
+<a href="/home" class="flex items-center gap-2"><span class="w-8 h-8 rounded-lg bg-amber-500 text-white flex items-center justify-center text-xs font-bold">TTA</span> <span class="hidden sm:inline text-amber-400 font-extrabold text-lg">Trust Trigger Agency</span></a>
 </div>
 </nav>
 
-<div class="green1 text-white py-16 px-6 text-center">
-<p class="text-xs font-bold uppercase tracking-[.2em] text-teal-300 mb-2">The Trust Trigger Method</p>
+<div class="dark-hero text-white py-16 px-6 text-center">
+<p class="text-xs font-bold uppercase tracking-[.2em] text-amber-300 mb-2">The Trust Trigger Method</p>
 <h1 class="text-3xl sm:text-4xl font-extrabold">Your Trust Trigger Report</h1>
-<p class="text-teal-200 text-sm mt-2 max-w-lg mx-auto">We analyse your website across 14 trust standards — then tell you exactly what's costing you customers and how to fix it.</p>
+<p class="text-slate-300 text-sm mt-2 max-w-lg mx-auto">We analyse your website across 14 trust standards — then tell you exactly what's costing you customers and how to fix it.</p>
 </div>
 
 <div class="max-w-3xl mx-auto px-6 py-10">
 
 <div id="form" class="max-w-md mx-auto">
-<div class="rounded-xl border border-zinc-200 bg-white shadow-sm p-6">
-<p class="text-sm font-bold text-zinc-800 mb-4">Enter a website to analyse</p>
-<input id="_n" type="text" placeholder="Business name" class="w-full rounded-lg border border-zinc-200 px-3 py-2.5 text-sm mb-2.5">
-<input id="_u" type="text" placeholder="Website URL" class="w-full rounded-lg border border-zinc-200 px-3 py-2.5 text-sm mb-2.5">
-<input id="_e" type="email" placeholder="Your email" class="w-full rounded-lg border border-zinc-200 px-3 py-2.5 text-sm mb-4">
+<div class="rounded-xl border border-slate-800 bg-slate-900 shadow-sm p-6">
+<p class="text-sm font-bold text-white mb-4">Enter a website to analyse</p>
+<input id="_n" type="text" placeholder="Business name" class="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2.5 text-sm text-white mb-2.5 placeholder-slate-500 focus:outline-none focus:border-amber-500">
+<input id="_u" type="text" placeholder="Website URL" class="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2.5 text-sm text-white mb-2.5 placeholder-slate-500 focus:outline-none focus:border-amber-500">
+<input id="_e" type="email" placeholder="Your email" class="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2.5 text-sm text-white mb-4 placeholder-slate-500 focus:outline-none focus:border-amber-500">
 <button id="_go" class="w-full rounded-lg bg-amber-500 px-4 py-2.5 text-sm font-bold text-white shadow-sm hover:bg-amber-400">Generate Your Trust Report →</button>
-<p class="text-xs text-zinc-400 text-center mt-2">Free. No card. Takes 30 seconds.</p>
+<p class="text-xs text-slate-500 text-center mt-2">Free. No card. Takes 30 seconds.</p>
 </div>
 </div>
 
 <div id="loading" class="hidden text-center py-16">
 <div class="spinner mx-auto mb-4"></div>
-<p class="text-sm font-semibold text-zinc-700">Scanning your website...</p>
+<p class="text-sm font-semibold text-slate-300">Scanning your website...</p>
 </div>
 
 <div id="error" class="hidden text-center py-10">
-<p class="text-red-600 text-sm font-semibold mb-2">Something went wrong</p>
-<p id="_err" class="text-zinc-500 text-xs mb-3"></p>
-<button onclick="f()" class="rounded-lg bg-zinc-200 px-4 py-2 text-xs font-medium">Try again</button>
+<p class="text-red-400 text-sm font-semibold mb-2">Something went wrong</p>
+<p id="_err" class="text-slate-500 text-xs mb-3"></p>
+<button onclick="f()" class="rounded-lg bg-slate-800 px-4 py-2 text-xs font-medium text-slate-300">Try again</button>
 </div>
 
 <div id="results" class="hidden"></div>
 
 </div>
 
-<footer class="bg-zinc-900 text-zinc-500 py-10 px-6 text-center text-xs">
-<p class="text-yellow-400">&copy; 2025 TTA — Trust Trigger Agency &middot; The Trust Trigger Transformation Method</p>
+<footer class="bg-slate-900 text-slate-500 py-10 px-6 text-center text-xs">
+<p class="text-amber-400">&copy; 2025 TTA — Trust Trigger Agency &middot; The Trust Trigger Transformation Method</p>
 </footer>
 
 <script>
@@ -92,11 +92,11 @@ $('_go').onclick=function(){
 function gr(s){
   var weeklyLoss = Math.round((100 - s) / 100  10  AVG_CUSTOMER_LTV);
   var weeklyImpact = Math.round((100 - s) / 100 * 10);
-  if(s>=80) return {label:'Strong (B)',color:'text-emerald-700',desc:'Your website builds trust reasonably well, but specific gaps still prevent some visitors from booking.',impact:weeklyImpact+' enquiries/week',loss:'&pound;'+weeklyLoss.toLocaleString()+'/week'};
-  if(s>=60) return {label:'Good (C)',color:'text-emerald-600',desc:'Your site is credible but missing key trust signals that convert visitors into customers.',impact:weeklyImpact+' enquiries/week',loss:'&pound;'+weeklyLoss.toLocaleString()+'/week'};
-  if(s>=40) return {label:'Average (D)',color:'text-amber-600',desc:'Your website is losing potential customers. Several trust signals are missing.',impact:weeklyImpact+' enquiries/week',loss:'&pound;'+weeklyLoss.toLocaleString()+'/week'};
-  if(s>=20) return {label:'Weak (E)',color:'text-orange-600',desc:'Significant trust gaps. Most visitors leave without contacting you.',impact:weeklyImpact+' enquiries/week',loss:'&pound;'+weeklyLoss.toLocaleString()+'/week'};
-  return {label:'At Risk (F)',color:'text-red-600',desc:'Critical trust issues. Your website is actively repelling customers.',impact:weeklyImpact+' enquiries/week',loss:'&pound;'+weeklyLoss.toLocaleString()+'/week'};
+  if(s>=80) return {label:'Strong (B)',color:'text-emerald-400',desc:'Your website builds trust reasonably well, but specific gaps still prevent some visitors from booking.',impact:weeklyImpact+' enquiries/week',loss:'&pound;'+weeklyLoss.toLocaleString()+'/week'};
+  if(s>=60) return {label:'Good (C)',color:'text-emerald-400',desc:'Your site is credible but missing key trust signals that convert visitors into customers.',impact:weeklyImpact+' enquiries/week',loss:'&pound;'+weeklyLoss.toLocaleString()+'/week'};
+  if(s>=40) return {label:'Average (D)',color:'text-amber-400',desc:'Your website is losing potential customers. Several trust signals are missing.',impact:weeklyImpact+' enquiries/week',loss:'&pound;'+weeklyLoss.toLocaleString()+'/week'};
+  if(s>=20) return {label:'Weak (E)',color:'text-orange-400',desc:'Significant trust gaps. Most visitors leave without contacting you.',impact:weeklyImpact+' enquiries/week',loss:'&pound;'+weeklyLoss.toLocaleString()+'/week'};
+  return {label:'At Risk (F)',color:'text-red-400',desc:'Critical trust issues. Your website is actively repelling customers.',impact:weeklyImpact+' enquiries/week',loss:'&pound;'+weeklyLoss.toLocaleString()+'/week'};
 }
 
 var PILLAR_INSIGHTS={
@@ -217,22 +217,22 @@ function render(){
   var now=new Date();
   var h='';
   
-  h+='<div class="rounded-xl border border-zinc-200 bg-white shadow-sm p-6">';
-  h+='<div class="flex items-start gap-5"><div class="relative w-20 h-20 shrink-0"><svg class="w-20 h-20 -rotate-90" viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="none" stroke="#e5e7eb" stroke-width="10"/><circle class="score-ring" id="sc" cx="60" cy="60" r="52" fill="none" stroke="#f59e0b" stroke-width="10" stroke-dasharray="326.7" stroke-dashoffset="326.7"/></svg><div class="absolute inset-0 flex items-center justify-center"><span class="text-xl font-extrabold text-zinc-900" id="sn">0</span></div></div>';
-  h+='<div><p class="text-xs font-bold uppercase tracking-wider text-zinc-500">Trust Trigger Score</p><h2 class="text-xl font-bold text-zinc-900">'+g.label+'</h2><p class="font-semibold text-zinc-800 text-sm">'+N+'</p><p class="text-xs text-zinc-400">'+U+'</p><p class="text-sm text-zinc-600 mt-2">'+g.desc+'</p></div></div>';
+  h+='<div class="rounded-xl border border-slate-800 bg-slate-900 shadow-sm p-6">';
+  h+='<div class="flex items-start gap-5"><div class="relative w-20 h-20 shrink-0"><svg class="w-20 h-20 -rotate-90" viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="none" stroke="#334155" stroke-width="10"/><circle class="score-ring" id="sc" cx="60" cy="60" r="52" fill="none" stroke="#f59e0b" stroke-width="10" stroke-dasharray="326.7" stroke-dashoffset="326.7"/></svg><div class="absolute inset-0 flex items-center justify-center"><span class="text-xl font-extrabold text-white" id="sn">0</span></div></div>';
+  h+='<div><p class="text-xs font-bold uppercase tracking-wider text-slate-400">Trust Trigger Score</p><h2 class="text-xl font-bold text-white">'+g.label+'</h2><p class="font-semibold text-slate-300 text-sm">'+N+'</p><p class="text-xs text-slate-500">'+U+'</p><p class="text-sm text-slate-400 mt-2">'+g.desc+'</p></div></div>';
 
   var weeklyLossVal = Math.round((100 - sc) / 100  10  AVG_CUSTOMER_LTV);
-  h+='<div class="mt-4 bg-red-50 border border-red-200 rounded-lg p-4"><p class="text-sm font-bold text-red-800">Estimated Revenue Impact</p><p class="text-sm text-red-700 mt-1">Based on an average customer lifetime value of <strong>&pound;'+AVG_CUSTOMER_LTV.toLocaleString()+'</strong>, your current trust gaps are likely costing you <strong>'+g.impact+'</strong> — approximately <strong>&pound;'+weeklyLossVal.toLocaleString()+'/week</strong> (&pound;'+(weeklyLossVal*52).toLocaleString()+'/year) in missed revenue.</p></div>';
-  h+='<div class="mt-3 text-xs text-zinc-500 flex flex-wrap gap-3"><span>'+now.toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"})+'</span><span>'+pills.length+' pillars</span><span>'+iss.length+' issues</span></div>';
+  h+='<div class="mt-4 bg-red-950 border border-red-900 rounded-lg p-4"><p class="text-sm font-bold text-red-400">Estimated Revenue Impact</p><p class="text-sm text-red-300 mt-1">Based on an average customer lifetime value of <strong class="text-white">&pound;'+AVG_CUSTOMER_LTV.toLocaleString()+'</strong>, your current trust gaps are likely costing you <strong>'+g.impact+'</strong> — approximately <strong>&pound;'+weeklyLossVal.toLocaleString()+'/week</strong> (&pound;'+(weeklyLossVal*52).toLocaleString()+'/year) in missed revenue.</p></div>';
+  h+='<div class="mt-3 text-xs text-slate-500 flex flex-wrap gap-3"><span>'+now.toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"})+'</span><span>'+pills.length+' pillars</span><span>'+iss.length+' issues</span></div>';
   h+='</div>';
   
-  h+='<div class="mt-5 rounded-xl border border-zinc-200 bg-white shadow-sm p-4">';
-  if(isWP) h+='<p class="text-sm font-semibold text-emerald-800">WordPress Site — We can publish content directly to your existing site. Your theme is preserved.</p>';
-  else h+='<p class="text-sm font-semibold text-amber-800">Custom Platform — We will build you a brand new dedicated website. Full design control. Ready in 28 days.</p>';
+  h+='<div class="mt-5 rounded-xl border border-slate-800 bg-slate-900 shadow-sm p-4">';
+  if(isWP) h+='<p class="text-sm font-semibold text-emerald-400">WordPress Site — We can publish content directly to your existing site. Your theme is preserved.</p>';
+  else h+='<p class="text-sm font-semibold text-amber-400">Custom Platform — We will build you a brand new dedicated website. Full design control. Ready in 28 days.</p>';
   h+='</div>';
   
   if(pills.length){
-    h+='<div class="mt-8"><p class="text-lg font-bold text-zinc-900 mb-1">Trust Pillar Breakdown</p><p class="text-sm text-zinc-500 mb-5">Your website scored across 5 trust dimensions. Each pillar reveals a specific reason visitors may leave without converting.</p>';
+    h+='<div class="mt-8"><p class="text-lg font-bold text-white mb-1">Trust Pillar Breakdown</p><p class="text-sm text-slate-400 mb-5">Your website scored across 5 trust dimensions. Each pillar reveals a specific reason visitors may leave without converting.</p>';
     pills.forEach(function(p){
       var pc=Math.round(p.percentage),l=p.label||p.name;
       if(pc<1 && p.percentage===0) { pc=0; }
@@ -240,17 +240,17 @@ function render(){
       var insightColor = '';
       var pi = PILLAR_INSIGHTS[l];
       if(pi) {
-        if(pc<40) { insight = pi.critical; insightColor = 'text-red-600'; }
-        else if(pc<80) { insight = pi.warning; insightColor = 'text-amber-600'; }
-        else { insight = pi.good; insightColor = 'text-emerald-600'; }
+        if(pc<40) { insight = pi.critical; insightColor = 'text-red-400'; }
+        else if(pc<80) { insight = pi.warning; insightColor = 'text-amber-400'; }
+        else { insight = pi.good; insightColor = 'text-emerald-400'; }
       }
       var b=pc>=80?'bg-emerald-500':pc>=60?'bg-amber-500':pc>=40?'bg-orange-500':'bg-red-500';
-      var t=pc>=80?'text-emerald-700':pc>=60?'text-amber-700':pc>=40?'text-orange-700':'text-red-700';
+      var t=pc>=80?'text-emerald-400':pc>=60?'text-amber-400':pc>=40?'text-orange-400':'text-red-400';
       var displayLabel = pc+'%';
-      if(pc===0) { b='bg-zinc-300'; t='text-zinc-500'; displayLabel='Not scored'; insight = 'This pillar was not scored because the data was insufficient or unavailable. This itself is a red flag — it means your business is invisible across critical trust dimensions that customers check before converting.'; insightColor = 'text-red-600'; }
-      h+='<div class="rounded-xl border border-zinc-200 bg-white shadow-sm p-4 mb-3">';
-      h+='<div class="flex justify-between items-center mb-1"><span class="text-sm font-bold text-zinc-900">'+l+'</span><span class="text-sm font-bold '+t+'">'+displayLabel+'</span></div>';
-      h+='<div class="h-2 bg-zinc-100 rounded-full overflow-hidden"><div class="h-full rounded-full '+b+'" style="width:'+(pc||5)+'%"></div></div>';
+      if(pc===0) { b='bg-zinc-600'; t='text-zinc-400'; displayLabel='Not scored'; insight = 'This pillar was not scored because the data was insufficient or unavailable. This itself is a red flag — it means your business is invisible across critical trust dimensions that customers check before converting.'; insightColor = 'text-red-400'; }
+      h+='<div class="rounded-xl border border-slate-800 bg-slate-900 shadow-sm p-4 mb-3">';
+      h+='<div class="flex justify-between items-center mb-1"><span class="text-sm font-bold text-white">'+l+'</span><span class="text-sm font-bold '+t+'">'+displayLabel+'</span></div>';
+      h+='<div class="h-2 bg-slate-800 rounded-full overflow-hidden"><div class="h-full rounded-full '+b+'" style="width:'+(pc||5)+'%"></div></div>';
       if(insight){ h+='<p class="text-xs '+insightColor+' mt-2 leading-relaxed">'+insight+'</p>'; }
       h+='</div>';
     });
@@ -258,69 +258,69 @@ function render(){
   }
   
   if(stds.length){
-    h+='<div class="mt-8"><p class="text-lg font-bold text-zinc-900 mb-1">Deep Diagnostic: Every Standard Checked</p><p class="text-sm text-zinc-500 mb-5">Below is what we found, what it could mean for your business, and 3 reasons why each issue matters.</p>';
+    h+='<div class="mt-8"><p class="text-lg font-bold text-white mb-1">Deep Diagnostic: Every Standard Checked</p><p class="text-sm text-slate-400 mb-5">Below is what we found, what it could mean for your business, and 3 reasons why each issue matters.</p>';
     stds.forEach(function(st){
       var dg=DIAG[st.name]||{issue:'Standard checked.',findings:['This standard was evaluated during your scan.','No specific issues were detected for this area.','Your performance here appears satisfactory.'],bizImplications:['No significant business impact identified.','Your site meets expectations in this area.','Continue monitoring for any changes.'],notfixReasons:['No critical issues found in this category.','Your current setup is adequate.','Address related issues from other categories first.'],considerations:['Keep this area maintained as part of ongoing trust optimisation.','Review quarterly for any changes in best practices.','Include this in your regular site audits.']};
       var lb=st.name.replace(/([A-Z])/g,' $1').replace(/^./,function(x){return x.toUpperCase()}).trim();
       if(st.name==='Https')lb='HTTPS';if(st.name==='Cta')lb='Call-to-Action';if(st.name==='Faq')lb='FAQ Section';
-      var icon=st.passed?'&#10004;':'&#10008;';var border=st.passed?'border-emerald-200':'border-red-200';
-      h+='<div class="rounded-xl border '+border+' bg-white shadow-sm p-5 mb-4"><div class="flex items-center gap-2 mb-3"><span>'+icon+'</span><p class="text-sm font-bold text-zinc-900">'+lb+'</p></div>';
+      var icon=st.passed?'&#10004;':'&#10008;';var border=st.passed?'border-emerald-900':'border-red-900';
+      h+='<div class="rounded-xl border '+border+' bg-slate-900 shadow-sm p-5 mb-4"><div class="flex items-center gap-2 mb-3"><span>'+icon+'</span><p class="text-sm font-bold text-white">'+lb+'</p></div>';
       if(!st.passed){
         h+='<div class="space-y-4">';
-        h+='<div><p class="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-2">What we found</p>';
-        dg.findings.forEach(function(f){ h+='<p class="text-sm text-zinc-700 mb-1">&bull; '+f+'</p>'; });
+        h+='<div><p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">What we found</p>';
+        dg.findings.forEach(function(f){ h+='<p class="text-sm text-slate-300 mb-1">&bull; '+f+'</p>'; });
         h+='</div>';
-        h+='<div><p class="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-2">What this could mean for your business</p>';
-        dg.bizImplications.forEach(function(b){ h+='<p class="text-sm text-zinc-700 mb-1">&bull; '+b+'</p>'; });
+        h+='<div><p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">What this could mean for your business</p>';
+        dg.bizImplications.forEach(function(b){ h+='<p class="text-sm text-slate-300 mb-1">&bull; '+b+'</p>'; });
         h+='</div>';
-        h+='<div class="bg-emerald-50 border border-emerald-200 rounded-lg p-3"><p class="text-xs font-bold text-emerald-700 uppercase tracking-wider mb-1">Benefit of fixing this</p><p class="text-sm text-emerald-800">'+dg.benefit+'</p></div>';
-        h+='<div class="bg-red-50 border border-red-200 rounded-lg p-3"><p class="text-xs font-bold text-red-700 uppercase tracking-wider mb-1">The cost of not fixing this</p>';
-        dg.notfixReasons.forEach(function(n){ h+='<p class="text-sm text-red-800 mb-1">&bull; '+n+'</p>'; });
+        h+='<div class="bg-emerald-950 border border-emerald-900 rounded-lg p-3"><p class="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-1">Benefit of fixing this</p><p class="text-sm text-emerald-300">'+dg.benefit+'</p></div>';
+        h+='<div class="bg-red-950 border border-red-900 rounded-lg p-3"><p class="text-xs font-bold text-red-400 uppercase tracking-wider mb-1">The cost of not fixing this</p>';
+        dg.notfixReasons.forEach(function(n){ h+='<p class="text-sm text-red-300 mb-1">&bull; '+n+'</p>'; });
         h+='</div>';
-        h+='<div class="bg-amber-50 border border-amber-200 rounded-lg p-3"><p class="text-xs font-bold text-amber-700 uppercase tracking-wider mb-1">Why you should act now</p>';
-        dg.considerations.forEach(function(c){ h+='<p class="text-sm text-amber-800 mb-1">&bull; '+c+'</p>'; });
+        h+='<div class="bg-amber-950 border border-amber-900 rounded-lg p-3"><p class="text-xs font-bold text-amber-400 uppercase tracking-wider mb-1">Why you should act now</p>';
+        dg.considerations.forEach(function(c){ h+='<p class="text-sm text-amber-300 mb-1">&bull; '+c+'</p>'; });
         h+='</div>';
         h+='</div>';
-      } else { h+='<p class="text-sm text-emerald-700 font-medium">This trust signal is working in your favour.</p>'; }
+      } else { h+='<p class="text-sm text-emerald-400 font-medium">This trust signal is working in your favour.</p>'; }
       h+='</div>';
     });
     h+='</div>';
   }
   
   if(iss.length){
-    h+='<div class="mt-8"><p class="text-lg font-bold text-zinc-900 mb-1">Priority Issues</p><p class="text-sm text-zinc-500 mb-5">These specific gaps are costing you revenue right now.</p>';
+    h+='<div class="mt-8"><p class="text-lg font-bold text-white mb-1">Priority Issues</p><p class="text-sm text-slate-400 mb-5">These specific gaps are costing you revenue right now.</p>';
     iss.forEach(function(x,i){
-      h+='<div class="border-l-4 border-red-500 bg-white rounded-r-xl shadow-sm p-5 mb-3"><div class="flex items-start gap-3"><span class="shrink-0 w-7 h-7 rounded-full bg-red-100 text-red-600 flex items-center justify-center text-sm font-bold">'+(i+1)+'</span><div><p class="text-sm font-bold text-zinc-900">'+x.title+'</p><p class="text-sm text-zinc-600 mt-1">'+x.detail+'</p></div></div></div>';
+      h+='<div class="border-l-4 border-red-500 bg-slate-900 rounded-r-xl shadow-sm p-5 mb-3"><div class="flex items-start gap-3"><span class="shrink-0 w-7 h-7 rounded-full bg-red-900 text-red-400 flex items-center justify-center text-sm font-bold">'+(i+1)+'</span><div><p class="text-sm font-bold text-white">'+x.title+'</p><p class="text-sm text-slate-400 mt-1">'+x.detail+'</p></div></div></div>';
     });
     h+='</div>';
   }
   
-  h+='<div class="mt-10"><div class="rounded-xl border-2 border-amber-500 bg-white shadow-sm p-6">';
-  h+='<p class="text-xs font-bold text-amber-600 uppercase tracking-wider">Our Recommendation</p>';
-  h+='<p class="text-2xl font-bold text-zinc-900 mt-1 mb-5">Trust Transformation Proposal</p>';
-  h+='<div class="bg-zinc-50 border border-zinc-200 rounded-lg p-4 mb-5"><table class="w-full text-sm"><tbody>';
-  h+='<tr class="border-b border-zinc-200"><td class="py-2 font-medium">Package</td><td class="py-2 text-right font-bold">Trust Transformation</td></tr>';
-  h+='<tr class="border-b border-zinc-200"><td class="py-2 font-medium">Price</td><td class="py-2 text-right"><span class="text-xl font-extrabold text-amber-600">&pound;995</span><span class="text-xs text-zinc-500 ml-1">one-time</span></td></tr>';
+  h+='<div class="mt-10"><div class="rounded-xl border-2 border-amber-500 bg-slate-950 shadow-sm p-6">';
+  h+='<p class="text-xs font-bold text-amber-400 uppercase tracking-wider">Our Recommendation</p>';
+  h+='<p class="text-2xl font-bold text-white mt-1 mb-5">Trust Transformation Proposal</p>';
+  h+='<div class="bg-slate-900 border border-slate-800 rounded-lg p-4 mb-5"><table class="w-full text-sm"><tbody>';
+  h+='<tr class="border-b border-slate-800"><td class="py-2 font-medium text-slate-300">Package</td><td class="py-2 text-right font-bold text-white">Trust Transformation</td></tr>';
+  h+='<tr class="border-b border-slate-800"><td class="py-2 font-medium text-slate-300">Price</td><td class="py-2 text-right"><span class="text-xl font-extrabold text-amber-400">&pound;995</span><span class="text-xs text-slate-500 ml-1">one-time</span></td></tr>';
   var deliveryDays = isWP ? 14 : 28;
-  h+='<tr class="border-b border-zinc-200"><td class="py-2 font-medium">Delivery</td><td class="py-2 text-right font-semibold">'+deliveryDays+' days</td></tr>';
-  h+='<tr><td class="py-2 font-medium">Projected score</td><td class="py-2 text-right font-semibold text-emerald-700">'+sc+' &rarr; 85+</td></tr>';
+  h+='<tr class="border-b border-slate-800"><td class="py-2 font-medium text-slate-300">Delivery</td><td class="py-2 text-right font-semibold text-white">'+deliveryDays+' days</td></tr>';
+  h+='<tr><td class="py-2 font-medium text-slate-300">Projected score</td><td class="py-2 text-right font-semibold text-emerald-400">'+sc+' &rarr; 85+</td></tr>';
   h+='</tbody></table></div>';
   h+='<ul class="space-y-2 mb-5 text-sm">';
-  h+='<li class="flex items-start gap-2"><span class="text-emerald-600">&#10003;</span> Full website trust audit completed</li>';
-  h+='<li class="flex items-start gap-2"><span class="text-emerald-600">&#10003;</span> New homepage copy optimised for conversion</li>';
-  h+='<li class="flex items-start gap-2"><span class="text-emerald-600">&#10003;</span> 5-email nurture sequence for new enquiries</li>';
-  h+='<li class="flex items-start gap-2"><span class="text-emerald-600">&#10003;</span> Google Business Profile content (10 posts)</li>';
-  h+='<li class="flex items-start gap-2"><span class="text-emerald-600">&#10003;</span> Social media content (Facebook + Instagram)</li>';
-  if(isWP) h+='<li class="flex items-start gap-2"><span class="text-emerald-600">&#10003;</span> Direct WordPress publishing (14-day delivery)</li>';
-  else h+='<li class="flex items-start gap-2"><span class="text-emerald-600">&#10003;</span> Brand new website build (5-7 pages, hosted — 28-day delivery)</li>';
-  h+='<li class="flex items-start gap-2"><span class="text-emerald-600">&#10003;</span> Before/after evidence report with score improvement</li>';
+  h+='<li class="flex items-start gap-2"><span class="text-emerald-400">&#10003;</span><span class="text-slate-300">Full website trust audit completed</span></li>';
+  h+='<li class="flex items-start gap-2"><span class="text-emerald-400">&#10003;</span><span class="text-slate-300">New homepage copy optimised for conversion</span></li>';
+  h+='<li class="flex items-start gap-2"><span class="text-emerald-400">&#10003;</span><span class="text-slate-300">5-email nurture sequence for new enquiries</span></li>';
+  h+='<li class="flex items-start gap-2"><span class="text-emerald-400">&#10003;</span><span class="text-slate-300">Google Business Profile content (10 posts)</span></li>';
+  h+='<li class="flex items-start gap-2"><span class="text-emerald-400">&#10003;</span><span class="text-slate-300">Social media content (Facebook + Instagram)</span></li>';
+  if(isWP) h+='<li class="flex items-start gap-2"><span class="text-emerald-400">&#10003;</span><span class="text-slate-300">Direct WordPress publishing (14-day delivery)</span></li>';
+  else h+='<li class="flex items-start gap-2"><span class="text-emerald-400">&#10003;</span><span class="text-slate-300">Brand new website build (5-7 pages, hosted — 28-day delivery)</span></li>';
+  h+='<li class="flex items-start gap-2"><span class="text-emerald-400">&#10003;</span><span class="text-slate-300">Before/after evidence report with score improvement</span></li>';
   h+='</ul>';
-  h+='<div class="text-center"><a href="https://calendly.com/mrfcmo/ai-readiness-review-call-clone" class="inline-block rounded-lg bg-amber-500 px-8 py-3 text-base font-bold text-white shadow-sm hover:bg-amber-400">Book Your Free 20-Minute Trust Review &rarr;</a><p class="text-xs text-zinc-400 mt-2">Free. No obligation.</p></div>';
+  h+='<div class="text-center"><a href="https://calendly.com/mrfcmo/ai-readiness-review-call-clone" class="inline-block rounded-lg bg-amber-500 px-8 py-3 text-base font-bold text-white shadow-sm hover:bg-amber-400">Book Your Free 20-Minute Trust Review &rarr;</a><p class="text-xs text-slate-500 mt-2">Free. No obligation.</p></div>';
   h+='</div></div>';
   
-  h+='<div class="mt-8"><div class="rounded-xl border border-zinc-200 bg-white shadow-sm p-6">';
-  h+='<p class="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-1">How We Deliver</p>';
-  h+='<h3 class="text-lg font-bold text-zinc-900 mb-5">Your '+deliveryDays+'-Day Fulfilment Timeline</h3>';
+  h+='<div class="mt-8"><div class="rounded-xl border border-slate-800 bg-slate-900 shadow-sm p-6">';
+  h+='<p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">How We Deliver</p>';
+  h+='<h3 class="text-lg font-bold text-white mb-5">Your '+deliveryDays+'-Day Fulfilment Timeline</h3>';
   var timeline;
   if(isWP){
     timeline = [['1','Strategy Call','We review your report. You confirm scope.'],['2-5','Content Creation','Homepage copy, emails, GBP posts, social content.'],['6-8','Your Review','Preview link sent. You approve or request changes.'],['9-12','Publishing','Content goes live on WordPress. Theme preserved.'],['13-14','Evidence Report','Rescan + before/after report showing score improvement.']];
@@ -328,9 +328,9 @@ function render(){
     timeline = [['1-2','Strategy &amp; Scope','We review your report. You confirm scope and design preferences.'],['3-10','Design &amp; Build','5-7 page website designed and built on custom platform.'],['11-16','Content Creation','All copy, images, and trust signals integrated into site.'],['17-22','Your Review','Preview link sent. You review and request changes.'],['23-26','Revisions &amp; Polish','We implement your feedback and finalise the site.'],['27-28','Launch &amp; Evidence','Site goes live. Rescan + before/after report with score improvement.']];
   }
   timeline.forEach(function(s){
-    h+='<div class="flex items-start gap-4 mb-4"><span class="shrink-0 w-8 h-8 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-sm font-bold">'+s[0]+'</span><div><p class="text-sm font-bold text-zinc-900">'+s[1]+'</p><p class="text-xs text-zinc-500">'+s[2]+'</p></div></div>';
+    h+='<div class="flex items-start gap-4 mb-4"><span class="shrink-0 w-8 h-8 rounded-full bg-amber-900 text-amber-300 flex items-center justify-center text-sm font-bold">'+s[0]+'</span><div><p class="text-sm font-bold text-white">'+s[1]+'</p><p class="text-xs text-slate-400">'+s[2]+'</p></div></div>';
   });
-  h+='<div class="mt-4 bg-zinc-50 border border-zinc-200 rounded-lg p-4"><p class="text-sm text-zinc-700">Your time commitment: <strong>~20 minutes total</strong> (one call + one approval). We do the rest.</p></div>';
+  h+='<div class="mt-4 bg-slate-900 border border-slate-800 rounded-lg p-4"><p class="text-sm text-slate-300">Your time commitment: <strong class="text-white">~20 minutes total</strong> (one call + one approval). We do the rest.</p></div>';
   h+='</div></div>';
   
   h+='<div class="mt-8 text-center"><a href="https://calendly.com/mrfcmo/ai-readiness-review-call-clone" class="inline-block rounded-lg bg-amber-500 px-8 py-3.5 text-base font-bold text-white shadow-sm hover:bg-amber-400">Book Your Free Trust Review &rarr;</a></div>';
