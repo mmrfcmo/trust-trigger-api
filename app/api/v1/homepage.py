@@ -23,6 +23,7 @@ PAGE = """<!DOCTYPE html>
     .logo-icon{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:8px;background:#f59e0b;color:#fff;font-weight:800;font-size:12px;margin-right:8px}
     .pulse-glow{animation:pulseGlow 2s ease-in-out infinite}
     @keyframes pulseGlow{0%,100%{box-shadow:0 0 20px rgba(245,158,11,.3)}50%{box-shadow:0 0 40px rgba(245,158,11,.6)}}
+    @media (max-width:640px){.text-4xl{font-size:1.875rem;line-height:1.15}.text-5xl{font-size:2.25rem;line-height:1.15}.grid{gap:1rem}}
   </style>
 </head>
 <body>
@@ -334,20 +335,9 @@ PAGE = """<!DOCTYPE html>
 </section>
 
 <!-- ===== FOOTER ===== -->
-<footer class="bg-slate-950 border-t border-slate-800 py-16 px-6">
+<footer class="bg-slate-950 border-t border-slate-800 py-12 px-6">
 <div class="max-w-6xl mx-auto">
-<div class="grid sm:grid-cols-3 gap-10">
-  <div>
-    <div class="flex items-center gap-2 mb-4">
-      <span class="w-8 h-8 rounded-lg bg-amber-500 text-white flex items-center justify-center text-sm font-extrabold">TTA</span>
-      <div>
-        <div class="font-bold text-amber-400">Trust Trigger Agency</div>
-        <div class="text-xs text-white">Measure. Transform. Prove. Maintain.</div>
-      </div>
-    </div>
-    <p class="text-xs text-slate-500">We help businesses earn and maintain trust online.</p>
-    <p class="text-xs text-slate-600 mt-1">Powered by The Trust Trigger Transformation Method™</p>
-  </div>
+<div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
   <div>
     <p class="font-bold text-white text-sm mb-4">Products</p>
     <div class="space-y-2 text-sm">
@@ -360,13 +350,18 @@ PAGE = """<!DOCTYPE html>
     <p class="font-bold text-white text-sm mb-4">Contact</p>
     <div class="space-y-2 text-sm text-slate-400">
       <p>📞 +44 208 591 1163</p>
+      <p>📞 +44 7956 393270</p>
       <p>✉️ info@trusttriggeragency.com</p>
       <p>📍 London, UK</p>
     </div>
   </div>
+  <div class="sm:col-span-2 md:col-span-1">
+    <p class="text-white text-sm">We help businesses earn and maintain trust online.</p>
+    <p class="text-white text-xs mt-1">Powered by The Trust Trigger Transformation Method™</p>
+  </div>
 </div>
-<div class="border-t border-slate-800 mt-10 pt-8 text-center text-xs text-slate-600">
-  <p>&copy; 2025 Trust Trigger Agency. All rights reserved.</p>
+<div class="border-t border-slate-800 mt-8 pt-6 text-center">
+  <p class="text-white text-xs">© 2025 Trust Trigger Agency. All rights reserved.</p>
 </div>
 </div>
 </footer>
