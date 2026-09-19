@@ -198,25 +198,25 @@ PAGE = """<!DOCTYPE html>
   <div class="mb-6">
     <p class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">Score Breakdown</p>
     <div class="grid sm:grid-cols-2 gap-3">
-      <div><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Online Presence</span><span class="text-white font-bold">8/25</span></div><div class="bg-slate-800 rounded-full" style="height:8px"><div class="bg-red-500 rounded-full" style="width:32%;height:100%"></div></div><p class="text-xs text-red-400 mt-1">Your site is hard to find. Missing key pages. Visitors cannot verify your credibility.</p></div>
-      <div><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Reputation</span><span class="text-white font-bold">6/30</span></div><div class="bg-slate-800 rounded-full" style="height:8px"><div class="bg-red-500 rounded-full" style="width:20%;height:100%"></div></div><p class="text-xs text-red-400 mt-1">No social proof. Zero reviews displayed. Customers choose competitors they can see.</p></div>
-      <div><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Engagement</span><span class="text-white font-bold">7/20</span></div><div class="bg-slate-800 rounded-full" style="height:8px"><div class="bg-amber-500 rounded-full" style="width:35%;height:100%"></div></div><p class="text-xs text-amber-400 mt-1">No clear calls-to-action. Visitors leave without booking.</p></div>
-      <div><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Transparency</span><span class="text-white font-bold">4/15</span></div><div class="bg-slate-800 rounded-full" style="height:8px"><div class="bg-red-500 rounded-full" style="width:27%;height:100%"></div></div><p class="text-xs text-red-400 mt-1">No About page, team photos, or privacy policy. You are asking visitors to trust a faceless business.</p></div>
-      <div class="sm:col-span-2"><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Technical Health</span><span class="text-white font-bold">7/10</span></div><div class="bg-slate-800 rounded-full" style="height:8px"><div class="bg-emerald-500 rounded-full" style="width:70%;height:100%"></div></div><p class="text-xs text-emerald-400 mt-1">Your technical foundation is reasonable.</p></div>
+      <div><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Online Presence</span><span class="text-white font-bold">8/25</span></div><div style="background:#334155;border-radius:9999px;height:8px;overflow:hidden"><div style="background:#ef4444;border-radius:9999px;width:32%;height:100%"></div></div><p class="text-xs text-red-400 mt-1">Your site is hard to find. Missing key pages. Visitors cannot verify your credibility.</p></div>
+      <div><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Reputation</span><span class="text-white font-bold">6/30</span></div><div style="background:#334155;border-radius:9999px;height:8px;overflow:hidden"><div style="background:#ef4444;border-radius:9999px;width:20%;height:100%"></div></div><p class="text-xs text-red-400 mt-1">No social proof. Zero reviews displayed. Customers choose competitors they can see.</p></div>
+      <div><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Engagement</span><span class="text-white font-bold">7/20</span></div><div style="background:#334155;border-radius:9999px;height:8px;overflow:hidden"><div style="background:#f59e0b;border-radius:9999px;width:35%;height:100%"></div></div><p class="text-xs text-amber-400 mt-1">No clear calls-to-action. Visitors leave without booking.</p></div>
+      <div><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Transparency</span><span class="text-white font-bold">4/15</span></div><div style="background:#334155;border-radius:9999px;height:8px;overflow:hidden"><div style="background:#ef4444;border-radius:9999px;width:27%;height:100%"></div></div><p class="text-xs text-red-400 mt-1">No About page, team photos, or privacy policy. You are asking visitors to trust a faceless business.</p></div>
+      <div class="sm:col-span-2"><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Technical Health</span><span class="text-white font-bold">7/10</span></div><div style="background:#334155;border-radius:9999px;height:8px;overflow:hidden"><div style="background:#10b981;border-radius:9999px;width:70%;height:100%"></div></div><p class="text-xs text-emerald-400 mt-1">Your technical foundation is reasonable.</p></div>
     </div>
   </div>
   <div class="mb-6">
     <p class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">Standards</p>
     <div class="grid grid-cols-3 gap-2 text-xs">
-      <div class="flex items-center gap-1.5"><span class="text-emerald-400">&#10003;</span><span class="text-slate-300">HTTPS</span></div>
-      <div class="flex items-center gap-1.5"><span class="text-red-400">&#10007;</span><span class="text-slate-300">Contact Page</span></div>
-      <div class="flex items-center gap-1.5"><span class="text-emerald-400">&#10003;</span><span class="text-slate-300">About Page</span></div>
-      <div class="flex items-center gap-1.5"><span class="text-red-400">&#10007;</span><span class="text-slate-300">Mobile Ready</span></div>
-      <div class="flex items-center gap-1.5"><span class="text-red-400">&#10007;</span><span class="text-slate-300">Testimonials</span></div>
-      <div class="flex items-center gap-1.5"><span class="text-red-400">&#10007;</span><span class="text-slate-300">FAQ</span></div>
-      <div class="flex items-center gap-1.5"><span class="text-red-400">&#10007;</span><span class="text-slate-300">Privacy Policy</span></div>
-      <div class="flex items-center gap-1.5"><span class="text-red-400">&#10007;</span><span class="text-slate-300">CTA</span></div>
-      <div class="flex items-center gap-1.5"><span class="text-red-400">&#10007;</span><span class="text-slate-300">Service Pages</span></div>
+      <div class="flex items-center gap-1.5"><span class="text-emerald-400">✓</span><span class="text-slate-300">HTTPS</span></div>
+      <div class="flex items-center gap-1.5"><span class="text-red-400">✗</span><span class="text-slate-300">Contact Page</span></div>
+      <div class="flex items-center gap-1.5"><span class="text-emerald-400">✓</span><span class="text-slate-300">About Page</span></div>
+      <div class="flex items-center gap-1.5"><span class="text-red-400">✗</span><span class="text-slate-300">Mobile Ready</span></div>
+      <div class="flex items-center gap-1.5"><span class="text-red-400">✗</span><span class="text-slate-300">Testimonials</span></div>
+      <div class="flex items-center gap-1.5"><span class="text-red-400">✗</span><span class="text-slate-300">FAQ</span></div>
+      <div class="flex items-center gap-1.5"><span class="text-red-400">✗</span><span class="text-slate-300">Privacy Policy</span></div>
+      <div class="flex items-center gap-1.5"><span class="text-red-400">✗</span><span class="text-slate-300">CTA</span></div>
+      <div class="flex items-center gap-1.5"><span class="text-red-400">✗</span><span class="text-slate-300">Service Pages</span></div>
     </div>
   </div>
   <div>
@@ -241,14 +241,14 @@ PAGE = """<!DOCTYPE html>
   <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">Trust Transformation</h2>
   <p class="text-slate-400 mb-8">We don't just tell you what's wrong. We fix it.</p>
   <div class="grid sm:grid-cols-2 gap-3 text-left max-w-md mx-auto mb-8">
-    <div class="flex items-start gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">&#10003;</span><span class="text-slate-300 text-sm">Homepage rewrite</span></div>
-    <div class="flex items-start gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">&#10003;</span><span class="text-slate-300 text-sm">Trust-focused messaging</span></div>
-    <div class="flex items-start gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">&#10003;</span><span class="text-slate-300 text-sm">Review integration</span></div>
-    <div class="flex items-start gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">&#10003;</span><span class="text-slate-300 text-sm">Stronger calls to action</span></div>
-    <div class="flex items-start gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">&#10003;</span><span class="text-slate-300 text-sm">Google Business improvements</span></div>
-    <div class="flex items-start gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">&#10003;</span><span class="text-slate-300 text-sm">Email sequence</span></div>
-    <div class="flex items-start gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">&#10003;</span><span class="text-slate-300 text-sm">Social content</span></div>
-    <div class="flex items-start gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">&#10003;</span><span class="text-slate-300 text-sm">Before &amp; after evidence report</span></div>
+    <div class="flex items-start gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">✓</span><span class="text-slate-300 text-sm">Homepage rewrite</span></div>
+    <div class="flex items-start gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">✓</span><span class="text-slate-300 text-sm">Trust-focused messaging</span></div>
+    <div class="flex items-start gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">✓</span><span class="text-slate-300 text-sm">Review integration</span></div>
+    <div class="flex items-start gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">✓</span><span class="text-slate-300 text-sm">Stronger calls to action</span></div>
+    <div class="flex items-start gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">✓</span><span class="text-slate-300 text-sm">Google Business improvements</span></div>
+    <div class="flex items-start gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">✓</span><span class="text-slate-300 text-sm">Email sequence</span></div>
+    <div class="flex items-start gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">✓</span><span class="text-slate-300 text-sm">Social content</span></div>
+    <div class="flex items-start gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">✓</span><span class="text-slate-300 text-sm">Before & after evidence report</span></div>
   </div>
   <a href="#get-snapshot" class="inline-flex items-center gap-2 rounded-lg bg-amber-500 px-8 py-4 text-base font-bold text-white shadow-lg transition hover:bg-amber-400">Get Your Free Trust Snapshot First →</a>
 </div>
