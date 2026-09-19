@@ -90,7 +90,7 @@ $('_go').onclick=function(){
 };
 
 function gr(s){
-  var weeklyLoss = Math.round((100 - s) / 100  10  AVG_CUSTOMER_LTV);
+  var weeklyLoss = Math.round((100 - s) / 100 * 10 *  AVG_CUSTOMER_LTV);
   var weeklyImpact = Math.round((100 - s) / 100 * 10);
   if(s>=80) return {label:'Strong (B)',color:'text-emerald-400',desc:'Your website builds trust reasonably well, but specific gaps still prevent some visitors from booking.',impact:weeklyImpact+' enquiries/week',loss:'&pound;'+weeklyLoss.toLocaleString()+'/week'};
   if(s>=60) return {label:'Good (C)',color:'text-emerald-400',desc:'Your site is credible but missing key trust signals that convert visitors into customers.',impact:weeklyImpact+' enquiries/week',loss:'&pound;'+weeklyLoss.toLocaleString()+'/week'};
