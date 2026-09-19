@@ -7,7 +7,7 @@ PAGE = """<!DOCTYPE html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Trust Snapshot™ — Free Digital Trust Assessment | TAA — Trust Trigger Agency</title>
+  <title>Trust Snapshot™ — Free Digital Trust Assessment | TTA — Trust Trigger Agency</title>
   <meta name="description" content="Get a free Trust Snapshot in under 60 seconds. We analyse your website, Google Business Profile and customer journey, then show you exactly what's costing you enquiries.">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23f59e0b'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='14' font-weight='900' fill='white' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,7 +31,7 @@ PAGE = """<!DOCTYPE html>
 <nav class="fixed top-0 left-0 right-0 z-50 bg-slate-950/90 backdrop-blur-md border-b border-slate-800">
 <div class="max-w-6xl mx-auto px-6 flex items-center justify-between h-20">
 <a href="/" class="flex items-center gap-2 text-white no-underline">
-  <span class="w-8 h-8 rounded-lg bg-amber-500 text-white flex items-center justify-center text-sm font-extrabold">TAA</span>
+  <span class="w-8 h-8 rounded-lg bg-amber-500 text-white flex items-center justify-center text-sm font-extrabold">TTA</span>
   <div>
     <div class="font-bold text-xl tracking-tight leading-tight text-amber-400">Trust Trigger Agency</div>
     <div class="text-xs font-semibold tracking-wider text-white">Measure. Transform. Prove. Maintain.</div>
@@ -202,11 +202,11 @@ PAGE = """<!DOCTYPE html>
   <div class="mb-6">
     <p class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">Score Breakdown</p>
     <div class="grid sm:grid-cols-2 gap-3">
-      <div><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Online Presence</span><span class="text-white font-bold">8/25</span></div><div class="h-2 bg-slate-800 rounded-full"><div class="h-full w-8/25 bg-red-500 rounded-full"></div></div></div>
-      <div><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Reputation</span><span class="text-white font-bold">6/30</span></div><div class="h-2 bg-slate-800 rounded-full"><div class="h-full w-6/30 bg-red-500 rounded-full"></div></div></div>
-      <div><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Engagement</span><span class="text-white font-bold">7/20</span></div><div class="h-2 bg-slate-800 rounded-full"><div class="h-full w-7/20 bg-amber-500 rounded-full"></div></div></div>
-      <div><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Transparency</span><span class="text-white font-bold">4/15</span></div><div class="h-2 bg-slate-800 rounded-full"><div class="h-full w-4/15 bg-red-500 rounded-full"></div></div></div>
-      <div class="sm:col-span-2"><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Technical Health</span><span class="text-white font-bold">7/10</span></div><div class="h-2 bg-slate-800 rounded-full"><div class="h-full w-70p bg-emerald-500 rounded-full"></div></div></div>
+      <div><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Online Presence</span><span class="text-white font-bold">8/25</span></div><div class="h-2 bg-slate-800 rounded-full"><div class="h-32p bg-red-500 rounded-full" style="width:32%"></div></div><p class="text-xs text-red-400 mt-1">Your site is hard to find. Missing key pages. Visitors cannot verify your credibility.</p></div>
+      <div><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Reputation</span><span class="text-white font-bold">6/30</span></div><div class="h-2 bg-slate-800 rounded-full"><div class="h-20p bg-red-500 rounded-full" style="width:20%"></div></div><p class="text-xs text-red-400 mt-1">No social proof. Zero reviews displayed. Customers choose competitors they can see.</p></div>
+      <div><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Engagement</span><span class="text-white font-bold">7/20</span></div><div class="h-2 bg-slate-800 rounded-full"><div class="h-35p bg-amber-500 rounded-full" style="width:35%"></div></div><p class="text-xs text-amber-400 mt-1">No clear calls-to-action. Visitors leave without booking.</p></div>
+      <div><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Transparency</span><span class="text-white font-bold">4/15</span></div><div class="h-2 bg-slate-800 rounded-full"><div class="h-27p bg-red-500 rounded-full" style="width:27%"></div></div><p class="text-xs text-red-400 mt-1">No About page, team photos, or privacy policy. You are asking visitors to trust a faceless business.</p></div>
+      <div class="sm:col-span-2"><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Technical Health</span><span class="text-white font-bold">7/10</span></div><div class="h-2 bg-slate-800 rounded-full"><div class="bg-emerald-500 rounded-full" style="width:70%;height:100%"></div></div><p class="text-xs text-emerald-400 mt-1">Your technical foundation is reasonable.</p></div>
     </div>
   </div>
 
@@ -339,7 +339,7 @@ PAGE = """<!DOCTYPE html>
 <div class="grid sm:grid-cols-3 gap-10">
   <div>
     <div class="flex items-center gap-2 mb-4">
-      <span class="w-8 h-8 rounded-lg bg-amber-500 text-white flex items-center justify-center text-sm font-extrabold">TAA</span>
+      <span class="w-8 h-8 rounded-lg bg-amber-500 text-white flex items-center justify-center text-sm font-extrabold">TTA</span>
       <div>
         <div class="font-bold text-amber-400">Trust Trigger Agency</div>
         <div class="text-xs text-white">Measure. Transform. Prove. Maintain.</div>
