@@ -42,7 +42,6 @@ PAGE = """<!DOCTYPE html>
 </div>
 </div>
 </nav>
-
 <!-- ===== HERO ===== -->
 <section class="relative pt-32 sm:pt-40 pb-20 sm:pb-28 overflow-hidden gradient-hero">
 <div class="absolute inset-0 opacity-10">
@@ -79,7 +78,7 @@ PAGE = """<!DOCTYPE html>
       <p class="text-slate-300 font-medium">Can I trust this company?</p>
     </div>
     <div class="rounded-xl border border-slate-800 bg-slate-950 p-6 text-center">
-      <div class="text-4xl mb-2">🧑‍🔧</div>
+      <div class="text-4xl mb-2">🧑🔧</div>
       <p class="text-slate-300 font-medium">Are they experienced?</p>
     </div>
     <div class="rounded-xl border border-slate-800 bg-slate-950 p-6 text-center">
@@ -175,36 +174,34 @@ PAGE = """<!DOCTYPE html>
   <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">What a low-scoring business looks like</h2>
   <p class="mt-4 text-slate-400">This business scored 32/100. How does your website compare?</p>
 </div>
-<div class="max-w-3xl mx-auto">
-<div class="rounded-2xl border border-slate-800 bg-slate-900 p-6 sm:p-8">
-  <div class="flex items-center gap-6 mb-8">
-    <div class="relative w-24 h-24 shrink-0">
-      <svg class="w-24 h-24 -rotate-90" viewBox="0 0 120 120">
-        <circle cx="60" cy="60" r="52" fill="none" stroke="#334155" stroke-width="10"/>
-        <circle cx="60" cy="60" r="52" fill="none" stroke="#ef4444" stroke-width="10" stroke-dasharray="326.7" stroke-dashoffset="220"/>
-      </svg>
-      <div class="absolute inset-0 flex items-center justify-center"><span class="text-2xl font-extrabold text-white">32</span></div>
+<div class="max-w-3xl mx-auto gradient-card rounded-2xl border border-slate-800 p-6 sm:p-8">
+  <!-- Score Circle -->
+  <div class="flex flex-col sm:flex-row gap-6 items-center mb-6">
+    <div class="flex-shrink-0 w-28 h-28 rounded-full border-4 border-red-500 flex items-center justify-center">
+      <span class="text-4xl font-extrabold text-white">32</span>
     </div>
     <div>
-      <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Trust Score</p>
-      <p class="text-xl font-bold text-red-400">At Risk</p>
-      <div class="flex gap-4 mt-1 text-xs text-slate-400">
+      <p class="text-lg font-bold text-white">Trust Score</p>
+      <p class="text-sm font-semibold text-red-400 mb-2">At Risk</p>
+      <div class="flex flex-wrap gap-4 text-xs text-slate-400">
         <span>Issues: 7</span>
         <span>Passed: 2/9</span>
         <span>Site: example.com</span>
       </div>
     </div>
   </div>
+  <!-- Score Breakdown -->
   <div class="mb-6">
     <p class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">Score Breakdown</p>
     <div class="grid sm:grid-cols-2 gap-3">
-      <div><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Online Presence</span><span class="text-white font-bold">8/25</span></div><div style="background:#334155;border-radius:9999px;height:8px;overflow:hidden"><div style="background:#ef4444;border-radius:9999px;width:32%;height:100%"></div></div><p class="text-xs text-red-400 mt-1">Your site is hard to find. Missing key pages. Visitors cannot verify your credibility.</p></div>
-      <div><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Reputation</span><span class="text-white font-bold">6/30</span></div><div style="background:#334155;border-radius:9999px;height:8px;overflow:hidden"><div style="background:#ef4444;border-radius:9999px;width:20%;height:100%"></div></div><p class="text-xs text-red-400 mt-1">No social proof. Zero reviews displayed. Customers choose competitors they can see.</p></div>
-      <div><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Engagement</span><span class="text-white font-bold">7/20</span></div><div style="background:#334155;border-radius:9999px;height:8px;overflow:hidden"><div style="background:#f59e0b;border-radius:9999px;width:35%;height:100%"></div></div><p class="text-xs text-amber-400 mt-1">No clear calls-to-action. Visitors leave without booking.</p></div>
-      <div><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Transparency</span><span class="text-white font-bold">4/15</span></div><div style="background:#334155;border-radius:9999px;height:8px;overflow:hidden"><div style="background:#ef4444;border-radius:9999px;width:27%;height:100%"></div></div><p class="text-xs text-red-400 mt-1">No About page, team photos, or privacy policy. You are asking visitors to trust a faceless business.</p></div>
-      <div class="sm:col-span-2"><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Technical Health</span><span class="text-white font-bold">7/10</span></div><div style="background:#334155;border-radius:9999px;height:8px;overflow:hidden"><div style="background:#10b981;border-radius:9999px;width:70%;height:100%"></div></div><p class="text-xs text-emerald-400 mt-1">Your technical foundation is reasonable.</p></div>
+      <div><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Online Presence</span><span class="text-white font-bold">8/25</span></div><div style="background:#334155;border-radius:9999px;height:24px;overflow:hidden"><div style="background:#ef4444;border-radius:9999px;width:32%;height:100%;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:11px;font-weight:700;color:white;box-shadow:inset 0 2px 4px rgba(0,0,0,0.2)">32%</div></div><p class="text-xs text-red-400 mt-1">Your site is hard to find. Missing key pages. Visitors cannot verify your credibility.</p></div>
+      <div><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Reputation</span><span class="text-white font-bold">6/30</span></div><div style="background:#334155;border-radius:9999px;height:24px;overflow:hidden"><div style="background:#ef4444;border-radius:9999px;width:20%;height:100%;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:11px;font-weight:700;color:white;box-shadow:inset 0 2px 4px rgba(0,0,0,0.2)">20%</div></div><p class="text-xs text-red-400 mt-1">No social proof. Zero reviews displayed. Customers choose competitors they can see.</p></div>
+      <div><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Engagement</span><span class="text-white font-bold">7/20</span></div><div style="background:#334155;border-radius:9999px;height:24px;overflow:hidden"><div style="background:#f59e0b;border-radius:9999px;width:35%;height:100%;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:11px;font-weight:700;color:white;box-shadow:inset 0 2px 4px rgba(0,0,0,0.2)">35%</div></div><p class="text-xs text-amber-400 mt-1">No clear calls-to-action. Visitors leave without booking.</p></div>
+      <div><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Transparency</span><span class="text-white font-bold">4/15</span></div><div style="background:#334155;border-radius:9999px;height:24px;overflow:hidden"><div style="background:#ef4444;border-radius:9999px;width:27%;height:100%;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:11px;font-weight:700;color:white;box-shadow:inset 0 2px 4px rgba(0,0,0,0.2)">27%</div></div><p class="text-xs text-red-400 mt-1">No About page, team photos, or privacy policy. You are asking visitors to trust a faceless business.</p></div>
+      <div class="sm:col-span-2"><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Technical Health</span><span class="text-white font-bold">7/10</span></div><div style="background:#334155;border-radius:9999px;height:24px;overflow:hidden"><div style="background:#10b981;border-radius:9999px;width:70%;height:100%;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:11px;font-weight:700;color:white;box-shadow:inset 0 2px 4px rgba(0,0,0,0.2)">70%</div></div><p class="text-xs text-emerald-400 mt-1">Your technical foundation is reasonable.</p></div>
     </div>
   </div>
+  <!-- Standards -->
   <div class="mb-6">
     <p class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">Standards</p>
     <div class="grid grid-cols-3 gap-2 text-xs">
@@ -219,15 +216,33 @@ PAGE = """<!DOCTYPE html>
       <div class="flex items-center gap-1.5"><span class="text-red-400">✗</span><span class="text-slate-300">Service Pages</span></div>
     </div>
   </div>
+  <!-- Top Issues -->
   <div>
     <p class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">Top Issues</p>
     <div class="space-y-2">
-      <div class="flex items-start gap-3 bg-slate-950 rounded-lg p-3"><span class="text-red-400 shrink-0">!</span><div><p class="text-sm font-medium text-slate-200">No contact page or phone number</p><p class="text-xs text-slate-500">Hard to reach you</p></div></div>
-      <div class="flex items-start gap-3 bg-slate-950 rounded-lg p-3"><span class="text-red-400 shrink-0">!</span><div><p class="text-sm font-medium text-slate-200">No SSL certificate (not HTTPS)</p><p class="text-xs text-slate-500">Visitors see "Not Secure"</p></div></div>
-      <div class="flex items-start gap-3 bg-slate-950 rounded-lg p-3"><span class="text-red-400 shrink-0">!</span><div><p class="text-sm font-medium text-slate-200">Website not mobile-friendly</p><p class="text-xs text-slate-500">Poor mobile experience</p></div></div>
+      <div class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/50">
+        <span class="text-red-400 flex-shrink-0 text-lg">!</span>
+        <div>
+          <p class="text-sm font-semibold text-white">No contact page or phone number</p>
+          <p class="text-xs text-slate-400">Hard to reach you</p>
+        </div>
+      </div>
+      <div class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/50">
+        <span class="text-red-400 flex-shrink-0 text-lg">!</span>
+        <div>
+          <p class="text-sm font-semibold text-white">No SSL certificate (not HTTPS)</p>
+          <p class="text-xs text-slate-400">Visitors see "Not Secure"</p>
+        </div>
+      </div>
+      <div class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/50">
+        <span class="text-red-400 flex-shrink-0 text-lg">!</span>
+        <div>
+          <p class="text-sm font-semibold text-white">Website not mobile-friendly</p>
+          <p class="text-xs text-slate-400">Poor mobile experience</p>
+        </div>
+      </div>
     </div>
   </div>
-</div>
 </div>
 </div>
 </section>
@@ -235,23 +250,47 @@ PAGE = """<!DOCTYPE html>
 <!-- ===== OFFER ===== -->
 <section class="py-16 sm:py-20 bg-slate-900">
 <div class="max-w-6xl mx-auto px-6">
-<div class="max-w-3xl mx-auto">
-<div class="rounded-2xl border-2 border-amber-500 bg-slate-950 p-8 sm:p-12 text-center">
-  <p class="text-xs font-bold text-amber-400 uppercase tracking-widest mb-2">The Offer</p>
-  <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">Trust Transformation</h2>
-  <p class="text-slate-400 mb-8">We don't just tell you what's wrong. We fix it.</p>
-  <div class="grid sm:grid-cols-2 gap-3 text-left max-w-md mx-auto mb-8">
-    <div class="flex items-start gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">✓</span><span class="text-slate-300 text-sm">Homepage rewrite</span></div>
-    <div class="flex items-start gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">✓</span><span class="text-slate-300 text-sm">Trust-focused messaging</span></div>
-    <div class="flex items-start gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">✓</span><span class="text-slate-300 text-sm">Review integration</span></div>
-    <div class="flex items-start gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">✓</span><span class="text-slate-300 text-sm">Stronger calls to action</span></div>
-    <div class="flex items-start gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">✓</span><span class="text-slate-300 text-sm">Google Business improvements</span></div>
-    <div class="flex items-start gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">✓</span><span class="text-slate-300 text-sm">Email sequence</span></div>
-    <div class="flex items-start gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">✓</span><span class="text-slate-300 text-sm">Social content</span></div>
-    <div class="flex items-start gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">✓</span><span class="text-slate-300 text-sm">Before & after evidence report</span></div>
-  </div>
-  <a href="#get-snapshot" class="inline-flex items-center gap-2 rounded-lg bg-amber-500 px-8 py-4 text-base font-bold text-white shadow-lg transition hover:bg-amber-400">Get Your Free Trust Snapshot First →</a>
+<div class="text-center mb-10">
+  <div class="inline-flex items-center gap-2 bg-amber-500/20 border border-amber-500/40 text-amber-200 text-xs font-semibold uppercase tracking-widest px-4 py-2 rounded-full mb-4">The Offer</div>
+  <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">Trust Transformation</h2>
+  <p class="mt-4 text-slate-400 max-w-xl mx-auto">We don't just tell you what's wrong. We fix it.</p>
 </div>
+<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto mb-10">
+  <div class="rounded-xl border border-slate-800 bg-slate-950 p-4 text-center">
+    <p class="text-emerald-400 text-lg">✓</p>
+    <p class="text-sm text-white font-medium">Homepage rewrite</p>
+  </div>
+  <div class="rounded-xl border border-slate-800 bg-slate-950 p-4 text-center">
+    <p class="text-emerald-400 text-lg">✓</p>
+    <p class="text-sm text-white font-medium">Trust-focused messaging</p>
+  </div>
+  <div class="rounded-xl border border-slate-800 bg-slate-950 p-4 text-center">
+    <p class="text-emerald-400 text-lg">✓</p>
+    <p class="text-sm text-white font-medium">Review integration</p>
+  </div>
+  <div class="rounded-xl border border-slate-800 bg-slate-950 p-4 text-center">
+    <p class="text-emerald-400 text-lg">✓</p>
+    <p class="text-sm text-white font-medium">Stronger calls to action</p>
+  </div>
+  <div class="rounded-xl border border-slate-800 bg-slate-950 p-4 text-center">
+    <p class="text-emerald-400 text-lg">✓</p>
+    <p class="text-sm text-white font-medium">Google Business improvements</p>
+  </div>
+  <div class="rounded-xl border border-slate-800 bg-slate-950 p-4 text-center">
+    <p class="text-emerald-400 text-lg">✓</p>
+    <p class="text-sm text-white font-medium">Email sequence</p>
+  </div>
+  <div class="rounded-xl border border-slate-800 bg-slate-950 p-4 text-center">
+    <p class="text-emerald-400 text-lg">✓</p>
+    <p class="text-sm text-white font-medium">Social content</p>
+  </div>
+  <div class="rounded-xl border border-slate-800 bg-slate-950 p-4 text-center">
+    <p class="text-emerald-400 text-lg">✓</p>
+    <p class="text-sm text-white font-medium">Before & after evidence report</p>
+  </div>
+</div>
+<div class="text-center">
+  <a href="#get-snapshot" class="inline-flex items-center gap-2 rounded-lg bg-amber-500 px-8 py-4 text-base font-bold text-white shadow-lg transition hover:bg-amber-400">Get Your Free Trust Snapshot First →</a>
 </div>
 </div>
 </section>
@@ -259,50 +298,49 @@ PAGE = """<!DOCTYPE html>
 <!-- ===== FAQ ===== -->
 <section class="py-16 sm:py-20 bg-slate-950">
 <div class="max-w-6xl mx-auto px-6">
-<div class="max-w-3xl mx-auto">
-<div class="text-center mb-10">
+<div class="text-center mb-12">
   <div class="inline-flex items-center gap-2 bg-amber-500/20 border border-amber-500/40 text-amber-200 text-xs font-semibold uppercase tracking-widest px-4 py-2 rounded-full mb-4">FAQ</div>
   <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">Common questions</h2>
 </div>
-<div class="space-y-4">
+<div class="max-w-2xl mx-auto space-y-4">
   <div class="rounded-xl border border-slate-800 bg-slate-900 p-5">
-    <p class="font-bold text-white mb-2">How long does the snapshot take?</p>
+    <p class="font-bold text-white text-sm mb-1">How long does the snapshot take?</p>
     <p class="text-sm text-slate-400">Under 60 seconds. Enter your URL and we scan your website and Google Business Profile automatically. Your personalised report is delivered within minutes.</p>
   </div>
   <div class="rounded-xl border border-slate-800 bg-slate-900 p-5">
-    <p class="font-bold text-white mb-2">Is it really free?</p>
+    <p class="font-bold text-white text-sm mb-1">Is it really free?</p>
     <p class="text-sm text-slate-400">Yes. No credit card required, no trial, no hidden fees. You get a full Trust Score and improvement plan at zero cost.</p>
   </div>
   <div class="rounded-xl border border-slate-800 bg-slate-900 p-5">
-    <p class="font-bold text-white mb-2">Do I need to buy anything?</p>
+    <p class="font-bold text-white text-sm mb-1">Do I need to buy anything?</p>
     <p class="text-sm text-slate-400">Not at all. The snapshot is yours to keep. If you decide you want help implementing the improvements, we can discuss a Trust Transformation — but there's no obligation.</p>
   </div>
   <div class="rounded-xl border border-slate-800 bg-slate-900 p-5">
-    <p class="font-bold text-white mb-2">How accurate is the Trust Score?</p>
+    <p class="font-bold text-white text-sm mb-1">How accurate is the Trust Score?</p>
     <p class="text-sm text-slate-400">We analyse your site against 14 trust signals we've validated across real transformations. It's designed to surface the most impactful issues, not produce a perfect absolute score.</p>
   </div>
   <div class="rounded-xl border border-slate-800 bg-slate-900 p-5">
-    <p class="font-bold text-white mb-2">What happens after the snapshot?</p>
+    <p class="font-bold text-white text-sm mb-1">What happens after the snapshot?</p>
     <p class="text-sm text-slate-400">You receive your report with your score, issues found, and recommended fixes. If you'd like us to implement the improvements, we can schedule a call to discuss a full Trust Transformation. If not, you have a clear roadmap to fix things yourself.</p>
   </div>
-</div>
 </div>
 </div>
 </section>
 
 <!-- ===== CTA SECTION ===== -->
-<section class="py-16 sm:py-20 gradient-hero" id="get-snapshot">
+<section class="py-16 sm:py-20 bg-slate-900" id="get-snapshot">
 <div class="max-w-6xl mx-auto px-6">
-<div class="max-w-lg mx-auto text-center mb-10">
+<div class="max-w-xl mx-auto text-center mb-8">
   <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">Get your free Trust Snapshot</h2>
-  <p class="mt-4 text-slate-300">Enter your details below. Your personalised report will be ready in minutes.</p>
+  <p class="mt-4 text-slate-400">Enter your details below. Your personalised report will be ready in minutes.</p>
 </div>
-<div class="max-w-md mx-auto">
-<div class="rounded-2xl border border-slate-800 bg-slate-900 p-6 sm:p-8">
+<div class="max-w-lg mx-auto">
   <div id="form-block">
-    <input id="_n2" type="text" placeholder="Full name" class="w-full rounded-lg border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white mb-3 placeholder-slate-500 focus:outline-none focus:border-amber-500">
-    <input id="_u2" type="text" placeholder="Website" class="w-full rounded-lg border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white mb-3 placeholder-slate-500 focus:outline-none focus:border-amber-500">
-    <input id="_e2" type="email" placeholder="Email address" class="w-full rounded-lg border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white mb-4 placeholder-slate-500 focus:outline-none focus:border-amber-500">
+    <div class="space-y-4">
+      <input id="_n2" type="text" placeholder="Full Name" class="w-full rounded-xl border border-slate-700 bg-slate-950 text-white px-4 py-3 text-sm placeholder-slate-500 focus:outline-none focus:border-amber-500">
+      <input id="_u2" type="text" placeholder="Website URL" class="w-full rounded-xl border border-slate-700 bg-slate-950 text-white px-4 py-3 text-sm placeholder-slate-500 focus:outline-none focus:border-amber-500">
+      <input id="_e2" type="email" placeholder="Email Address" class="w-full rounded-xl border border-slate-700 bg-slate-950 text-white px-4 py-3 text-sm placeholder-slate-500 focus:outline-none focus:border-amber-500">
+    </div>
     <button id="_go2" class="w-full rounded-lg bg-amber-500 px-4 py-3 text-sm font-bold text-white shadow-sm hover:bg-amber-400">Get My Free Trust Snapshot →</button>
     <p class="text-xs text-slate-500 text-center mt-3">No credit card needed. Your report will be ready in approximately 5 minutes.</p>
   </div>
@@ -320,7 +358,6 @@ PAGE = """<!DOCTYPE html>
     <p class="text-amber-400 text-sm font-semibold">Your report is ready!</p>
     <p class="text-slate-300 text-xs mt-1">Redirecting to your personalised Trust Snapshot...</p>
   </div>
-</div>
 </div>
 </div>
 </section>
