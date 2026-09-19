@@ -62,7 +62,6 @@ PAGE = """<!DOCTYPE html>
 </div>
 </div>
 </section>
-
 <!-- ===== PROBLEM ===== -->
 <section class="py-16 sm:py-20 bg-slate-900" id="problem">
 <div class="max-w-6xl mx-auto px-6">
@@ -94,7 +93,6 @@ PAGE = """<!DOCTYPE html>
 </div>
 </div>
 </section>
-
 <!-- ===== FEATURES ===== -->
 <section class="py-16 sm:py-20 bg-slate-950">
 <div class="max-w-6xl mx-auto px-6">
@@ -138,7 +136,6 @@ PAGE = """<!DOCTYPE html>
 <p class="text-center text-amber-400 mt-8 text-sm font-semibold">Delivered in minutes. No credit card needed.</p>
 </div>
 </section>
-
 <!-- ===== HOW IT WORKS ===== -->
 <section class="py-16 sm:py-20 bg-slate-900">
 <div class="max-w-6xl mx-auto px-6">
@@ -165,7 +162,6 @@ PAGE = """<!DOCTYPE html>
 </div>
 </div>
 </section>
-
 <!-- ===== EXAMPLE REPORT ===== -->
 <section class="py-16 sm:py-20 bg-slate-950" id="example-report">
 <div class="max-w-6xl mx-auto px-6">
@@ -193,254 +189,46 @@ PAGE = """<!DOCTYPE html>
   <!-- Score Breakdown -->
   <div class="mb-6">
     <p class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">Score Breakdown</p>
-    <div class="grid sm:grid-cols-2 gap-3">
-      <div><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Online Presence</span><span class="text-white font-bold">8/25</span></div><div style="background:#334155;border-radius:9999px;height:24px;overflow:hidden"><div style="background:#ef4444;border-radius:9999px;width:32%;height:100%;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:11px;font-weight:700;color:white;box-shadow:inset 0 2px 4px rgba(0,0,0,0.2)">32%</div></div><p class="text-xs text-red-400 mt-1">Your site is hard to find. Missing key pages. Visitors cannot verify your credibility.</p></div>
-      <div><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Reputation</span><span class="text-white font-bold">6/30</span></div><div style="background:#334155;border-radius:9999px;height:24px;overflow:hidden"><div style="background:#ef4444;border-radius:9999px;width:20%;height:100%;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:11px;font-weight:700;color:white;box-shadow:inset 0 2px 4px rgba(0,0,0,0.2)">20%</div></div><p class="text-xs text-red-400 mt-1">No social proof. Zero reviews displayed. Customers choose competitors they can see.</p></div>
-      <div><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Engagement</span><span class="text-white font-bold">7/20</span></div><div style="background:#334155;border-radius:9999px;height:24px;overflow:hidden"><div style="background:#f59e0b;border-radius:9999px;width:35%;height:100%;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:11px;font-weight:700;color:white;box-shadow:inset 0 2px 4px rgba(0,0,0,0.2)">35%</div></div><p class="text-xs text-amber-400 mt-1">No clear calls-to-action. Visitors leave without booking.</p></div>
-      <div><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Transparency</span><span class="text-white font-bold">4/15</span></div><div style="background:#334155;border-radius:9999px;height:24px;overflow:hidden"><div style="background:#ef4444;border-radius:9999px;width:27%;height:100%;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:11px;font-weight:700;color:white;box-shadow:inset 0 2px 4px rgba(0,0,0,0.2)">27%</div></div><p class="text-xs text-red-400 mt-1">No About page, team photos, or privacy policy. You are asking visitors to trust a faceless business.</p></div>
-      <div class="sm:col-span-2"><div class="flex justify-between text-sm mb-1"><span class="text-slate-300">Technical Health</span><span class="text-white font-bold">7/10</span></div><div style="background:#334155;border-radius:9999px;height:24px;overflow:hidden"><div style="background:#10b981;border-radius:9999px;width:70%;height:100%;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:11px;font-weight:700;color:white;box-shadow:inset 0 2px 4px rgba(0,0,0,0.2)">70%</div></div><p class="text-xs text-emerald-400 mt-1">Your technical foundation is reasonable.</p></div>
+    <div class="space-y-4">
+      <div>
+        <div class="flex justify-between items-center mb-1"><span class="text-slate-300 font-medium">Online Presence</span><span class="text-white font-bold">8/25</span></div>
+        <div style="background:#1e293b;border:2px solid #475569;border-radius:8px;height:40px;position:relative">
+          <div style="background:#ef4444;width:32%;height:40px;border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:12px;font-size:14px;font-weight:800;color:#fff">32%</div>
+        </div>
+        <p class="text-xs text-red-400 mt-1.5">Your site is hard to find. Missing key pages. Visitors cannot verify your credibility.</p>
+      </div>
+      <div>
+        <div class="flex justify-between items-center mb-1"><span class="text-slate-300 font-medium">Reputation</span><span class="text-white font-bold">6/30</span></div>
+        <div style="background:#1e293b;border:2px solid #475569;border-radius:8px;height:40px;position:relative">
+          <div style="background:#ef4444;width:20%;height:40px;border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:12px;font-size:14px;font-weight:800;color:#fff">20%</div>
+        </div>
+        <p class="text-xs text-red-400 mt-1.5">No social proof. Zero reviews displayed. Customers choose competitors they can see.</p>
+      </div>
+      <div>
+        <div class="flex justify-between items-center mb-1"><span class="text-slate-300 font-medium">Engagement</span><span class="text-white font-bold">7/20</span></div>
+        <div style="background:#1e293b;border:2px solid #475569;border-radius:8px;height:40px;position:relative">
+          <div style="background:#f59e0b;width:35%;height:40px;border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:12px;font-size:14px;font-weight:800;color:#fff">35%</div>
+        </div>
+        <p class="text-xs text-amber-400 mt-1.5">No clear calls-to-action. Visitors leave without booking.</p>
+      </div>
+      <div>
+        <div class="flex justify-between items-center mb-1"><span class="text-slate-300 font-medium">Transparency</span><span class="text-white font-bold">4/15</span></div>
+        <div style="background:#1e293b;border:2px solid #475569;border-radius:8px;height:40px;position:relative">
+          <div style="background:#ef4444;width:27%;height:40px;border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:12px;font-size:14px;font-weight:800;color:#fff">27%</div>
+        </div>
+        <p class="text-xs text-red-400 mt-1.5">No About page, team photos, or privacy policy. You are asking visitors to trust a faceless business.</p>
+      </div>
+      <div>
+        <div class="flex justify-between items-center mb-1"><span class="text-slate-300 font-medium">Technical Health</span><span class="text-white font-bold">7/10</span></div>
+        <div style="background:#1e293b;border:2px solid #475569;border-radius:8px;height:40px;position:relative">
+          <div style="background:#10b981;width:70%;height:40px;border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:12px;font-size:14px;font-weight:800;color:#fff">70%</div>
+        </div>
+        <p class="text-xs text-emerald-400 mt-1.5">Your technical foundation is reasonable.</p>
+      </div>
     </div>
+  </div>
   </div>
   <!-- Standards -->
   <div class="mb-6">
     <p class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">Standards</p>
     <div class="grid grid-cols-3 gap-2 text-xs">
-      <div class="flex items-center gap-1.5"><span class="text-emerald-400">✓</span><span class="text-slate-300">HTTPS</span></div>
-      <div class="flex items-center gap-1.5"><span class="text-red-400">✗</span><span class="text-slate-300">Contact Page</span></div>
-      <div class="flex items-center gap-1.5"><span class="text-emerald-400">✓</span><span class="text-slate-300">About Page</span></div>
-      <div class="flex items-center gap-1.5"><span class="text-red-400">✗</span><span class="text-slate-300">Mobile Ready</span></div>
-      <div class="flex items-center gap-1.5"><span class="text-red-400">✗</span><span class="text-slate-300">Testimonials</span></div>
-      <div class="flex items-center gap-1.5"><span class="text-red-400">✗</span><span class="text-slate-300">FAQ</span></div>
-      <div class="flex items-center gap-1.5"><span class="text-red-400">✗</span><span class="text-slate-300">Privacy Policy</span></div>
-      <div class="flex items-center gap-1.5"><span class="text-red-400">✗</span><span class="text-slate-300">CTA</span></div>
-      <div class="flex items-center gap-1.5"><span class="text-red-400">✗</span><span class="text-slate-300">Service Pages</span></div>
-    </div>
-  </div>
-  <!-- Top Issues -->
-  <div>
-    <p class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">Top Issues</p>
-    <div class="space-y-2">
-      <div class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/50">
-        <span class="text-red-400 flex-shrink-0 text-lg">!</span>
-        <div>
-          <p class="text-sm font-semibold text-white">No contact page or phone number</p>
-          <p class="text-xs text-slate-400">Hard to reach you</p>
-        </div>
-      </div>
-      <div class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/50">
-        <span class="text-red-400 flex-shrink-0 text-lg">!</span>
-        <div>
-          <p class="text-sm font-semibold text-white">No SSL certificate (not HTTPS)</p>
-          <p class="text-xs text-slate-400">Visitors see "Not Secure"</p>
-        </div>
-      </div>
-      <div class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/50">
-        <span class="text-red-400 flex-shrink-0 text-lg">!</span>
-        <div>
-          <p class="text-sm font-semibold text-white">Website not mobile-friendly</p>
-          <p class="text-xs text-slate-400">Poor mobile experience</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-</section>
-
-<!-- ===== OFFER ===== -->
-<section class="py-16 sm:py-20 bg-slate-900">
-<div class="max-w-6xl mx-auto px-6">
-<div class="text-center mb-10">
-  <div class="inline-flex items-center gap-2 bg-amber-500/20 border border-amber-500/40 text-amber-200 text-xs font-semibold uppercase tracking-widest px-4 py-2 rounded-full mb-4">The Offer</div>
-  <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">Trust Transformation</h2>
-  <p class="mt-4 text-slate-400 max-w-xl mx-auto">We don't just tell you what's wrong. We fix it.</p>
-</div>
-<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto mb-10">
-  <div class="rounded-xl border border-slate-800 bg-slate-950 p-4 text-center">
-    <p class="text-emerald-400 text-lg">✓</p>
-    <p class="text-sm text-white font-medium">Homepage rewrite</p>
-  </div>
-  <div class="rounded-xl border border-slate-800 bg-slate-950 p-4 text-center">
-    <p class="text-emerald-400 text-lg">✓</p>
-    <p class="text-sm text-white font-medium">Trust-focused messaging</p>
-  </div>
-  <div class="rounded-xl border border-slate-800 bg-slate-950 p-4 text-center">
-    <p class="text-emerald-400 text-lg">✓</p>
-    <p class="text-sm text-white font-medium">Review integration</p>
-  </div>
-  <div class="rounded-xl border border-slate-800 bg-slate-950 p-4 text-center">
-    <p class="text-emerald-400 text-lg">✓</p>
-    <p class="text-sm text-white font-medium">Stronger calls to action</p>
-  </div>
-  <div class="rounded-xl border border-slate-800 bg-slate-950 p-4 text-center">
-    <p class="text-emerald-400 text-lg">✓</p>
-    <p class="text-sm text-white font-medium">Google Business improvements</p>
-  </div>
-  <div class="rounded-xl border border-slate-800 bg-slate-950 p-4 text-center">
-    <p class="text-emerald-400 text-lg">✓</p>
-    <p class="text-sm text-white font-medium">Email sequence</p>
-  </div>
-  <div class="rounded-xl border border-slate-800 bg-slate-950 p-4 text-center">
-    <p class="text-emerald-400 text-lg">✓</p>
-    <p class="text-sm text-white font-medium">Social content</p>
-  </div>
-  <div class="rounded-xl border border-slate-800 bg-slate-950 p-4 text-center">
-    <p class="text-emerald-400 text-lg">✓</p>
-    <p class="text-sm text-white font-medium">Before & after evidence report</p>
-  </div>
-</div>
-<div class="text-center">
-  <a href="#get-snapshot" class="inline-flex items-center gap-2 rounded-lg bg-amber-500 px-8 py-4 text-base font-bold text-white shadow-lg transition hover:bg-amber-400">Get Your Free Trust Snapshot First →</a>
-</div>
-</div>
-</section>
-
-<!-- ===== FAQ ===== -->
-<section class="py-16 sm:py-20 bg-slate-950">
-<div class="max-w-6xl mx-auto px-6">
-<div class="text-center mb-12">
-  <div class="inline-flex items-center gap-2 bg-amber-500/20 border border-amber-500/40 text-amber-200 text-xs font-semibold uppercase tracking-widest px-4 py-2 rounded-full mb-4">FAQ</div>
-  <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">Common questions</h2>
-</div>
-<div class="max-w-2xl mx-auto space-y-4">
-  <div class="rounded-xl border border-slate-800 bg-slate-900 p-5">
-    <p class="font-bold text-white text-sm mb-1">How long does the snapshot take?</p>
-    <p class="text-sm text-slate-400">Under 60 seconds. Enter your URL and we scan your website and Google Business Profile automatically. Your personalised report is delivered within minutes.</p>
-  </div>
-  <div class="rounded-xl border border-slate-800 bg-slate-900 p-5">
-    <p class="font-bold text-white text-sm mb-1">Is it really free?</p>
-    <p class="text-sm text-slate-400">Yes. No credit card required, no trial, no hidden fees. You get a full Trust Score and improvement plan at zero cost.</p>
-  </div>
-  <div class="rounded-xl border border-slate-800 bg-slate-900 p-5">
-    <p class="font-bold text-white text-sm mb-1">Do I need to buy anything?</p>
-    <p class="text-sm text-slate-400">Not at all. The snapshot is yours to keep. If you decide you want help implementing the improvements, we can discuss a Trust Transformation — but there's no obligation.</p>
-  </div>
-  <div class="rounded-xl border border-slate-800 bg-slate-900 p-5">
-    <p class="font-bold text-white text-sm mb-1">How accurate is the Trust Score?</p>
-    <p class="text-sm text-slate-400">We analyse your site against 14 trust signals we've validated across real transformations. It's designed to surface the most impactful issues, not produce a perfect absolute score.</p>
-  </div>
-  <div class="rounded-xl border border-slate-800 bg-slate-900 p-5">
-    <p class="font-bold text-white text-sm mb-1">What happens after the snapshot?</p>
-    <p class="text-sm text-slate-400">You receive your report with your score, issues found, and recommended fixes. If you'd like us to implement the improvements, we can schedule a call to discuss a full Trust Transformation. If not, you have a clear roadmap to fix things yourself.</p>
-  </div>
-</div>
-</div>
-</section>
-
-<!-- ===== CTA SECTION ===== -->
-<section class="py-16 sm:py-20 bg-slate-900" id="get-snapshot">
-<div class="max-w-6xl mx-auto px-6">
-<div class="max-w-xl mx-auto text-center mb-8">
-  <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">Get your free Trust Snapshot</h2>
-  <p class="mt-4 text-slate-400">Enter your details below. Your personalised report will be ready in minutes.</p>
-</div>
-<div class="max-w-lg mx-auto">
-  <div id="form-block">
-    <div class="space-y-4">
-      <input id="_n2" type="text" placeholder="Full Name" class="w-full rounded-xl border border-slate-700 bg-slate-950 text-white px-4 py-3 text-sm placeholder-slate-500 focus:outline-none focus:border-amber-500">
-      <input id="_u2" type="text" placeholder="Website URL" class="w-full rounded-xl border border-slate-700 bg-slate-950 text-white px-4 py-3 text-sm placeholder-slate-500 focus:outline-none focus:border-amber-500">
-      <input id="_e2" type="email" placeholder="Email Address" class="w-full rounded-xl border border-slate-700 bg-slate-950 text-white px-4 py-3 text-sm placeholder-slate-500 focus:outline-none focus:border-amber-500">
-    </div>
-    <button id="_go2" class="w-full rounded-lg bg-amber-500 px-4 py-3 text-sm font-bold text-white shadow-sm hover:bg-amber-400">Get My Free Trust Snapshot →</button>
-    <p class="text-xs text-slate-500 text-center mt-3">No credit card needed. Your report will be ready in approximately 5 minutes.</p>
-  </div>
-  <div id="loading2" class="hidden text-center py-8">
-    <div class="spinner mx-auto mb-4"></div>
-    <p class="text-sm font-semibold text-slate-300">Analysing your website...</p>
-  </div>
-  <div id="error2" class="hidden text-center py-4">
-    <p class="text-red-400 text-sm font-semibold mb-2">Something went wrong</p>
-    <p id="_err2" class="text-slate-400 text-xs mb-3"></p>
-    <button onclick="resetForm()" class="rounded-lg bg-slate-800 px-4 py-2 text-xs font-medium text-slate-300">Try again</button>
-  </div>
-  <div id="results2" class="hidden"></div>
-  <div id="redirect2" class="hidden text-center py-4">
-    <p class="text-amber-400 text-sm font-semibold">Your report is ready!</p>
-    <p class="text-slate-300 text-xs mt-1">Redirecting to your personalised Trust Snapshot...</p>
-  </div>
-</div>
-</div>
-</section>
-
-<!-- ===== FOOTER ===== -->
-<footer class="bg-slate-950 border-t border-slate-800 py-12 px-6">
-<div class="max-w-6xl mx-auto">
-<div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
-  <div>
-    <p class="font-bold text-white text-sm mb-4">Products</p>
-    <div class="space-y-2 text-sm">
-      <p class="text-slate-400">Discover — Trust Snapshot™ (Free)</p>
-      <p class="text-slate-400">Transform — Trust Transformation™ (£995)</p>
-      <p class="text-slate-400">Maintain — Trust Monitor™ (£99/mo)</p>
-    </div>
-  </div>
-  <div>
-    <p class="font-bold text-white text-sm mb-4">Contact</p>
-    <div class="space-y-2 text-sm text-slate-400">
-      <p>📞 +44 208 591 1163</p>
-      <p>📞 +44 7956 393270</p>
-      <p>✉️ info@trusttriggeragency.com</p>
-      <p>📍 London, UK</p>
-    </div>
-  </div>
-  <div class="sm:col-span-2 md:col-span-1">
-    <p class="text-white text-sm">We help businesses earn and maintain trust online.</p>
-    <p class="text-white text-xs mt-1">Powered by The Trust Trigger Transformation Method™</p>
-  </div>
-</div>
-<div class="border-t border-slate-800 mt-8 pt-6 text-center">
-  <p class="text-white text-xs">© 2025 Trust Trigger Agency. All rights reserved.</p>
-</div>
-</div>
-</footer>
-
-<style>
-.spinner{border:3px solid #334155;border-top:3px solid #f59e0b;border-radius:50%;width:32px;height:32px;animation:spin .8s linear infinite}
-@keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
-</style>
-
-<script>
-var A='https://trust-trigger-api.onrender.com';
-
-function $(id){return document.getElementById(id);}
-function hide(id){var e=$(id);if(e)e.classList.add('hidden');}
-function show(id){var e=$(id);if(e)e.classList.remove('hidden');}
-function resetForm(){hide('error2');show('form-block');}
-
-$('_go2').onclick=function(){
-  var N=$('_n2').value.trim();
-  var U=$('_u2').value.trim();
-  var E=$('_e2').value.trim();
-  if(!N||!U||!E){alert('Please fill in all fields.');return;}
-  hide('form-block');hide('error2');hide('results2');hide('redirect2');
-  show('loading2');
-  var x=new XMLHttpRequest();
-  x.open('POST',A+'/api/v1/public/trust-snapshot',true);
-  x.setRequestHeader('Content-Type','application/json');
-  x.onload=function(){
-    hide('loading2');
-    if(x.status==201||x.status==200){
-      try{
-        var d=JSON.parse(x.responseText);
-        if(d.error){$('_err2').textContent=d.error;show('error2');return;}
-        if(d.report_url){
-          show('redirect2');
-          setTimeout(function(){window.location.href=A+d.report_url;},2000);
-        }
-      }catch(e){$('_err2').textContent='Invalid response';show('error2');}
-    }else{$('_err2').textContent='Server error: '+x.status;show('error2');}
-  };
-  x.onerror=function(){$('_err2').textContent='Network error.';show('error2');};
-  x.send(JSON.stringify({full_name:N,website:U,email:E}));
-};
-</script>
-</body>
-</html>"""
-
-@router.get("/home", response_class=HTMLResponse)
-async def get_homepage():
-    return PAGE
-
-@router.get("/", response_class=HTMLResponse)
-async def get_root():
-    return PAGE
