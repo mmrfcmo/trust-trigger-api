@@ -9,7 +9,7 @@ PAGE = """<!DOCTYPE html>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Trust Snapshot™ — Free Digital Trust Assessment | TAA — Trust Trigger Agency</title>
   <meta name="description" content="Get a free Trust Snapshot in under 60 seconds. We analyse your website, Google Business Profile and customer journey, then show you exactly what's costing you enquiries.">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230d9488'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='14' font-weight='900' fill='white' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23f59e0b'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='14' font-weight='900' fill='white' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
@@ -18,13 +18,11 @@ PAGE = """<!DOCTYPE html>
     html,body{font-family:'Inter',ui-sans-serif,system-ui,sans-serif}body{-webkit-font-smoothing:antialiased;background:#0f172a;color:#e2e8f0}
     .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease-out,transform .6s ease-out}
     .reveal.in-view{opacity:1;transform:none}
-    .gradient-hero{background:linear-gradient(135deg,#0f172a 0%,#1a2a4a 50%,#0d9488 100%)}
+    .gradient-hero{background:linear-gradient(135deg,#0f172a 0%,#1a2a4a 50%,#78350f 100%)}
     .gradient-card{background:linear-gradient(135deg,#1e293b,#0f172a)}
-    .logo-icon{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:8px;background:#0d9488;color:#fff;font-weight:800;font-size:12px;margin-right:8px}
-    .trust-score-ring{transition:stroke-dashoffset 1.2s ease-out}
+    .logo-icon{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:8px;background:#f59e0b;color:#fff;font-weight:800;font-size:12px;margin-right:8px}
     .pulse-glow{animation:pulseGlow 2s ease-in-out infinite}
-    @keyframes pulseGlow{0%,100%{box-shadow:0 0 20px rgba(13,148,136,.3)}50%{box-shadow:0 0 40px rgba(13,148,136,.6)}}
-    input{color:#1e293b}
+    @keyframes pulseGlow{0%,100%{box-shadow:0 0 20px rgba(245,158,11,.3)}50%{box-shadow:0 0 40px rgba(245,158,11,.6)}}
   </style>
 </head>
 <body>
@@ -33,14 +31,14 @@ PAGE = """<!DOCTYPE html>
 <nav class="fixed top-0 left-0 right-0 z-50 bg-slate-950/90 backdrop-blur-md border-b border-slate-800">
 <div class="max-w-6xl mx-auto px-6 flex items-center justify-between h-20">
 <a href="/" class="flex items-center gap-2 text-white no-underline">
-  <span class="w-8 h-8 rounded-lg bg-teal-600 text-white flex items-center justify-center text-sm font-extrabold">TAA</span>
+  <span class="w-8 h-8 rounded-lg bg-amber-500 text-white flex items-center justify-center text-sm font-extrabold">TAA</span>
   <div>
-    <div class="font-bold text-xl tracking-tight leading-tight text-white">Trust Trigger Agency</div>
-    <div class="text-xs font-semibold tracking-wider text-teal-400">Measure. Transform. Prove. Maintain.</div>
+    <div class="font-bold text-xl tracking-tight leading-tight text-amber-400">Trust Trigger Agency</div>
+    <div class="text-xs font-semibold tracking-wider text-white">Measure. Transform. Prove. Maintain.</div>
   </div>
 </a>
 <div class="hidden md:flex items-center gap-6">
-  <a href="#get-snapshot" class="inline-flex items-center gap-2 rounded-lg bg-teal-600 px-5 py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-teal-500">Get My Free Trust Snapshot →</a>
+  <a href="#get-snapshot" class="inline-flex items-center gap-2 rounded-lg bg-amber-500 px-5 py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-amber-400">Get My Free Trust Snapshot →</a>
 </div>
 </div>
 </nav>
@@ -48,16 +46,16 @@ PAGE = """<!DOCTYPE html>
 <!-- ===== HERO ===== -->
 <section class="relative pt-32 sm:pt-40 pb-20 sm:pb-28 overflow-hidden gradient-hero">
 <div class="absolute inset-0 opacity-10">
-  <div class="absolute top-20 left-10 w-72 h-72 bg-teal-500 rounded-full blur-3xl"></div>
-  <div class="absolute bottom-10 right-10 w-96 h-96 bg-amber-500 rounded-full blur-3xl"></div>
+  <div class="absolute top-20 left-10 w-72 h-72 bg-amber-500 rounded-full blur-3xl"></div>
+  <div class="absolute bottom-10 right-10 w-96 h-96 bg-amber-300 rounded-full blur-3xl"></div>
 </div>
 <div class="relative max-w-6xl mx-auto px-6">
 <div class="max-w-4xl mx-auto text-center">
-  <div class="inline-flex items-center gap-2 bg-teal-600/20 border border-teal-600/40 text-teal-300 text-xs font-semibold uppercase tracking-widest px-4 py-2 rounded-full mb-6">Powered by The Trust Trigger Transformation Method™</div>
+  <div class="inline-flex items-center gap-2 bg-amber-500/20 border border-amber-500/40 text-amber-200 text-xs font-semibold uppercase tracking-widest px-4 py-2 rounded-full mb-6">Powered by The Trust Trigger Transformation Method™</div>
   <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.05] text-white">Discover Why Customers Don't Trust Your Website</h1>
   <p class="mt-6 text-lg text-slate-300 max-w-2xl mx-auto">Get a free Trust Snapshot in under 60 seconds. We'll analyse your website, Google Business Profile and customer journey, then show you exactly what's costing you enquiries.</p>
   <div class="flex flex-wrap gap-4 justify-center mt-10">
-    <a href="#get-snapshot" class="inline-flex items-center gap-2 rounded-lg bg-teal-600 px-8 py-4 text-base font-bold text-white shadow-lg transition hover:bg-teal-500 pulse-glow">Get My Free Trust Snapshot →</a>
+    <a href="#get-snapshot" class="inline-flex items-center gap-2 rounded-lg bg-amber-500 px-8 py-4 text-base font-bold text-white shadow-lg transition hover:bg-amber-400 pulse-glow">Get My Free Trust Snapshot →</a>
     <a href="#example-report" class="inline-flex items-center gap-2 rounded-lg border-2 border-slate-700 bg-slate-900 px-8 py-4 text-base font-medium text-slate-300 shadow-sm transition hover:bg-slate-800">See Example Report</a>
   </div>
   <p class="mt-6 text-xs text-slate-500">Trusted by local service businesses looking to turn more visitors into enquiries.</p>
@@ -71,9 +69,9 @@ PAGE = """<!DOCTYPE html>
 <div class="max-w-6xl mx-auto px-6">
 <div class="max-w-4xl mx-auto">
   <div class="text-center mb-10">
-    <div class="inline-flex items-center gap-2 bg-amber-600/20 border border-amber-600/40 text-amber-300 text-xs font-semibold uppercase tracking-widest px-4 py-2 rounded-full mb-4">The Real Problem</div>
+    <div class="inline-flex items-center gap-2 bg-amber-500/20 border border-amber-500/40 text-amber-200 text-xs font-semibold uppercase tracking-widest px-4 py-2 rounded-full mb-4">The Real Problem</div>
     <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">Most business websites don't have a traffic problem.</h2>
-    <p class="text-3xl sm:text-4xl font-extrabold tracking-tight text-teal-400 mt-2">They have a trust problem.</p>
+    <p class="text-3xl sm:text-4xl font-extrabold tracking-tight text-amber-400 mt-2">They have a trust problem.</p>
   </div>
   <div class="grid sm:grid-cols-2 gap-4 mt-10">
     <div class="rounded-xl border border-slate-800 bg-slate-950 p-6 text-center">
@@ -102,43 +100,43 @@ PAGE = """<!DOCTYPE html>
 <section class="py-16 sm:py-20 bg-slate-950">
 <div class="max-w-6xl mx-auto px-6">
 <div class="text-center mb-12">
-  <div class="inline-flex items-center gap-2 bg-teal-600/20 border border-teal-600/40 text-teal-300 text-xs font-semibold uppercase tracking-widest px-4 py-2 rounded-full mb-4">Your Free Trust Snapshot Includes</div>
+  <div class="inline-flex items-center gap-2 bg-amber-500/20 border border-amber-500/40 text-amber-200 text-xs font-semibold uppercase tracking-widest px-4 py-2 rounded-full mb-4">Your Free Trust Snapshot Includes</div>
   <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">See exactly where you're losing trust</h2>
   <p class="mt-4 text-slate-400 max-w-xl mx-auto">We check your business against seven critical trust dimensions. Delivered in minutes.</p>
 </div>
 <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-  <div class="rounded-xl border border-slate-800 bg-slate-900 p-6 hover:border-teal-600/40 transition">
-    <span class="w-10 h-10 rounded-lg bg-teal-600/20 text-teal-400 flex items-center justify-center text-lg font-bold mb-4">1</span>
+  <div class="rounded-xl border border-slate-800 bg-slate-900 p-6 hover:border-amber-500/40 transition">
+    <span class="w-10 h-10 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center text-lg font-bold mb-4">1</span>
     <h3 class="font-bold text-white mb-2">Trust Score (0–100)</h3>
     <p class="text-sm text-slate-400">Your overall digital trust rating</p>
   </div>
-  <div class="rounded-xl border border-slate-800 bg-slate-900 p-6 hover:border-teal-600/40 transition">
-    <span class="w-10 h-10 rounded-lg bg-teal-600/20 text-teal-400 flex items-center justify-center text-lg font-bold mb-4">2</span>
+  <div class="rounded-xl border border-slate-800 bg-slate-900 p-6 hover:border-amber-500/40 transition">
+    <span class="w-10 h-10 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center text-lg font-bold mb-4">2</span>
     <h3 class="font-bold text-white mb-2">Homepage analysis</h3>
     <p class="text-sm text-slate-400">First impression audit</p>
   </div>
-  <div class="rounded-xl border border-slate-800 bg-slate-900 p-6 hover:border-teal-600/40 transition">
-    <span class="w-10 h-10 rounded-lg bg-teal-600/20 text-teal-400 flex items-center justify-center text-lg font-bold mb-4">3</span>
+  <div class="rounded-xl border border-slate-800 bg-slate-900 p-6 hover:border-amber-500/40 transition">
+    <span class="w-10 h-10 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center text-lg font-bold mb-4">3</span>
     <h3 class="font-bold text-white mb-2">Google Business Profile review</h3>
     <p class="text-sm text-slate-400">Your GBP listing assessed</p>
   </div>
-  <div class="rounded-xl border border-slate-800 bg-slate-900 p-6 hover:border-teal-600/40 transition">
-    <span class="w-10 h-10 rounded-lg bg-teal-600/20 text-teal-400 flex items-center justify-center text-lg font-bold mb-4">4</span>
+  <div class="rounded-xl border border-slate-800 bg-slate-900 p-6 hover:border-amber-500/40 transition">
+    <span class="w-10 h-10 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center text-lg font-bold mb-4">4</span>
     <h3 class="font-bold text-white mb-2">Trust signal assessment</h3>
     <p class="text-sm text-slate-400">Testimonials, badges, contact info</p>
   </div>
-  <div class="rounded-xl border border-slate-800 bg-slate-900 p-6 hover:border-teal-600/40 transition">
-    <span class="w-10 h-10 rounded-lg bg-teal-600/20 text-teal-400 flex items-center justify-center text-lg font-bold mb-4">5</span>
+  <div class="rounded-xl border border-slate-800 bg-slate-900 p-6 hover:border-amber-500/40 transition">
+    <span class="w-10 h-10 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center text-lg font-bold mb-4">5</span>
     <h3 class="font-bold text-white mb-2">Conversion opportunities</h3>
     <p class="text-sm text-slate-400">Where visitors drop off</p>
   </div>
-  <div class="rounded-xl border border-slate-800 bg-slate-900 p-6 hover:border-teal-600/40 transition">
-    <span class="w-10 h-10 rounded-lg bg-teal-600/20 text-teal-400 flex items-center justify-center text-lg font-bold mb-4">6</span>
+  <div class="rounded-xl border border-slate-800 bg-slate-900 p-6 hover:border-amber-500/40 transition">
+    <span class="w-10 h-10 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center text-lg font-bold mb-4">6</span>
     <h3 class="font-bold text-white mb-2">Personalised improvement plan</h3>
     <p class="text-sm text-slate-400">Quick wins + strategic fixes</p>
   </div>
 </div>
-<p class="text-center text-teal-400 mt-8 text-sm font-semibold">Delivered in minutes. No credit card needed.</p>
+<p class="text-center text-amber-400 mt-8 text-sm font-semibold">Delivered in minutes. No credit card needed.</p>
 </div>
 </section>
 
@@ -146,22 +144,22 @@ PAGE = """<!DOCTYPE html>
 <section class="py-16 sm:py-20 bg-slate-900">
 <div class="max-w-6xl mx-auto px-6">
 <div class="text-center mb-12">
-  <div class="inline-flex items-center gap-2 bg-amber-600/20 border border-amber-600/40 text-amber-300 text-xs font-semibold uppercase tracking-widest px-4 py-2 rounded-full mb-4">How It Works</div>
+  <div class="inline-flex items-center gap-2 bg-amber-500/20 border border-amber-500/40 text-amber-200 text-xs font-semibold uppercase tracking-widest px-4 py-2 rounded-full mb-4">How It Works</div>
   <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">Three steps to clarity</h2>
 </div>
 <div class="grid sm:grid-cols-3 gap-8 max-w-4xl mx-auto">
   <div class="text-center">
-    <span class="w-14 h-14 rounded-full bg-teal-600/20 text-teal-400 flex items-center justify-center text-2xl font-bold mx-auto mb-4">1</span>
+    <span class="w-14 h-14 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center text-2xl font-bold mx-auto mb-4">1</span>
     <h3 class="font-bold text-white text-lg mb-2">Enter your website</h3>
     <p class="text-sm text-slate-400">Type in your URL. It takes 10 seconds.</p>
   </div>
   <div class="text-center">
-    <span class="w-14 h-14 rounded-full bg-teal-600/20 text-teal-400 flex items-center justify-center text-2xl font-bold mx-auto mb-4">2</span>
+    <span class="w-14 h-14 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center text-2xl font-bold mx-auto mb-4">2</span>
     <h3 class="font-bold text-white text-lg mb-2">We analyse your presence</h3>
     <p class="text-sm text-slate-400">We scan your site, Google Business Profile (GBP) and trust signals.</p>
   </div>
   <div class="text-center">
-    <span class="w-14 h-14 rounded-full bg-teal-600/20 text-teal-400 flex items-center justify-center text-2xl font-bold mx-auto mb-4">3</span>
+    <span class="w-14 h-14 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center text-2xl font-bold mx-auto mb-4">3</span>
     <h3 class="font-bold text-white text-lg mb-2">Receive your personalised report</h3>
     <p class="text-sm text-slate-400">Your Trust Snapshot with actionable fixes. If you like what you see, we can implement the improvements for you.</p>
   </div>
@@ -173,7 +171,7 @@ PAGE = """<!DOCTYPE html>
 <section class="py-16 sm:py-20 bg-slate-950" id="example-report">
 <div class="max-w-6xl mx-auto px-6">
 <div class="text-center mb-10">
-  <div class="inline-flex items-center gap-2 bg-teal-600/20 border border-teal-600/40 text-teal-300 text-xs font-semibold uppercase tracking-widest px-4 py-2 rounded-full mb-4">Example Report</div>
+  <div class="inline-flex items-center gap-2 bg-amber-500/20 border border-amber-500/40 text-amber-200 text-xs font-semibold uppercase tracking-widest px-4 py-2 rounded-full mb-4">Example Report</div>
   <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">What a low-scoring business looks like</h2>
   <p class="mt-4 text-slate-400">This business scored 32/100. How does your website compare?</p>
 </div>
@@ -246,8 +244,8 @@ PAGE = """<!DOCTYPE html>
 <section class="py-16 sm:py-20 bg-slate-900">
 <div class="max-w-6xl mx-auto px-6">
 <div class="max-w-3xl mx-auto">
-<div class="rounded-2xl border-2 border-teal-600 bg-slate-950 p-8 sm:p-12 text-center">
-  <p class="text-xs font-bold text-teal-400 uppercase tracking-widest mb-2">The Offer</p>
+<div class="rounded-2xl border-2 border-amber-500 bg-slate-950 p-8 sm:p-12 text-center">
+  <p class="text-xs font-bold text-amber-400 uppercase tracking-widest mb-2">The Offer</p>
   <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">Trust Transformation</h2>
   <p class="text-slate-400 mb-8">We don't just tell you what's wrong. We fix it.</p>
   <div class="grid sm:grid-cols-2 gap-3 text-left max-w-md mx-auto mb-8">
@@ -260,7 +258,7 @@ PAGE = """<!DOCTYPE html>
     <div class="flex items-start gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">&#10003;</span><span class="text-slate-300 text-sm">Social content</span></div>
     <div class="flex items-start gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">&#10003;</span><span class="text-slate-300 text-sm">Before &amp; after evidence report</span></div>
   </div>
-  <a href="#get-snapshot" class="inline-flex items-center gap-2 rounded-lg bg-teal-600 px-8 py-4 text-base font-bold text-white shadow-lg transition hover:bg-teal-500">Get Your Free Trust Snapshot First →</a>
+  <a href="#get-snapshot" class="inline-flex items-center gap-2 rounded-lg bg-amber-500 px-8 py-4 text-base font-bold text-white shadow-lg transition hover:bg-amber-400">Get Your Free Trust Snapshot First →</a>
 </div>
 </div>
 </div>
@@ -271,7 +269,7 @@ PAGE = """<!DOCTYPE html>
 <div class="max-w-6xl mx-auto px-6">
 <div class="max-w-3xl mx-auto">
 <div class="text-center mb-10">
-  <div class="inline-flex items-center gap-2 bg-amber-600/20 border border-amber-600/40 text-amber-300 text-xs font-semibold uppercase tracking-widest px-4 py-2 rounded-full mb-4">FAQ</div>
+  <div class="inline-flex items-center gap-2 bg-amber-500/20 border border-amber-500/40 text-amber-200 text-xs font-semibold uppercase tracking-widest px-4 py-2 rounded-full mb-4">FAQ</div>
   <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">Common questions</h2>
 </div>
 <div class="space-y-4">
@@ -310,10 +308,10 @@ PAGE = """<!DOCTYPE html>
 <div class="max-w-md mx-auto">
 <div class="rounded-2xl border border-slate-800 bg-slate-900 p-6 sm:p-8">
   <div id="form-block">
-    <input id="_n2" type="text" placeholder="Full name" class="w-full rounded-lg border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white mb-3 placeholder-slate-500 focus:outline-none focus:border-teal-500">
-    <input id="_u2" type="text" placeholder="Website" class="w-full rounded-lg border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white mb-3 placeholder-slate-500 focus:outline-none focus:border-teal-500">
-    <input id="_e2" type="email" placeholder="Email address" class="w-full rounded-lg border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white mb-4 placeholder-slate-500 focus:outline-none focus:border-teal-500">
-    <button id="_go2" class="w-full rounded-lg bg-teal-600 px-4 py-3 text-sm font-bold text-white shadow-sm hover:bg-teal-500">Get My Free Trust Snapshot →</button>
+    <input id="_n2" type="text" placeholder="Full name" class="w-full rounded-lg border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white mb-3 placeholder-slate-500 focus:outline-none focus:border-amber-500">
+    <input id="_u2" type="text" placeholder="Website" class="w-full rounded-lg border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white mb-3 placeholder-slate-500 focus:outline-none focus:border-amber-500">
+    <input id="_e2" type="email" placeholder="Email address" class="w-full rounded-lg border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white mb-4 placeholder-slate-500 focus:outline-none focus:border-amber-500">
+    <button id="_go2" class="w-full rounded-lg bg-amber-500 px-4 py-3 text-sm font-bold text-white shadow-sm hover:bg-amber-400">Get My Free Trust Snapshot →</button>
     <p class="text-xs text-slate-500 text-center mt-3">No credit card needed. Your report will be ready in approximately 5 minutes.</p>
   </div>
   <div id="loading2" class="hidden text-center py-8">
@@ -327,7 +325,7 @@ PAGE = """<!DOCTYPE html>
   </div>
   <div id="results2" class="hidden"></div>
   <div id="redirect2" class="hidden text-center py-4">
-    <p class="text-teal-400 text-sm font-semibold">Your report is ready!</p>
+    <p class="text-amber-400 text-sm font-semibold">Your report is ready!</p>
     <p class="text-slate-300 text-xs mt-1">Redirecting to your personalised Trust Snapshot...</p>
   </div>
 </div>
@@ -341,10 +339,10 @@ PAGE = """<!DOCTYPE html>
 <div class="grid sm:grid-cols-3 gap-10">
   <div>
     <div class="flex items-center gap-2 mb-4">
-      <span class="w-8 h-8 rounded-lg bg-teal-600 text-white flex items-center justify-center text-sm font-extrabold">TAA</span>
+      <span class="w-8 h-8 rounded-lg bg-amber-500 text-white flex items-center justify-center text-sm font-extrabold">TAA</span>
       <div>
-        <div class="font-bold text-white">Trust Trigger Agency</div>
-        <div class="text-xs text-teal-400">Measure. Transform. Prove. Maintain.</div>
+        <div class="font-bold text-amber-400">Trust Trigger Agency</div>
+        <div class="text-xs text-white">Measure. Transform. Prove. Maintain.</div>
       </div>
     </div>
     <p class="text-xs text-slate-500">We help businesses earn and maintain trust online.</p>
@@ -368,13 +366,13 @@ PAGE = """<!DOCTYPE html>
   </div>
 </div>
 <div class="border-t border-slate-800 mt-10 pt-8 text-center text-xs text-slate-600">
-  <p>© 2025 Trust Trigger Agency. All rights reserved.</p>
+  <p>&copy; 2025 Trust Trigger Agency. All rights reserved.</p>
 </div>
 </div>
 </footer>
 
 <style>
-.spinner{border:3px solid #334155;border-top:3px solid #0d9488;border-radius:50%;width:32px;height:32px;animation:spin .8s linear infinite}
+.spinner{border:3px solid #334155;border-top:3px solid #f59e0b;border-radius:50%;width:32px;height:32px;animation:spin .8s linear infinite}
 @keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
 </style>
 
